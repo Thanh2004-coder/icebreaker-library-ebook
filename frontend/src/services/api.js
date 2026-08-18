@@ -50,14 +50,24 @@ export async function fetchReviews(gameId, { timeoutMs = 8000 } = {}) {
   }
 }
 
-export async function createReview(gameId, payload) {
-  const response = await fetch(apiUrl(`/api/reviews/${gameId}`), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!response.ok) throw new Error(await parseError(response));
-  return response.json();
+export async function createReview(gameId, payload, { timeoutMs = 8000 } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(apiUrl(`/api/reviews/${gameId}`), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error(await parseError(response));
+    return response.json();
+  } catch (err) {
+    if (err?.name === "AbortError") throw new Error("Không kết nối được máy chủ đánh giá.");
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 export function formatRating(averageRating, reviewCount) {

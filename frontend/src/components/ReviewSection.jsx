@@ -1,9 +1,32 @@
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import StarRating from "./StarRating.jsx";
 import ReviewForm from "./ReviewForm.jsx";
 import { fetchReviews, formatRating } from "../services/api.js";
 
-export default function ReviewSection({ gameId }) {
+class ReviewErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { failed: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+
+  render() {
+    if (this.state.failed) {
+      return (
+        <section className="review-section">
+          <h2>Đánh giá</h2>
+          <p className="muted">Đánh giá tạm thời không khả dụng.</p>
+        </section>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+function ReviewPanel({ gameId }) {
   const [reviews, setReviews] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
@@ -14,33 +37,38 @@ export default function ReviewSection({ gameId }) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    setUnavailable(false);
+    if (reload === 0) setUnavailable(false);
     fetchReviews(gameId)
       .then((data) => {
         if (cancelled) return;
         const list = Array.isArray(data?.reviews) ? data.reviews : [];
         const count = Number(data?.reviewCount ?? list.length);
-        const fromList = count ? list.reduce((sum, item) => sum + Number(item.rating || 0), 0) / count : 0;
+        const parsedAverage = Number(data?.averageRating);
+        const fromList = count
+          ? list.reduce((sum, item) => sum + Number(item.rating || 0), 0) / count
+          : 0;
         setReviews(list);
-        setReviewCount(count);
-        setAverageRating(data?.averageRating != null ? Number(data.averageRating) : fromList);
+        setReviewCount(Number.isFinite(count) ? count : list.length);
+        setAverageRating(Number.isFinite(parsedAverage) ? parsedAverage : fromList);
+        setUnavailable(false);
         setLoading(false);
       })
       .catch(() => {
         if (cancelled) return;
+        setLoading(false);
+        if (reload > 0) return;
         setReviews([]);
         setReviewCount(0);
         setAverageRating(0);
         setUnavailable(true);
-        setLoading(false);
       });
     return () => {
       cancelled = true;
     };
   }, [gameId, reload]);
 
-  const count = reviewCount;
-  const average = averageRating;
+  const count = Number.isFinite(Number(reviewCount)) ? Number(reviewCount) : 0;
+  const average = Number.isFinite(Number(averageRating)) ? Number(averageRating) : 0;
 
   return (
     <section className="review-section">
@@ -60,11 +88,11 @@ export default function ReviewSection({ gameId }) {
         <p className="empty">Chưa có review. Hãy là người đầu tiên.</p>
       ) : null}
       <ul className="review-list">
-        {reviews.map((item) => (
-          <li key={item.id} className="review-item">
+        {reviews.map((item, index) => (
+          <li key={item.id ?? `${item.reviewerName || item.displayName}-${index}`} className="review-item">
             <div className="review-head">
               <strong>{item.reviewerName || item.displayName}</strong>
-              <StarRating value={item.rating} readOnly />
+              <StarRating value={Number(item.rating) || 0} readOnly />
             </div>
             <p>{item.comment}</p>
             {item.createdAt ? <time>{new Date(item.createdAt).toLocaleString("vi-VN")}</time> : null}
@@ -74,5 +102,13 @@ export default function ReviewSection({ gameId }) {
 
       {unavailable ? null : <ReviewForm gameId={gameId} onCreated={() => setReload((n) => n + 1)} />}
     </section>
+  );
+}
+
+export default function ReviewSection({ gameId }) {
+  return (
+    <ReviewErrorBoundary>
+      <ReviewPanel gameId={gameId} />
+    </ReviewErrorBoundary>
   );
 }
