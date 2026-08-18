@@ -1,0 +1,5 @@
+target
+.git
+.gitattributes
+*.iml
+.idea
