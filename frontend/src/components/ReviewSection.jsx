@@ -5,6 +5,8 @@ import { fetchReviews, formatRating } from "../services/api.js";
 
 export default function ReviewSection({ gameId }) {
   const [reviews, setReviews] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [unavailable, setUnavailable] = useState(false);
   const [reload, setReload] = useState(0);
@@ -16,12 +18,19 @@ export default function ReviewSection({ gameId }) {
     fetchReviews(gameId)
       .then((data) => {
         if (cancelled) return;
-        setReviews(Array.isArray(data) ? data : []);
+        const list = Array.isArray(data?.reviews) ? data.reviews : [];
+        const count = Number(data?.reviewCount ?? list.length);
+        const fromList = count ? list.reduce((sum, item) => sum + Number(item.rating || 0), 0) / count : 0;
+        setReviews(list);
+        setReviewCount(count);
+        setAverageRating(data?.averageRating != null ? Number(data.averageRating) : fromList);
         setLoading(false);
       })
       .catch(() => {
         if (cancelled) return;
         setReviews([]);
+        setReviewCount(0);
+        setAverageRating(0);
         setUnavailable(true);
         setLoading(false);
       });
@@ -30,8 +39,8 @@ export default function ReviewSection({ gameId }) {
     };
   }, [gameId, reload]);
 
-  const count = reviews.length;
-  const average = count ? reviews.reduce((sum, item) => sum + Number(item.rating || 0), 0) / count : 0;
+  const count = reviewCount;
+  const average = averageRating;
 
   return (
     <section className="review-section">
@@ -54,7 +63,7 @@ export default function ReviewSection({ gameId }) {
         {reviews.map((item) => (
           <li key={item.id} className="review-item">
             <div className="review-head">
-              <strong>{item.displayName}</strong>
+              <strong>{item.reviewerName || item.displayName}</strong>
               <StarRating value={item.rating} readOnly />
             </div>
             <p>{item.comment}</p>

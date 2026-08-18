@@ -4,3 +4,6 @@ dist
 *.log
 .env
 .env.local
+backend/target/
+*.iml
+application-local.properties

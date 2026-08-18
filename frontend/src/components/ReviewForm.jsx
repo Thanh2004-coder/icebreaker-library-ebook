@@ -19,7 +19,7 @@ export default function ReviewForm({ gameId, onCreated }) {
     setSending(true);
     try {
       await createReview(gameId, {
-        displayName: displayName.trim(),
+        reviewerName: displayName.trim(),
         rating,
         comment: comment.trim(),
       });

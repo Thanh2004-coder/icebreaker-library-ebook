@@ -23,13 +23,25 @@ async function parseError(response) {
   return `Không tải được đánh giá (HTTP ${response.status}).`;
 }
 
+function asReviewList(data) {
+  if (Array.isArray(data)) {
+    return { reviews: data, averageRating: null, reviewCount: data.length };
+  }
+  const reviews = Array.isArray(data?.reviews) ? data.reviews : [];
+  return {
+    reviews,
+    averageRating: data?.averageRating ?? null,
+    reviewCount: Number(data?.reviewCount ?? reviews.length),
+  };
+}
+
 export async function fetchReviews(gameId, { timeoutMs = 8000 } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(apiUrl(`/api/games/${gameId}/reviews`), { signal: controller.signal });
+    const response = await fetch(apiUrl(`/api/reviews/${gameId}`), { signal: controller.signal });
     if (!response.ok) throw new Error(await parseError(response));
-    return await response.json();
+    return asReviewList(await response.json());
   } catch (err) {
     if (err?.name === "AbortError") throw new Error("Không kết nối được máy chủ đánh giá.");
     throw err;
@@ -39,7 +51,7 @@ export async function fetchReviews(gameId, { timeoutMs = 8000 } = {}) {
 }
 
 export async function createReview(gameId, payload) {
-  const response = await fetch(apiUrl(`/api/games/${gameId}/reviews`), {
+  const response = await fetch(apiUrl(`/api/reviews/${gameId}`), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
