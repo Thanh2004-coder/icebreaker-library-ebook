@@ -44,6 +44,8 @@ export default function GamePage({ game }) {
         ))}
       </div>
 
+      <ReviewSection gameId={game.id} />
+
       <section>
         <h2>Cách chơi</h2>
         <img
@@ -76,8 +78,6 @@ export default function GamePage({ game }) {
           ))}
         </div>
       </section>
-
-      <ReviewSection gameId={game.id} />
     </article>
   );
 }

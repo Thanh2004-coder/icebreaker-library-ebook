@@ -4,6 +4,7 @@ import com.warmup.ebook.domain.Review;
 import com.warmup.ebook.dto.CreateReviewRequest;
 import com.warmup.ebook.dto.ReviewDto;
 import com.warmup.ebook.dto.ReviewListResponse;
+import com.warmup.ebook.dto.ReviewStatsResponse;
 import com.warmup.ebook.repository.ReviewRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,23 +26,31 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public ReviewListResponse listByGame(Long gameId) {
+        requireGameId(gameId);
         List<ReviewDto> reviews = reviewRepository.findByGameIdOrderByCreatedAtDesc(gameId).stream()
                 .map(ReviewDto::from)
                 .toList();
-        long count = reviews.size();
-        Double average = count == 0
-                ? null
-                : BigDecimal.valueOf(reviews.stream().mapToInt(ReviewDto::rating).average().orElse(0))
-                        .setScale(1, RoundingMode.HALF_UP)
-                        .doubleValue();
-        return new ReviewListResponse(gameId, average, count, reviews);
+        ReviewStatsResponse stats = stats(gameId);
+        return new ReviewListResponse(gameId, stats.averageRating(), stats.reviewCount(), reviews);
+    }
+
+    @Transactional(readOnly = true)
+    public ReviewStatsResponse stats(Long gameId) {
+        requireGameId(gameId);
+        long count = reviewRepository.countByGameId(gameId);
+        Double rawAverage = reviewRepository.averageRatingByGameId(gameId);
+        Double average = null;
+        if (count > 0 && rawAverage != null) {
+            average = BigDecimal.valueOf(rawAverage.doubleValue())
+                    .setScale(1, RoundingMode.HALF_UP)
+                    .doubleValue();
+        }
+        return new ReviewStatsResponse(gameId, average, count);
     }
 
     @Transactional
     public ReviewDto create(Long gameId, CreateReviewRequest request) {
-        if (gameId == null || gameId < 1) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "gameId khong hop le.");
-        }
+        requireGameId(gameId);
 
         Review review = new Review();
         review.setGameId(gameId);
@@ -49,5 +58,11 @@ public class ReviewService {
         review.setRating(request.getRating());
         review.setComment(request.getComment().trim());
         return ReviewDto.from(reviewRepository.save(review));
+    }
+
+    private void requireGameId(Long gameId) {
+        if (gameId == null || gameId < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "gameId khong hop le.");
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.warmup.ebook.controller;
 import com.warmup.ebook.dto.CreateReviewRequest;
 import com.warmup.ebook.dto.ReviewDto;
 import com.warmup.ebook.dto.ReviewListResponse;
+import com.warmup.ebook.dto.ReviewStatsResponse;
 import com.warmup.ebook.service.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class ReviewController {
     @GetMapping
     public ReviewListResponse list(@PathVariable Long gameId) {
         return reviewService.listByGame(gameId);
+    }
+
+    @GetMapping("/stats")
+    public ReviewStatsResponse stats(@PathVariable Long gameId) {
+        return reviewService.stats(gameId);
     }
 
     @PostMapping

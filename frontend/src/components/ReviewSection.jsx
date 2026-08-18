@@ -16,9 +16,11 @@ class ReviewErrorBoundary extends Component {
   render() {
     if (this.state.failed) {
       return (
-        <section className="review-section">
+        <section className="review-section" id="reviews">
           <h2>Đánh giá</h2>
-          <p className="muted">Đánh giá tạm thời không khả dụng.</p>
+          <p className="error" role="alert">
+            Không hiển thị được đánh giá. Máy chủ có thể đang lỗi. Không dùng dữ liệu giả.
+          </p>
         </section>
       );
     }
@@ -28,79 +30,83 @@ class ReviewErrorBoundary extends Component {
 
 function ReviewPanel({ gameId }) {
   const [reviews, setReviews] = useState([]);
-  const [averageRating, setAverageRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(null);
   const [reviewCount, setReviewCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [unavailable, setUnavailable] = useState(false);
+  const [error, setError] = useState("");
   const [reload, setReload] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    if (reload === 0) setUnavailable(false);
+    setError("");
+
     fetchReviews(gameId)
       .then((data) => {
         if (cancelled) return;
         const list = Array.isArray(data?.reviews) ? data.reviews : [];
         const count = Number(data?.reviewCount ?? list.length);
         const parsedAverage = Number(data?.averageRating);
-        const fromList = count
-          ? list.reduce((sum, item) => sum + Number(item.rating || 0), 0) / count
-          : 0;
         setReviews(list);
         setReviewCount(Number.isFinite(count) ? count : list.length);
-        setAverageRating(Number.isFinite(parsedAverage) ? parsedAverage : fromList);
-        setUnavailable(false);
+        setAverageRating(Number.isFinite(parsedAverage) ? parsedAverage : null);
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
         if (cancelled) return;
-        setLoading(false);
-        if (reload > 0) return;
         setReviews([]);
         setReviewCount(0);
-        setAverageRating(0);
-        setUnavailable(true);
+        setAverageRating(null);
+        setError(err.message || "Không kết nối được máy chủ đánh giá. Không dùng dữ liệu giả.");
+        setLoading(false);
       });
+
     return () => {
       cancelled = true;
     };
   }, [gameId, reload]);
 
   const count = Number.isFinite(Number(reviewCount)) ? Number(reviewCount) : 0;
-  const average = Number.isFinite(Number(averageRating)) ? Number(averageRating) : 0;
+  const average = Number.isFinite(Number(averageRating)) ? Number(averageRating) : null;
 
   return (
-    <section className="review-section">
+    <section className="review-section" id="reviews">
       <h2>Đánh giá</h2>
       {loading ? <p className="muted">Đang tải đánh giá…</p> : null}
-      {unavailable ? <p className="muted">Đánh giá tạm thời không khả dụng.</p> : null}
-      {!loading && !unavailable ? (
+      {error ? (
+        <p className="error" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      {!loading && !error ? (
         <div className="rating-row">
-          {count ? <StarRating value={Math.round(average)} readOnly /> : null}
-          <strong>{count ? `${average.toFixed(1)}/5` : "Chưa có đánh giá"}</strong>
+          {count > 0 && average != null ? <StarRating value={Math.round(average)} readOnly /> : null}
+          <strong>{count > 0 && average != null ? `${average.toFixed(1)}/5` : "Chưa có đánh giá"}</strong>
           <span>{formatRating(average, count)}</span>
         </div>
       ) : null}
 
       <h2>Các review</h2>
-      {!loading && !unavailable && reviews.length === 0 ? (
+      {!loading && !error && reviews.length === 0 ? (
         <p className="empty">Chưa có review. Hãy là người đầu tiên.</p>
       ) : null}
-      <ul className="review-list">
-        {reviews.map((item, index) => (
-          <li key={item.id ?? `${item.reviewerName || item.displayName}-${index}`} className="review-item">
-            <div className="review-head">
-              <strong>{item.reviewerName || item.displayName}</strong>
-              <StarRating value={Number(item.rating) || 0} readOnly />
-            </div>
-            <p>{item.comment}</p>
-            {item.createdAt ? <time>{new Date(item.createdAt).toLocaleString("vi-VN")}</time> : null}
-          </li>
-        ))}
-      </ul>
+      {!error ? (
+        <ul className="review-list">
+          {reviews.map((item, index) => (
+            <li key={item.id ?? `${item.reviewerName || item.displayName}-${index}`} className="review-item">
+              <div className="review-head">
+                <strong>{item.reviewerName || item.displayName}</strong>
+                <StarRating value={Number(item.rating) || 0} readOnly />
+              </div>
+              <p>{item.comment}</p>
+              {item.createdAt ? <time>{new Date(item.createdAt).toLocaleString("vi-VN")}</time> : null}
+            </li>
+          ))}
+        </ul>
+      ) : null}
 
-      {unavailable ? null : <ReviewForm gameId={gameId} onCreated={() => setReload((n) => n + 1)} />}
+      <ReviewForm gameId={gameId} onCreated={() => setReload((n) => n + 1)} />
     </section>
   );
 }
