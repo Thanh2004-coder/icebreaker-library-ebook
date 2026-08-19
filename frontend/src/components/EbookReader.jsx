@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BookPageTurn from "./book/BookPageTurn.jsx";
+import PageTurn from "./book/PageTurn.jsx";
 import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
 import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 
@@ -87,7 +87,7 @@ export default function EbookReader({ page }) {
   const spread = (
     <div className={spreadClass} onClick={(event) => event.stopPropagation()}>
       {turn ? (
-        <BookPageTurn turn={turn} onComplete={finishTurn} />
+        <PageTurn turn={turn} onComplete={finishTurn} />
       ) : (
         <div className={pageClass(current)} onClick={openFocus}>
           <SheetBody page={current} />
