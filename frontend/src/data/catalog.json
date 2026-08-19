@@ -216,770 +216,281 @@
   },
   "games": [
     {
-      "id": 8,
+      "id": 1,
       "page": 6,
-      "name": "Bingo làm quen",
-      "description": "Mỗi ô bingo là một câu dễ. Tìm người trong lớp khớp và đánh dấu.",
+      "name": "Tìm số đồng đội (Number Hunt)",
       "minPlayers": 12,
-      "maxPlayers": 12,
-      "players": "12 người",
+      "maxPlayers": 20,
+      "players": "12-20 người",
       "durationMin": 15,
       "durationMax": 15,
       "duration": "15 phút",
+      "time": "15 phút",
       "context": "Trong lớp học",
       "contexts": [
         "Trong lớp học"
       ],
+      "purpose": "Khởi động trước khi họp nhóm, Phá băng, Tăng tương tác",
       "purposes": [
         "Khởi động trước khi họp nhóm",
-        "Làm quen",
         "Phá băng",
-        "Tìm điểm chung",
         "Tăng tương tác"
       ],
-      "heroImage": "/images/games/8.svg",
-      "instructionImage": "/images/games/instructions/8.svg",
+      "tags": [
+        "Khởi động trước khi họp nhóm",
+        "Phá băng",
+        "Tăng tương tác"
+      ],
+      "description": "Khoanh đúng dãy số 1-80 theo lượt để đội hoàn thành nhanh nhất.",
+      "coverImage": "/images/games/1.svg",
+      "heroImage": "/images/games/1.svg",
+      "instructionImage": "/images/games/instructions/1.svg",
       "howToPlay": [
-        "Leader phát bảng bingo 3x3 hoặc 4x4 đã in sẵn.",
-        "Mỗi ô là một đặc điểm nhẹ: “hay nghe podcast”, “nấu được một món”, “thích mèo”.",
-        "Đi quanh lớp, hỏi nhau. Ai khớp ký tên vào ô và kể đúng 1 câu.",
-        "Ai có 1 hàng thì hô “Bingo” — cả nhóm vỗ tay, không tặng phạt."
+        "Quản trò phát cho mỗi đội 1 tờ A0/A1 có số 1-80 lộn xộn và 1 bút dạ.",
+        "Nhóm 1-5 người: cả nhóm lần lượt chạy lên khoanh số hoặc mỗi người 1 tờ A4 thi cá nhân 1-80.",
+        "Nhóm 6-10 người: chia 2 đội, giấy đặt cách vạch 3-5m; mỗi người khoanh đúng 1 số rồi trao bút cho người tiếp theo.",
+        "Nhóm 10+ người: chia 3-4 đội, tăng khó bằng cự ly 10-15m hoặc thêm nhảy lò cò/vượt chướng ngại trước khi khoanh."
       ],
       "preparation": [
-        "Leader phải chuẩn bị bảng bingo trước khi bắt đầu."
+        "Tờ giấy lớn A0/A1 in số 1-80 lộn xộn, bút lông hoặc bút dạ (mỗi đội 1 chiếc)."
       ],
       "preparationRequired": true,
       "preparationTime": 10,
       "rules": [
-        "Ô phải dễ, phù hợp nhóm mới."
-      ]
-    },
-    {
-      "id": 4,
-      "page": 7,
-      "name": "Câu chuyện 3 chương",
-      "description": "Ba người nối một câu chuyện rất ngắn: mở đầu, tình huống, kết. Người còn lại thêm chi tiết nhỏ.",
-      "minPlayers": 4,
-      "maxPlayers": 4,
-      "players": "4 người",
-      "durationMin": 10,
-      "durationMax": 10,
-      "duration": "10 phút",
-      "context": "Nhóm nhỏ",
-      "contexts": [
-        "Nhóm nhỏ"
-      ],
-      "purposes": [
-        "Giao tiếp",
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo tiếng cười"
-      ],
-      "heroImage": "/images/games/4.svg",
-      "instructionImage": "/images/games/instructions/4.svg",
-      "howToPlay": [
-        "Nhóm ngồi thành vòng nhỏ. Leader đưa chủ đề nhẹ: “một buổi học bị mất điện”.",
-        "Người 1 nói 2–3 câu mở đầu. Người 2 thêm tình huống. Người 3 kết thúc.",
-        "Người còn lại thêm đúng 1 câu chi tiết nhỏ.",
-        "Không cần hay. Chỉ cần nối được mạch."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị thân thể."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không bắt bịa dài. Không chê ý tưởng."
-      ]
-    },
-    {
-      "id": 16,
-      "page": 8,
-      "name": "Câu chuyện nối câu",
-      "description": "Mỗi người thêm đúng một câu vào câu chuyện chung, đi một vòng.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 8,
-      "durationMax": 8,
-      "duration": "8 phút",
-      "context": "Nhóm nhỏ",
-      "contexts": [
-        "Nhóm nhỏ"
-      ],
-      "purposes": [
-        "Giao tiếp",
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo tiếng cười"
-      ],
-      "heroImage": "/images/games/16.svg",
-      "instructionImage": "/images/games/instructions/16.svg",
-      "howToPlay": [
-        "Leader mở: “Sáng nay một nhóm sinh viên vào lớp và thấy…”",
-        "Mỗi người thêm 1 câu. Đi hết vòng, có thể vòng 2 nếu còn giờ.",
-        "Ai kẹt được gợi ý: “thêm một chi tiết đồ vật / thời tiết”.",
-        "Người cuối kết thúc có hậu."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị thân thể. Nếu ngại, nói một câu rất ngắn như “rồi mất điện”."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không được bỏ lượt."
-      ]
-    },
-    {
-      "id": 18,
-      "page": 9,
-      "name": "Câu hỏi 3 giây",
-      "description": "Leader hỏi câu siêu dễ, mỗi người trả lời đúng một từ trong khoảng 3–5 giây.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 5,
-      "durationMax": 5,
-      "duration": "5 phút",
-      "context": "Trong lớp học",
-      "contexts": [
-        "Trong lớp học"
-      ],
-      "purposes": [
-        "Giao tiếp",
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác"
-      ],
-      "heroImage": "/images/games/18.svg",
-      "instructionImage": "/images/games/instructions/18.svg",
-      "howToPlay": [
-        "Câu mẫu: “Đồ uống lúc này?”, “Môn đang tới hạn?”.",
-        "Đi vòng quanh lớp. Không giải thích.",
-        "2–3 vòng câu khác nhau.",
-        "Ai chưa nghĩ ra nói “nước lọc” / “chưa nghĩ” — vẫn tính là đã tham gia."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị trước. Câu phải trả lời được bằng một từ."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không biến thành thẩm vấn. Leader không comment đúng sai."
-      ]
-    },
-    {
-      "id": 19,
-      "page": 10,
-      "name": "Con vật đại diện",
-      "description": "Chọn một con vật cho “version mình lúc họp nhóm” và nói lý do một câu. Chơi ngoài trời nếu tiện.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 6,
-      "durationMax": 6,
-      "duration": "6 phút",
-      "context": "Ngoài trời",
-      "contexts": [
-        "Ngoài trời"
-      ],
-      "purposes": [
-        "Làm quen",
-        "Phá băng",
-        "Tạo sự thoải mái",
-        "Tạo tiếng cười"
-      ],
-      "heroImage": "/images/games/19.svg",
-      "instructionImage": "/images/games/instructions/19.svg",
-      "howToPlay": [
-        "Leader mẫu: “Mình là mèo hôm nay, vì muốn ngồi im nghe trước”.",
-        "Mỗi người chọn con vật. Không cần độc lạ.",
-        "Nói 1 câu lý do. Leader ghi nhanh lên giấy.",
-        "Không bắt chước tiếng kêu nếu ai ngại."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị trước. Không gán con vật cho người khác."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không đùa theo hướng chế giễu."
-      ]
-    },
-    {
-      "id": 5,
-      "page": 11,
-      "name": "Đặt biệt danh vui",
-      "description": "Mỗi người chọn một biệt danh dễ gọi trong buổi họp mặt, giải thích bằng một câu.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 7,
-      "durationMax": 7,
-      "duration": "7 phút",
-      "context": "Trong lớp học",
-      "contexts": [
-        "Trong lớp học"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Làm quen",
-        "Phá băng",
-        "Tạo sự thoải mái",
-        "Tạo tiếng cười"
-      ],
-      "heroImage": "/images/games/5.svg",
-      "instructionImage": "/images/games/instructions/5.svg",
-      "howToPlay": [
-        "Leader nêu ví dụ trước: “Hôm nay mình là Trà Đá, vì mình tỉnh táo chậm”.",
-        "Lần lượt mỗi người nói: tên thật + biệt danh + lý do một câu.",
-        "Biệt danh phải dễ nói, không đụng chạm ngoại hình / điểm yếu.",
-        "Leader ghi nhanh lên bảng để mọi người nhớ."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị trước. Ai không muốn biệt danh có thể dùng tên + một cử chỉ."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Cấm biệt danh chế giễu."
+        "Mỗi lượt chỉ được khoanh đúng 1 số.",
+        "Khoanh sai phải quay lại sửa trước khi đổi lượt.",
+        "Di chuyển an toàn, không va chạm hoặc chắn đường đội khác."
       ]
     },
     {
       "id": 2,
-      "page": 12,
-      "name": "Đi tìm báu vật trong nhà",
-      "description": "Mini Scavenger Hunt: mỗi người tìm nhanh một món đồ theo gợi ý rồi khoe với nhóm trong phòng.",
+      "page": 7,
+      "name": "Đoán ý đồng đội / Tam sao thất bản",
       "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 18,
-      "durationMax": 18,
-      "duration": "18 phút",
-      "context": "Trong phòng",
-      "contexts": [
-        "Trong phòng"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/2.svg",
-      "instructionImage": "/images/games/instructions/2.svg",
-      "howToPlay": [
-        "Leader đọc lần lượt 4–5 gợi ý dễ: “một vật màu xanh”, “thứ làm bạn tỉnh táo”, “một món dùng lúc học”.",
-        "Mỗi gợi ý: mọi người có 20–30 giây tìm đồ trong phòng / quanh chỗ ngồi.",
-        "Lần lượt đưa đồ ra giữa nhóm và nói đúng một câu.",
-        "Không ai bị loại. Ai chưa tìm thấy có thể mô tả món đồ.",
-        "Leader chọn 1 món “đáng nhớ nhất” để cả nhóm vỗ tay, không chấm điểm."
-      ],
-      "preparation": [
-        "Có hoạt động tay chân: cho 2–3 phút dọn góc ngồi. Leader soạn sẵn list gợi ý trước."
-      ],
-      "preparationRequired": true,
-      "preparationTime": 3,
-      "rules": [
-        "Nhịp chậm. Không biến thành cuộc đua."
-      ]
-    },
-    {
-      "id": 7,
-      "page": 13,
-      "name": "Đoán chủ nhân",
-      "description": "Mỗi người chọn một món đồ. Cả nhóm đoán món đó của ai, rồi chủ nhân nói một câu.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
+      "maxPlayers": 12,
+      "players": "5-12 người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
+      "time": "10 phút",
       "context": "Trong lớp học",
       "contexts": [
         "Trong lớp học"
       ],
+      "purpose": "Giao tiếp, Phá băng, Tạo tiếng cười",
       "purposes": [
         "Giao tiếp",
-        "Làm quen",
         "Phá băng",
+        "Tăng tương tác",
         "Tạo tiếng cười"
       ],
-      "heroImage": "/images/games/7.svg",
-      "instructionImage": "/images/games/instructions/7.svg",
+      "tags": [
+        "Giao tiếp",
+        "Phá băng",
+        "Tăng tương tác",
+        "Tạo tiếng cười"
+      ],
+      "description": "Diễn tả/truyền từ khóa theo đội để đồng đội đoán và thấy hiệu ứng tam sao thất bản.",
+      "coverImage": "/images/games/2.svg",
+      "heroImage": "/images/games/2.svg",
+      "instructionImage": "/images/games/instructions/2.svg",
       "howToPlay": [
-        "Mỗi người chọn một món gần tầm tay, đặt úp hoặc giấu tên.",
-        "Lần lượt giơ đồ lên, chưa nói tên chủ nhân.",
-        "Cả nhóm đoán chủ nhân. Chủ nhân xác nhận và nói 1 câu về món đồ.",
-        "Không cần đoán đúng hết."
+        "Nhóm 1-5 người: 1 người diễn tả không nói, 4 người còn lại đoán từ/hành động.",
+        "Nhóm 6-10 người: chia 2 đội xếp hàng dọc, truyền từ khóa từ cuối lên đầu để người đầu hàng đoán.",
+        "Nhóm 10+ người: chia nhiều hàng song song, thông tin đi qua nhiều người tạo hiệu ứng tam sao thất bản.",
+        "Có thể dùng tai nghe bật nhạc to nếu chơi truyền bằng khẩu hình."
       ],
       "preparation": [
-        "Cho 1–2 phút chọn đồ trong lớp. Không dùng đồ mang tính riêng tư quá."
+        "Băng đô hoặc khăn màu để chia đội, thẻ từ vựng/hành động, tai nghe bật nhạc to (nếu chơi bằng môi)."
       ],
       "preparationRequired": true,
-      "preparationTime": 2,
+      "preparationTime": 5,
       "rules": [
-        "Không tạo áp lực phải đoán đúng."
+        "Người diễn tả không dùng lời nói.",
+        "Đội đoán trong thời gian giới hạn mỗi lượt."
       ]
     },
     {
       "id": 3,
-      "page": 14,
-      "name": "Đứng lên - Ngồi xuống theo lệnh ngược",
-      "description": "Leader ra lệnh, cả nhóm làm NGƯỢC: nghe “đứng” thì ngồi, nghe “ngồi” thì đứng.",
-      "minPlayers": 10,
-      "maxPlayers": 10,
-      "players": "10 người",
-      "durationMin": 5,
-      "durationMax": 5,
-      "duration": "5 phút",
-      "context": "Trong lớp học",
+      "page": 8,
+      "name": "Trốn khung hình (Don't get caught)",
+      "minPlayers": 5,
+      "maxPlayers": 12,
+      "players": "5-12 người",
+      "durationMin": 8,
+      "durationMax": 8,
+      "duration": "8 phút",
+      "time": "8 phút",
+      "context": "Ngoài trời",
       "contexts": [
-        "Trong lớp học"
+        "Ngoài trời"
       ],
+      "purpose": "Phá băng, Tăng tương tác, Tạo tiếng cười",
       "purposes": [
-        "Khởi động trước khi họp nhóm",
         "Phá băng",
         "Tăng tương tác",
         "Tạo tiếng cười"
       ],
+      "tags": [
+        "Phá băng",
+        "Tăng tương tác",
+        "Tạo tiếng cười"
+      ],
+      "description": "Người bịt mắt chụp ảnh bất ngờ, người chơi phải né để không lọt vào khung hình.",
+      "coverImage": "/images/games/3.svg",
       "heroImage": "/images/games/3.svg",
       "instructionImage": "/images/games/instructions/3.svg",
       "howToPlay": [
-        "Cả nhóm đứng tại chỗ trong lớp, chừa khoảng để ngồi xuống an toàn.",
-        "Leader nói chậm: “Đứng lên” hoặc “Ngồi xuống”. Cả nhóm làm NGƯỢC lệnh.",
-        "Sai thì cười và chơi tiếp, không bị loại.",
-        "Kết thúc bằng một lệnh thật để cả nhóm ngồi lại."
+        "Nhóm 1-5 người: người bịt mắt cầm điện thoại xoay vòng tại chỗ và chụp liên tiếp 3 tấm; ai lọt khung bị phạt.",
+        "Nhóm 6-10 người: người bịt mắt đếm 1-3 rồi chụp một góc bất kỳ, các thành viên di chuyển để né khung hình.",
+        "Nhóm 10+ người: chơi không gian lớn, có thể dùng 2 hunter; người dính trong ảnh bị loại dần.",
+        "Kết thúc khi tìm ra người trụ lại cuối cùng."
       ],
       "preparation": [
-        "Có hoạt động tay chân: dành 1–2 phút đứng dậy. Không chơi nếu ai đang không tiện đứng."
+        "1 điện thoại thông minh và 1 dải băng bịt mắt."
       ],
       "preparationRequired": true,
       "preparationTime": 2,
       "rules": [
-        "Nhịp chậm, không loại người."
+        "Người bịt mắt không được tháo băng trong lượt.",
+        "Di chuyển vừa phải, tránh va chạm."
       ]
     },
     {
-      "id": 13,
-      "page": 15,
-      "name": "Emoji tâm trạng",
-      "description": "Mỗi người chọn 1–2 biểu cảm hoặc sticker giấy để mô tả cảm xúc lúc bắt đầu buổi họp mặt.",
+      "id": 4,
+      "page": 9,
+      "name": "Chiếc ghế vô hình (Human Chair)",
       "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 4,
-      "durationMax": 4,
-      "duration": "4 phút",
-      "context": "Trong phòng",
-      "contexts": [
-        "Trong phòng"
-      ],
-      "purposes": [
-        "Giao tiếp",
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/13.svg",
-      "instructionImage": "/images/games/instructions/13.svg",
-      "howToPlay": [
-        "Leader phát giấy nhỏ / sticky note. Mọi người vẽ một mặt cười hoặc viết 1 từ cảm xúc.",
-        "Lần lượt giơ giấy lên. Muốn nói thêm một câu thì nói, không bắt buộc.",
-        "Leader gom cảm xúc nhóm rồi chuyển sang việc chính, không phán xét."
-      ],
-      "preparation": [
-        "Không cần thêm chuẩn bị. Có thể dùng giấy sẵn trong phòng."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không hỏi “vì sao buồn”."
-      ]
-    },
-    {
-      "id": 11,
-      "page": 16,
-      "name": "Giới thiệu bằng 3 từ",
-      "description": "Mỗi người mô tả mình tuần này bằng đúng 3 từ, rồi giải thích 10 giây nếu muốn.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 5,
-      "durationMax": 5,
-      "duration": "5 phút",
-      "context": "Nhóm nhỏ",
-      "contexts": [
-        "Nhóm nhỏ"
-      ],
-      "purposes": [
-        "Giao tiếp",
-        "Khởi động trước khi họp nhóm",
-        "Làm quen",
-        "Phá băng",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/11.svg",
-      "instructionImage": "/images/games/instructions/11.svg",
-      "howToPlay": [
-        "Leader làm mẫu: “Deadline – trà đá – mưa”.",
-        "Mỗi người nói 3 từ. Có thể viết ra giấy rồi đọc.",
-        "Không bắt kể dài. Ai ngại chỉ cần 3 từ, không giải thích.",
-        "Leader gom điểm chung của cả nhóm."
-      ],
-      "preparation": [
-        "Cho 20 giây nghĩ trước khi bắt đầu vòng nói."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Câu trả lời ba từ là đủ.",
-        "Câu trả lời ba từ là đủ."
-      ]
-    },
-    {
-      "id": 17,
-      "page": 17,
-      "name": "High-five ảo theo chủ đề",
-      "description": "Leader nêu chủ đề, ai khớp thì high-five người bên cạnh. Rất nhanh, rất ít nói.",
-      "minPlayers": 10,
-      "maxPlayers": 10,
-      "players": "10 người",
-      "durationMin": 4,
-      "durationMax": 4,
-      "duration": "4 phút",
-      "context": "Trong lớp học",
-      "contexts": [
-        "Trong lớp học"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/17.svg",
-      "instructionImage": "/images/games/instructions/17.svg",
-      "howToPlay": [
-        "Cả nhóm đứng thành vòng trong lớp.",
-        "“High-five nếu hôm nay uống cà phê.” Ai khớp high-five người cạnh mình.",
-        "Đổi chủ đề: ngủ muộn, thích mèo, đang mang balo.",
-        "Làm 6–8 chủ đề. Chủ đề cuối: “High-five nếu sẵn sàng vào việc”."
-      ],
-      "preparation": [
-        "Phù hợp nhóm rụt rè vì gần như không phải nói."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không bắt kể thêm. Chỉ chơi trực tiếp trong lớp."
-      ]
-    },
-    {
-      "id": 10,
-      "page": 18,
-      "name": "Nhìn hình đoán chữ",
-      "description": "Leader chiếu hoặc giơ hình; nhóm đoán từ/cụm từ. Ưu tiên hình vui, không đánh đố.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 10,
-      "durationMax": 10,
-      "duration": "10 phút",
-      "context": "Trong lớp học",
-      "contexts": [
-        "Trong lớp học"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo tiếng cười"
-      ],
-      "heroImage": "/images/games/10.svg",
-      "instructionImage": "/images/games/instructions/10.svg",
-      "howToPlay": [
-        "Leader chuẩn bị 6–8 hình in sẵn hoặc viết trên bảng.",
-        "Giơ từng hình 20–30 giây.",
-        "Mọi người đoán nói to, không giành lời.",
-        "Leader chốt đáp án rồi sang hình tiếp. Dừng khi hết giờ."
-      ],
-      "preparation": [
-        "Leader phải chuẩn bị hình trước. Tránh hình phản cảm hoặc quá khó."
-      ],
-      "preparationRequired": true,
-      "preparationTime": 10,
-      "rules": [
-        "Không xếp hạng ai đoán nhanh nhất."
-      ]
-    },
-    {
-      "id": 14,
-      "page": 19,
-      "name": "Show and Tell 30 giây",
-      "description": "Khoe một vật trong tầm tay và nói tối đa 30 giây vì sao hôm nay để nó gần mình.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 8,
-      "durationMax": 8,
-      "duration": "8 phút",
-      "context": "Trong phòng",
-      "contexts": [
-        "Trong phòng"
-      ],
-      "purposes": [
-        "Làm quen",
-        "Phá băng",
-        "Tăng tương tác",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/14.svg",
-      "instructionImage": "/images/games/instructions/14.svg",
-      "howToPlay": [
-        "Cho 1 phút tìm vật (ly, tai nghe, vở, móc khóa).",
-        "Mỗi người: giơ vật + nói tối đa 30 giây.",
-        "Nhóm vỗ tay nhẹ. Không so sánh vật “cool” hơn."
-      ],
-      "preparation": [
-        "Có thao tác cầm đồ: cho 1 phút tìm vật trong phòng."
-      ],
-      "preparationRequired": true,
-      "preparationTime": 1,
-      "rules": [
-        "Leader canh giờ nhẹ, không cắt lời đột ngột."
-      ]
-    },
-    {
-      "id": 12,
-      "page": 20,
-      "name": "This or That",
-      "description": "Chọn nhanh một trong hai thứ dễ: trà/cà phê, sáng/tối, mèo/chó… Không có đáp án đúng.",
-      "minPlayers": 8,
-      "maxPlayers": 8,
-      "players": "8 người",
+      "maxPlayers": 12,
+      "players": "5-12 người",
       "durationMin": 7,
       "durationMax": 7,
       "duration": "7 phút",
+      "time": "7 phút",
+      "context": "Trong phòng",
+      "contexts": [
+        "Trong phòng"
+      ],
+      "purpose": "Khởi động trước khi họp nhóm, Tăng tương tác, Tạo sự thoải mái",
+      "purposes": [
+        "Khởi động trước khi họp nhóm",
+        "Tăng tương tác",
+        "Tạo sự thoải mái"
+      ],
+      "tags": [
+        "Khởi động trước khi họp nhóm",
+        "Tăng tương tác",
+        "Tạo sự thoải mái"
+      ],
+      "description": "Người chơi ngồi lên đùi nhau theo vòng để tạo “ghế vô hình” và giữ thăng bằng.",
+      "coverImage": "/images/games/4.svg",
+      "heroImage": "/images/games/4.svg",
+      "instructionImage": "/images/games/instructions/4.svg",
+      "howToPlay": [
+        "Nhóm 1-5 người: tối thiểu 4-5 người tạo vòng tròn rồi đồng loạt ngồi lên đùi người phía sau.",
+        "Nhóm 6-10 người: sau khi giữ vững tư thế, quản trò yêu cầu cả vòng di chuyển 3 bước trái/phải.",
+        "Nhóm 10+ người: chia thành các vòng 6-8 người để thi vòng nào giữ được lâu hơn hoặc tạo vòng lớn nếu đủ chỗ.",
+        "Dùng nhạc/trống để giữ nhịp vào và thoát tư thế."
+      ],
+      "preparation": [
+        "Trống hoặc loa phát nhạc."
+      ],
+      "preparationRequired": true,
+      "preparationTime": 2,
+      "rules": [
+        "Ngồi theo nhịp chung, không đẩy người khác.",
+        "Dừng ngay khi mất thăng bằng để đảm bảo an toàn."
+      ]
+    },
+    {
+      "id": 5,
+      "page": 10,
+      "name": "Vỗ tay 3-6-9",
+      "minPlayers": 5,
+      "maxPlayers": 12,
+      "players": "5-12 người",
+      "durationMin": 6,
+      "durationMax": 6,
+      "duration": "6 phút",
+      "time": "6 phút",
       "context": "Trong lớp học",
       "contexts": [
         "Trong lớp học"
       ],
+      "purpose": "Khởi động trước khi họp nhóm, Phá băng, Tạo sự thoải mái",
       "purposes": [
         "Khởi động trước khi họp nhóm",
         "Phá băng",
-        "Tăng tương tác",
-        "Tạo sự thoải mái",
-        "Tạo tiếng cười"
+        "Tạo sự thoải mái"
       ],
-      "heroImage": "/images/games/12.svg",
-      "instructionImage": "/images/games/instructions/12.svg",
+      "tags": [
+        "Khởi động trước khi họp nhóm",
+        "Phá băng",
+        "Tạo sự thoải mái"
+      ],
+      "description": "Đọc số theo vòng và vỗ tay khi gặp số có 3, 6, 9; càng đông càng tăng luật.",
+      "coverImage": "/images/games/5.svg",
+      "heroImage": "/images/games/5.svg",
+      "instructionImage": "/images/games/instructions/5.svg",
       "howToPlay": [
-        "Leader đọc cặp: “Trà sữa hay nước lọc?”",
-        "Mọi người giơ 1 ngón / 2 ngón, hoặc bước sang trái/phải trong lớp.",
-        "Leader hỏi 1–2 người vì sao — trả lời một câu.",
-        "Lặp 5–6 cặp đời thường, không chính trị, không ngoại hình."
+        "Nhóm 1-5 người: chơi theo vòng, lần lượt đọc số và vỗ tay khi số chứa 3, 6 hoặc 9.",
+        "Nhóm 6-10 người: số hai chữ số chứa 3/6/9 như 33, 36, 39 phải vỗ tay 2 cái.",
+        "Nhóm 10+ người: thêm luật đảo hướng đếm sau mỗi lần vỗ tay.",
+        "Ai đọc sai hoặc vỗ chậm nhận hình phạt nhẹ."
       ],
       "preparation": [
-        "Không cần chuẩn bị thân thể. Leader soạn sẵn 5–6 cặp lựa chọn dễ."
+        "Không cần đạo cụ. Có thể chuẩn bị hình phạt nhẹ."
       ],
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không tranh luận ai đúng."
+        "Phải vỗ tay đúng nhịp và đúng số lượng theo luật vòng hiện tại."
       ]
     },
     {
       "id": 6,
-      "page": 21,
-      "name": "Tìm điểm chung nhanh",
-      "description": "Cả nhóm tìm càng nhiều điểm chung càng tốt trong thời gian ngắn, không cần sâu.",
+      "page": 11,
+      "name": "Chạy đua Toán học / Đứng đúng đáp án (Number Rush)",
       "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 8,
-      "durationMax": 8,
-      "duration": "8 phút",
-      "context": "Nhóm nhỏ",
-      "contexts": [
-        "Nhóm nhỏ"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Làm quen",
-        "Phá băng",
-        "Tìm điểm chung",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/6.svg",
-      "instructionImage": "/images/games/instructions/6.svg",
-      "howToPlay": [
-        "Leader đặt câu dễ: “Ai từng thức khuya làm bài giơ tay”.",
-        "Những người giơ tay nói thêm 1 chi tiết rất ngắn.",
-        "Lặp 4–5 câu: đồ uống, môn học, thú cưng, ca sĩ nghe dạo này.",
-        "Leader ghi 3 điểm chung lên bảng rồi cả nhóm bắt tay."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị thân thể. Leader chỉ cần 4–5 câu hỏi đóng (có/không) soạn sẵn."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không hỏi thu nhập, điểm số, chuyện gia đình nhạy cảm."
-      ]
-    },
-    {
-      "id": 20,
-      "page": 22,
-      "name": "Tìm người cùng vibe",
-      "description": "Leader nêu 4 vibe; mỗi người chọn 1. Những người cùng vibe đứng lại gần nhau trên campus / hành lang.",
-      "minPlayers": 8,
-      "maxPlayers": 8,
-      "players": "8 người",
-      "durationMin": 5,
-      "durationMax": 5,
-      "duration": "5 phút",
-      "context": "Campus",
-      "contexts": [
-        "Campus"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tìm điểm chung",
-        "Tạo sự thoải mái"
-      ],
-      "heroImage": "/images/games/20.svg",
-      "instructionImage": "/images/games/instructions/20.svg",
-      "howToPlay": [
-        "Bốn vibe: “muốn nghe”, “muốn nói”, “muốn pha trò”, “muốn vào việc luôn”.",
-        "Mỗi người chọn 1 (giơ số ngón tay).",
-        "Cùng số thì bước lại gần và chào nhau. Không có vibe nào “đúng hơn”.",
-        "Leader điều chỉnh cách họp mặt cho khớp năng lượng nhóm."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị trước. Giúp nhóm mới không bị ép phải nói nhiều."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Tôn trọng người chọn “muốn nghe”."
-      ]
-    },
-    {
-      "id": 1,
-      "page": 23,
-      "name": "Truyền tin nhắn",
-      "description": "Chinese Whisper bằng lời: thì thầm một câu ngắn lần lượt trong nhóm, rồi so câu cuối với câu gốc.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 8,
-      "durationMax": 8,
-      "duration": "8 phút",
+      "maxPlayers": 12,
+      "players": "5-12 người",
+      "durationMin": 10,
+      "durationMax": 10,
+      "duration": "10 phút",
+      "time": "10 phút",
       "context": "Trong lớp học",
       "contexts": [
         "Trong lớp học"
       ],
+      "purpose": "Khởi động trước khi họp nhóm, Tăng tương tác, Giao tiếp",
       "purposes": [
         "Khởi động trước khi họp nhóm",
-        "Phá băng",
         "Tăng tương tác",
-        "Tạo tiếng cười"
+        "Giao tiếp"
       ],
-      "heroImage": "/images/games/1.svg",
-      "instructionImage": "/images/games/instructions/1.svg",
-      "howToPlay": [
-        "Cả nhóm đứng hoặc ngồi thành vòng trong lớp.",
-        "Leader nghĩ một câu ngắn, dễ hiểu rồi thì thầm vào tai người bên cạnh.",
-        "Lần lượt thì thầm đến người cuối. Người cuối nói to câu nhận được.",
-        "Leader đọc câu gốc. Cả nhóm cười với chỗ “lạc” — không ai bị phạt."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị thân thể. Leader chỉ cần nghĩ sẵn 1 câu trung tính."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Chỉ dùng câu trung tính. Nói rõ, không cố tình phá nếu nhóm còn rụt rè."
-      ]
-    },
-    {
-      "id": 9,
-      "page": 24,
-      "name": "Từ nối từ",
-      "description": "Người trước nói một từ, người sau nói từ liên quan. Giữ nhịp chậm, không loại.",
-      "minPlayers": 2,
-      "maxPlayers": 2,
-      "players": "2 người",
-      "durationMin": 6,
-      "durationMax": 6,
-      "duration": "6 phút",
-      "context": "Trong phòng",
-      "contexts": [
-        "Trong phòng"
-      ],
-      "purposes": [
-        "Giao tiếp",
+      "tags": [
         "Khởi động trước khi họp nhóm",
-        "Phá băng",
-        "Tăng tương tác"
-      ],
-      "heroImage": "/images/games/9.svg",
-      "instructionImage": "/images/games/instructions/9.svg",
-      "howToPlay": [
-        "Hai người ngồi đối diện. Leader (hoặc một người) mở từ: “Nhóm”.",
-        "Người kia nói một từ liên quan: “họp”, “bài tập”, “lớp”…",
-        "Đi vài vòng. Nếu kẹt, được hỏi gợi ý: “nghĩ về đồ ăn / môn học”.",
-        "Kết bằng từ cuối cùng nói đồng thanh."
-      ],
-      "preparation": [
-        "Không cần chuẩn bị trước. Có thể bắt đầu ngay."
-      ],
-      "preparationRequired": false,
-      "preparationTime": 0,
-      "rules": [
-        "Không tính giờ gấp. Im lặng 5 giây vẫn được."
-      ]
-    },
-    {
-      "id": 15,
-      "page": 25,
-      "name": "Would You Rather nhẹ",
-      "description": "Chọn một trong hai tình huống vô hại, giải thích đúng một câu. Chơi khi đang đi hoặc đứng trên campus.",
-      "minPlayers": 5,
-      "maxPlayers": 5,
-      "players": "5 người",
-      "durationMin": 7,
-      "durationMax": 7,
-      "duration": "7 phút",
-      "context": "Campus",
-      "contexts": [
-        "Campus"
-      ],
-      "purposes": [
-        "Khởi động trước khi họp nhóm",
-        "Phá băng",
         "Tăng tương tác",
-        "Tạo tiếng cười"
+        "Giao tiếp"
       ],
-      "heroImage": "/images/games/15.svg",
-      "instructionImage": "/images/games/instructions/15.svg",
+      "description": "Người chơi chạy tới ô đáp án đúng sau khi nghe phép tính nhẩm từ quản trò.",
+      "coverImage": "/images/games/6.svg",
+      "heroImage": "/images/games/6.svg",
+      "instructionImage": "/images/games/instructions/6.svg",
       "howToPlay": [
-        "Leader đọc: “Thức khuya làm bài hay dậy sớm làm bài?”",
-        "Giơ tay hoặc bước sang hai phía.",
-        "1–2 người giải thích một câu.",
-        "Lặp 4–5 câu. Câu cuối liên quan việc nhóm sắp làm."
+        "Nhóm 1-5 người: chơi cá nhân, quản trò đọc phép tính, ai chạy đến đáp án đúng trước được 1 điểm.",
+        "Nhóm 6-10 người: chia 2 đội, mỗi lượt 1 người của mỗi đội thi 1-1.",
+        "Nhóm 10+ người: tất cả cùng tìm ô đáp án sau khi nghe phép tính; ai đứng sai hoặc chậm bị loại.",
+        "Lặp nhiều lượt với mức tính nhẩm tăng dần."
       ],
       "preparation": [
-        "Không cần chuẩn bị trước. Cấm tình huống sợ hãi, ngoại hình, tiền bạc."
+        "Các tờ giấy A4 ghi số đáp án dán dưới sàn và bộ câu hỏi tính nhẩm."
       ],
-      "preparationRequired": false,
-      "preparationTime": 0,
+      "preparationRequired": true,
+      "preparationTime": 8,
       "rules": [
-        "Không có đáp án thắng."
+        "Chỉ được chạy khi quản trò đọc xong câu hỏi.",
+        "Đứng đúng ô mới được tính điểm/thắng lượt."
       ]
     }
   ]
