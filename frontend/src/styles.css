@@ -31,7 +31,6 @@ body {
     radial-gradient(circle at 20% 10%, rgba(255, 120, 210, 0.2), transparent 35%),
     radial-gradient(circle at 80% 30%, rgba(97, 120, 255, 0.25), transparent 36%),
     radial-gradient(circle at 50% 90%, rgba(116, 80, 255, 0.2), transparent 32%),
-    url("/images/purple-background.png") center / cover fixed no-repeat,
     #09041a;
 }
 
@@ -250,9 +249,7 @@ legend {
   padding: 18px 16px 22px;
   border-radius: 20px;
   border: 1px solid rgba(109, 70, 255, 0.45);
-  background:
-    linear-gradient(rgba(9, 4, 26, 0.36), rgba(9, 4, 26, 0.36)),
-    url("/images/purple-background.png") center / cover fixed no-repeat;
+  background: rgba(9, 4, 26, 0.36);
   box-shadow: var(--shadow);
 }
 
@@ -330,7 +327,7 @@ legend {
 }
 
 .book-page.game-page {
-  background: rgba(14, 8, 39, 0.72);
+  background: url("/images/purple-background.png") center / cover no-repeat;
 }
 
 .design-sheet {
@@ -808,9 +805,7 @@ legend {
   }
 
   .ebook-reader {
-    background:
-      linear-gradient(rgba(9, 4, 26, 0.36), rgba(9, 4, 26, 0.36)),
-      url("/images/purple-background.png") center / cover no-repeat;
+    background: rgba(9, 4, 26, 0.36);
   }
 
   .ebook-focus .book-page,
