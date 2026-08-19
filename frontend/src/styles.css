@@ -257,23 +257,23 @@ legend {
 }
 
 .ebook-reader-standalone {
-  max-width: 1080px;
+  max-width: none;
   margin: 0 auto;
 }
 
 .book-spread {
-  display: grid;
-  grid-template-columns: minmax(0, 520px);
-  max-width: 1080px;
-  margin: 0 auto;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
-  justify-content: center;
 }
 
 .book-page {
   position: relative;
   background: rgba(14, 8, 39, 0.72);
   border: 1px solid var(--line);
+  width: 100%;
   min-height: 640px;
   max-height: 80vh;
   overflow: auto;
@@ -746,7 +746,8 @@ legend {
   .book-spread,
   .book-spread.single,
   .book-spread.cover-only {
-    grid-template-columns: minmax(0, 1fr);
+    display: block;
+    width: 100%;
   }
 
   .book-page,
