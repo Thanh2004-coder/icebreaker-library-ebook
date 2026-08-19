@@ -228,9 +228,9 @@
       "id": 1,
       "page": 5,
       "name": "Tìm số đồng đội (Number Hunt)",
-      "minPlayers": 5,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "5+ người",
+      "players": "2–20 người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
@@ -258,14 +258,54 @@
       "coverImage": "/images/games/1.svg",
       "heroImage": "/images/games/1.svg",
       "instructionImage": "/images/games/instructions/1.svg",
-      "howToPlay": [
-        "Quản trò phát cho mỗi đội 1 tờ A0/A1 có số 1-80 lộn xộn và 1 bút dạ.",
-        "Nhóm 1-5 người: cả nhóm lần lượt chạy lên khoanh số hoặc mỗi người 1 tờ A4 thi cá nhân 1-80.",
-        "Nhóm 6-10 người: chia 2 đội, giấy đặt cách vạch 3-5m; mỗi người khoanh đúng 1 số rồi trao bút cho người tiếp theo.",
-        "Nhóm 10+ người: chia 3-4 đội, tăng khó bằng cự ly 10-15m hoặc thêm nhảy lò cò/vượt chướng ngại trước khi khoanh."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "Mỗi người nhận 1 tờ A4 in số 1–40 lộn xộn và 1 bút.",
+            "Hai người cùng bắt đầu: lần lượt khoanh đúng thứ tự 1 → 40 trên tờ của mình.",
+            "Ai hoàn thành trước hoặc ít lỗi hơn trong cùng thời gian thắng.",
+            "Có thể chơi nhiều hiệp và đổi tờ số để tăng độ khó."
+          ],
+          "rules": [
+            "Mỗi lượt chỉ khoanh đúng 1 số theo thứ tự.",
+            "Khoanh sai phải sửa trước khi chuyển lượt."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "Chia thành 2 cặp (nếu 4 người) hoặc 1 quản trò + 3 thi đấu (nếu 3 người).",
+            "Mỗi người/cặp nhận 1 tờ A4 số 1–60 lộn xộn; luân phiên khoanh đúng thứ tự.",
+            "Nếu 4 người: chơi relay — mỗi lượt 1 người khoanh 1 số rồi trao bút cho người kế tiếp trên cùng tờ đội.",
+            "Đội hoàn thành trước hoặc đúng nhiều số hơn trong 10 phút thắng."
+          ],
+          "rules": [
+            "Không chỉ tay hoặc gọi số hộ người đang cầm bút.",
+            "Chỉ người cầm bút được khoanh trong lượt của mình."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Quản trò phát cho mỗi đội 1 tờ A0/A1 có số 1–80 lộn xộn và 1 bút dạ.",
+            "Nhóm 5–10 người: chia 2 đội, giấy đặt cách vạch 3–5 m; mỗi người khoanh đúng 1 số rồi trao bút cho người tiếp theo.",
+            "Nhóm 10+ người: chia 3–4 đội, tăng khó bằng cự ly 10–15 m hoặc thêm nhảy lò cò/vượt chướng ngại trước khi khoanh.",
+            "Đội hoàn thành dãy số đúng thứ tự trước thắng."
+          ],
+          "rules": [
+            "Mỗi lượt chỉ được khoanh đúng 1 số.",
+            "Khoanh sai phải quay lại sửa trước khi đổi lượt.",
+            "Di chuyển an toàn, không va chạm hoặc chắn đường đội khác."
+          ]
+        }
       ],
       "preparation": [
-        "Tờ giấy lớn A0/A1 in số 1-80 lộn xộn, bút lông hoặc bút dạ (mỗi đội 1 chiếc)."
+        "Tờ A4 in số 1–40 hoặc 1–60 (cho nhóm nhỏ), tờ A0/A1 in số 1–80 (cho nhóm lớn), bút lông hoặc bút dạ."
       ],
       "preparationRequired": true,
       "preparationTime": 10,
@@ -279,9 +319,9 @@
       "id": 2,
       "page": 6,
       "name": "Đoán ý đồng đội / Tam sao thất bản",
-      "minPlayers": 3,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "3+ người",
+      "players": "2–20 người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
@@ -312,14 +352,53 @@
       "coverImage": "/images/games/2.svg",
       "heroImage": "/images/games/2.svg",
       "instructionImage": "/images/games/instructions/2.svg",
-      "howToPlay": [
-        "Nhóm 1-5 người: 1 người diễn tả không nói, 4 người còn lại đoán từ/hành động.",
-        "Nhóm 6-10 người: chia 2 đội xếp hàng dọc, truyền từ khóa từ cuối lên đầu để người đầu hàng đoán.",
-        "Nhóm 10+ người: chia nhiều hàng song song, thông tin đi qua nhiều người tạo hiệu ứng tam sao thất bản.",
-        "Có thể dùng tai nghe bật nhạc to nếu chơi truyền bằng khẩu hình."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "Bốc thăm từ khóa/hành động trên thẻ.",
+            "1 người diễn tả không nói, 1 người đoán trong 60 giây.",
+            "Đoán đúng được 1 điểm; sau mỗi lượt đổi vai.",
+            "Chơi 5–8 lượt, ai nhiều điểm hơn thắng."
+          ],
+          "rules": [
+            "Không dùng lời nói hoặc chỉ trực tiếp vào vật liên quan.",
+            "Không viết chữ hoặc vẽ chữ cái."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "Cách 1 — Diễn tả: 1 người diễn tả, 2–3 người cùng đoán; ai đoán trước được điểm.",
+            "Cách 2 — Tam sao thất bản mini: xếp hàng dọc, người cuối xem thẻ và mô tả bằng khẩu hình cho người phía trước; truyền dần lên đầu hàng để người đầu đoán từ.",
+            "Có thể dùng tai nghe bật nhạc to cho người ở giữa hàng nếu chơi truyền bằng môi.",
+            "Mỗi lượt đổi vị trí để ai cũng thử vai truyền và đoán."
+          ],
+          "rules": [
+            "Người diễn tả/truyền không được nói to từ khóa.",
+            "Mỗi lượt có thời gian giới hạn 60–90 giây."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Nhóm 5–10 người: chia 2 đội xếp hàng dọc, truyền từ khóa từ cuối lên đầu để người đầu hàng đoán.",
+            "Nhóm 10+ người: chia nhiều hàng song song, thông tin đi qua nhiều người tạo hiệu ứng tam sao thất bản.",
+            "Có thể dùng tai nghe bật nhạc to nếu chơi truyền bằng khẩu hình.",
+            "Đội đoán đúng nhiều từ hơn sau 3–5 lượt thắng."
+          ],
+          "rules": [
+            "Người diễn tả không dùng lời nói.",
+            "Đội đoán trong thời gian giới hạn mỗi lượt."
+          ]
+        }
       ],
       "preparation": [
-        "Băng đô hoặc khăn màu để chia đội, thẻ từ vựng/hành động, tai nghe bật nhạc to (nếu chơi bằng môi)."
+        "Thẻ từ vựng/hành động, băng đô hoặc khăn (nếu chia đội), tai nghe bật nhạc to (tùy chọn)."
       ],
       "preparationRequired": true,
       "preparationTime": 5,
@@ -332,9 +411,9 @@
       "id": 3,
       "page": 7,
       "name": "Trốn khung hình (Don't get caught)",
-      "minPlayers": 5,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "5+ người",
+      "players": "2–20 người",
       "durationMin": 8,
       "durationMax": 8,
       "duration": "8 phút",
@@ -360,14 +439,53 @@
       "coverImage": "/images/games/3.svg",
       "heroImage": "/images/games/3.svg",
       "instructionImage": "/images/games/instructions/3.svg",
-      "howToPlay": [
-        "Nhóm 1-5 người: người bịt mắt cầm điện thoại xoay vòng tại chỗ và chụp liên tiếp 3 tấm; ai lọt khung bị phạt.",
-        "Nhóm 6-10 người: người bịt mắt đếm 1-3 rồi chụp một góc bất kỳ, các thành viên di chuyển để né khung hình.",
-        "Nhóm 10+ người: chơi không gian lớn, có thể dùng 2 hunter; người dính trong ảnh bị loại dần.",
-        "Kết thúc khi tìm ra người trụ lại cuối cùng."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "1 người bịt mắt cầm điện thoại, đếm 1–3 rồi chụp một tấm.",
+            "Người còn lại đứng trong khung hoặc bước ra ngoài khung trước khi chụp.",
+            "Ai lọt vào ảnh nhận 1 điểm phạt; đổi vai sau mỗi lượt.",
+            "Chơi 6–8 lượt trong không gian nhỏ, không cần chạy xa."
+          ],
+          "rules": [
+            "Người bịt mắt không được tháo băng trong lượt.",
+            "Không chạy nhanh hoặc va chạm trong phòng nhỏ."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "1 người làm hunter bịt mắt cầm điện thoại.",
+            "2–3 người còn lại đứng/rẽ trong cùng phòng; khi hunter đếm 1–3 và chụp, mọi người né khung hình.",
+            "Ai xuất hiện trong ảnh nhận điểm phạt; người ít điểm phạt nhất thắng sau 5 lượt.",
+            "Luân phiên làm hunter."
+          ],
+          "rules": [
+            "Hunter xoay tại chỗ hoặc di chuyển chậm, không đuổi theo.",
+            "Di chuyển vừa phải, tránh va chạm."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Nhóm 5–10 người: 1 hunter bịt mắt đếm 1–3 rồi chụp một góc bất kỳ, các thành viên di chuyển để né khung hình.",
+            "Nhóm 10+ người: chơi không gian lớn, có thể dùng 2 hunter; người dính trong ảnh bị loại dần.",
+            "Kết thúc khi tìm ra người trụ lại cuối cùng.",
+            "Có thể chơi nhiều vòng với hunter luân phiên."
+          ],
+          "rules": [
+            "Người bịt mắt không được tháo băng trong lượt.",
+            "Di chuyển vừa phải, tránh va chạm."
+          ]
+        }
       ],
       "preparation": [
-        "1 điện thoại thông minh và 1 dải băng bịt mắt."
+        "1 điện thoại thông minh và 1 dải băng bịt mắt (nhóm nhỏ có thể dùng 1 bộ, nhóm lớn thêm 1–2 bộ)."
       ],
       "preparationRequired": true,
       "preparationTime": 2,
@@ -380,9 +498,9 @@
       "id": 4,
       "page": 8,
       "name": "Chiếc ghế vô hình (Human Chair)",
-      "minPlayers": 5,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "5+ người",
+      "players": "2–20 người",
       "durationMin": 5,
       "durationMax": 5,
       "duration": "5 phút",
@@ -410,14 +528,54 @@
       "coverImage": "/images/games/4.svg",
       "heroImage": "/images/games/4.svg",
       "instructionImage": "/images/games/instructions/4.svg",
-      "howToPlay": [
-        "Nhóm 1-5 người: tối thiểu 4-5 người tạo vòng tròn rồi đồng loạt ngồi lên đùi người phía sau.",
-        "Nhóm 6-10 người: sau khi giữ vững tư thế, quản trò yêu cầu cả vòng di chuyển 3 bước trái/phải.",
-        "Nhóm 10+ người: chia thành các vòng 6-8 người để thi vòng nào giữ được lâu hơn hoặc tạo vòng lớn nếu đủ chỗ.",
-        "Dùng nhạc/trống để giữ nhịp vào và thoát tư thế."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "Biến thể an toàn — Tựa lưng tin cậy: hai người đứng lưng áp lưng, chân mở rộng bằng vai.",
+            "Theo nhịp quản trò, cả hai từ từ ngồi xuống (squat) sao cho lưng vẫn áp nhau và giữ thăng bằng 5–10 giây.",
+            "Sau đó đứng lên cùng nhịp; lặp 3–5 lần.",
+            "Không áp dụng vòng tròn ghế vô hình vì không an toàn với 2 người."
+          ],
+          "rules": [
+            "Chỉ squat trong phạm vi kiểm soát, dừng ngay khi mất thăng bằng.",
+            "Không đẩy hoặc nghiêng người đối phương.",
+            "Chơi trên mặt sàn phẳng, tránh trơn."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "Nhóm 3 người: xếp tam giác, quay mặt vào trong, tay đặt lên vai người bên cạnh, từ từ ngồi xuống để đùi chạm ghế (đùi người phía sau) trong 3–5 giây.",
+            "Nhóm 4 người: tạo vòng tròn nhỏ, đứng sát nhau, đồng loạt ngồi lên đùi người phía sau.",
+            "Giữ tư thế 5 giây rồi đứng lên theo nhịc; thử 3–5 hiệp.",
+            "Dùng nhạc/trống để báo hiệu ngồi và đứng."
+          ],
+          "rules": [
+            "Ngồi theo nhịp chung, không đẩy người khác.",
+            "Dừng ngay khi mất thăng bằng để đảm bảo an toàn."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Nhóm 5–10 người: tạo vòng tròn rồi đồng loạt ngồi lên đùi người phía sau; sau khi giữ vững, quản trò yêu cầu cả vòng di chuyển 3 bước trái/phải.",
+            "Nhóm 10+ người: chia thành các vòng 6–8 người để thi vòng nào giữ được lâu hơn hoặc tạo vòng lớn nếu đủ chỗ.",
+            "Dùng nhạc/trống để giữ nhịp vào và thoát tư thế.",
+            "Vòng giữ thăng bằng lâu nhất thắng."
+          ],
+          "rules": [
+            "Ngồi theo nhịp chung, không đẩy người khác.",
+            "Dừng ngay khi mất thăng bằng để đảm bảo an toàn."
+          ]
+        }
       ],
       "preparation": [
-        "Trống hoặc loa phát nhạc."
+        "Trống hoặc loa phát nhạc (tùy chọn), không gian sàn phẳng."
       ],
       "preparationRequired": true,
       "preparationTime": 2,
@@ -430,9 +588,9 @@
       "id": 5,
       "page": 9,
       "name": "Vỗ tay 3-6-9",
-      "minPlayers": 3,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "3+ người",
+      "players": "2–20 người",
       "durationMin": 4,
       "durationMax": 4,
       "duration": "4 phút",
@@ -460,11 +618,49 @@
       "coverImage": "/images/games/5.svg",
       "heroImage": "/images/games/5.svg",
       "instructionImage": "/images/games/instructions/5.svg",
-      "howToPlay": [
-        "Nhóm 1-5 người: chơi theo vòng, lần lượt đọc số và vỗ tay khi số chứa 3, 6 hoặc 9.",
-        "Nhóm 6-10 người: số hai chữ số chứa 3/6/9 như 33, 36, 39 phải vỗ tay 2 cái.",
-        "Nhóm 10+ người: thêm luật đảo hướng đếm sau mỗi lần vỗ tay.",
-        "Ai đọc sai hoặc vỗ chậm nhận hình phạt nhẹ."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "Hai người đối diện hoặc ngồi cạnh nhau.",
+            "Luân phiên đọc số 1, 2, 3… theo thứ tự.",
+            "Vỗ tay 1 cái khi số có chứa chữ số 3, 6 hoặc 9 (ví dụ: 3, 6, 9, 13, 16, 19…).",
+            "Ai đọc sai, vỗ thiếu hoặc vỗ nhầm thì thua lượt; chơi đến số 30 hoặc 50."
+          ],
+          "rules": [
+            "Phải vỗ tay đúng nhịp ngay khi đến lượt mình.",
+            "Không được nhắc số hộ đối phương."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "Xếp vòng tròn 3–4 người, đếm số luân phiên.",
+            "Vỗ tay khi số chứa 3, 6 hoặc 9; số hai chữ số như 33, 36, 39 vỗ 2 cái.",
+            "Người sai nhận hình phạt nhẹ rồi tiếp tục vòng.",
+            "Có thể đặt mốc kết thúc ở số 50 hoặc 99."
+          ],
+          "rules": [
+            "Phải vỗ đúng số lượng tay theo luật hiện tại.",
+            "Không chen lượt."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Nhóm 5–10 người: chơi theo vòng, vỗ tay khi số chứa 3, 6 hoặc 9; số hai chữ số chứa 3/6/9 vỗ 2 cái.",
+            "Nhóm 10+ người: thêm luật đảo hướng đếm sau mỗi lần vỗ tay.",
+            "Ai đọc sai hoặc vỗ chậm nhận hình phạt nhẹ.",
+            "Có thể chia 2 vòng nếu quá đông."
+          ],
+          "rules": [
+            "Phải vỗ tay đúng nhịp và đúng số lượng theo luật vòng hiện tại."
+          ]
+        }
       ],
       "preparation": [
         "Không cần đạo cụ. Có thể chuẩn bị hình phạt nhẹ."
@@ -479,9 +675,9 @@
       "id": 6,
       "page": 10,
       "name": "Chạy đua Toán học / Đứng đúng đáp án (Number Rush)",
-      "minPlayers": 5,
+      "minPlayers": 2,
       "maxPlayers": 20,
-      "players": "5+ người",
+      "players": "2–20 người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
@@ -510,14 +706,53 @@
       "coverImage": "/images/games/6.svg",
       "heroImage": "/images/games/6.svg",
       "instructionImage": "/images/games/instructions/6.svg",
-      "howToPlay": [
-        "Nhóm 1-5 người: chơi cá nhân, quản trò đọc phép tính, ai chạy đến đáp án đúng trước được 1 điểm.",
-        "Nhóm 6-10 người: chia 2 đội, mỗi lượt 1 người của mỗi đội thi 1-1.",
-        "Nhóm 10+ người: tất cả cùng tìm ô đáp án sau khi nghe phép tính; ai đứng sai hoặc chậm bị loại.",
-        "Lặp nhiều lượt với mức tính nhẩm tăng dần."
+      "howToPlay": [],
+      "playerModes": [
+        {
+          "key": "2",
+          "label": "2 người",
+          "instructions": [
+            "Dán 2–4 tờ A4 ghi đáp án ở các vị trí cách nhau 1–2 m.",
+            "1 người làm quản trò đọc phép tính nhẩm, 1 người chạy/bước nhanh đến ô đáp án đúng.",
+            "Đoán đúng được 1 điểm; đổi vai quản trò sau 5 câu.",
+            "Chơi 10 câu, ai nhiều điểm hơn thắng."
+          ],
+          "rules": [
+            "Chỉ được di chuyển sau khi quản trò đọc xong câu hỏi.",
+            "Đứng đúng ô mới được tính điểm."
+          ]
+        },
+        {
+          "key": "3-4",
+          "label": "3–4 người",
+          "instructions": [
+            "Dán 3–6 tờ A4 đáp án rải trong phòng.",
+            "1 quản trò đọc câu hỏi; 2–3 người cùng tìm ô đúng, ai tới trước được điểm.",
+            "Nếu 4 người: chia 2 đội 2v2, mỗi lượt 1 người mỗi đội thi đấu.",
+            "Lặp 8–12 câu, đội/cá nhân nhiều điểm hơn thắng."
+          ],
+          "rules": [
+            "Không kéo hoặc chắn người khác.",
+            "Đứng sai ô không được điểm."
+          ]
+        },
+        {
+          "key": "5+",
+          "label": "5+ người",
+          "instructions": [
+            "Nhóm 5–10 người: chia 2 đội, mỗi lượt 1 người của mỗi đội thi 1–1 trước các ô đáp án.",
+            "Nhóm 10+ người: tất cả cùng tìm ô đáp án sau khi nghe phép tính; ai đứng sai hoặc chậm bị loại.",
+            "Lặp nhiều lượt với mức tính nhẩm tăng dần.",
+            "Đội/cá nhân còn lại hoặc nhiều điểm nhất thắng."
+          ],
+          "rules": [
+            "Chỉ được chạy khi quản trò đọc xong câu hỏi.",
+            "Đứng đúng ô mới được tính điểm/thắng lượt."
+          ]
+        }
       ],
       "preparation": [
-        "Các tờ giấy A4 ghi số đáp án dán dưới sàn và bộ câu hỏi tính nhẩm."
+        "Các tờ giấy A4 ghi số đáp án dán dưới sàn (nhóm nhỏ 2–4 tờ, nhóm lớn 6–10 tờ) và bộ câu hỏi tính nhẩm."
       ],
       "preparationRequired": true,
       "preparationTime": 8,
@@ -707,6 +942,103 @@
       "purposes": [],
       "tags": [],
       "searchKeywords": []
+    },
+    {
+      "id": 21,
+      "page": 25,
+      "name": "",
+      "description": "",
+      "howToPlay": [],
+      "preparation": [],
+      "rules": [],
+      "contexts": [],
+      "purposes": [],
+      "tags": [],
+      "searchKeywords": []
+    },
+    {
+      "id": 22,
+      "page": 26,
+      "name": "",
+      "description": "",
+      "howToPlay": [],
+      "preparation": [],
+      "rules": [],
+      "contexts": [],
+      "purposes": [],
+      "tags": [],
+      "searchKeywords": []
+    },
+    {
+      "id": 23,
+      "page": 27,
+      "name": "",
+      "description": "",
+      "howToPlay": [],
+      "preparation": [],
+      "rules": [],
+      "contexts": [],
+      "purposes": [],
+      "tags": [],
+      "searchKeywords": []
+    },
+    {
+      "id": 24,
+      "page": 28,
+      "name": "",
+      "description": "",
+      "howToPlay": [],
+      "preparation": [],
+      "rules": [],
+      "contexts": [],
+      "purposes": [],
+      "tags": [],
+      "searchKeywords": []
+    },
+    {
+      "id": 25,
+      "page": 29,
+      "name": "",
+      "description": "",
+      "howToPlay": [],
+      "preparation": [],
+      "rules": [],
+      "contexts": [],
+      "purposes": [],
+      "tags": [],
+      "searchKeywords": []
+    }
+  ],
+  "webs": [
+    {
+      "id": 1,
+      "page": 30,
+      "title": "",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "page": 31,
+      "title": "",
+      "url": ""
+    },
+    {
+      "id": 3,
+      "page": 32,
+      "title": "",
+      "url": ""
+    },
+    {
+      "id": 4,
+      "page": 33,
+      "title": "",
+      "url": ""
+    },
+    {
+      "id": 5,
+      "page": 34,
+      "title": "",
+      "url": ""
     }
   ]
 }

@@ -3,6 +3,7 @@ import catalog from "./catalog.json";
 /** Raw catalog — single source of truth for static ebook/game content. */
 export const CATALOG = catalog;
 export const GAMES = catalog.games || [];
+export const WEBS = catalog.webs || [];
 export const FILTERS = catalog.filters || {};
 export const SHEETS = catalog.sheets || [];
 export const UI = catalog.ui || {};
@@ -22,12 +23,12 @@ function numberedPages(items, key = "page") {
 }
 
 export function firstPage() {
-  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES)];
+  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES), ...numberedPages(WEBS)];
   return pages.length ? Math.min(...pages) : 1;
 }
 
 export function lastPage() {
-  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES)];
+  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES), ...numberedPages(WEBS)];
   return pages.length ? Math.max(...pages) : 1;
 }
 
@@ -85,6 +86,11 @@ export function getGameByPage(page) {
   return GAMES.find((game) => Number(game.page) === key) || null;
 }
 
+export function getWebByPage(page) {
+  const key = Number(page);
+  return WEBS.find((web) => Number(web.page) === key) || null;
+}
+
 export function getDesignSheet(page) {
   const key = Number(page);
   return SHEETS.find((sheet) => Number(sheet.page) === key) || null;
@@ -128,6 +134,19 @@ export function asLines(value) {
     .filter(Boolean);
 }
 
+export function playerModeSections(game) {
+  const modes = game?.playerModes;
+  if (!Array.isArray(modes) || !modes.length) return [];
+  return modes
+    .map((mode, index) => ({
+      key: String(mode.key || mode.players || index),
+      label: mode.label || mode.players || "",
+      instructions: asLines(mode.instructions),
+      rules: asLines(mode.rules),
+    }))
+    .filter((mode) => mode.label && (mode.instructions.length || mode.rules.length));
+}
+
 export function howToPlaySteps(game) {
   const raw = game?.howToPlay;
   if (Array.isArray(raw)) return raw.map((item) => String(item).trim()).filter(Boolean);
@@ -142,6 +161,7 @@ export function howToPlaySteps(game) {
 export function getGameDisplay(game) {
   if (!game) return null;
   const purposes = game.purposes?.length ? game.purposes : game.tags || [];
+  const modes = playerModeSections(game);
   return {
     id: game.id,
     page: game.page,
@@ -155,7 +175,8 @@ export function getGameDisplay(game) {
     heroImage: getHeroImage(game),
     instructionImage: hasInstructionImage(game) ? game.instructionImage : null,
     showInstructionImage: hasInstructionImage(game),
-    howToPlay: howToPlaySteps(game),
+    playerModes: modes,
+    howToPlay: modes.length ? [] : howToPlaySteps(game),
     preparation: asLines(game.preparation),
     rules: asLines(game.rules),
   };
@@ -173,6 +194,10 @@ export function getSheet(page) {
       game,
       gameIndex: gamesByPage().findIndex((item) => item.id === game.id) + 1,
     };
+  }
+  const web = getWebByPage(n);
+  if (web) {
+    return { type: "web", page: n, web };
   }
   return { type: "empty", page: n };
 }

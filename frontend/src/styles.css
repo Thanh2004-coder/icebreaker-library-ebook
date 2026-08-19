@@ -660,6 +660,23 @@ legend {
   margin: 0 0 8px;
 }
 
+.player-mode-list {
+  display: grid;
+  gap: 16px;
+}
+
+.player-mode-block h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #ffd76b;
+}
+
+.player-mode-rules {
+  margin: 8px 0 0;
+  padding-left: 1.25em;
+  line-height: 1.7;
+}
+
 .prose {
   white-space: pre-wrap;
   line-height: 1.7;
