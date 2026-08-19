@@ -1,49 +1,57 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DesignSheet from "./DesignSheet.jsx";
-import GameDetail from "./game/GameDetail.jsx";
-import { FIRST_PAGE, LAST_PAGE, UI, clampPage, getSheet, resolveCatalogText } from "../data/catalog.js";
-
-function SheetBody({ page }) {
-  const sheet = getSheet(page);
-  const readerUi = UI.reader || {};
-  if (sheet.type === "design") return <DesignSheet sheet={sheet.sheet} />;
-  if (sheet.type === "game") return <GameDetail game={sheet.game} />;
-  return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
-}
+import BookPageTurn from "./book/BookPageTurn.jsx";
+import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
+import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 
 function isInteractive(target) {
   return Boolean(target.closest("a, button, input, textarea, select, label"));
 }
 
-function pageClass(pageNumber) {
-  const sheet = getSheet(pageNumber);
-  const kind = sheet.type === "design" ? "design-page" : sheet.type === "game" ? "game-page" : "empty-page";
-  return `book-page solo ${kind}`;
+function prefersReducedMotion() {
+  return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export default function EbookReader({ page }) {
   const navigate = useNavigate();
   const current = clampPage(page);
-  const visible = [current];
   const [focused, setFocused] = useState(false);
-  const [flipClass, setFlipClass] = useState("");
-  const [prevPage, setPrevPage] = useState(current);
+  const [turn, setTurn] = useState(null);
   const readerUi = UI.reader || {};
 
-  const go = (next) => navigate(`/page/${clampPage(next)}`);
   const step = 1;
-  const canPrev = current > FIRST_PAGE;
-  const canNext = current < LAST_PAGE;
+  const isAnimating = turn !== null;
+  const canPrev = current > FIRST_PAGE && !isAnimating;
+  const canNext = current < LAST_PAGE && !isAnimating;
 
-  useEffect(() => {
-    if (current === prevPage) return;
-    const direction = current > prevPage ? "flip-next" : "flip-prev";
-    setFlipClass(direction);
-    setPrevPage(current);
-    const timer = window.setTimeout(() => setFlipClass(""), 500);
-    return () => window.clearTimeout(timer);
-  }, [current, prevPage]);
+  const requestGo = useCallback(
+    (target) => {
+      if (isAnimating) return;
+      const next = clampPage(target);
+      if (next === current) return;
+
+      if (prefersReducedMotion()) {
+        navigate(`/page/${next}`);
+        return;
+      }
+
+      setTurn({
+        from: current,
+        to: next,
+        direction: next > current ? "next" : "prev",
+      });
+    },
+    [current, isAnimating, navigate]
+  );
+
+  const finishTurn = useCallback(() => {
+    setTurn((active) => {
+      if (!active) return null;
+      const target = active.to;
+      window.setTimeout(() => navigate(`/page/${target}`), 0);
+      return null;
+    });
+  }, [navigate]);
 
   useEffect(() => {
     const onKey = (event) => {
@@ -51,12 +59,13 @@ export default function EbookReader({ page }) {
         setFocused(false);
         return;
       }
-      if (event.key === "ArrowLeft" && canPrev) navigate(`/page/${clampPage(current - step)}`);
-      if (event.key === "ArrowRight" && canNext) navigate(`/page/${clampPage(current + step)}`);
+      if (isAnimating) return;
+      if (event.key === "ArrowLeft" && current > FIRST_PAGE) requestGo(current - step);
+      if (event.key === "ArrowRight" && current < LAST_PAGE) requestGo(current + step);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [canPrev, canNext, current, step, navigate, focused]);
+  }, [current, focused, isAnimating, requestGo, step]);
 
   useEffect(() => {
     if (!focused) return undefined;
@@ -67,31 +76,31 @@ export default function EbookReader({ page }) {
     };
   }, [focused]);
 
-  const spreadClass = "book-spread single";
+  const spreadClass = `book-spread single${isAnimating ? " is-turning" : ""}`;
 
   const openFocus = (event) => {
-    if (focused) return;
+    if (focused || isAnimating) return;
     if (isInteractive(event.target)) return;
     setFocused(true);
   };
 
   const spread = (
     <div className={spreadClass} onClick={(event) => event.stopPropagation()}>
-      {visible.map((pageNumber, index) => (
-        <div key={pageNumber} className={pageClass(pageNumber)} onClick={openFocus}>
-          <div className={`page-content ${flipClass}`}>
-            <SheetBody page={pageNumber} />
-          </div>
-          <span className="page-folio folio-right">{pageNumber}</span>
+      {turn ? (
+        <BookPageTurn turn={turn} onComplete={finishTurn} />
+      ) : (
+        <div className={pageClass(current)} onClick={openFocus}>
+          <SheetBody page={current} />
+          <span className="page-folio folio-right">{current}</span>
         </div>
-      ))}
+      )}
     </div>
   );
 
   const ariaLabel = resolveCatalogText(readerUi.ariaLabel || "Ebook {title}");
 
   return (
-    <section className="ebook-reader" aria-label={ariaLabel}>
+    <section className={`ebook-reader${isAnimating ? " is-turning" : ""}`} aria-label={ariaLabel}>
       {focused ? (
         <div className="ebook-focus" onClick={() => setFocused(false)}>
           <button
@@ -101,7 +110,7 @@ export default function EbookReader({ page }) {
             aria-label="Trang trước"
             onClick={(event) => {
               event.stopPropagation();
-              go(current - step);
+              requestGo(current - step);
             }}
           >
             {readerUi.prevShort || "←"}
@@ -114,7 +123,7 @@ export default function EbookReader({ page }) {
             aria-label="Trang sau"
             onClick={(event) => {
               event.stopPropagation();
-              go(current + step);
+              requestGo(current + step);
             }}
           >
             {readerUi.nextShort || "→"}
@@ -125,14 +134,11 @@ export default function EbookReader({ page }) {
       )}
 
       <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>
-        <button type="button" disabled={!canPrev} onClick={() => go(current - step)}>
+        <button type="button" disabled={!canPrev} onClick={() => requestGo(current - step)}>
           {readerUi.prev || "← Trang trước"}
         </button>
-        <p>
-          Trang {visible[0]}
-          {visible[1] ? `–${visible[1]}` : ""} / {LAST_PAGE}
-        </p>
-        <button type="button" disabled={!canNext} onClick={() => go(current + step)}>
+        <p>Trang {turn ? `${turn.from} → ${turn.to}` : current} / {LAST_PAGE}</p>
+        <button type="button" disabled={!canNext} onClick={() => requestGo(current + step)}>
           {readerUi.next || "Trang sau →"}
         </button>
       </nav>
