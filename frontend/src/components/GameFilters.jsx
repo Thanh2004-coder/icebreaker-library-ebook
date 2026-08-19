@@ -1,5 +1,8 @@
+import { UI } from "../data/catalog.js";
+
 export default function GameFilters({ filters, selected, onChange }) {
   if (!filters) return null;
+  const filterUi = UI.filters || {};
 
   const toggleMulti = (key, value) => {
     const current = selected[key] || [];
@@ -7,10 +10,12 @@ export default function GameFilters({ filters, selected, onChange }) {
     onChange({ ...selected, [key]: next });
   };
 
+  const allLabel = filterUi.all || "Tất cả";
+
   return (
     <section className="filters" aria-label="Bộ lọc">
       <fieldset>
-        <legend>Số người</legend>
+        <legend>{filterUi.legendPlayers || "Số người"}</legend>
         <div className="chips">
           {filters.players.map((item) => (
             <label key={item.value} className={selected.players === item.value ? "chip on" : "chip"}>
@@ -25,13 +30,13 @@ export default function GameFilters({ filters, selected, onChange }) {
             </label>
           ))}
           <button type="button" className="chip ghost" onClick={() => onChange({ ...selected, players: "" })}>
-            Tất cả
+            {allLabel}
           </button>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Bối cảnh</legend>
+        <legend>{filterUi.legendContext || "Bối cảnh"}</legend>
         <div className="chips">
           {filters.contexts.map((item) => (
             <label key={item.value} className={selected.context === item.value ? "chip on" : "chip"}>
@@ -46,13 +51,13 @@ export default function GameFilters({ filters, selected, onChange }) {
             </label>
           ))}
           <button type="button" className="chip ghost" onClick={() => onChange({ ...selected, context: "" })}>
-            Tất cả
+            {allLabel}
           </button>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Mục đích</legend>
+        <legend>{filterUi.legendPurpose || "Mục đích"}</legend>
         <div className="chips">
           {filters.purposes.map((item) => (
             <label key={item.value} className={selected.purposes.includes(item.value) ? "chip on" : "chip"}>
@@ -68,7 +73,7 @@ export default function GameFilters({ filters, selected, onChange }) {
       </fieldset>
 
       <fieldset>
-        <legend>Thời gian</legend>
+        <legend>{filterUi.legendDuration || "Thời gian"}</legend>
         <div className="chips">
           {filters.durations.map((item) => (
             <label key={item.value} className={selected.duration === item.value ? "chip on" : "chip"}>
@@ -83,7 +88,7 @@ export default function GameFilters({ filters, selected, onChange }) {
             </label>
           ))}
           <button type="button" className="chip ghost" onClick={() => onChange({ ...selected, duration: "" })}>
-            Tất cả
+            {allLabel}
           </button>
         </div>
       </fieldset>

@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EbookCover from "./EbookCover.jsx";
 import TableOfContents from "./TableOfContents.jsx";
-import GamePage from "./GamePage.jsx";
-import { EBOOK, LAST_PAGE, clampPage, getSheet, isCoverPage, spreadPages } from "../data/catalog.js";
+import GameDetail from "./game/GameDetail.jsx";
+import { EBOOK, LAST_PAGE, UI, clampPage, getSheet, isCoverPage, resolveCatalogText, spreadPages } from "../data/catalog.js";
 
 function useTwoPage() {
   const [twoPage, setTwoPage] = useState(() =>
@@ -36,11 +36,12 @@ function FrontMatter({ title, body }) {
 
 function SheetBody({ page }) {
   const sheet = getSheet(page);
+  const readerUi = UI.reader || {};
   if (sheet.type === "cover") return <EbookCover />;
   if (sheet.type === "toc") return <TableOfContents />;
   if (sheet.type === "text") return <FrontMatter title={sheet.title} body={sheet.body} />;
-  if (sheet.type === "game") return <GamePage game={sheet.game} />;
-  return <p className="empty">Trang trống.</p>;
+  if (sheet.type === "game") return <GameDetail game={sheet.game} />;
+  return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
 }
 
 function isInteractive(target) {
@@ -53,6 +54,7 @@ export default function EbookReader({ page }) {
   const current = clampPage(page);
   const visible = useMemo(() => spreadPages(current, twoPage), [current, twoPage]);
   const [focused, setFocused] = useState(false);
+  const readerUi = UI.reader || {};
 
   const go = (next) => navigate(`/page/${clampPage(next)}`);
   const coverOnly = twoPage && isCoverPage(current);
@@ -105,8 +107,10 @@ export default function EbookReader({ page }) {
     </div>
   );
 
+  const ariaLabel = resolveCatalogText(readerUi.ariaLabel || "Ebook {title}");
+
   return (
-    <section className="ebook-reader" aria-label="Ebook Game Warm-up">
+    <section className="ebook-reader" aria-label={ariaLabel}>
       {focused ? (
         <div className="ebook-focus" onClick={() => setFocused(false)}>
           <button
@@ -119,7 +123,7 @@ export default function EbookReader({ page }) {
               go(current - step);
             }}
           >
-            ←
+            {readerUi.prevShort || "←"}
           </button>
           <div className="ebook-focus-book">{spread}</div>
           <button
@@ -132,23 +136,23 @@ export default function EbookReader({ page }) {
               go(current + step);
             }}
           >
-            →
+            {readerUi.nextShort || "→"}
           </button>
         </div>
       ) : (
         spread
       )}
 
-      <nav className="reader-nav" aria-label="Lật trang">
+      <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>
         <button type="button" disabled={!canPrev} onClick={() => go(current - step)}>
-          ← Trang trước
+          {readerUi.prev || "← Trang trước"}
         </button>
         <p>
           Trang {visible[0]}
           {visible[1] ? `–${visible[1]}` : ""} / {LAST_PAGE}
         </p>
         <button type="button" disabled={!canNext} onClick={() => go(current + step)}>
-          Trang sau →
+          {readerUi.next || "Trang sau →"}
         </button>
       </nav>
     </section>

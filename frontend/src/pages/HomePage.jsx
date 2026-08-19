@@ -5,7 +5,7 @@ import SearchBar from "../components/SearchBar.jsx";
 import GameFilters from "../components/GameFilters.jsx";
 import SearchResults from "../components/SearchResults.jsx";
 import EbookReader from "../components/EbookReader.jsx";
-import { EBOOK, FILTERS, GAMES, clampPage } from "../data/catalog.js";
+import { EBOOK, FILTERS, GAMES, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 import { EMPTY_FILTERS, filterGames, hasActiveQuery } from "../data/filterGames.js";
 
 export default function HomePage() {
@@ -14,6 +14,7 @@ export default function HomePage() {
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(EMPTY_FILTERS);
+  const homeUi = UI.home || {};
 
   const currentPage = clampPage(page || 1);
 
@@ -31,6 +32,10 @@ export default function HomePage() {
     [search, selected]
   );
   const querying = hasActiveQuery(search, selected);
+
+  const summaryText = resolveCatalogText(homeUi.summary || "{title} · {count} trò chơi")
+    .replace("{title}", EBOOK.title)
+    .replace("{count}", String(GAMES.length));
 
   return (
     <div className="page">
@@ -50,7 +55,7 @@ export default function HomePage() {
           />
         ) : (
           <div className="result-bar">
-            <p>{EBOOK.title} · {GAMES.length} trò chơi</p>
+            <p>{summaryText}</p>
           </div>
         )}
         <EbookReader page={currentPage} />

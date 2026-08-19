@@ -1,9 +1,12 @@
 import catalog from "./catalog.json";
 
+/** Raw catalog — single source of truth for static ebook/game content. */
 export const CATALOG = catalog;
 export const GAMES = catalog.games || [];
 export const FILTERS = catalog.filters || {};
 export const SHEETS = catalog.sheets || [];
+export const UI = catalog.ui || {};
+export const SITE = catalog.site || {};
 
 export const FALLBACK_GAME_IMAGE =
   catalog.assets?.fallbackHeroImage || "/images/games/fallback.svg";
@@ -33,6 +36,34 @@ export const EBOOK = {
   gameStartPage: GAME_START_PAGE,
 };
 
+/** Replace {gameStartPage}, {lastPage}, {gameCount} in catalog copy. */
+export function resolveCatalogText(text) {
+  if (text == null) return "";
+  return String(text)
+    .replace(/\{gameStartPage\}/g, String(GAME_START_PAGE))
+    .replace(/\{lastPage\}/g, String(LAST_PAGE))
+    .replace(/\{gameCount\}/g, String(GAMES.length))
+    .replace(/\{title\}/g, EBOOK.title || "");
+}
+
+export function resolveCatalogLines(value) {
+  const lines = asLines(value);
+  return lines.map((line) => resolveCatalogText(line));
+}
+
+export function formatPlayers(min, max) {
+  if (min == null) return "";
+  if (max == null) return `${min}+ người`;
+  if (min === max) return `${min} người`;
+  return `${min}–${max} người`;
+}
+
+export function formatDuration(min, max) {
+  if (min == null) return "";
+  if (min === max) return `${min} phút`;
+  return `${min}–${max} phút`;
+}
+
 export function getGameById(id) {
   const key = Number(id);
   return GAMES.find((game) => Number(game.id) === key) || null;
@@ -53,6 +84,10 @@ export function getHeroImage(game) {
 
 export function getInstructionImage(game) {
   return game?.instructionImage || FALLBACK_INSTRUCTION_IMAGE;
+}
+
+export function hasInstructionImage(game) {
+  return Boolean(game?.instructionImage?.trim());
 }
 
 export function onImageError(fallbackSrc) {
@@ -83,12 +118,43 @@ export function howToPlaySteps(game) {
     .filter(Boolean);
 }
 
+/** Normalized view-model for rendering a game sheet — components read this, not raw quirks. */
+export function getGameDisplay(game) {
+  if (!game) return null;
+  const purposes = game.purposes?.length ? game.purposes : game.tags || [];
+  return {
+    id: game.id,
+    page: game.page,
+    name: game.name || "",
+    description: game.description || "",
+    players: game.players || formatPlayers(game.minPlayers, game.maxPlayers),
+    time: game.time || game.duration || formatDuration(game.durationMin, game.durationMax),
+    context: game.context || (game.contexts || []).join(", "),
+    purposes,
+    tags: purposes,
+    heroImage: getHeroImage(game),
+    instructionImage: hasInstructionImage(game) ? game.instructionImage : null,
+    showInstructionImage: hasInstructionImage(game),
+    howToPlay: howToPlaySteps(game),
+    preparation: asLines(game.preparation),
+    rules: asLines(game.rules),
+  };
+}
+
 export function getSheet(page) {
   const n = Number(page);
   const game = getGameByPage(n);
   if (game) return { type: "game", page: n, game };
   const sheet = SHEETS.find((item) => Number(item.page) === n);
-  if (sheet) return { ...sheet };
+  if (sheet) {
+    if (sheet.type === "text" && sheet.body) {
+      return {
+        ...sheet,
+        body: resolveCatalogLines(sheet.body),
+      };
+    }
+    return { ...sheet };
+  }
   return { type: "empty", page: n };
 }
 

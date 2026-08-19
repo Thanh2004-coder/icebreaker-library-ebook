@@ -546,8 +546,7 @@ legend {
   color: var(--coral-dark);
 }
 
-.game-sheet section h2,
-.review-section h2 {
+.game-sheet section h2 {
   font-size: 1.05rem;
   margin: 16px 0 8px;
 }
@@ -580,114 +579,6 @@ legend {
   border: 1px solid #f0cbbd;
   border-radius: 12px;
   padding: 12px 14px;
-}
-
-.review-section {
-  margin: 16px 0 8px;
-  padding: 12px 0 4px;
-  border-top: 1px solid var(--line);
-}
-
-.rating-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0 14px;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.stars {
-  display: inline-flex;
-  gap: 2px;
-}
-
-.star {
-  border: 0;
-  background: none;
-  padding: 0;
-  color: #d9cfc0;
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.star.on {
-  color: #e07a5f;
-}
-
-.review-form {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: 12px;
-}
-
-.review-form h3,
-.field-label {
-  margin: 0;
-  font-weight: 700;
-}
-
-.review-form label,
-.review-form input,
-.review-form textarea {
-  display: block;
-  width: 100%;
-}
-
-.review-form input,
-.review-form textarea {
-  margin-top: 6px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 10px 12px;
-  background: #fff;
-}
-
-.review-form button {
-  justify-self: start;
-  border: 0;
-  background: var(--teal);
-  color: #fff;
-  border-radius: 12px;
-  padding: 10px 16px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.review-form button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.review-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.review-item {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-
-.review-head {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
-}
-
-.review-item time {
-  color: var(--muted);
-  font-size: 0.8rem;
 }
 
 .site-footer {

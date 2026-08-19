@@ -70,7 +70,15 @@ function matchesSearch(game, search) {
   if (!search || !search.trim()) return true;
   const raw = search.trim().toLowerCase();
   const needle = unaccent(search);
-  const haystack = [game.name, game.description, game.purpose, ...(game.purposes || []), ...(game.tags || [])]
+  const haystack = [
+    game.name,
+    game.description,
+    game.purpose,
+    game.context,
+    ...(game.purposes || []),
+    ...(game.tags || []),
+    ...(game.contexts || []),
+  ]
     .filter(Boolean)
     .join(" ");
   return haystack.toLowerCase().includes(raw) || unaccent(haystack).includes(needle);

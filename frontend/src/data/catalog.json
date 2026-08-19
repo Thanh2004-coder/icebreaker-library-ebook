@@ -4,6 +4,74 @@
     "subtitle": "Thư viện trò chơi làm quen và khởi động cho nhóm",
     "kicker": "Thư viện icebreaker"
   },
+  "ui": {
+    "search": {
+      "label": "Tìm kiếm trò chơi",
+      "placeholder": "Tìm kiếm trò chơi..."
+    },
+    "filters": {
+      "legendPlayers": "Số người",
+      "legendContext": "Bối cảnh",
+      "legendPurpose": "Mục đích",
+      "legendDuration": "Thời gian",
+      "all": "Tất cả"
+    },
+    "game": {
+      "pagePrefix": "Trang",
+      "howToPlay": "Cách chơi",
+      "preparation": "Chuẩn bị",
+      "rules": "Quy định",
+      "notFound": "Không tìm thấy trò chơi.",
+      "instructionAlt": "Cách chơi {name}"
+    },
+    "toc": {
+      "title": "Mục lục"
+    },
+    "cover": {
+      "ariaLabel": "Bìa ebook",
+      "gamesUnit": "trò chơi",
+      "pageRangeJoin": "–"
+    },
+    "reader": {
+      "ariaLabel": "Ebook {title}",
+      "navAriaLabel": "Lật trang",
+      "prev": "← Trang trước",
+      "next": "Trang sau →",
+      "prevShort": "←",
+      "nextShort": "→",
+      "emptyPage": "Trang trống."
+    },
+    "searchResults": {
+      "found": "Tìm thấy {count} trò chơi",
+      "foundPages": " ở trang {pages}",
+      "clear": "Xóa bộ lọc",
+      "empty": "Không có trò chơi khớp. Thử nới bộ lọc hoặc xóa từ khóa.",
+      "openPage": "Xem trang {page}",
+      "pageLabel": "Trang {page}"
+    },
+    "home": {
+      "summary": "{title} · {count} trò chơi"
+    },
+    "gameRoute": {
+      "back": "← Mở trang {page} trong ebook"
+    }
+  },
+  "site": {
+    "footer": {
+      "contactKicker": "Liên hệ",
+      "feedbackKicker": "Đánh giá trải nghiệm",
+      "feedbackHint": "Quét mã QR để đánh giá trải nghiệm dịch vụ",
+      "feedbackLink": "Mở form đánh giá",
+      "feedbackFormUrl": "https://docs.google.com/forms/d/1oQAkvbTh_DTeJFcvziep0xceAdd1iftBxF8_oY67evs/viewform",
+      "contacts": [
+        { "label": "Nhóm thực hiện", "value": "Thành phố bất ổn" },
+        { "label": "Đại diện nhóm", "value": "Nguyễn Đăng Nam" },
+        { "label": "Email", "value": "ICEBREAKER@gmail.com", "href": "mailto:ICEBREAKER@gmail.com" },
+        { "label": "Kênh liên hệ", "value": "0862778706", "href": "tel:0862778706" },
+        { "label": "Giảng viên hướng dẫn", "value": "Trương Thu Thủy" }
+      ]
+    }
+  },
   "assets": {
     "fallbackHeroImage": "/images/games/fallback.svg",
     "fallbackInstructionImage": "/images/games/instructions/fallback.svg"
@@ -24,8 +92,7 @@
       "body": [
         "Search và bộ lọc chạy ngay trên trình duyệt, không cần máy chủ.",
         "Kết quả sẽ cho biết trò chơi nằm ở trang nào.",
-        "Bấm tên trong mục lục hoặc “Xem trang” để mở đúng trang sách.",
-        "Đánh giá / review lấy từ máy chủ. Nếu máy chủ tạm nghỉ, ebook vẫn đọc bình thường."
+        "Bấm tên trong mục lục hoặc “Xem trang” để mở đúng trang sách."
       ]
     },
     {
@@ -33,7 +100,7 @@
       "type": "text",
       "title": "20 trò chơi",
       "body": [
-        "Mỗi trò chơi là một trang cố định trong cuốn sách này. Trang 6 bắt đầu danh sách theo thứ tự mục lục."
+        "Mỗi trò chơi là một trang cố định trong cuốn sách này. Trang {gameStartPage} bắt đầu danh sách theo thứ tự mục lục."
       ]
     },
     {

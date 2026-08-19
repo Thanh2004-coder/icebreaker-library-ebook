@@ -33,7 +33,7 @@ Route `/games/:id` (`frontend/src/pages/GamePage.jsx`) **không** có focus mode
 3. CSS `cursor: zoom-in` báo hiệu có thể click để phóng to.
 4. **Không** bật focus nếu click vào phần tương tác: `a`, `button`, `input`, `textarea`, `select`, `label` (hàm `isInteractive`).
 
-Ví dụ: click “Xem trang”, chip filter, form review, hoặc hàng mục lục **không** mở focus. Click vùng giấy trống / nội dung tĩnh thì mở.
+Ví dụ: click “Xem trang”, chip filter, form phản hồi, hoặc hàng mục lục **không** mở focus. Click vùng giấy trống / nội dung tĩnh thì mở.
 
 Nếu đang ở focus rồi, click tiếp lên trang **không** làm gì (`if (focused) return`).
 
@@ -192,7 +192,7 @@ Loader: `frontend/src/data/catalog.js`.
 
 ### Game
 
-Mỗi game có `page` (số trang ebook) **và** `id` (dùng review API, không dùng để vẽ trang).
+Mỗi game có `page` (số trang ebook) **và** `id` (dùng API, không dùng để vẽ trang).
 
 `getSheet(n)`:
 
@@ -263,7 +263,7 @@ Chống **horizontal scroll** khi 2 trang:
 4. Cột đơn dùng `minmax(0, 520px)` / mobile `minmax(0, 1fr)`. `minmax(0, …)` cho phép cột **co nhỏ hơn min-content**, tránh grid đẩy ngang.
 5. `.ebook-focus-book { width: min(1180px, 100%) }` — overlay không rộng hơn viewport.
 6. `.ebook-focus { overflow: auto }` — nếu vẫn thiếu chỗ thì cuộn overlay, không đẩy `body` ngang.
-7. `.book-page { overflow: auto }` — nội dung dài (cách chơi, review) cuộn **trong trang**, không làm đôi sách phình ngang.
+7. `.book-page { overflow: auto }` — nội dung dài (cách chơi, nội dung khác) cuộn **trong trang**, không làm đôi sách phình ngang.
 8. Ảnh `.sheet-hero` / `.sheet-instruction` là `width: 100%; display: block`.
 
 Focus overlay:
@@ -299,14 +299,14 @@ Nếu muốn giữ đúng hành vi zoom hiện tại, **đừng**:
 
 - Xóa hoặc đổi nghĩa `focused` / `openFocus` / overlay `.ebook-focus`.
 - Bỏ `stopPropagation` trên `.book-spread` hoặc trên nút `.focus-arrow` (sẽ tắt focus khi lật trang).
-- Bỏ `isInteractive` (click review/filter/mục lục sẽ nhầm thành zoom).
+- Bỏ `isInteractive` (click nội dung tương tác/filter/mục lục sẽ nhầm thành zoom).
 - Đổi breakpoint JS `900px` mà không đổi `@media (max-width: 899px)` (lệch 1 trang vs 2 trang).
 - Đổi `spreadPages` (cặp chẵn–lẻ và bìa đơn).
 - Hard-code số trang trong `EbookReader` thay vì `catalog.json`.
 - Thêm Zoom +/− / `transform: scale` nếu chưa thống nhất với overlay hiện tại — code **không** có scale.
 - Gắn focus mode vào `pages/GamePage.jsx` mà không copy hành vi `EbookReader` (route đó vốn không zoom).
 
-Review API, search, filter, catalog là độc lập với `focused`. Hỏng review không tắt được zoom.
+API, search, filter, catalog là độc lập với `focused`. Hỏng API không tắt được zoom.
 
 ---
 

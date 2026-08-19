@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { EBOOK, gamesByPage } from "../data/catalog.js";
+import { EBOOK, UI, gamesByPage } from "../data/catalog.js";
 
 export default function TableOfContents() {
   const navigate = useNavigate();
   const games = gamesByPage();
+  const tocUi = UI.toc || {};
 
   return (
     <article className="toc-page">
-      <p className="eyebrow">Mục lục</p>
+      <p className="eyebrow">{tocUi.title || "Mục lục"}</p>
       <h1>{EBOOK.title}</h1>
       <ul className="toc-list">
         {games.map((game) => (

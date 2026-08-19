@@ -1,54 +1,48 @@
 import { QRCodeSVG } from "qrcode.react";
-
-const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/1oQAkvbTh_DTeJFcvziep0xceAdd1iftBxF8_oY67evs/viewform";
+import { SITE } from "../data/catalog.js";
 
 export default function Footer() {
+  const footer = SITE.footer || {};
+  const contacts = Array.isArray(footer.contacts) ? footer.contacts : [];
+  const formUrl = footer.feedbackFormUrl || "";
+
   return (
     <footer className="site-footer">
       <div className="footer-inner">
         <div className="footer-contact">
-          <p className="footer-kicker">Liên hệ</p>
+          <p className="footer-kicker">{footer.contactKicker || "Liên hệ"}</p>
           <ul>
-            <li>
-              <span>Nhóm thực hiện</span>
-              <strong>Thành phố bất ổn</strong>
-            </li>
-            <li>
-              <span>Đại diện nhóm</span>
-              <strong>Nguyễn Đăng Nam</strong>
-            </li>
-            <li>
-              <span>Email</span>
-              <a href="mailto:ICEBREAKER@gmail.com">ICEBREAKER@gmail.com</a>
-            </li>
-            <li>
-              <span>Kênh liên hệ</span>
-              <a href="tel:0862778706">0862778706</a>
-            </li>
-            <li>
-              <span>Giảng viên hướng dẫn</span>
-              <strong>Trương Thu Thủy</strong>
-            </li>
+            {contacts.map((item) => (
+              <li key={`${item.label}-${item.value}`}>
+                <span>{item.label}</span>
+                {item.href ? (
+                  <a href={item.href}>{item.value}</a>
+                ) : (
+                  <strong>{item.value}</strong>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
-        <div className="footer-qr">
-          <p className="footer-kicker">Đánh giá trải nghiệm</p>
-          <p className="footer-hint">Quét mã QR để đánh giá trải nghiệm dịch vụ</p>
-          <div className="qr-frame">
-            <QRCodeSVG
-              value={GOOGLE_FORM_URL}
-              size={132}
-              bgColor="#fffdf8"
-              fgColor="#1b4d4a"
-              level="M"
-              includeMargin
-            />
+        {formUrl ? (
+          <div className="footer-qr">
+            <p className="footer-kicker">{footer.feedbackKicker || "Đánh giá trải nghiệm"}</p>
+            <p className="footer-hint">{footer.feedbackHint || ""}</p>
+            <div className="qr-frame">
+              <QRCodeSVG
+                value={formUrl}
+                size={132}
+                bgColor="#fffdf8"
+                fgColor="#1b4d4a"
+                level="M"
+                includeMargin
+              />
+            </div>
+            <a className="footer-form-link" href={formUrl} target="_blank" rel="noreferrer">
+              {footer.feedbackLink || "Mở form đánh giá"}
+            </a>
           </div>
-          <a className="footer-form-link" href={GOOGLE_FORM_URL} target="_blank" rel="noreferrer">
-            Mở form đánh giá
-          </a>
-        </div>
+        ) : null}
       </div>
     </footer>
   );

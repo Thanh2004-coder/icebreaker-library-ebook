@@ -1,11 +1,12 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import Header from "../components/Header.jsx";
-import GamePageView from "../components/GamePage.jsx";
-import { getGameById } from "../data/catalog.js";
+import GameDetail from "../components/game/GameDetail.jsx";
+import { UI, getGameById, resolveCatalogText } from "../data/catalog.js";
 
 export default function GamePage() {
   const { id } = useParams();
   const game = getGameById(id);
+  const routeUi = UI.gameRoute || {};
 
   if (!game) return <Navigate to="/page/1" replace />;
 
@@ -14,11 +15,14 @@ export default function GamePage() {
       <Header />
       <main className="layout">
         <Link to={`/page/${game.page}`} className="back">
-          ← Mở trang {game.page} trong ebook
+          {resolveCatalogText(routeUi.back || "← Mở trang {page} trong ebook").replace(
+            "{page}",
+            String(game.page)
+          )}
         </Link>
         <div className="book-spread single">
           <div className="book-page solo">
-            <GamePageView game={game} />
+            <GameDetail game={game} />
             <span className="page-folio folio-right">{game.page}</span>
           </div>
         </div>
