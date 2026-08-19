@@ -27,12 +27,23 @@ export default function EbookReader({ page }) {
   const current = clampPage(page);
   const visible = [current];
   const [focused, setFocused] = useState(false);
+  const [flipClass, setFlipClass] = useState("");
+  const [prevPage, setPrevPage] = useState(current);
   const readerUi = UI.reader || {};
 
   const go = (next) => navigate(`/page/${clampPage(next)}`);
   const step = 1;
   const canPrev = current > FIRST_PAGE;
   const canNext = current < LAST_PAGE;
+
+  useEffect(() => {
+    if (current === prevPage) return;
+    const direction = current > prevPage ? "flip-next" : "flip-prev";
+    setFlipClass(direction);
+    setPrevPage(current);
+    const timer = window.setTimeout(() => setFlipClass(""), 500);
+    return () => window.clearTimeout(timer);
+  }, [current, prevPage]);
 
   useEffect(() => {
     const onKey = (event) => {
@@ -68,7 +79,9 @@ export default function EbookReader({ page }) {
     <div className={spreadClass} onClick={(event) => event.stopPropagation()}>
       {visible.map((pageNumber, index) => (
         <div key={pageNumber} className={pageClass(pageNumber)} onClick={openFocus}>
-          <SheetBody page={pageNumber} />
+          <div className={`page-content ${flipClass}`}>
+            <SheetBody page={pageNumber} />
+          </div>
           <span className="page-folio folio-right">{pageNumber}</span>
         </div>
       ))}
