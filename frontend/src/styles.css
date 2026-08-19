@@ -287,6 +287,35 @@ legend {
   cursor: zoom-in;
 }
 
+.book-page.web-page {
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 0;
+  background: transparent;
+}
+
+.web-sheet,
+.web-sheet-empty {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
+
+.web-sheet-title {
+  margin: 0;
+  padding: 16px 20px 0;
+  font-size: 1.2rem;
+}
+
+.web-sheet-frame {
+  display: block;
+  width: 100%;
+  min-height: min(70vh, 640px);
+  border: 0;
+  background: transparent;
+}
+
 .book-page.game-page {
   background-image: var(--game-page-background);
   background-position: center;
@@ -727,12 +756,6 @@ legend {
   color: #f8f3ea;
 }
 
-.game-serial {
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
-  color: #f49be3;
-}
-
 .sheet-page-label {
   margin: 0 0 8px;
   color: #95b7ff;
@@ -783,6 +806,12 @@ legend {
   }
 
   .book-page.design-page {
+    max-height: min(75vh, calc(100dvh - 280px));
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .book-page.web-page {
     max-height: min(75vh, calc(100dvh - 280px));
     min-height: 0;
     overflow-y: auto;

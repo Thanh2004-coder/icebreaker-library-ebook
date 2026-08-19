@@ -12,11 +12,8 @@ export default function GameDetail({ game }) {
     return <p className="empty">{labels.notFound || "Không tìm thấy trò chơi."}</p>;
   }
 
-  const gameNo = String(display.id).padStart(2, "0");
-
   return (
     <article className="game-sheet">
-      <p className="eyebrow game-serial">{gameNo} - PICK YOUR GAME</p>
       <p className="sheet-page-label">
         {labels.pagePrefix || "Trang"} {display.page}
       </p>
