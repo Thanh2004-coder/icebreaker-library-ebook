@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageTurn from "./book/PageTurn.jsx";
 import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
 import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 
@@ -8,50 +7,24 @@ function isInteractive(target) {
   return Boolean(target.closest("a, button, input, textarea, select, label"));
 }
 
-function prefersReducedMotion() {
-  return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
 export default function EbookReader({ page }) {
   const navigate = useNavigate();
   const current = clampPage(page);
   const [focused, setFocused] = useState(false);
-  const [turn, setTurn] = useState(null);
   const readerUi = UI.reader || {};
 
   const step = 1;
-  const isAnimating = turn !== null;
-  const canPrev = current > FIRST_PAGE && !isAnimating;
-  const canNext = current < LAST_PAGE && !isAnimating;
+  const canPrev = current > FIRST_PAGE;
+  const canNext = current < LAST_PAGE;
 
   const requestGo = useCallback(
     (target) => {
-      if (isAnimating) return;
       const next = clampPage(target);
       if (next === current) return;
-
-      if (prefersReducedMotion()) {
-        navigate(`/page/${next}`);
-        return;
-      }
-
-      setTurn({
-        from: current,
-        to: next,
-        direction: next > current ? "next" : "prev",
-      });
+      navigate(`/page/${next}`);
     },
-    [current, isAnimating, navigate]
+    [current, navigate]
   );
-
-  const finishTurn = useCallback(() => {
-    setTurn((active) => {
-      if (!active) return null;
-      const target = active.to;
-      window.setTimeout(() => navigate(`/page/${target}`), 0);
-      return null;
-    });
-  }, [navigate]);
 
   useEffect(() => {
     const onKey = (event) => {
@@ -59,13 +32,12 @@ export default function EbookReader({ page }) {
         setFocused(false);
         return;
       }
-      if (isAnimating) return;
       if (event.key === "ArrowLeft" && current > FIRST_PAGE) requestGo(current - step);
       if (event.key === "ArrowRight" && current < LAST_PAGE) requestGo(current + step);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [current, focused, isAnimating, requestGo, step]);
+  }, [current, focused, requestGo, step]);
 
   useEffect(() => {
     if (!focused) return undefined;
@@ -76,31 +48,25 @@ export default function EbookReader({ page }) {
     };
   }, [focused]);
 
-  const spreadClass = `book-spread single${isAnimating ? " is-turning" : ""}`;
-
   const openFocus = (event) => {
-    if (focused || isAnimating) return;
+    if (focused) return;
     if (isInteractive(event.target)) return;
     setFocused(true);
   };
 
   const spread = (
-    <div className={spreadClass} onClick={(event) => event.stopPropagation()}>
-      {turn ? (
-        <PageTurn turn={turn} onComplete={finishTurn} />
-      ) : (
-        <div className={pageClass(current)} onClick={openFocus}>
-          <SheetBody page={current} />
-          <span className="page-folio folio-right">{current}</span>
-        </div>
-      )}
+    <div className="book-spread single" onClick={(event) => event.stopPropagation()}>
+      <div className={pageClass(current)} onClick={openFocus}>
+        <SheetBody page={current} />
+        <span className="page-folio folio-right">{current}</span>
+      </div>
     </div>
   );
 
   const ariaLabel = resolveCatalogText(readerUi.ariaLabel || "Ebook {title}");
 
   return (
-    <section className={`ebook-reader${isAnimating ? " is-turning" : ""}`} aria-label={ariaLabel}>
+    <section className="ebook-reader" aria-label={ariaLabel}>
       {focused ? (
         <div className="ebook-focus" onClick={() => setFocused(false)}>
           <button
@@ -137,7 +103,9 @@ export default function EbookReader({ page }) {
         <button type="button" disabled={!canPrev} onClick={() => requestGo(current - step)}>
           {readerUi.prev || "← Trang trước"}
         </button>
-        <p>Trang {turn ? `${turn.from} → ${turn.to}` : current} / {LAST_PAGE}</p>
+        <p>
+          Trang {current} / {LAST_PAGE}
+        </p>
         <button type="button" disabled={!canNext} onClick={() => requestGo(current + step)}>
           {readerUi.next || "Trang sau →"}
         </button>

@@ -15,12 +15,3 @@ export function SheetBody({ page }) {
   if (sheet.type === "game") return <GameDetail game={sheet.game} />;
   return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
 }
-
-export function BookPageShell({ pageNumber, className = "", children }) {
-  return (
-    <div className={`${pageClass(pageNumber)} ${className}`.trim()}>
-      {children ?? <SheetBody page={pageNumber} />}
-      <span className="page-folio folio-right">{pageNumber}</span>
-    </div>
-  );
-}
