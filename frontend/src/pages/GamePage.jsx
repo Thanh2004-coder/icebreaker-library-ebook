@@ -20,12 +20,14 @@ export default function GamePage() {
             String(game.page)
           )}
         </Link>
-        <div className="book-spread single">
-          <div className="book-page solo">
-            <GameDetail game={game} />
-            <span className="page-folio folio-right">{game.page}</span>
+        <section className="ebook-reader ebook-reader-standalone">
+          <div className="book-spread single">
+            <div className="book-page solo game-page">
+              <GameDetail game={game} />
+              <span className="page-folio folio-right">{game.page}</span>
+            </div>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );

@@ -90,10 +90,36 @@
     }
   },
   "assets": {
+    "ebookBackground": "/images/purple-background.png",
     "fallbackHeroImage": "/images/games/fallback.svg",
     "fallbackInstructionImage": "/images/games/instructions/fallback.svg"
   },
-  "sheets": [],
+  "sheets": [
+    {
+      "page": 1,
+      "type": "design",
+      "image": "/images/cover.png",
+      "alt": "Trang 1 — Bìa ebook"
+    },
+    {
+      "page": 2,
+      "type": "design",
+      "image": "/images/intro.png",
+      "alt": "Trang 2 — Giới thiệu"
+    },
+    {
+      "page": 3,
+      "type": "design",
+      "image": "/images/start.png",
+      "alt": "Trang 3 — Bắt đầu"
+    },
+    {
+      "page": 4,
+      "type": "design",
+      "image": "/images/pick-game.png",
+      "alt": "Trang 4 — Pick your game"
+    }
+  ],
   "filters": {
     "players": [
       {
@@ -199,7 +225,7 @@
   "games": [
     {
       "id": 1,
-      "page": 6,
+      "page": 5,
       "name": "Tìm số đồng đội (Number Hunt)",
       "minPlayers": 5,
       "maxPlayers": 20,
@@ -250,7 +276,7 @@
     },
     {
       "id": 2,
-      "page": 7,
+      "page": 6,
       "name": "Đoán ý đồng đội / Tam sao thất bản",
       "minPlayers": 3,
       "maxPlayers": 20,
@@ -303,7 +329,7 @@
     },
     {
       "id": 3,
-      "page": 8,
+      "page": 7,
       "name": "Trốn khung hình (Don't get caught)",
       "minPlayers": 5,
       "maxPlayers": 20,
@@ -351,7 +377,7 @@
     },
     {
       "id": 4,
-      "page": 9,
+      "page": 8,
       "name": "Chiếc ghế vô hình (Human Chair)",
       "minPlayers": 5,
       "maxPlayers": 20,
@@ -401,7 +427,7 @@
     },
     {
       "id": 5,
-      "page": 10,
+      "page": 9,
       "name": "Vỗ tay 3-6-9",
       "minPlayers": 3,
       "maxPlayers": 20,
@@ -450,7 +476,7 @@
     },
     {
       "id": 6,
-      "page": 11,
+      "page": 10,
       "name": "Chạy đua Toán học / Đứng đúng đáp án (Number Rush)",
       "minPlayers": 5,
       "maxPlayers": 20,

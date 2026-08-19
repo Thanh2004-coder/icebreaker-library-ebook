@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import DesignSheet from "./DesignSheet.jsx";
 import GameDetail from "./game/GameDetail.jsx";
-import { EBOOK, GAME_START_PAGE, LAST_PAGE, UI, clampPage, getSheet, resolveCatalogText, spreadPages } from "../data/catalog.js";
+import { FIRST_PAGE, LAST_PAGE, UI, clampPage, getSheet, resolveCatalogText, spreadPages } from "../data/catalog.js";
 
 function useTwoPage() {
   const [twoPage, setTwoPage] = useState(() =>
@@ -22,12 +23,20 @@ function useTwoPage() {
 function SheetBody({ page }) {
   const sheet = getSheet(page);
   const readerUi = UI.reader || {};
+  if (sheet.type === "design") return <DesignSheet sheet={sheet.sheet} />;
   if (sheet.type === "game") return <GameDetail game={sheet.game} />;
   return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
 }
 
 function isInteractive(target) {
   return Boolean(target.closest("a, button, input, textarea, select, label"));
+}
+
+function pageClass(pageNumber, spreadSize, index) {
+  const sheet = getSheet(pageNumber);
+  const side = spreadSize === 1 ? "solo" : index === 0 ? "left" : "right";
+  const kind = sheet.type === "design" ? "design-page" : sheet.type === "game" ? "game-page" : "empty-page";
+  return `book-page ${side} ${kind}`;
 }
 
 export default function EbookReader({ page }) {
@@ -40,7 +49,7 @@ export default function EbookReader({ page }) {
 
   const go = (next) => navigate(`/page/${clampPage(next)}`);
   const step = twoPage ? 2 : 1;
-  const canPrev = current > GAME_START_PAGE;
+  const canPrev = current > FIRST_PAGE;
   const canNext = (twoPage ? visible[visible.length - 1] : current) < LAST_PAGE;
 
   useEffect(() => {
@@ -76,11 +85,7 @@ export default function EbookReader({ page }) {
   const spread = (
     <div className={spreadClass} onClick={(event) => event.stopPropagation()}>
       {visible.map((pageNumber, index) => (
-        <div
-          key={pageNumber}
-          className={`book-page ${visible.length === 1 ? "solo" : index === 0 ? "left" : "right"}`}
-          onClick={openFocus}
-        >
+        <div key={pageNumber} className={pageClass(pageNumber, visible.length, index)} onClick={openFocus}>
           <SheetBody page={pageNumber} />
           <span className={`page-folio ${index === 0 ? "folio-left" : "folio-right"}`}>{pageNumber}</span>
         </div>

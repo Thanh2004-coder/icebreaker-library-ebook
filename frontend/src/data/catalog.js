@@ -4,10 +4,12 @@ import catalog from "./catalog.json";
 export const CATALOG = catalog;
 export const GAMES = catalog.games || [];
 export const FILTERS = catalog.filters || {};
-export const SHEETS = [];
+export const SHEETS = catalog.sheets || [];
 export const UI = catalog.ui || {};
 export const SITE = catalog.site || {};
 
+export const EBOOK_BACKGROUND =
+  catalog.assets?.ebookBackground || "/images/purple-background.png";
 export const FALLBACK_GAME_IMAGE =
   catalog.assets?.fallbackHeroImage || "/images/games/fallback.svg";
 export const FALLBACK_INSTRUCTION_IMAGE =
@@ -17,8 +19,13 @@ function numberedPages(items, key = "page") {
   return items.map((item) => Number(item?.[key])).filter((n) => Number.isFinite(n));
 }
 
+export function firstPage() {
+  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES)];
+  return pages.length ? Math.min(...pages) : 1;
+}
+
 export function lastPage() {
-  const pages = [...numberedPages(GAMES)];
+  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES)];
   return pages.length ? Math.max(...pages) : 1;
 }
 
@@ -27,11 +34,13 @@ export function gameStartPage() {
   return pages.length ? Math.min(...pages) : lastPage();
 }
 
+export const FIRST_PAGE = firstPage();
 export const LAST_PAGE = lastPage();
 export const GAME_START_PAGE = gameStartPage();
 
 export const EBOOK = {
   ...catalog.ebook,
+  firstPage: FIRST_PAGE,
   lastPage: LAST_PAGE,
   gameStartPage: GAME_START_PAGE,
 };
@@ -72,6 +81,11 @@ export function getGameById(id) {
 export function getGameByPage(page) {
   const key = Number(page);
   return GAMES.find((game) => Number(game.page) === key) || null;
+}
+
+export function getDesignSheet(page) {
+  const key = Number(page);
+  return SHEETS.find((sheet) => Number(sheet.page) === key) || null;
 }
 
 export function gamesByPage() {
@@ -143,17 +157,26 @@ export function getGameDisplay(game) {
 
 export function getSheet(page) {
   const n = Number(page);
+  const design = getDesignSheet(n);
+  if (design) return { type: "design", page: n, sheet: design };
   const game = getGameByPage(n);
-  if (game) return { type: "game", page: n, game, gameIndex: gamesByPage().findIndex((item) => item.id === game.id) + 1 };
+  if (game) {
+    return {
+      type: "game",
+      page: n,
+      game,
+      gameIndex: gamesByPage().findIndex((item) => item.id === game.id) + 1,
+    };
+  }
   return { type: "empty", page: n };
 }
 
 export function isCoverPage(page) {
-  return false;
+  return Number(page) === FIRST_PAGE;
 }
 
 export function clampPage(page) {
-  const first = GAME_START_PAGE || 1;
+  const first = FIRST_PAGE || 1;
   const last = LAST_PAGE || first;
   const n = Number(page);
   if (!Number.isFinite(n)) return first;
@@ -163,7 +186,7 @@ export function clampPage(page) {
 export function spreadPages(page, twoPage) {
   const current = clampPage(page);
   if (!twoPage) return [current];
-  const first = GAME_START_PAGE || 1;
+  const first = FIRST_PAGE || 1;
   const offset = current - first;
   const left = offset % 2 === 0 ? current : current - 1;
   const right = left + 1;
