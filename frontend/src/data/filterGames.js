@@ -74,6 +74,8 @@ function matchesSearch(game, search) {
   const raw = search.trim().toLowerCase();
   const needle = unaccent(search);
   const haystack = [
+    game.id,
+    game.page,
     game.name,
     game.description,
     game.purpose,
@@ -81,6 +83,7 @@ function matchesSearch(game, search) {
     ...(game.purposes || []),
     ...(game.tags || []),
     ...(game.contexts || []),
+    ...(game.searchKeywords || []),
   ]
     .filter(Boolean)
     .join(" ");

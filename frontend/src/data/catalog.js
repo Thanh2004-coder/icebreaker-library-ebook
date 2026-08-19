@@ -10,6 +10,8 @@ export const SITE = catalog.site || {};
 
 export const EBOOK_BACKGROUND =
   catalog.assets?.ebookBackground || "/images/purple-background.png";
+export const GAME_PAGE_BACKGROUND =
+  catalog.assets?.gamePageBackground || EBOOK_BACKGROUND;
 export const FALLBACK_GAME_IMAGE =
   catalog.assets?.fallbackHeroImage || "/images/games/fallback.svg";
 export const FALLBACK_INSTRUCTION_IMAGE =
@@ -90,6 +92,10 @@ export function getDesignSheet(page) {
 
 export function gamesByPage() {
   return [...GAMES].sort((a, b) => a.page - b.page);
+}
+
+export function getGamePageBackground(game) {
+  return game?.assets?.background || GAME_PAGE_BACKGROUND;
 }
 
 export function getHeroImage(game) {

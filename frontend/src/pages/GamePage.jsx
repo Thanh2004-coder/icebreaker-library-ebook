@@ -2,6 +2,7 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import GameDetail from "../components/game/GameDetail.jsx";
 import { UI, getGameById, resolveCatalogText } from "../data/catalog.js";
+import { gamePageStyle } from "../components/book/pageHelpers.jsx";
 
 export default function GamePage() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function GamePage() {
         </Link>
         <section className="ebook-reader ebook-reader-standalone">
           <div className="book-spread single">
-            <div className="book-page solo game-page">
+            <div className="book-page solo game-page" style={gamePageStyle(game)}>
               <GameDetail game={game} />
               <span className="page-folio folio-right">{game.page}</span>
             </div>

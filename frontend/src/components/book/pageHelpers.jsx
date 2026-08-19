@@ -1,11 +1,24 @@
 import DesignSheet from "../DesignSheet.jsx";
 import GameDetail from "../game/GameDetail.jsx";
-import { UI, getSheet } from "../../data/catalog.js";
+import { getGamePageBackground, getSheet, UI } from "../../data/catalog.js";
 
 export function pageClass(pageNumber) {
   const sheet = getSheet(pageNumber);
   const kind = sheet.type === "design" ? "design-page" : sheet.type === "game" ? "game-page" : "empty-page";
   return `book-page solo ${kind}`;
+}
+
+export function pageStyle(pageNumber) {
+  const sheet = getSheet(pageNumber);
+  if (sheet.type !== "game") return undefined;
+  const background = getGamePageBackground(sheet.game);
+  return { "--game-page-background": `url("${background}")` };
+}
+
+export function gamePageStyle(game) {
+  if (!game) return undefined;
+  const background = getGamePageBackground(game);
+  return { "--game-page-background": `url("${background}")` };
 }
 
 export function SheetBody({ page }) {

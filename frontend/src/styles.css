@@ -288,7 +288,10 @@ legend {
 }
 
 .book-page.game-page {
-  background: url("/images/purple-background.png") center / cover no-repeat;
+  background-image: var(--game-page-background);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .design-sheet {

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
+import { SheetBody, pageClass, pageStyle } from "./book/pageHelpers.jsx";
 import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 
 function isInteractive(target) {
@@ -56,7 +56,7 @@ export default function EbookReader({ page }) {
 
   const spread = (
     <div className="book-spread single" onClick={(event) => event.stopPropagation()}>
-      <div className={pageClass(current)} onClick={openFocus}>
+      <div className={pageClass(current)} style={pageStyle(current)} onClick={openFocus}>
         <SheetBody page={current} />
         <span className="page-folio folio-right">{current}</span>
       </div>
