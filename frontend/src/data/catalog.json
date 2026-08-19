@@ -246,21 +246,12 @@
         "Ai có 1 hàng thì hô “Bingo” — cả nhóm vỗ tay, không tặng phạt."
       ],
       "preparation": [
-        "Leader phải chuẩn bị bảng bingo trước khi bắt đầu. Không thêm 5 phút khởi động thân thể."
+        "Leader phải chuẩn bị bảng bingo trước khi bắt đầu."
       ],
       "preparationRequired": true,
       "preparationTime": 10,
       "rules": [
-        "Ô phải dễ, phù hợp nhóm mới.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Ô phải dễ, phù hợp nhóm mới."
       ]
     },
     {
@@ -294,21 +285,12 @@
         "Không cần hay. Chỉ cần nối được mạch."
       ],
       "preparation": [
-        "Không có hoạt động tay chân — không dành 5 phút chuẩn bị thân thể."
+        "Không cần chuẩn bị thân thể."
       ],
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không bắt bịa dài. Không chê ý tưởng.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không bắt bịa dài. Không chê ý tưởng."
       ]
     },
     {
@@ -347,16 +329,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không được bỏ lượt.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không được bỏ lượt."
       ]
     },
     {
@@ -394,16 +367,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không biến thành thẩm vấn. Leader không comment đúng sai.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không biến thành thẩm vấn. Leader không comment đúng sai."
       ]
     },
     {
@@ -441,16 +405,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không đùa theo hướng chế giễu.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không đùa theo hướng chế giễu."
       ]
     },
     {
@@ -489,16 +444,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Cấm biệt danh chế giễu.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Cấm biệt danh chế giễu."
       ]
     },
     {
@@ -537,16 +483,7 @@
       "preparationRequired": true,
       "preparationTime": 3,
       "rules": [
-        "Nhịp chậm. Không biến thành cuộc đua.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Nhịp chậm. Không biến thành cuộc đua."
       ]
     },
     {
@@ -584,16 +521,7 @@
       "preparationRequired": true,
       "preparationTime": 2,
       "rules": [
-        "Không tạo áp lực phải đoán đúng.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không tạo áp lực phải đoán đúng."
       ]
     },
     {
@@ -631,16 +559,7 @@
       "preparationRequired": true,
       "preparationTime": 2,
       "rules": [
-        "Nhịp chậm, không loại người.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Nhịp chậm, không loại người."
       ]
     },
     {
@@ -672,21 +591,12 @@
         "Leader gom cảm xúc nhóm rồi chuyển sang việc chính, không phán xét."
       ],
       "preparation": [
-        "Không có hoạt động tay chân nặng — không thêm 5 phút chuẩn bị. Có thể dùng giấy sẵn trong phòng."
+        "Không cần thêm chuẩn bị. Có thể dùng giấy sẵn trong phòng."
       ],
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không hỏi “vì sao buồn”.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không hỏi “vì sao buồn”."
       ]
     },
     {
@@ -726,15 +636,7 @@
       "preparationTime": 0,
       "rules": [
         "Câu trả lời ba từ là đủ.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Câu trả lời ba từ là đủ."
       ]
     },
     {
@@ -767,21 +669,12 @@
         "Làm 6–8 chủ đề. Chủ đề cuối: “High-five nếu sẵn sàng vào việc”."
       ],
       "preparation": [
-        "Phù hợp nhóm rụt rè vì gần như không phải nói. Không cần 5 phút chuẩn bị."
+        "Phù hợp nhóm rụt rè vì gần như không phải nói."
       ],
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không bắt kể thêm. Chỉ chơi trực tiếp trong lớp.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không bắt kể thêm. Chỉ chơi trực tiếp trong lớp."
       ]
     },
     {
@@ -819,16 +712,7 @@
       "preparationRequired": true,
       "preparationTime": 10,
       "rules": [
-        "Không xếp hạng ai đoán nhanh nhất.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không xếp hạng ai đoán nhanh nhất."
       ]
     },
     {
@@ -865,16 +749,7 @@
       "preparationRequired": true,
       "preparationTime": 1,
       "rules": [
-        "Leader canh giờ nhẹ, không cắt lời đột ngột.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Leader canh giờ nhẹ, không cắt lời đột ngột."
       ]
     },
     {
@@ -913,16 +788,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không tranh luận ai đúng.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không tranh luận ai đúng."
       ]
     },
     {
@@ -961,16 +827,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không hỏi thu nhập, điểm số, chuyện gia đình nhạy cảm.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không hỏi thu nhập, điểm số, chuyện gia đình nhạy cảm."
       ]
     },
     {
@@ -1008,16 +865,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Tôn trọng người chọn “muốn nghe”.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Tôn trọng người chọn “muốn nghe”."
       ]
     },
     {
@@ -1055,16 +903,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Chỉ dùng câu trung tính. Nói rõ, không cố tình phá nếu nhóm còn rụt rè.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Chỉ dùng câu trung tính. Nói rõ, không cố tình phá nếu nhóm còn rụt rè."
       ]
     },
     {
@@ -1102,16 +941,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không tính giờ gấp. Im lặng 5 giây vẫn được.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không tính giờ gấp. Im lặng 5 giây vẫn được."
       ]
     },
     {
@@ -1149,16 +979,7 @@
       "preparationRequired": false,
       "preparationTime": 0,
       "rules": [
-        "Không có đáp án thắng.",
-        "Quy định chung:",
-        "• Không ai được bỏ qua lượt. Nếu đang ngại, trả lời ngắn (một từ, một cử chỉ, hoặc “cho mình 5 giây”).",
-        "• Không tạo áp lực cạnh tranh quá mạnh. Không tính điểm trừ, không xếp hạng thua.",
-        "• Không đánh giá hoặc chê câu trả lời.",
-        "• Ưu tiên câu hỏi dễ, đời thường, phù hợp nhóm mới làm quen.",
-        "• Trò không có hoạt động tay chân thì không dành 5 phút chuẩn bị trước.",
-        "• Trò cần tài liệu/hình ảnh (Bingo, Nhìn hình đoán chữ): Leader chuẩn bị nội dung trước khi bắt đầu.",
-        "• Trò có hoạt động tay chân: cho mọi người vài phút đứng dậy / tìm đồ trước khi chơi.",
-        "• Chỉ chơi trực tiếp trong cùng một không gian."
+        "Không có đáp án thắng."
       ]
     }
   ]
