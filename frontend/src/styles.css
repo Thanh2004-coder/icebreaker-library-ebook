@@ -504,6 +504,20 @@ legend {
 
 .ebook-focus .book-page.design-page {
   overflow-y: auto;
+  min-height: 0;
+  height: auto;
+}
+
+.ebook-focus .book-spread.single .book-page.design-page,
+.ebook-focus .book-spread.cover-only .book-page.design-page {
+  min-height: 0;
+  height: auto;
+}
+
+.ebook-focus .design-sheet,
+.ebook-focus .design-sheet-page {
+  height: auto;
+  min-height: 0;
 }
 
 .ebook-focus .book-spread.single .book-page,
@@ -783,6 +797,16 @@ legend {
     min-height: 70vh;
   }
 
+  .ebook-focus .book-page.design-page {
+    min-height: 0;
+    height: auto;
+    max-height: calc(100dvh - 32px);
+  }
+
+  .ebook-focus:has(.book-page.design-page) {
+    align-items: flex-start;
+  }
+
   .result-card {
     flex-direction: column;
   }
@@ -815,6 +839,11 @@ legend {
 
   .ebook-focus .book-page {
     min-height: 70vh;
+  }
+
+  .ebook-focus .book-page.design-page {
+    min-height: 0;
+    height: auto;
   }
 
   .sheet-hero {
