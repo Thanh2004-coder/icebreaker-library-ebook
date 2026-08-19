@@ -322,7 +322,9 @@ legend {
 
 .book-page.design-page {
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 0;
   background: transparent;
   cursor: zoom-in;
 }
@@ -334,16 +336,13 @@ legend {
 .design-sheet {
   display: block;
   width: 100%;
-  min-height: 640px;
 }
 
 .design-sheet-image {
   display: block;
   width: 100%;
-  height: 100%;
-  min-height: 640px;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
+  max-width: 100%;
 }
 
 .game-sheet {
@@ -537,6 +536,10 @@ legend {
   min-height: min(78vh, 860px);
   max-height: calc(100vh - 48px);
   cursor: default;
+}
+
+.ebook-focus .book-page.design-page {
+  overflow-y: auto;
 }
 
 .ebook-focus .book-spread.single .book-page,
@@ -798,10 +801,10 @@ legend {
     min-height: 520px;
   }
 
-  .book-page.design-page,
-  .design-sheet,
-  .design-sheet-image {
-    min-height: 520px;
+  .book-page.design-page {
+    max-height: min(75vh, calc(100dvh - 280px));
+    min-height: 0;
+    overflow-y: auto;
   }
 
   .ebook-reader {
