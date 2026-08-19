@@ -4,7 +4,7 @@ import catalog from "./catalog.json";
 export const CATALOG = catalog;
 export const GAMES = catalog.games || [];
 export const FILTERS = catalog.filters || {};
-export const SHEETS = catalog.sheets || [];
+export const SHEETS = [];
 export const UI = catalog.ui || {};
 export const SITE = catalog.site || {};
 
@@ -18,7 +18,7 @@ function numberedPages(items, key = "page") {
 }
 
 export function lastPage() {
-  const pages = [...numberedPages(SHEETS), ...numberedPages(GAMES)];
+  const pages = [...numberedPages(GAMES)];
   return pages.length ? Math.max(...pages) : 1;
 }
 
@@ -144,35 +144,28 @@ export function getGameDisplay(game) {
 export function getSheet(page) {
   const n = Number(page);
   const game = getGameByPage(n);
-  if (game) return { type: "game", page: n, game };
-  const sheet = SHEETS.find((item) => Number(item.page) === n);
-  if (sheet) {
-    if (sheet.type === "text" && sheet.body) {
-      return {
-        ...sheet,
-        body: resolveCatalogLines(sheet.body),
-      };
-    }
-    return { ...sheet };
-  }
+  if (game) return { type: "game", page: n, game, gameIndex: gamesByPage().findIndex((item) => item.id === game.id) + 1 };
   return { type: "empty", page: n };
 }
 
 export function isCoverPage(page) {
-  return getSheet(page).type === "cover";
+  return false;
 }
 
 export function clampPage(page) {
+  const first = GAME_START_PAGE || 1;
+  const last = LAST_PAGE || first;
   const n = Number(page);
-  if (!Number.isFinite(n)) return 1;
-  return Math.min(Math.max(Math.round(n), 1), LAST_PAGE);
+  if (!Number.isFinite(n)) return first;
+  return Math.min(Math.max(Math.round(n), first), last);
 }
 
 export function spreadPages(page, twoPage) {
   const current = clampPage(page);
   if (!twoPage) return [current];
-  if (isCoverPage(current)) return [current];
-  const left = current % 2 === 0 ? current : current - 1;
+  const first = GAME_START_PAGE || 1;
+  const offset = current - first;
+  const left = offset % 2 === 0 ? current : current - 1;
   const right = left + 1;
   return right <= LAST_PAGE ? [left, right] : [left];
 }

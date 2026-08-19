@@ -1,16 +1,16 @@
 :root {
-  --bg: #f3eee4;
-  --ink: #1c2b2a;
-  --muted: #5b6b68;
-  --paper: #fffdf8;
-  --line: #e2d8c8;
-  --teal: #1b4d4a;
-  --teal-2: #2f6f6a;
-  --coral: #e07a5f;
-  --coral-dark: #c65b42;
-  --sage: #7a9e7e;
-  --shadow: 0 18px 40px rgba(28, 43, 42, 0.08);
-  font-family: "Be Vietnam Pro", system-ui, sans-serif;
+  --bg: #0a0620;
+  --ink: #efeaff;
+  --muted: #c5b9f8;
+  --paper: rgba(20, 11, 54, 0.88);
+  --line: #5d46c9;
+  --teal: #8cc7ff;
+  --teal-2: #6fb2ff;
+  --coral: #f78bd0;
+  --coral-dark: #ffdb66;
+  --sage: #a98dff;
+  --shadow: 0 20px 48px rgba(6, 2, 20, 0.55);
+  font-family: "Chakra Petch", "Be Vietnam Pro", system-ui, sans-serif;
 }
 
 * {
@@ -27,9 +27,11 @@ body,
 }
 
 body {
-  background-image:
-    radial-gradient(circle at top right, rgba(224, 122, 95, 0.16), transparent 28%),
-    radial-gradient(circle at left 20%, rgba(47, 111, 106, 0.12), transparent 32%);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 120, 210, 0.2), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(97, 120, 255, 0.25), transparent 36%),
+    radial-gradient(circle at 50% 90%, rgba(116, 80, 255, 0.2), transparent 32%),
+    #09041a;
 }
 
 a {
@@ -54,9 +56,11 @@ textarea {
 }
 
 .hero {
-  background: linear-gradient(135deg, #163e3c 0%, #1b4d4a 55%, #2f6f6a 100%);
-  color: #f8f3ea;
+  background: linear-gradient(140deg, #140a3f 0%, #240f5e 52%, #2e1a75 100%);
+  color: #f6f1ff;
   padding: 48px 20px 40px;
+  border-bottom: 2px solid #6a46ff;
+  box-shadow: inset 0 -1px 0 rgba(255, 218, 111, 0.45);
 }
 
 .hero-inner {
@@ -69,14 +73,16 @@ textarea {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-size: 0.75rem;
-  color: rgba(248, 243, 234, 0.72);
+  color: rgba(247, 233, 255, 0.78);
 }
 
 .brand-title {
   display: block;
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(255, 221, 99, 0.5);
 }
 
 .tagline {
@@ -84,7 +90,7 @@ textarea {
   max-width: 640px;
   font-size: 1.05rem;
   line-height: 1.6;
-  color: rgba(248, 243, 234, 0.86);
+  color: rgba(235, 228, 255, 0.92);
 }
 
 .layout {
@@ -104,7 +110,8 @@ textarea {
 .search-wrap input {
   width: 100%;
   border: 1px solid var(--line);
-  background: var(--paper);
+  background: rgba(14, 8, 39, 0.96);
+  color: var(--ink);
   border-radius: 16px;
   padding: 16px 18px;
   box-shadow: var(--shadow);
@@ -118,7 +125,7 @@ textarea {
 
 fieldset {
   border: 1px solid var(--line);
-  background: rgba(255, 253, 248, 0.7);
+  background: rgba(17, 10, 45, 0.85);
   border-radius: 16px;
   margin: 0;
   padding: 12px 14px 14px;
@@ -142,7 +149,8 @@ legend {
   align-items: center;
   gap: 6px;
   border: 1px solid var(--line);
-  background: #fff;
+  background: rgba(27, 16, 66, 0.85);
+  color: var(--ink);
   border-radius: 999px;
   padding: 7px 12px;
   cursor: pointer;
@@ -154,9 +162,9 @@ legend {
 }
 
 .chip.on {
-  border-color: var(--teal);
-  background: #e7f1ef;
-  color: var(--teal);
+  border-color: #ffd76b;
+  background: rgba(255, 215, 107, 0.2);
+  color: #ffe8a1;
   font-weight: 600;
 }
 
@@ -197,7 +205,7 @@ legend {
   justify-content: space-between;
   align-items: flex-start;
   gap: 16px;
-  background: var(--paper);
+  background: rgba(16, 10, 42, 0.9);
   border: 1px solid var(--line);
   border-radius: 20px;
   padding: 16px 20px;
@@ -212,14 +220,14 @@ legend {
 .result-page {
   margin: 0 0 8px;
   font-weight: 700;
-  color: var(--teal);
+  color: #ffd76b;
 }
 
 .open-page-btn {
   flex: none;
   border: 0;
-  background: var(--teal);
-  color: #fff;
+  background: linear-gradient(90deg, #ff7cc8, #8f6bff);
+  color: #1a0f38;
   border-radius: 12px;
   padding: 10px 14px;
   cursor: pointer;
@@ -227,7 +235,7 @@ legend {
 }
 
 .card-desc {
-  color: var(--muted);
+  color: #d8d0ff;
   line-height: 1.55;
   margin: 0 0 14px;
 }
@@ -256,7 +264,10 @@ legend {
 
 .book-page {
   position: relative;
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 128, 214, 0.13), transparent 32%),
+    radial-gradient(circle at 80% 30%, rgba(120, 150, 255, 0.16), transparent 34%),
+    #0f0931;
   border: 1px solid var(--line);
   min-height: 640px;
   max-height: 80vh;
@@ -268,12 +279,12 @@ legend {
 .book-page.left {
   border-radius: 18px 0 0 18px;
   border-right: 0;
-  box-shadow: inset -18px 0 28px rgba(28, 43, 42, 0.04);
+  box-shadow: inset -18px 0 28px rgba(6, 2, 24, 0.45);
 }
 
 .book-page.right {
   border-radius: 0 18px 18px 0;
-  box-shadow: inset 18px 0 28px rgba(28, 43, 42, 0.04);
+  box-shadow: inset 18px 0 28px rgba(6, 2, 24, 0.45);
 }
 
 .book-page.solo {
@@ -342,7 +353,7 @@ legend {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.72rem;
-  color: var(--coral-dark);
+  color: #ffd76b;
   font-weight: 700;
   margin: 0 0 8px;
 }
@@ -408,16 +419,17 @@ legend {
 
 .reader-nav button {
   border: 1px solid var(--line);
-  background: #fff;
+  background: rgba(16, 10, 42, 0.92);
+  color: var(--ink);
   border-radius: 10px;
   padding: 8px 12px;
   cursor: pointer;
 }
 
 .reader-nav button:hover:not(:disabled) {
-  background: var(--teal);
-  color: #fff;
-  border-color: var(--teal);
+  background: #6c46ff;
+  color: #fff7d2;
+  border-color: #8d69ff;
 }
 
 .reader-nav button:disabled {
@@ -434,7 +446,7 @@ legend {
   justify-content: center;
   gap: 0;
   padding: 24px 72px;
-  background: rgba(28, 43, 42, 0.52);
+  background: rgba(8, 3, 26, 0.82);
   overflow: auto;
 }
 
@@ -467,8 +479,8 @@ legend {
   height: 48px;
   border: 0;
   border-radius: 999px;
-  background: var(--paper);
-  color: var(--teal);
+  background: #1f124f;
+  color: #ffd76b;
   box-shadow: var(--shadow);
   font-size: 1.35rem;
   font-weight: 700;
@@ -484,8 +496,8 @@ legend {
 }
 
 .focus-arrow:hover:not(:disabled) {
-  background: var(--teal);
-  color: #fff;
+  background: #6b49ff;
+  color: #fff6cf;
 }
 
 .focus-arrow:disabled {
@@ -500,7 +512,7 @@ legend {
   max-width: 100%;
   object-fit: cover;
   object-position: center;
-  background: #1b4d4a;
+  background: #1b114a;
 }
 
 .sheet-hero {
@@ -513,7 +525,7 @@ legend {
   height: 140px;
   border-radius: 12px;
   margin: 0 0 12px;
-  background: #e8f0ee;
+  background: #20145a;
 }
 
 .meta {
@@ -533,8 +545,8 @@ legend {
 }
 
 .tag {
-  background: #e7f1ef;
-  color: var(--teal);
+  background: rgba(109, 180, 255, 0.2);
+  color: #aed5ff;
   border-radius: 999px;
   padding: 6px 10px;
   font-size: 0.82rem;
@@ -542,8 +554,8 @@ legend {
 }
 
 .tag.purpose {
-  background: #fde8e0;
-  color: var(--coral-dark);
+  background: rgba(255, 141, 210, 0.22);
+  color: #ffd3f1;
 }
 
 .game-sheet section h2 {
@@ -575,15 +587,15 @@ legend {
 
 .error,
 .empty {
-  background: #fff4ee;
-  border: 1px solid #f0cbbd;
+  background: rgba(44, 24, 88, 0.82);
+  border: 1px solid #7349e6;
   border-radius: 12px;
   padding: 12px 14px;
 }
 
 .site-footer {
   margin-top: auto;
-  background: linear-gradient(135deg, #163e3c 0%, #1b4d4a 60%, #2f6f6a 100%);
+  background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
   color: #f8f3ea;
   padding: 32px 20px 28px;
 }
@@ -602,7 +614,7 @@ legend {
   text-transform: uppercase;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #e07a5f;
+  color: #ffd76b;
 }
 
 .footer-contact ul {
@@ -630,8 +642,8 @@ legend {
 }
 
 .footer-qr {
-  background: rgba(255, 253, 248, 0.08);
-  border: 1px solid rgba(248, 243, 234, 0.18);
+  background: rgba(255, 253, 248, 0.05);
+  border: 1px solid rgba(255, 215, 107, 0.36);
   border-radius: 20px;
   padding: 18px;
 }
@@ -645,7 +657,7 @@ legend {
 
 .qr-frame {
   display: inline-flex;
-  background: #fffdf8;
+  background: #f8f4ff;
   border-radius: 14px;
   padding: 8px;
 }
@@ -655,6 +667,44 @@ legend {
   margin: 10px 0 0;
   font-weight: 700;
   color: #f8f3ea;
+}
+
+.game-serial {
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: #f49be3;
+}
+
+.sheet-page-label {
+  margin: 0 0 8px;
+  color: #95b7ff;
+  font-weight: 700;
+}
+
+.game-title {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.game-panel {
+  background: rgba(14, 8, 39, 0.85);
+  border: 1px solid #6846d5;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.game-panel h2 {
+  margin-top: 0;
+}
+
+.hint-panel {
+  border-color: #f08ad0;
 }
 
 @media (max-width: 899px) {

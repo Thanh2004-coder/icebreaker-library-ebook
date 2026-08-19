@@ -18,18 +18,21 @@ function slugToLabel(options, slug) {
 
 function matchesPlayers(game, players) {
   if (!players) return true;
-  const count = game.minPlayers;
+  const min = Number(game.minPlayers);
+  const max = Number(game.maxPlayers ?? game.minPlayers);
+  if (!Number.isFinite(min) || !Number.isFinite(max)) return false;
+  const overlaps = (rangeMin, rangeMax) => max >= rangeMin && min <= rangeMax;
   switch (players) {
     case "2":
-      return count === 2;
+      return overlaps(2, 2);
     case "3-4":
-      return count >= 3 && count <= 4;
+      return overlaps(3, 4);
     case "5":
-      return count === 5;
+      return overlaps(5, 5);
     case "6-10":
-      return count >= 6 && count <= 10;
+      return overlaps(6, 10);
     case "10+":
-      return count >= 10;
+      return max >= 10;
     default:
       return true;
   }

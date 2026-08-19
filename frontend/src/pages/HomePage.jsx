@@ -27,6 +27,13 @@ export default function HomePage() {
     if (!page) navigate("/page/1", { replace: true });
   }, [page, navigate]);
 
+  useEffect(() => {
+    const raw = Number(page);
+    if (!Number.isFinite(raw) || raw !== currentPage) {
+      navigate(`/page/${currentPage}`, { replace: true });
+    }
+  }, [page, currentPage, navigate]);
+
   const filtered = useMemo(
     () => filterGames(GAMES, { search, selected }),
     [search, selected]

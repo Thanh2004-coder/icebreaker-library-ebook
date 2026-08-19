@@ -64,11 +64,28 @@
       "feedbackLink": "Mở form đánh giá",
       "feedbackFormUrl": "https://docs.google.com/forms/d/1oQAkvbTh_DTeJFcvziep0xceAdd1iftBxF8_oY67evs/viewform",
       "contacts": [
-        { "label": "Nhóm thực hiện", "value": "Thành phố bất ổn" },
-        { "label": "Đại diện nhóm", "value": "Nguyễn Đăng Nam" },
-        { "label": "Email", "value": "ICEBREAKER@gmail.com", "href": "mailto:ICEBREAKER@gmail.com" },
-        { "label": "Kênh liên hệ", "value": "0862778706", "href": "tel:0862778706" },
-        { "label": "Giảng viên hướng dẫn", "value": "Trương Thu Thủy" }
+        {
+          "label": "Nhóm thực hiện",
+          "value": "Thành phố bất ổn"
+        },
+        {
+          "label": "Đại diện nhóm",
+          "value": "Nguyễn Đăng Nam"
+        },
+        {
+          "label": "Email",
+          "value": "ICEBREAKER@gmail.com",
+          "href": "mailto:ICEBREAKER@gmail.com"
+        },
+        {
+          "label": "Kênh liên hệ",
+          "value": "0862778706",
+          "href": "tel:0862778706"
+        },
+        {
+          "label": "Giảng viên hướng dẫn",
+          "value": "Trương Thu Thủy"
+        }
       ]
     }
   },
@@ -76,42 +93,7 @@
     "fallbackHeroImage": "/images/games/fallback.svg",
     "fallbackInstructionImage": "/images/games/instructions/fallback.svg"
   },
-  "sheets": [
-    {
-      "page": 1,
-      "type": "cover"
-    },
-    {
-      "page": 2,
-      "type": "toc"
-    },
-    {
-      "page": 3,
-      "type": "text",
-      "title": "Cách dùng ebook",
-      "body": [
-        "Search và bộ lọc chạy ngay trên trình duyệt, không cần máy chủ.",
-        "Kết quả sẽ cho biết trò chơi nằm ở trang nào.",
-        "Bấm tên trong mục lục hoặc “Xem trang” để mở đúng trang sách."
-      ]
-    },
-    {
-      "page": 4,
-      "type": "text",
-      "title": "20 trò chơi",
-      "body": [
-        "Mỗi trò chơi là một trang cố định trong cuốn sách này. Trang {gameStartPage} bắt đầu danh sách theo thứ tự mục lục."
-      ]
-    },
-    {
-      "page": 5,
-      "type": "text",
-      "title": "Bắt đầu",
-      "body": [
-        "Lật sang trang tiếp theo để bắt đầu danh sách trò chơi."
-      ]
-    }
-  ],
+  "sheets": [],
   "filters": {
     "players": [
       {
@@ -219,27 +201,31 @@
       "id": 1,
       "page": 6,
       "name": "Tìm số đồng đội (Number Hunt)",
-      "minPlayers": 12,
+      "minPlayers": 5,
       "maxPlayers": 20,
-      "players": "12-20 người",
-      "durationMin": 15,
-      "durationMax": 15,
-      "duration": "15 phút",
-      "time": "15 phút",
+      "players": "5+ người",
+      "durationMin": 10,
+      "durationMax": 10,
+      "duration": "10 phút",
+      "time": "10 phút",
       "context": "Trong lớp học",
       "contexts": [
-        "Trong lớp học"
+        "Trong lớp học",
+        "Ngoài trời",
+        "Campus"
       ],
-      "purpose": "Khởi động trước khi họp nhóm, Phá băng, Tăng tương tác",
+      "purpose": "Phá băng, Tăng tương tác, Khởi động trước khi họp nhóm, Tạo tiếng cười",
       "purposes": [
-        "Khởi động trước khi họp nhóm",
         "Phá băng",
-        "Tăng tương tác"
+        "Tăng tương tác",
+        "Khởi động trước khi họp nhóm",
+        "Tạo tiếng cười"
       ],
       "tags": [
-        "Khởi động trước khi họp nhóm",
         "Phá băng",
-        "Tăng tương tác"
+        "Tăng tương tác",
+        "Khởi động trước khi họp nhóm",
+        "Tạo tiếng cười"
       ],
       "description": "Khoanh đúng dãy số 1-80 theo lượt để đội hoàn thành nhanh nhất.",
       "coverImage": "/images/games/1.svg",
@@ -266,27 +252,32 @@
       "id": 2,
       "page": 7,
       "name": "Đoán ý đồng đội / Tam sao thất bản",
-      "minPlayers": 5,
-      "maxPlayers": 12,
-      "players": "5-12 người",
+      "minPlayers": 3,
+      "maxPlayers": 20,
+      "players": "3+ người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
       "time": "10 phút",
       "context": "Trong lớp học",
       "contexts": [
-        "Trong lớp học"
+        "Trong lớp học",
+        "Trong phòng",
+        "Campus",
+        "Nhóm nhỏ"
       ],
-      "purpose": "Giao tiếp, Phá băng, Tạo tiếng cười",
+      "purpose": "Làm quen, Phá băng, Giao tiếp, Tăng tương tác, Tạo tiếng cười",
       "purposes": [
-        "Giao tiếp",
+        "Làm quen",
         "Phá băng",
+        "Giao tiếp",
         "Tăng tương tác",
         "Tạo tiếng cười"
       ],
       "tags": [
-        "Giao tiếp",
+        "Làm quen",
         "Phá băng",
+        "Giao tiếp",
         "Tăng tương tác",
         "Tạo tiếng cười"
       ],
@@ -315,26 +306,28 @@
       "page": 8,
       "name": "Trốn khung hình (Don't get caught)",
       "minPlayers": 5,
-      "maxPlayers": 12,
-      "players": "5-12 người",
+      "maxPlayers": 20,
+      "players": "5+ người",
       "durationMin": 8,
       "durationMax": 8,
       "duration": "8 phút",
       "time": "8 phút",
-      "context": "Ngoài trời",
+      "context": "Trong phòng",
       "contexts": [
-        "Ngoài trời"
+        "Trong phòng",
+        "Ngoài trời",
+        "Campus"
       ],
-      "purpose": "Phá băng, Tăng tương tác, Tạo tiếng cười",
+      "purpose": "Phá băng, Tạo tiếng cười, Tăng tương tác",
       "purposes": [
         "Phá băng",
-        "Tăng tương tác",
-        "Tạo tiếng cười"
+        "Tạo tiếng cười",
+        "Tăng tương tác"
       ],
       "tags": [
         "Phá băng",
-        "Tăng tương tác",
-        "Tạo tiếng cười"
+        "Tạo tiếng cười",
+        "Tăng tương tác"
       ],
       "description": "Người bịt mắt chụp ảnh bất ngờ, người chơi phải né để không lọt vào khung hình.",
       "coverImage": "/images/games/3.svg",
@@ -361,26 +354,30 @@
       "page": 9,
       "name": "Chiếc ghế vô hình (Human Chair)",
       "minPlayers": 5,
-      "maxPlayers": 12,
-      "players": "5-12 người",
-      "durationMin": 7,
-      "durationMax": 7,
-      "duration": "7 phút",
-      "time": "7 phút",
+      "maxPlayers": 20,
+      "players": "5+ người",
+      "durationMin": 5,
+      "durationMax": 5,
+      "duration": "5 phút",
+      "time": "5 phút",
       "context": "Trong phòng",
       "contexts": [
-        "Trong phòng"
+        "Trong phòng",
+        "Ngoài trời",
+        "Campus"
       ],
-      "purpose": "Khởi động trước khi họp nhóm, Tăng tương tác, Tạo sự thoải mái",
+      "purpose": "Phá băng, Tăng tương tác, Tạo tiếng cười, Khởi động trước khi họp nhóm",
       "purposes": [
-        "Khởi động trước khi họp nhóm",
+        "Phá băng",
         "Tăng tương tác",
-        "Tạo sự thoải mái"
+        "Tạo tiếng cười",
+        "Khởi động trước khi họp nhóm"
       ],
       "tags": [
-        "Khởi động trước khi họp nhóm",
+        "Phá băng",
         "Tăng tương tác",
-        "Tạo sự thoải mái"
+        "Tạo tiếng cười",
+        "Khởi động trước khi họp nhóm"
       ],
       "description": "Người chơi ngồi lên đùi nhau theo vòng để tạo “ghế vô hình” và giữ thăng bằng.",
       "coverImage": "/images/games/4.svg",
@@ -406,27 +403,31 @@
       "id": 5,
       "page": 10,
       "name": "Vỗ tay 3-6-9",
-      "minPlayers": 5,
-      "maxPlayers": 12,
-      "players": "5-12 người",
-      "durationMin": 6,
-      "durationMax": 6,
-      "duration": "6 phút",
-      "time": "6 phút",
+      "minPlayers": 3,
+      "maxPlayers": 20,
+      "players": "3+ người",
+      "durationMin": 4,
+      "durationMax": 4,
+      "duration": "4 phút",
+      "time": "4 phút",
       "context": "Trong lớp học",
       "contexts": [
-        "Trong lớp học"
+        "Trong lớp học",
+        "Trong phòng",
+        "Nhóm nhỏ"
       ],
-      "purpose": "Khởi động trước khi họp nhóm, Phá băng, Tạo sự thoải mái",
+      "purpose": "Làm quen, Phá băng, Tạo tiếng cười, Tăng tương tác",
       "purposes": [
-        "Khởi động trước khi họp nhóm",
+        "Làm quen",
         "Phá băng",
-        "Tạo sự thoải mái"
+        "Tạo tiếng cười",
+        "Tăng tương tác"
       ],
       "tags": [
-        "Khởi động trước khi họp nhóm",
+        "Làm quen",
         "Phá băng",
-        "Tạo sự thoải mái"
+        "Tạo tiếng cười",
+        "Tăng tương tác"
       ],
       "description": "Đọc số theo vòng và vỗ tay khi gặp số có 3, 6, 9; càng đông càng tăng luật.",
       "coverImage": "/images/games/5.svg",
@@ -452,26 +453,31 @@
       "page": 11,
       "name": "Chạy đua Toán học / Đứng đúng đáp án (Number Rush)",
       "minPlayers": 5,
-      "maxPlayers": 12,
-      "players": "5-12 người",
+      "maxPlayers": 20,
+      "players": "5+ người",
       "durationMin": 10,
       "durationMax": 10,
       "duration": "10 phút",
       "time": "10 phút",
       "context": "Trong lớp học",
       "contexts": [
-        "Trong lớp học"
+        "Trong lớp học",
+        "Trong phòng",
+        "Ngoài trời",
+        "Campus"
       ],
-      "purpose": "Khởi động trước khi họp nhóm, Tăng tương tác, Giao tiếp",
+      "purpose": "Phá băng, Tăng tương tác, Tạo tiếng cười, Khởi động trước khi họp nhóm",
       "purposes": [
-        "Khởi động trước khi họp nhóm",
+        "Phá băng",
         "Tăng tương tác",
-        "Giao tiếp"
+        "Tạo tiếng cười",
+        "Khởi động trước khi họp nhóm"
       ],
       "tags": [
-        "Khởi động trước khi họp nhóm",
+        "Phá băng",
         "Tăng tương tác",
-        "Giao tiếp"
+        "Tạo tiếng cười",
+        "Khởi động trước khi họp nhóm"
       ],
       "description": "Người chơi chạy tới ô đáp án đúng sau khi nghe phép tính nhẩm từ quản trò.",
       "coverImage": "/images/games/6.svg",

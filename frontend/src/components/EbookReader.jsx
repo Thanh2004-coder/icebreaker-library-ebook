@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EbookCover from "./EbookCover.jsx";
-import TableOfContents from "./TableOfContents.jsx";
 import GameDetail from "./game/GameDetail.jsx";
-import { EBOOK, LAST_PAGE, UI, clampPage, getSheet, isCoverPage, resolveCatalogText, spreadPages } from "../data/catalog.js";
+import { EBOOK, GAME_START_PAGE, LAST_PAGE, UI, clampPage, getSheet, resolveCatalogText, spreadPages } from "../data/catalog.js";
 
 function useTwoPage() {
   const [twoPage, setTwoPage] = useState(() =>
@@ -21,25 +19,9 @@ function useTwoPage() {
   return twoPage;
 }
 
-function FrontMatter({ title, body }) {
-  const lines = Array.isArray(body) ? body : [body];
-  return (
-    <article className="front-matter">
-      <p className="eyebrow">{EBOOK.title}</p>
-      <h1>{title}</h1>
-      {lines.map((line) => (
-        <p key={line}>{line}</p>
-      ))}
-    </article>
-  );
-}
-
 function SheetBody({ page }) {
   const sheet = getSheet(page);
   const readerUi = UI.reader || {};
-  if (sheet.type === "cover") return <EbookCover />;
-  if (sheet.type === "toc") return <TableOfContents />;
-  if (sheet.type === "text") return <FrontMatter title={sheet.title} body={sheet.body} />;
   if (sheet.type === "game") return <GameDetail game={sheet.game} />;
   return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
 }
@@ -57,10 +39,9 @@ export default function EbookReader({ page }) {
   const readerUi = UI.reader || {};
 
   const go = (next) => navigate(`/page/${clampPage(next)}`);
-  const coverOnly = twoPage && isCoverPage(current);
-  const step = twoPage && !coverOnly ? 2 : 1;
-  const canPrev = current > 1;
-  const canNext = (twoPage && !coverOnly ? visible[visible.length - 1] : current) < LAST_PAGE;
+  const step = twoPage ? 2 : 1;
+  const canPrev = current > GAME_START_PAGE;
+  const canNext = (twoPage ? visible[visible.length - 1] : current) < LAST_PAGE;
 
   useEffect(() => {
     const onKey = (event) => {
@@ -84,7 +65,7 @@ export default function EbookReader({ page }) {
     };
   }, [focused]);
 
-  const spreadClass = coverOnly ? "book-spread cover-only" : visible.length === 2 ? "book-spread" : "book-spread single";
+  const spreadClass = visible.length === 2 ? "book-spread" : "book-spread single";
 
   const openFocus = (event) => {
     if (focused) return;
