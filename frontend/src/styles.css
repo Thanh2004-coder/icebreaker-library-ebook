@@ -452,9 +452,9 @@ legend {
 }
 
 .design-sheet-page {
-  width: min(100%, 88%);
-  max-width: 88%;
-  margin-inline: auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .design-sheet-image {
