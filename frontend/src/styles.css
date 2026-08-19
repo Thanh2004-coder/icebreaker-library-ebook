@@ -263,15 +263,10 @@ legend {
 
 .book-spread {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 520px);
   max-width: 1080px;
   margin: 0 auto;
   filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
-}
-
-.book-spread.single,
-.book-spread.cover-only {
-  grid-template-columns: minmax(0, 520px);
   justify-content: center;
 }
 
