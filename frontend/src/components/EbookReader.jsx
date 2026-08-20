@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FitPageStage from "./book/FitPageStage.jsx";
+import GamePageStage from "./book/GamePageStage.jsx";
 import { SheetBody, pageClass, pageStyle } from "./book/pageHelpers.jsx";
 import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
+
+/** Design sheets use the original FitPageStage UI; game/web pages use the large viewer. */
+const DESIGN_PAGE_LAST = 4;
 
 function isInteractive(target) {
   return Boolean(target.closest("a, button, input, textarea, select, label"));
@@ -13,6 +17,7 @@ export default function EbookReader({ page }) {
   const current = clampPage(page);
   const [focused, setFocused] = useState(false);
   const readerUi = UI.reader || {};
+  const useDesignLayout = current <= DESIGN_PAGE_LAST;
 
   const step = 1;
   const canPrev = current > FIRST_PAGE;
@@ -66,45 +71,85 @@ export default function EbookReader({ page }) {
 
   const ariaLabel = resolveCatalogText(readerUi.ariaLabel || "Ebook {title}");
 
-  return (
-    <section className="ebook-reader" aria-label={ariaLabel}>
-      {focused ? (
-        <div className="ebook-focus" onClick={() => setFocused(false)}>
-          <button
-            type="button"
-            className="focus-arrow left"
-            disabled={!canPrev}
-            aria-label="Trang trước"
-            onClick={(event) => {
-              event.stopPropagation();
-              requestGo(current - step);
-            }}
-          >
-            {readerUi.prevShort || "←"}
-          </button>
-          <div className="ebook-focus-book">
-            <FitPageStage pageKey={`focus-${current}`} key={`focus-${current}`} className="ebook-stage-focus">
-              {pageLeaf}
-            </FitPageStage>
-          </div>
-          <button
-            type="button"
-            className="focus-arrow right"
-            disabled={!canNext}
-            aria-label="Trang sau"
-            onClick={(event) => {
-              event.stopPropagation();
-              requestGo(current + step);
-            }}
-          >
-            {readerUi.nextShort || "→"}
-          </button>
+  const stage = useDesignLayout ? (
+    focused ? (
+      <div className="ebook-focus" onClick={() => setFocused(false)}>
+        <button
+          type="button"
+          className="focus-arrow left"
+          disabled={!canPrev}
+          aria-label="Trang trước"
+          onClick={(event) => {
+            event.stopPropagation();
+            requestGo(current - step);
+          }}
+        >
+          {readerUi.prevShort || "←"}
+        </button>
+        <div className="ebook-focus-book">
+          <FitPageStage pageKey={`focus-${current}`} key={`focus-${current}`} className="ebook-stage-focus">
+            {pageLeaf}
+          </FitPageStage>
         </div>
-      ) : (
-        <FitPageStage pageKey={current} key={`page-${current}`}>
+        <button
+          type="button"
+          className="focus-arrow right"
+          disabled={!canNext}
+          aria-label="Trang sau"
+          onClick={(event) => {
+            event.stopPropagation();
+            requestGo(current + step);
+          }}
+        >
+          {readerUi.nextShort || "→"}
+        </button>
+      </div>
+    ) : (
+      <FitPageStage pageKey={current} key={`page-${current}`}>
+        {pageLeaf}
+      </FitPageStage>
+    )
+  ) : focused ? (
+    <div className="ebook-focus ebook-focus--game" onClick={() => setFocused(false)}>
+      <button
+        type="button"
+        className="focus-arrow left"
+        disabled={!canPrev}
+        aria-label="Trang trước"
+        onClick={(event) => {
+          event.stopPropagation();
+          requestGo(current - step);
+        }}
+      >
+        {readerUi.prevShort || "←"}
+      </button>
+      <div className="ebook-focus-book">
+        <GamePageStage pageKey={`focus-${current}`} key={`focus-game-${current}`} className="ebook-game-viewer--focus">
           {pageLeaf}
-        </FitPageStage>
-      )}
+        </GamePageStage>
+      </div>
+      <button
+        type="button"
+        className="focus-arrow right"
+        disabled={!canNext}
+        aria-label="Trang sau"
+        onClick={(event) => {
+          event.stopPropagation();
+          requestGo(current + step);
+        }}
+      >
+        {readerUi.nextShort || "→"}
+      </button>
+    </div>
+  ) : (
+    <GamePageStage pageKey={current} key={`game-page-${current}`}>
+      {pageLeaf}
+    </GamePageStage>
+  );
+
+  return (
+    <section className={`ebook-reader${useDesignLayout ? "" : " ebook-reader--game"}`} aria-label={ariaLabel}>
+      {stage}
 
       <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>
         <button type="button" disabled={!canPrev} onClick={() => requestGo(current - step)}>

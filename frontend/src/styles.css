@@ -1223,3 +1223,232 @@ legend {
     height: 120px;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Pages 5+ only: large centered game/web viewer (FitPageStage / pages 1–4    */
+/* are untouched — these selectors never apply outside .ebook-game-viewer).   */
+/* -------------------------------------------------------------------------- */
+
+.ebook-reader--game {
+  min-height: max(480px, calc(100dvh - 260px));
+}
+
+.ebook-game-viewer {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
+  min-height: max(420px, calc(100dvh - 300px));
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.ebook-game-viewer--focus {
+  width: 100%;
+  height: 100%;
+  min-height: min(78dvh, 860px);
+}
+
+.ebook-game-viewer__stage {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame {
+  width: min(960px, 94%);
+  height: min(84vh, calc(100dvh - 270px));
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame .book-spread {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
+}
+
+.ebook-game-viewer__frame .book-page {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  border-radius: 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame .book-page.game-page {
+  padding: 0;
+  width: 100%;
+}
+
+.ebook-game-viewer__frame .book-page.web-page {
+  padding: 0;
+  background: rgba(14, 8, 39, 0.72);
+}
+
+.ebook-game-viewer__frame .game-sheet {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 18px 22px 36px;
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame .web-sheet,
+.ebook-game-viewer__frame .web-sheet-empty {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Readable desktop type inside the large viewer */
+.ebook-game-viewer__frame .book-page.game-page .sheet-page-label {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-title,
+.ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  line-height: 1.25;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .card-desc {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .meta {
+  gap: 6px;
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .tag-row {
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .tag {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .sheet-hero {
+  height: clamp(140px, 22vh, 220px);
+  border-radius: 14px;
+  margin: 0 0 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
+  height: clamp(110px, 16vh, 180px);
+  border-radius: 12px;
+  margin: 0 0 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-grid {
+  gap: 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-panel {
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-sheet section h2,
+.ebook-game-viewer__frame .book-page.game-page .game-panel h2 {
+  font-size: 1.05rem;
+  margin: 10px 0 6px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .how-to-steps {
+  line-height: 1.55;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .how-to-steps li {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-list {
+  gap: 10px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-block h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-rules,
+.ebook-game-viewer__frame .book-page.game-page .prose {
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+
+.ebook-focus--game .ebook-focus-book {
+  width: min(980px, calc(100vw - 120px));
+}
+
+.ebook-focus--game .ebook-game-viewer__frame {
+  width: 100%;
+  height: calc(100dvh - 48px);
+  max-height: calc(100dvh - 48px);
+}
+
+@media (max-width: 899px) {
+  .ebook-game-viewer {
+    min-height: max(360px, calc(100dvh - 280px));
+  }
+
+  .ebook-game-viewer__stage {
+    padding: 4px 4px;
+  }
+
+  .ebook-game-viewer__frame {
+    width: 100%;
+    height: min(78vh, calc(100dvh - 240px));
+    border-radius: 16px;
+  }
+
+  .ebook-game-viewer__frame .game-sheet {
+    padding: 14px 14px 32px;
+  }
+
+  .ebook-game-viewer__frame .book-page.game-page .sheet-hero {
+    height: 120px;
+  }
+
+  .ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
+    height: 96px;
+  }
+
+  .ebook-game-viewer__frame .book-page.game-page .game-title,
+  .ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+    font-size: 1.25rem;
+  }
+}
