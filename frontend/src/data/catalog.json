@@ -235,11 +235,10 @@
       "durationMax": 10,
       "duration": "10 phút",
       "time": "10 phút",
-      "context": "Trong lớp học",
+      "context": "Trong lớp học / Ngoài trời",
       "contexts": [
         "Trong lớp học",
-        "Ngoài trời",
-        "Campus"
+        "Ngoài trời"
       ],
       "purpose": "Phá băng, Tăng tương tác, Khởi động trước khi họp nhóm, Tạo tiếng cười",
       "purposes": [
@@ -254,64 +253,71 @@
         "Khởi động trước khi họp nhóm",
         "Tạo tiếng cười"
       ],
-      "description": "Khoanh đúng dãy số 1-80 theo lượt để đội hoàn thành nhanh nhất.",
+      "searchKeywords": [
+        "Number Hunt",
+        "Tìm số đồng đội",
+        "khoanh số",
+        "1-80",
+        "relay"
+      ],
+      "description": "Đội thi khoanh đúng dãy số 1–80 trên tờ giấy lớn; tùy số người mà chơi phá kỷ lục hoặc chạy tiếp sức.",
       "coverImage": "/images/games/1.svg",
       "heroImage": "/images/games/1.svg",
       "instructionImage": "/images/games/instructions/1.svg",
       "howToPlay": [],
       "playerModes": [
         {
-          "key": "2",
-          "label": "2 người",
+          "key": "1-5",
+          "label": "Nhóm 1–5 người",
           "instructions": [
-            "Mỗi người nhận 1 tờ A4 in số 1–40 lộn xộn và 1 bút.",
-            "Hai người cùng bắt đầu: lần lượt khoanh đúng thứ tự 1 → 40 trên tờ của mình.",
-            "Ai hoàn thành trước hoặc ít lỗi hơn trong cùng thời gian thắng.",
-            "Có thể chơi nhiều hiệp và đổi tờ số để tăng độ khó."
+            "Trò chơi mang tính chất “Phá kỷ lục”.",
+            "Cả nhóm cùng xếp hàng 1 người, lần lượt chạy lên khoanh số.",
+            "Hoặc mỗi người dùng một tờ A4 in sẵn số và thi xem ai khoanh xong 1–80 nhanh nhất."
           ],
           "rules": [
-            "Mỗi lượt chỉ khoanh đúng 1 số theo thứ tự.",
-            "Khoanh sai phải sửa trước khi chuyển lượt."
+            "Khoanh đúng thứ tự số trên tờ.",
+            "Có thể chơi nhiều hiệp để phá kỷ lục thời gian."
           ]
         },
         {
-          "key": "3-4",
-          "label": "3–4 người",
+          "key": "6-10",
+          "label": "Nhóm 6–10 người",
           "instructions": [
-            "Chia thành 2 cặp (nếu 4 người) hoặc 1 quản trò + 3 thi đấu (nếu 3 người).",
-            "Mỗi người/cặp nhận 1 tờ A4 số 1–60 lộn xộn; luân phiên khoanh đúng thứ tự.",
-            "Nếu 4 người: chơi relay — mỗi lượt 1 người khoanh 1 số rồi trao bút cho người kế tiếp trên cùng tờ đội.",
-            "Đội hoàn thành trước hoặc đúng nhiều số hơn trong 10 phút thắng."
+            "Chia thành 2 đội, mỗi đội 3–5 người.",
+            "Mỗi đội nhận 1 tờ A0 dán trên tường hoặc sàn nhà, cách vạch xuất phát 3–5 mét.",
+            "Thành viên xếp hàng dọc.",
+            "Mỗi người chạy lên khoanh đúng 1 số, chạy về đưa bút cho người tiếp theo."
           ],
           "rules": [
-            "Không chỉ tay hoặc gọi số hộ người đang cầm bút.",
-            "Chỉ người cầm bút được khoanh trong lượt của mình."
+            "Mỗi lượt chỉ khoanh đúng 1 số.",
+            "Chỉ người cầm bút được khoanh trong lượt của mình.",
+            "Đội hoàn thành dãy số đúng trước thắng."
           ]
         },
         {
-          "key": "5+",
-          "label": "5+ người",
+          "key": "10+",
+          "label": "Nhóm 10+ người",
           "instructions": [
-            "Quản trò phát cho mỗi đội 1 tờ A0/A1 có số 1–80 lộn xộn và 1 bút dạ.",
-            "Nhóm 5–10 người: chia 2 đội, giấy đặt cách vạch 3–5 m; mỗi người khoanh đúng 1 số rồi trao bút cho người tiếp theo.",
-            "Nhóm 10+ người: chia 3–4 đội, tăng khó bằng cự ly 10–15 m hoặc thêm nhảy lò cò/vượt chướng ngại trước khi khoanh.",
-            "Đội hoàn thành dãy số đúng thứ tự trước thắng."
+            "Chia thành 3–4 đội.",
+            "Tăng độ khó bằng cách đặt tờ giấy xa hơn 10–15 mét.",
+            "Hoặc yêu cầu thành viên nhảy lò cò / vượt chướng ngại vật trước khi đến chỗ khoanh số."
           ],
           "rules": [
-            "Mỗi lượt chỉ được khoanh đúng 1 số.",
-            "Khoanh sai phải quay lại sửa trước khi đổi lượt.",
+            "Mỗi lượt chỉ khoanh đúng 1 số rồi trao bút cho người tiếp theo.",
             "Di chuyển an toàn, không va chạm hoặc chắn đường đội khác."
           ]
         }
       ],
       "preparation": [
-        "Tờ A4 in số 1–40 hoặc 1–60 (cho nhóm nhỏ), tờ A0/A1 in số 1–80 (cho nhóm lớn), bút lông hoặc bút dạ."
+        "Tờ giấy lớn (A0 hoặc A1) in sẵn các số từ 1–80 lộn xộn với nhiều kích cỡ.",
+        "Bút lông/bút dạ, mỗi đội 1 chiếc.",
+        "Có thể chuẩn bị thêm tờ A4 in sẵn số cho nhóm 1–5 người chơi kiểu phá kỷ lục cá nhân."
       ],
       "preparationRequired": true,
       "preparationTime": 10,
       "rules": [
-        "Mỗi lượt chỉ được khoanh đúng 1 số.",
-        "Khoanh sai phải quay lại sửa trước khi đổi lượt.",
+        "Mỗi lượt chỉ được khoanh đúng 1 số (khi chơi tiếp sức).",
+        "Khoanh sai phải sửa trước khi đổi lượt.",
         "Di chuyển an toàn, không va chạm hoặc chắn đường đội khác."
       ]
     },
