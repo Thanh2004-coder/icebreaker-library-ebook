@@ -1,11 +1,18 @@
 import DesignSheet from "../DesignSheet.jsx";
 import GameDetail from "../game/GameDetail.jsx";
+import WebSheet from "../WebSheet.jsx";
 import { getGamePageBackground, getSheet, UI } from "../../data/catalog.js";
+
+function pageKind(type) {
+  if (type === "design") return "design-page";
+  if (type === "game") return "game-page";
+  if (type === "web") return "web-page";
+  return "empty-page";
+}
 
 export function pageClass(pageNumber) {
   const sheet = getSheet(pageNumber);
-  const kind = sheet.type === "design" ? "design-page" : sheet.type === "game" ? "game-page" : "empty-page";
-  return `book-page solo ${kind}`;
+  return `book-page solo ${pageKind(sheet.type)}`;
 }
 
 export function pageStyle(pageNumber) {
@@ -26,5 +33,6 @@ export function SheetBody({ page }) {
   const readerUi = UI.reader || {};
   if (sheet.type === "design") return <DesignSheet sheet={sheet.sheet} />;
   if (sheet.type === "game") return <GameDetail game={sheet.game} />;
+  if (sheet.type === "web") return <WebSheet web={sheet.web} />;
   return <p className="empty">{readerUi.emptyPage || "Trang trống."}</p>;
 }

@@ -805,6 +805,123 @@ legend {
   border-color: #f08ad0;
 }
 
+/* Desktop/web: compact centered game page (~50vw), leave mobile alone */
+@media (min-width: 900px) {
+  .book-spread:has(.book-page.game-page) {
+    width: min(50vw, 720px);
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .book-page.game-page {
+    width: 100%;
+    min-height: 0;
+    max-height: min(78vh, 820px);
+    padding: 14px 16px 32px;
+    overflow-y: auto;
+  }
+
+  .book-page.game-page .sheet-page-label {
+    margin: 0 0 4px;
+    font-size: 0.88rem;
+  }
+
+  .book-page.game-page .game-title,
+  .book-page.game-page .game-sheet h1 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    line-height: 1.25;
+  }
+
+  .book-page.game-page .card-desc {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .book-page.game-page .meta {
+    gap: 4px;
+    margin: 0 0 8px;
+    font-size: 0.84rem;
+  }
+
+  .book-page.game-page .tag-row {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .book-page.game-page .tag {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+  }
+
+  .book-page.game-page .sheet-hero {
+    height: 110px;
+    border-radius: 12px;
+    margin: 0 0 8px;
+  }
+
+  .book-page.game-page .sheet-instruction {
+    height: 90px;
+    border-radius: 10px;
+    margin: 0 0 8px;
+  }
+
+  .book-page.game-page .game-grid {
+    gap: 8px;
+  }
+
+  .book-page.game-page .game-panel {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .book-page.game-page .game-sheet section h2,
+  .book-page.game-page .game-panel h2 {
+    font-size: 0.95rem;
+    margin: 8px 0 4px;
+  }
+
+  .book-page.game-page .how-to-steps {
+    line-height: 1.45;
+  }
+
+  .book-page.game-page .how-to-steps li {
+    margin: 0 0 4px;
+    font-size: 0.86rem;
+  }
+
+  .book-page.game-page .player-mode-list {
+    gap: 8px;
+  }
+
+  .book-page.game-page .player-mode-block h3 {
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+  }
+
+  .book-page.game-page .player-mode-rules {
+    line-height: 1.45;
+    font-size: 0.84rem;
+  }
+
+  .book-page.game-page .prose {
+    line-height: 1.45;
+    font-size: 0.86rem;
+  }
+
+  .ebook-focus .book-spread:has(.book-page.game-page) {
+    width: min(50vw, 720px);
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .ebook-focus .book-page.game-page {
+    min-height: 0;
+    max-height: calc(100vh - 48px);
+  }
+}
+
 @media (max-width: 899px) {
   .book-spread,
   .book-spread.single,
