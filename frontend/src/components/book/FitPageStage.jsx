@@ -46,11 +46,11 @@ export function fitPageBox(availW, availH) {
 
 /**
  * Stable ebook page stage:
- * 1) Layout content at BASE_WIDTH × BASE_HEIGHT (fixed ebook aspect)
- * 2) Scale content down inside the base box if needed
- * 3) Uniformly scale the base box into the available stage
+ * 1) Layout at fixed BASE_WIDTH × BASE_HEIGHT (ebook aspect)
+ * 2) Uniformly scale that box into the available stage (outerScale only)
  *
- * Frame size is never driven by content height.
+ * Tall game content scrolls inside the page — never shrinks the page
+ * frame (that caused letterboxing / empty margins around games).
  */
 export default function FitPageStage({ children, pageKey, className = "" }) {
   const stageRef = useRef(null);
@@ -58,14 +58,13 @@ export default function FitPageStage({ children, pageKey, className = "" }) {
   const rafRef = useRef(0);
   const [box, setBox] = useState(() => {
     if (typeof window === "undefined") {
-      return { width: 0, height: 0, outerScale: 1, innerScale: 1 };
+      return { width: 0, height: 0, scale: 1 };
     }
     const seed = fitPageBox(Math.max(window.innerWidth - 64, 280), Math.max(window.innerHeight * 0.55, 320));
     return {
       width: seed.width,
       height: seed.height,
-      outerScale: seed.width / BASE_WIDTH,
-      innerScale: 1,
+      scale: seed.width / BASE_WIDTH,
     };
   });
 
@@ -76,33 +75,26 @@ export default function FitPageStage({ children, pageKey, className = "" }) {
 
     const { availW, availH } = readStageSize(stage);
     const fitted = fitPageBox(availW, availH);
-    const outerScale = fitted.width / BASE_WIDTH;
+    const scale = fitted.width / BASE_WIDTH;
 
-    // Measure at the comfortable base width. Do NOT touch transform here —
-    // mutating it fights React and can leave a stale scale(1) when setState
-    // bails out as unchanged. scrollHeight ignores CSS transforms.
+    // Keep the layout box fixed. Do NOT mutate transform here — that can
+    // fight React and leave a stale scale when setState bails out.
     scaleEl.style.width = `${BASE_WIDTH}px`;
+    scaleEl.style.height = `${BASE_HEIGHT}px`;
     scaleEl.style.minHeight = `${BASE_HEIGHT}px`;
-
-    const contentH = Math.max(scaleEl.scrollHeight, 1);
-    const innerScale = Math.min(1, BASE_HEIGHT / contentH);
-    const combined = outerScale * innerScale;
 
     setBox((prev) => {
       if (
         prev.width === fitted.width &&
         prev.height === fitted.height &&
-        Math.abs(prev.outerScale - outerScale) < 0.001 &&
-        Math.abs(prev.innerScale - innerScale) < 0.001
+        Math.abs(prev.scale - scale) < 0.001
       ) {
         return prev;
       }
       return {
         width: fitted.width,
         height: fitted.height,
-        outerScale,
-        innerScale,
-        combined,
+        scale,
       };
     });
   }, []);
@@ -152,7 +144,6 @@ export default function FitPageStage({ children, pageKey, className = "" }) {
   }, [scheduleRecalculate, pageKey]);
 
   const ready = box.width > 0 && box.height > 0;
-  const combined = box.combined ?? box.outerScale * (box.innerScale || 1);
 
   return (
     <div ref={stageRef} className={`ebook-stage ${className}`.trim()}>
@@ -175,8 +166,9 @@ export default function FitPageStage({ children, pageKey, className = "" }) {
               ready
                 ? {
                     width: BASE_WIDTH,
+                    height: BASE_HEIGHT,
                     minHeight: BASE_HEIGHT,
-                    transform: `scale(${combined})`,
+                    transform: `scale(${box.scale})`,
                     transformOrigin: "top left",
                   }
                 : undefined
