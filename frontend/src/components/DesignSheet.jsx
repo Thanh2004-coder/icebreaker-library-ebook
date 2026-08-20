@@ -7,7 +7,8 @@ export default function DesignSheet({ sheet }) {
         src={sheet.image}
         alt={sheet.alt || `Trang ${sheet.page}`}
         className="design-sheet-image"
-        loading="lazy"
+        loading="eager"
+        decoding="async"
       />
     </article>
   );

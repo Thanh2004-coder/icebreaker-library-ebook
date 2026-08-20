@@ -45,9 +45,9 @@ export default function HomePage() {
     .replace("{count}", String(GAMES.length));
 
   return (
-    <div className="page">
+    <div className="page page-home">
       <Header />
-      <main className="layout">
+      <main className="layout layout-ebook">
         <SearchBar value={searchInput} onChange={setSearchInput} />
         <GameFilters filters={FILTERS} selected={selected} onChange={setSelected} />
         {querying ? (

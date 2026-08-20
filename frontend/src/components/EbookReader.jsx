@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FitPageStage from "./book/FitPageStage.jsx";
 import { SheetBody, pageClass, pageStyle } from "./book/pageHelpers.jsx";
 import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
 
@@ -54,7 +55,7 @@ export default function EbookReader({ page }) {
     setFocused(true);
   };
 
-  const spread = (
+  const pageLeaf = (
     <div className="book-spread single" onClick={(event) => event.stopPropagation()}>
       <div className={pageClass(current)} style={pageStyle(current)} onClick={openFocus}>
         <SheetBody page={current} />
@@ -81,7 +82,11 @@ export default function EbookReader({ page }) {
           >
             {readerUi.prevShort || "←"}
           </button>
-          <div className="ebook-focus-book">{spread}</div>
+          <div className="ebook-focus-book">
+            <FitPageStage pageKey={`focus-${current}`} className="ebook-stage-focus">
+              {pageLeaf}
+            </FitPageStage>
+          </div>
           <button
             type="button"
             className="focus-arrow right"
@@ -96,7 +101,7 @@ export default function EbookReader({ page }) {
           </button>
         </div>
       ) : (
-        spread
+        <FitPageStage pageKey={current}>{pageLeaf}</FitPageStage>
       )}
 
       <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>

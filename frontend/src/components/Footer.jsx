@@ -31,7 +31,7 @@ export default function Footer() {
             <div className="qr-frame">
               <QRCodeSVG
                 value={formUrl}
-                size={132}
+                size={72}
                 bgColor="#fffdf8"
                 fgColor="#1b4d4a"
                 level="M"

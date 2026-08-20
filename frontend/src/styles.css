@@ -47,12 +47,23 @@ textarea {
 
 .page {
   flex: 1;
+  min-height: 0;
+}
+
+.page-home {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .app-shell {
-  min-height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .hero {
@@ -98,6 +109,16 @@ textarea {
   margin: 0 auto;
   padding: 28px 20px 48px;
   width: 100%;
+}
+
+.layout-ebook {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 16px;
+  max-width: min(1100px, 100%);
 }
 
 .search-wrap label {
@@ -246,16 +267,49 @@ legend {
 
 .ebook-reader {
   margin-top: 8px;
-  padding: 18px 16px 22px;
+  padding: 12px 12px 10px;
   border-radius: 20px;
   border: 1px solid rgba(109, 70, 255, 0.45);
   background: rgba(9, 4, 26, 0.36);
   box-shadow: var(--shadow);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .ebook-reader-standalone {
   max-width: none;
   margin: 0 auto;
+}
+
+.ebook-stage {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ebook-stage-focus {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.ebook-fit-frame {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ebook-fit-content {
+  will-change: transform;
 }
 
 .book-spread {
@@ -271,26 +325,25 @@ legend {
   background: rgba(14, 8, 39, 0.72);
   border: 1px solid var(--line);
   width: 100%;
-  min-height: 640px;
-  max-height: 80vh;
-  overflow: auto;
-  padding: 28px 28px 48px;
+  min-height: 0;
+  max-height: none;
+  overflow: hidden;
+  padding: 20px 20px 36px;
   cursor: zoom-in;
 }
 
 .book-page.design-page {
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   min-height: 0;
   background: transparent;
   cursor: zoom-in;
+  border: 0;
 }
 
 .book-page.web-page {
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   min-height: 0;
   background: transparent;
 }
@@ -299,7 +352,7 @@ legend {
 .web-sheet-empty {
   display: block;
   width: 100%;
-  min-height: 100%;
+  min-height: 0;
 }
 
 .web-sheet-title {
@@ -311,7 +364,7 @@ legend {
 .web-sheet-frame {
   display: block;
   width: 100%;
-  min-height: min(70vh, 640px);
+  min-height: min(50vh, 420px);
   border: 0;
   background: transparent;
 }
@@ -326,6 +379,7 @@ legend {
 .design-sheet {
   display: block;
   width: 100%;
+  line-height: 0;
 }
 
 .design-sheet-page {
@@ -339,6 +393,8 @@ legend {
   width: 100%;
   height: auto;
   max-width: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .game-sheet {
@@ -478,7 +534,8 @@ legend {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 10px;
+  flex-shrink: 0;
 }
 
 .reader-nav p {
@@ -516,11 +573,16 @@ legend {
   gap: 0;
   padding: 24px 72px;
   background: rgba(8, 3, 26, 0.82);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .ebook-focus-book {
   width: min(1180px, 100%);
+  height: calc(100dvh - 48px);
+  max-height: calc(100dvh - 48px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .ebook-focus .book-spread {
@@ -529,32 +591,19 @@ legend {
 }
 
 .ebook-focus .book-page {
-  min-height: min(78vh, 860px);
-  max-height: calc(100vh - 48px);
+  min-height: 0;
+  max-height: none;
   cursor: default;
+  overflow: hidden;
 }
 
 .ebook-focus .book-page.design-page {
-  overflow-y: auto;
-  min-height: 0;
-  height: auto;
-}
-
-.ebook-focus .book-spread.single .book-page.design-page,
-.ebook-focus .book-spread.cover-only .book-page.design-page {
-  min-height: 0;
-  height: auto;
-}
-
-.ebook-focus .design-sheet,
-.ebook-focus .design-sheet-page {
-  height: auto;
-  min-height: 0;
+  overflow: hidden;
 }
 
 .ebook-focus .book-spread.single .book-page,
 .ebook-focus .book-spread.cover-only .book-page {
-  min-height: min(78vh, 860px);
+  min-height: 0;
 }
 
 .focus-arrow {
@@ -699,9 +748,10 @@ legend {
 
 .site-footer {
   margin-top: auto;
+  flex-shrink: 0;
   background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
   color: #f8f3ea;
-  padding: 32px 20px 28px;
+  padding: 16px 20px 14px;
 }
 
 .footer-inner {
@@ -709,7 +759,8 @@ legend {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.4fr 0.8fr;
-  gap: 32px;
+  gap: 16px;
+  align-items: start;
 }
 
 .footer-kicker {
@@ -748,22 +799,22 @@ legend {
 .footer-qr {
   background: rgba(255, 253, 248, 0.05);
   border: 1px solid rgba(255, 215, 107, 0.36);
-  border-radius: 20px;
-  padding: 18px;
+  border-radius: 14px;
+  padding: 10px 12px;
 }
 
 .footer-hint {
-  margin: 0 0 12px;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: rgba(248, 243, 234, 0.86);
 }
 
 .qr-frame {
   display: inline-flex;
   background: #f8f4ff;
-  border-radius: 14px;
-  padding: 8px;
+  border-radius: 10px;
+  padding: 4px;
 }
 
 .footer-form-link {
@@ -805,124 +856,157 @@ legend {
   border-color: #f08ad0;
 }
 
-/* Desktop/web: compact centered game page (~50vw), leave mobile alone */
-@media (min-width: 900px) {
-  .book-spread:has(.book-page.game-page) {
-    width: min(50vw, 720px);
-    max-width: 720px;
-    margin-inline: auto;
-  }
+/* Compact game content so FitPageStage can scale a full page into the stage */
+.book-page.game-page {
+  padding: 12px 14px 28px;
+}
 
-  .book-page.game-page {
-    width: 100%;
-    min-height: 0;
-    max-height: min(78vh, 820px);
-    padding: 14px 16px 32px;
-    overflow-y: auto;
-  }
+.book-page.game-page .sheet-page-label {
+  margin: 0 0 4px;
+  font-size: 0.88rem;
+}
 
-  .book-page.game-page .sheet-page-label {
-    margin: 0 0 4px;
-    font-size: 0.88rem;
-  }
+.book-page.game-page .game-title,
+.book-page.game-page .game-sheet h1 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+  line-height: 1.25;
+}
 
-  .book-page.game-page .game-title,
-  .book-page.game-page .game-sheet h1 {
-    margin: 0 0 8px;
-    font-size: 1.15rem;
-    line-height: 1.25;
-  }
+.book-page.game-page .card-desc {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
 
-  .book-page.game-page .card-desc {
-    margin: 0 0 8px;
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
+.book-page.game-page .meta {
+  gap: 4px;
+  margin: 0 0 8px;
+  font-size: 0.84rem;
+}
 
-  .book-page.game-page .meta {
-    gap: 4px;
-    margin: 0 0 8px;
-    font-size: 0.84rem;
-  }
+.book-page.game-page .tag-row {
+  gap: 6px;
+  margin-bottom: 10px;
+}
 
-  .book-page.game-page .tag-row {
-    gap: 6px;
-    margin-bottom: 10px;
-  }
+.book-page.game-page .tag {
+  padding: 4px 8px;
+  font-size: 0.74rem;
+}
 
-  .book-page.game-page .tag {
-    padding: 4px 8px;
-    font-size: 0.74rem;
-  }
+.book-page.game-page .sheet-hero {
+  height: 100px;
+  border-radius: 12px;
+  margin: 0 0 8px;
+}
 
-  .book-page.game-page .sheet-hero {
-    height: 110px;
-    border-radius: 12px;
-    margin: 0 0 8px;
-  }
+.book-page.game-page .sheet-instruction {
+  height: 80px;
+  border-radius: 10px;
+  margin: 0 0 8px;
+}
 
-  .book-page.game-page .sheet-instruction {
-    height: 90px;
-    border-radius: 10px;
-    margin: 0 0 8px;
-  }
+.book-page.game-page .game-grid {
+  gap: 8px;
+}
 
-  .book-page.game-page .game-grid {
-    gap: 8px;
-  }
+.book-page.game-page .game-panel {
+  padding: 8px 10px;
+  border-radius: 12px;
+}
 
-  .book-page.game-page .game-panel {
-    padding: 8px 10px;
-    border-radius: 12px;
-  }
+.book-page.game-page .game-sheet section h2,
+.book-page.game-page .game-panel h2 {
+  font-size: 0.95rem;
+  margin: 8px 0 4px;
+}
 
-  .book-page.game-page .game-sheet section h2,
-  .book-page.game-page .game-panel h2 {
-    font-size: 0.95rem;
-    margin: 8px 0 4px;
-  }
+.book-page.game-page .how-to-steps {
+  line-height: 1.4;
+}
 
-  .book-page.game-page .how-to-steps {
-    line-height: 1.45;
-  }
+.book-page.game-page .how-to-steps li {
+  margin: 0 0 4px;
+  font-size: 0.84rem;
+}
 
-  .book-page.game-page .how-to-steps li {
-    margin: 0 0 4px;
-    font-size: 0.86rem;
-  }
+.book-page.game-page .player-mode-list {
+  gap: 8px;
+}
 
-  .book-page.game-page .player-mode-list {
-    gap: 8px;
-  }
+.book-page.game-page .player-mode-block h3 {
+  margin: 0 0 4px;
+  font-size: 0.88rem;
+}
 
-  .book-page.game-page .player-mode-block h3 {
-    margin: 0 0 4px;
-    font-size: 0.9rem;
-  }
+.book-page.game-page .player-mode-rules,
+.book-page.game-page .prose {
+  line-height: 1.4;
+  font-size: 0.84rem;
+}
 
-  .book-page.game-page .player-mode-rules {
-    line-height: 1.45;
-    font-size: 0.84rem;
-  }
+.layout-ebook .result-bar,
+.layout-ebook .search-wrap,
+.layout-ebook .filters {
+  flex-shrink: 0;
+}
 
-  .book-page.game-page .prose {
-    line-height: 1.45;
-    font-size: 0.86rem;
-  }
+.layout-ebook .result-bar {
+  margin: 10px 0 8px;
+}
 
-  .ebook-focus .book-spread:has(.book-page.game-page) {
-    width: min(50vw, 720px);
-    max-width: 720px;
-    margin-inline: auto;
-  }
+.layout-ebook .search-results {
+  flex-shrink: 1;
+  min-height: 0;
+  max-height: 26vh;
+  overflow: auto;
+  margin-bottom: 8px;
+}
 
-  .ebook-focus .book-page.game-page {
-    min-height: 0;
-    max-height: calc(100vh - 48px);
-  }
+.page-home .hero {
+  padding: 14px 16px 12px;
+  flex-shrink: 0;
+}
+
+.page-home .brand-title {
+  font-size: clamp(1.35rem, 3.2vw, 2.1rem);
+}
+
+.page-home .tagline {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  max-width: 52rem;
+}
+
+.page-home .eyebrow-light {
+  margin: 0 0 4px;
+  font-size: 0.68rem;
+}
+
+.page-home .filters {
+  margin-top: 10px;
+  gap: 8px;
+}
+
+.page-home fieldset {
+  padding: 8px 10px 10px;
 }
 
 @media (max-width: 899px) {
+  .page-home {
+    height: 100%;
+  }
+
+  .page-home .tagline {
+    display: none;
+  }
+
+  .layout-ebook {
+    padding: 12px 12px 10px;
+  }
+
   .book-spread,
   .book-spread.single,
   .book-spread.cover-only {
@@ -936,45 +1020,45 @@ legend {
   .book-page.solo {
     border-radius: 18px;
     max-height: none;
-    min-height: 520px;
-  }
-
-  .book-page.design-page {
-    max-height: min(75vh, calc(100dvh - 280px));
     min-height: 0;
-    overflow-y: auto;
   }
 
+  .book-page.design-page,
   .book-page.web-page {
-    max-height: min(75vh, calc(100dvh - 280px));
+    max-height: none;
     min-height: 0;
-    overflow-y: auto;
+    overflow: hidden;
   }
 
   .ebook-reader {
     background: rgba(9, 4, 26, 0.36);
+    padding: 8px 8px 6px;
   }
 
   .ebook-focus .book-page,
   .ebook-focus .book-page.left,
   .ebook-focus .book-page.right,
   .ebook-focus .book-page.solo {
-    max-height: calc(100vh - 32px);
-    min-height: 70vh;
+    max-height: none;
+    min-height: 0;
   }
 
   .ebook-focus .book-page.design-page {
     min-height: 0;
     height: auto;
-    max-height: calc(100dvh - 32px);
-  }
-
-  .ebook-focus:has(.book-page.design-page) {
-    align-items: flex-start;
+    max-height: none;
   }
 
   .result-card {
     flex-direction: column;
+  }
+
+  .book-page.game-page .sheet-hero {
+    height: 88px;
+  }
+
+  .book-page.game-page .sheet-instruction {
+    height: 72px;
   }
 }
 
@@ -1003,8 +1087,13 @@ legend {
     padding: 16px 52px;
   }
 
+  .ebook-focus-book {
+    height: calc(100dvh - 32px);
+    max-height: calc(100dvh - 32px);
+  }
+
   .ebook-focus .book-page {
-    min-height: 70vh;
+    min-height: 0;
   }
 
   .ebook-focus .book-page.design-page {
