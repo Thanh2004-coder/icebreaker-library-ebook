@@ -83,7 +83,7 @@ export default function EbookReader({ page }) {
             {readerUi.prevShort || "←"}
           </button>
           <div className="ebook-focus-book">
-            <FitPageStage pageKey={`focus-${current}`} className="ebook-stage-focus">
+            <FitPageStage pageKey={`focus-${current}`} key={`focus-${current}`} className="ebook-stage-focus">
               {pageLeaf}
             </FitPageStage>
           </div>
@@ -101,7 +101,9 @@ export default function EbookReader({ page }) {
           </button>
         </div>
       ) : (
-        <FitPageStage pageKey={current}>{pageLeaf}</FitPageStage>
+        <FitPageStage pageKey={current} key={`page-${current}`}>
+          {pageLeaf}
+        </FitPageStage>
       )}
 
       <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>

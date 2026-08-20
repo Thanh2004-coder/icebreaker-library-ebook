@@ -1,134 +1,189 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
-function measureAvailable(stage) {
-  const rect = stage.getBoundingClientRect();
-  const cssW = stage.clientWidth;
-  const cssH = stage.clientHeight;
-  const fallbackW = Math.max(window.innerWidth - 48, 280);
-  const fallbackH = Math.max(Math.floor(window.innerHeight * 0.55), 320);
+/** Matches design-page artwork (~627×1002). width / height */
+export const PAGE_ASPECT = 5 / 8;
+/** Comfortable layout width — content is measured here, then the whole page scales. */
+const BASE_WIDTH = 560;
+const BASE_HEIGHT = Math.round(BASE_WIDTH / PAGE_ASPECT);
+const MIN_STAGE = 160;
 
-  const availW = Math.max(cssW, rect.width || 0, 1);
-  const availH = Math.max(cssH, rect.height || 0, 1);
+function readStageSize(stage) {
+  const rect = stage.getBoundingClientRect();
+  let availW = Math.max(stage.clientWidth || 0, rect.width || 0);
+  let availH = Math.max(stage.clientHeight || 0, rect.height || 0);
+
+  if (availW < MIN_STAGE) {
+    availW = Math.max(window.innerWidth - 64, 280);
+  }
+  if (availH < MIN_STAGE) {
+    availH = Math.max(Math.floor(window.innerHeight * 0.55), 320);
+  }
+
+  return { availW, availH };
+}
+
+/**
+ * Fit a fixed-aspect base page into the stage.
+ * Content never changes the aspect — only uniform scale does.
+ */
+export function fitPageBox(availW, availH) {
+  const maxW = Math.min(availW, BASE_WIDTH, window.innerWidth);
+  const maxH = Math.min(availH, window.innerHeight);
+
+  let width = maxW;
+  let height = width / PAGE_ASPECT;
+
+  if (height > maxH) {
+    height = maxH;
+    width = height * PAGE_ASPECT;
+  }
 
   return {
-    availW: availW >= 160 ? availW : fallbackW,
-    availH: availH >= 120 ? availH : fallbackH,
+    width: Math.max(1, Math.floor(width)),
+    height: Math.max(1, Math.floor(height)),
   };
 }
 
 /**
- * Scales one ebook page into the stage using both available width and height.
- * Never collapses to 0 — falls back to viewport-based size if the flex stage
- * has not resolved height yet.
+ * Stable ebook page stage:
+ * 1) Layout content at BASE_WIDTH × BASE_HEIGHT (fixed ebook aspect)
+ * 2) Scale content down inside the base box if needed
+ * 3) Uniformly scale the base box into the available stage
+ *
+ * Frame size is never driven by content height.
  */
 export default function FitPageStage({ children, pageKey, className = "" }) {
   const stageRef = useRef(null);
-  const contentRef = useRef(null);
-  const [fit, setFit] = useState({
-    scale: 1,
-    frameW: null,
-    frameH: null,
-    contentW: null,
+  const scaleRef = useRef(null);
+  const rafRef = useRef(0);
+  const [box, setBox] = useState(() => {
+    if (typeof window === "undefined") {
+      return { width: 0, height: 0, outerScale: 1, innerScale: 1 };
+    }
+    const seed = fitPageBox(Math.max(window.innerWidth - 64, 280), Math.max(window.innerHeight * 0.55, 320));
+    return {
+      width: seed.width,
+      height: seed.height,
+      outerScale: seed.width / BASE_WIDTH,
+      innerScale: 1,
+    };
   });
 
   const recalculate = useCallback(() => {
     const stage = stageRef.current;
-    const content = contentRef.current;
-    if (!stage || !content) return;
+    const scaleEl = scaleRef.current;
+    if (!stage || !scaleEl) return;
 
-    let { availW, availH } = measureAvailable(stage);
+    const { availW, availH } = readStageSize(stage);
+    const fitted = fitPageBox(availW, availH);
+    const outerScale = fitted.width / BASE_WIDTH;
 
-    // If flex still collapsed the stage, force a usable viewport box.
-    if (availH < 120) {
-      availH = Math.max(Math.floor(window.innerHeight * 0.55), 320);
-      stage.style.minHeight = `${availH}px`;
-    }
-    if (availW < 160) {
-      availW = Math.max(window.innerWidth - 48, 280);
-    }
+    // Measure at the comfortable base width. Do NOT touch transform here —
+    // mutating it fights React and can leave a stale scale(1) when setState
+    // bails out as unchanged. scrollHeight ignores CSS transforms.
+    scaleEl.style.width = `${BASE_WIDTH}px`;
+    scaleEl.style.minHeight = `${BASE_HEIGHT}px`;
 
-    const maxBaseWidth = Math.min(availW, Math.max(280, availH * 0.9), 760);
+    const contentH = Math.max(scaleEl.scrollHeight, 1);
+    const innerScale = Math.min(1, BASE_HEIGHT / contentH);
+    const combined = outerScale * innerScale;
 
-    content.style.width = `${maxBaseWidth}px`;
-    content.style.height = "auto";
-    content.style.transform = "scale(1)";
-    content.style.transformOrigin = "top left";
-
-    const contentW = Math.max(content.scrollWidth, content.offsetWidth, 1);
-    const contentH = Math.max(content.scrollHeight, content.offsetHeight, 1);
-
-    const scale = Math.min(1, availW / contentW, availH / contentH);
-
-    setFit({
-      scale,
-      frameW: Math.max(contentW * scale, 1),
-      frameH: Math.max(contentH * scale, 1),
-      contentW,
+    setBox((prev) => {
+      if (
+        prev.width === fitted.width &&
+        prev.height === fitted.height &&
+        Math.abs(prev.outerScale - outerScale) < 0.001 &&
+        Math.abs(prev.innerScale - innerScale) < 0.001
+      ) {
+        return prev;
+      }
+      return {
+        width: fitted.width,
+        height: fitted.height,
+        outerScale,
+        innerScale,
+        combined,
+      };
     });
   }, []);
 
+  const scheduleRecalculate = useCallback(() => {
+    window.cancelAnimationFrame(rafRef.current);
+    rafRef.current = window.requestAnimationFrame(() => {
+      recalculate();
+    });
+  }, [recalculate]);
+
   useLayoutEffect(() => {
-    recalculate();
-    const timer = window.setTimeout(recalculate, 50);
-    const timer2 = window.setTimeout(recalculate, 250);
+    scheduleRecalculate();
 
     const stage = stageRef.current;
-    const content = contentRef.current;
-    if (!stage || !content) {
-      return () => {
-        window.clearTimeout(timer);
-        window.clearTimeout(timer2);
-      };
-    }
+    if (!stage) return undefined;
 
-    const ro = new ResizeObserver(() => {
-      window.requestAnimationFrame(recalculate);
-    });
+    const ro = new ResizeObserver(scheduleRecalculate);
     ro.observe(stage);
-    ro.observe(content);
 
-    const images = [...content.querySelectorAll("img")];
-    const onImg = () => recalculate();
+    const onViewport = () => scheduleRecalculate();
+    window.addEventListener("resize", onViewport);
+    window.addEventListener("orientationchange", onViewport);
+    window.visualViewport?.addEventListener("resize", onViewport);
+
+    const images = stage.querySelectorAll("img");
     images.forEach((img) => {
-      img.addEventListener("load", onImg);
-      if (img.complete) onImg();
+      img.addEventListener("load", scheduleRecalculate);
+      if (img.complete) scheduleRecalculate();
     });
 
-    window.addEventListener("resize", recalculate);
-    window.addEventListener("orientationchange", recalculate);
+    document.fonts?.ready?.then(scheduleRecalculate).catch(() => {});
 
-    const fontsReady = document.fonts?.ready;
-    if (fontsReady) fontsReady.then(recalculate).catch(() => {});
+    const t1 = window.setTimeout(scheduleRecalculate, 32);
+    const t2 = window.setTimeout(scheduleRecalculate, 180);
 
     return () => {
-      window.clearTimeout(timer);
-      window.clearTimeout(timer2);
+      window.cancelAnimationFrame(rafRef.current);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
       ro.disconnect();
-      images.forEach((img) => img.removeEventListener("load", onImg));
-      window.removeEventListener("resize", recalculate);
-      window.removeEventListener("orientationchange", recalculate);
+      window.removeEventListener("resize", onViewport);
+      window.removeEventListener("orientationchange", onViewport);
+      window.visualViewport?.removeEventListener("resize", onViewport);
+      images.forEach((img) => img.removeEventListener("load", scheduleRecalculate));
     };
-  }, [recalculate, pageKey]);
+  }, [scheduleRecalculate, pageKey]);
+
+  const ready = box.width > 0 && box.height > 0;
+  const combined = box.combined ?? box.outerScale * (box.innerScale || 1);
 
   return (
     <div ref={stageRef} className={`ebook-stage ${className}`.trim()}>
       <div
         className="ebook-fit-frame"
-        style={{
-          width: fit.frameW ?? undefined,
-          height: fit.frameH ?? undefined,
-        }}
+        style={
+          ready
+            ? {
+                width: box.width,
+                height: box.height,
+              }
+            : undefined
+        }
       >
-        <div
-          ref={contentRef}
-          className="ebook-fit-content"
-          style={{
-            width: fit.contentW ?? "100%",
-            transform: `scale(${fit.scale})`,
-            transformOrigin: "top left",
-          }}
-        >
-          {children}
+        <div className="ebook-fit-clip">
+          <div
+            ref={scaleRef}
+            className="ebook-fit-scale"
+            style={
+              ready
+                ? {
+                    width: BASE_WIDTH,
+                    minHeight: BASE_HEIGHT,
+                    transform: `scale(${combined})`,
+                    transformOrigin: "top left",
+                  }
+                : undefined
+            }
+          >
+            {children}
+          </div>
         </div>
       </div>
     </div>

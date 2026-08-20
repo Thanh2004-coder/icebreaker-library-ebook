@@ -114,6 +114,7 @@ textarea {
   width: 100%;
   max-width: min(1100px, 100%);
   padding-bottom: 16px;
+  overflow-x: hidden;
 }
 
 .search-wrap label {
@@ -270,8 +271,10 @@ legend {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  min-height: min(70dvh, 780px);
+  min-height: max(440px, calc(100dvh - 300px));
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .ebook-reader-standalone {
@@ -282,11 +285,13 @@ legend {
 .ebook-stage {
   flex: 1 1 auto;
   width: 100%;
-  min-height: min(58dvh, 640px);
+  max-width: 100%;
+  min-height: max(380px, calc(100dvh - 360px));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  overflow-x: hidden;
   position: relative;
 }
 
@@ -298,19 +303,67 @@ legend {
 
 .ebook-fit-frame {
   position: relative;
-  max-width: 100%;
-  overflow: hidden;
   flex-shrink: 0;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  border-radius: 18px;
 }
 
-.ebook-fit-content {
+.ebook-fit-clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.ebook-fit-scale {
   will-change: transform;
+}
+
+.ebook-fit-scale .book-spread {
+  width: 100%;
+}
+
+.ebook-fit-scale .book-page {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+.ebook-fit-scale .book-page.game-page {
+  min-height: 100%;
+}
+
+.ebook-fit-scale .book-page.design-page,
+.ebook-fit-scale .book-page.web-page {
+  height: auto;
+}
+
+.ebook-fit-scale .design-sheet,
+.ebook-fit-scale .design-sheet-page {
+  width: 100%;
+  line-height: 0;
+}
+
+.ebook-fit-scale .design-sheet-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center top;
+}
+
+.ebook-fit-scale .game-sheet {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .book-spread {
   display: block;
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   margin: 0;
   filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
 }
@@ -320,16 +373,18 @@ legend {
   background: rgba(14, 8, 39, 0.72);
   border: 1px solid var(--line);
   width: 100%;
+  max-width: 100%;
   min-height: 0;
   max-height: none;
-  overflow: visible;
+  overflow: hidden;
   padding: 20px 20px 36px;
   cursor: zoom-in;
+  box-sizing: border-box;
 }
 
 .book-page.design-page {
   padding: 0;
-  overflow: visible;
+  overflow: hidden;
   min-height: 0;
   background: transparent;
   cursor: zoom-in;
@@ -338,7 +393,7 @@ legend {
 
 .book-page.web-page {
   padding: 0;
-  overflow: visible;
+  overflow: hidden;
   min-height: 0;
   background: transparent;
 }
@@ -394,6 +449,9 @@ legend {
 
 .game-sheet {
   background: transparent;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .book-page.left {
@@ -981,12 +1039,23 @@ legend {
 }
 
 .page-home .filters {
-  margin-top: 10px;
+  margin-top: 8px;
   gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .page-home fieldset {
-  padding: 8px 10px 10px;
+  padding: 6px 8px 8px;
+}
+
+.page-home .chips {
+  gap: 6px;
+}
+
+.page-home .chip {
+  padding: 5px 9px;
+  font-size: 0.8rem;
 }
 
 @media (max-width: 899px) {
@@ -996,6 +1065,10 @@ legend {
 
   .page-home .tagline {
     display: none;
+  }
+
+  .page-home .filters {
+    grid-template-columns: 1fr;
   }
 
   .layout-ebook {
