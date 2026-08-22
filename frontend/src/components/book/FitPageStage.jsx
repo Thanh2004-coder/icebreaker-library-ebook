@@ -3,7 +3,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 /** Matches design-page artwork (~627x1002). width / height */
 export const PAGE_ASPECT = 5 / 8;
 /** Comfortable layout width - content is measured here, then the whole page scales. */
-const BASE_WIDTH = 460;
+const BASE_WIDTH = 469;
 const BASE_HEIGHT = Math.round(BASE_WIDTH / PAGE_ASPECT);
 const MIN_STAGE = 160;
 
