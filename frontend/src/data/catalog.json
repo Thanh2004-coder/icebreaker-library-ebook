@@ -144,10 +144,6 @@
     ],
     "durations": [
       {
-        "value": "under-5",
-        "label": "Dưới 5 phút"
-      },
-      {
         "value": "5-7",
         "label": "5–7 phút"
       },
@@ -158,10 +154,6 @@
       {
         "value": "10-15",
         "label": "10–15 phút"
-      },
-      {
-        "value": "over-15",
-        "label": "Trên 15 phút"
       }
     ]
   },
