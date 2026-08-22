@@ -142,62 +142,6 @@
         "label": "10+ người"
       }
     ],
-    "contexts": [
-      {
-        "value": "classroom",
-        "label": "Trong lớp học"
-      },
-      {
-        "value": "indoor",
-        "label": "Trong phòng"
-      },
-      {
-        "value": "outdoor",
-        "label": "Ngoài trời"
-      },
-      {
-        "value": "campus",
-        "label": "Campus"
-      },
-      {
-        "value": "small-group",
-        "label": "Nhóm nhỏ"
-      }
-    ],
-    "purposes": [
-      {
-        "value": "meet",
-        "label": "Làm quen"
-      },
-      {
-        "value": "icebreak",
-        "label": "Phá băng"
-      },
-      {
-        "value": "laugh",
-        "label": "Tạo tiếng cười"
-      },
-      {
-        "value": "interact",
-        "label": "Tăng tương tác"
-      },
-      {
-        "value": "common",
-        "label": "Tìm điểm chung"
-      },
-      {
-        "value": "comfort",
-        "label": "Tạo sự thoải mái"
-      },
-      {
-        "value": "communicate",
-        "label": "Giao tiếp"
-      },
-      {
-        "value": "kickoff",
-        "label": "Khởi động trước khi họp nhóm"
-      }
-    ],
     "durations": [
       {
         "value": "under-5",
