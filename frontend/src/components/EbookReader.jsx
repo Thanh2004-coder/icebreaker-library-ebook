@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FitPageStage from "./book/FitPageStage.jsx";
 import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
 import {
     FIRST_PAGE,
@@ -171,61 +172,72 @@ export default function EbookReader({ page }) {
             "Ebook {title}"
         );
 
+    const stage = focused ? (
+        <div
+            className="ebook-focus ebook-focus--screenshots"
+            onClick={() =>
+                setFocused(false)
+            }
+        >
+            <button
+                type="button"
+                className="focus-arrow left"
+                disabled={!canPrev}
+                aria-label="Trang trước"
+                onClick={(event) => {
+                    event.stopPropagation();
+
+                    requestGo(
+                        current - step
+                    );
+                }}
+            >
+                {readerUi.prevShort ||
+                    "←"}
+            </button>
+
+            <div className="ebook-focus-book screenshot-focus-book">
+                <FitPageStage
+                    pageKey={`focus-${current}`}
+                    key={`focus-${current}`}
+                    className="ebook-stage-focus"
+                >
+                    {pageLeaf}
+                </FitPageStage>
+            </div>
+
+            <button
+                type="button"
+                className="focus-arrow right"
+                disabled={!canNext}
+                aria-label="Trang sau"
+                onClick={(event) => {
+                    event.stopPropagation();
+
+                    requestGo(
+                        current + step
+                    );
+                }}
+            >
+                {readerUi.nextShort ||
+                    "→"}
+            </button>
+        </div>
+    ) : (
+        <FitPageStage
+            pageKey={current}
+            key={`page-${current}`}
+        >
+            {pageLeaf}
+        </FitPageStage>
+    );
+
     return (
         <section
             className="ebook-reader ebook-reader--screenshots"
             aria-label={ariaLabel}
         >
-            {focused ? (
-                <div
-                    className="ebook-focus ebook-focus--screenshots"
-                    onClick={() =>
-                        setFocused(false)
-                    }
-                >
-                    <button
-                        type="button"
-                        className="focus-arrow left"
-                        disabled={!canPrev}
-                        aria-label="Trang trước"
-                        onClick={(event) => {
-                            event.stopPropagation();
-
-                            requestGo(
-                                current - step
-                            );
-                        }}
-                    >
-                        {readerUi.prevShort ||
-                            "←"}
-                    </button>
-
-                    <div className="ebook-focus-book screenshot-focus-book">
-                        {pageLeaf}
-                    </div>
-
-                    <button
-                        type="button"
-                        className="focus-arrow right"
-                        disabled={!canNext}
-                        aria-label="Trang sau"
-                        onClick={(event) => {
-                            event.stopPropagation();
-
-                            requestGo(
-                                current + step
-                            );
-                        }}
-                    >
-                        {readerUi.nextShort ||
-                            "→"}
-                    </button>
-                </div>
-            ) : (
-                <div className="ebook-screenshot-stage">
-                    {pageLeaf}
-                </div>
-            )}
+            {stage}
 
             <nav
                 className="reader-nav"

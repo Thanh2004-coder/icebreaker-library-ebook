@@ -480,6 +480,21 @@ legend {
   border-radius: 18px;
 }
 
+.screenshot-only-page {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+}
+
+.book-page-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 .page-folio {
   position: absolute;
   bottom: 14px;
