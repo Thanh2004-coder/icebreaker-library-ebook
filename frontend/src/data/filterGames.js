@@ -71,23 +71,34 @@ function purposeNames(game) {
 
 function matchesSearch(game, search) {
   if (!search || !search.trim()) return true;
-  const raw = search.trim().toLowerCase();
+
   const needle = unaccent(search);
-  const haystack = [
+
+  const values = [
     game.id,
     game.page,
     game.name,
     game.description,
     game.purpose,
     game.context,
+    game.players,
+    game.time,
+    game.duration,
     ...(game.purposes || []),
     ...(game.tags || []),
     ...(game.contexts || []),
     ...(game.searchKeywords || []),
-  ]
-    .filter(Boolean)
-    .join(" ");
-  return haystack.toLowerCase().includes(raw) || unaccent(haystack).includes(needle);
+    ...(game.preparation || []),
+    ...(game.rules || []),
+    ...(game.howToPlay || []),
+  ];
+
+  const haystack = values
+      .filter(Boolean)
+      .map((value) => String(value))
+      .join(" ");
+
+  return unaccent(haystack).includes(needle);
 }
 
 export function filterGames(games, { search, selected }) {
