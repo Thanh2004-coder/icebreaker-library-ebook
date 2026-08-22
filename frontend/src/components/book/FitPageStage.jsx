@@ -1,183 +1,213 @@
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import FitPageStage from "./book/FitPageStage.jsx";
+import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
+import {
+  FIRST_PAGE,
+  LAST_PAGE,
+  UI,
+  clampPage,
+  resolveCatalogText,
+} from "../data/catalog.js";
 
-/** Matches design-page artwork (~627×1002). width / height */
-export const PAGE_ASPECT = 5 / 8;
-/** Comfortable layout width — content is measured here, then the whole page scales. */
-const BASE_WIDTH = 560;
-const BASE_HEIGHT = Math.round(BASE_WIDTH / PAGE_ASPECT);
-const MIN_STAGE = 160;
-
-function readStageSize(stage) {
-  const rect = stage.getBoundingClientRect();
-  let availW = Math.max(stage.clientWidth || 0, rect.width || 0);
-  let availH = Math.max(stage.clientHeight || 0, rect.height || 0);
-
-  if (availW < MIN_STAGE) {
-    availW = Math.max(window.innerWidth - 64, 280);
-  }
-  if (availH < MIN_STAGE) {
-    availH = Math.max(Math.floor(window.innerHeight * 0.55), 320);
-  }
-
-  return { availW, availH };
+function isInteractive(target) {
+  return Boolean(
+      target.closest(
+          "a, button, input, textarea, select, label"
+      )
+  );
 }
 
-/**
- * Fit a fixed-aspect base page into the stage.
- * Content never changes the aspect — only uniform scale does.
- */
-export function fitPageBox(availW, availH) {
-  const maxW = Math.min(availW, BASE_WIDTH, window.innerWidth);
-  const maxH = Math.min(availH, window.innerHeight);
+export default function EbookReader({ page }) {
+  const navigate = useNavigate();
+  const current = clampPage(page);
 
-  let width = maxW;
-  let height = width / PAGE_ASPECT;
+  const [focused, setFocused] = useState(false);
 
-  if (height > maxH) {
-    height = maxH;
-    width = height * PAGE_ASPECT;
-  }
+  const readerUi = UI.reader || {};
 
-  return {
-    width: Math.max(1, Math.floor(width)),
-    height: Math.max(1, Math.floor(height)),
-  };
-}
+  const step = 1;
 
-/**
- * Stable ebook page stage:
- * 1) Layout at fixed BASE_WIDTH × BASE_HEIGHT (ebook aspect)
- * 2) Uniformly scale that box into the available stage (outerScale only)
- *
- * Tall game content scrolls inside the page — never shrinks the page
- * frame (that caused letterboxing / empty margins around games).
- */
-export default function FitPageStage({ children, pageKey, className = "" }) {
-  const stageRef = useRef(null);
-  const scaleRef = useRef(null);
-  const rafRef = useRef(0);
-  const [box, setBox] = useState(() => {
-    if (typeof window === "undefined") {
-      return { width: 0, height: 0, scale: 1 };
-    }
-    const seed = fitPageBox(Math.max(window.innerWidth - 64, 280), Math.max(window.innerHeight * 0.55, 320));
-    return {
-      width: seed.width,
-      height: seed.height,
-      scale: seed.width / BASE_WIDTH,
-    };
-  });
+  const canPrev = current > FIRST_PAGE;
+  const canNext = current < LAST_PAGE;
 
-  const recalculate = useCallback(() => {
-    const stage = stageRef.current;
-    const scaleEl = scaleRef.current;
-    if (!stage || !scaleEl) return;
+  const requestGo = useCallback(
+      (target) => {
+        const next = clampPage(target);
 
-    const { availW, availH } = readStageSize(stage);
-    const fitted = fitPageBox(availW, availH);
-    const scale = fitted.width / BASE_WIDTH;
+        if (next === current) return;
 
-    // Keep the layout box fixed. Do NOT mutate transform here — that can
-    // fight React and leave a stale scale when setState bails out.
-    scaleEl.style.width = `${BASE_WIDTH}px`;
-    scaleEl.style.height = `${BASE_HEIGHT}px`;
-    scaleEl.style.minHeight = `${BASE_HEIGHT}px`;
+        navigate(`/page/${next}`);
+      },
+      [current, navigate]
+  );
 
-    setBox((prev) => {
-      if (
-        prev.width === fitted.width &&
-        prev.height === fitted.height &&
-        Math.abs(prev.scale - scale) < 0.001
-      ) {
-        return prev;
+  useEffect(() => {
+    const onKey = (event) => {
+      if (event.key === "Escape" && focused) {
+        setFocused(false);
+        return;
       }
-      return {
-        width: fitted.width,
-        height: fitted.height,
-        scale,
-      };
-    });
-  }, []);
 
-  const scheduleRecalculate = useCallback(() => {
-    window.cancelAnimationFrame(rafRef.current);
-    rafRef.current = window.requestAnimationFrame(() => {
-      recalculate();
-    });
-  }, [recalculate]);
+      if (
+          event.key === "ArrowLeft" &&
+          current > FIRST_PAGE
+      ) {
+        requestGo(current - step);
+      }
 
-  useLayoutEffect(() => {
-    scheduleRecalculate();
+      if (
+          event.key === "ArrowRight" &&
+          current < LAST_PAGE
+      ) {
+        requestGo(current + step);
+      }
+    };
 
-    const stage = stageRef.current;
-    if (!stage) return undefined;
-
-    const ro = new ResizeObserver(scheduleRecalculate);
-    ro.observe(stage);
-
-    const onViewport = () => scheduleRecalculate();
-    window.addEventListener("resize", onViewport);
-    window.addEventListener("orientationchange", onViewport);
-    window.visualViewport?.addEventListener("resize", onViewport);
-
-    const images = stage.querySelectorAll("img");
-    images.forEach((img) => {
-      img.addEventListener("load", scheduleRecalculate);
-      if (img.complete) scheduleRecalculate();
-    });
-
-    document.fonts?.ready?.then(scheduleRecalculate).catch(() => {});
-
-    const t1 = window.setTimeout(scheduleRecalculate, 32);
-    const t2 = window.setTimeout(scheduleRecalculate, 180);
+    window.addEventListener("keydown", onKey);
 
     return () => {
-      window.cancelAnimationFrame(rafRef.current);
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
-      ro.disconnect();
-      window.removeEventListener("resize", onViewport);
-      window.removeEventListener("orientationchange", onViewport);
-      window.visualViewport?.removeEventListener("resize", onViewport);
-      images.forEach((img) => img.removeEventListener("load", scheduleRecalculate));
+      window.removeEventListener("keydown", onKey);
     };
-  }, [scheduleRecalculate, pageKey]);
+  }, [
+    current,
+    focused,
+    requestGo,
+  ]);
 
-  const ready = box.width > 0 && box.height > 0;
+  useEffect(() => {
+    if (!focused) return undefined;
 
-  return (
-    <div ref={stageRef} className={`ebook-stage ${className}`.trim()}>
+    const previous = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [focused]);
+
+  const openFocus = (event) => {
+    if (focused) return;
+
+    if (isInteractive(event.target)) return;
+
+    setFocused(true);
+  };
+
+  /*
+   * Every page uses the exact same page structure.
+   * There is no separate game/design/web layout here.
+   */
+  const pageLeaf = (
       <div
-        className="ebook-fit-frame"
-        style={
-          ready
-            ? {
-                width: box.width,
-                height: box.height,
-              }
-            : undefined
-        }
+          className="book-spread single"
+          onClick={(event) => event.stopPropagation()}
       >
-        <div className="ebook-fit-clip">
-          <div
-            ref={scaleRef}
-            className="ebook-fit-scale"
-            style={
-              ready
-                ? {
-                    width: BASE_WIDTH,
-                    height: BASE_HEIGHT,
-                    minHeight: BASE_HEIGHT,
-                    transform: `scale(${box.scale})`,
-                    transformOrigin: "top left",
-                  }
-                : undefined
-            }
-          >
-            {children}
-          </div>
+        <div
+            className={`${pageClass(current)} screenshot-only-page`}
+            onClick={openFocus}
+        >
+          <SheetBody page={current} />
         </div>
       </div>
-    </div>
+  );
+
+  const ariaLabel = resolveCatalogText(
+      readerUi.ariaLabel || "Ebook {title}"
+  );
+
+  /*
+   * ALL 33 pages use FitPageStage.
+   *
+   * Page 1  -> FitPageStage
+   * Page 2  -> FitPageStage
+   * ...
+   * Page 33 -> FitPageStage
+   */
+  const stage = focused ? (
+      <div
+          className="ebook-focus"
+          onClick={() => setFocused(false)}
+      >
+        <button
+            type="button"
+            className="focus-arrow left"
+            disabled={!canPrev}
+            aria-label="Trang trước"
+            onClick={(event) => {
+              event.stopPropagation();
+              requestGo(current - step);
+            }}
+        >
+          {readerUi.prevShort || "←"}
+        </button>
+
+        <div className="ebook-focus-book">
+          <FitPageStage
+              pageKey={`focus-${current}`}
+              key={`focus-${current}`}
+              className="ebook-stage-focus"
+          >
+            {pageLeaf}
+          </FitPageStage>
+        </div>
+
+        <button
+            type="button"
+            className="focus-arrow right"
+            disabled={!canNext}
+            aria-label="Trang sau"
+            onClick={(event) => {
+              event.stopPropagation();
+              requestGo(current + step);
+            }}
+        >
+          {readerUi.nextShort || "→"}
+        </button>
+      </div>
+  ) : (
+      <FitPageStage
+          pageKey={current}
+          key={`page-${current}`}
+      >
+        {pageLeaf}
+      </FitPageStage>
+  );
+
+  return (
+      <section
+          className="ebook-reader"
+          aria-label={ariaLabel}
+      >
+        {stage}
+
+        <nav
+            className="reader-nav"
+            aria-label={
+                readerUi.navAriaLabel || "Lật trang"
+            }
+        >
+          <button
+              type="button"
+              disabled={!canPrev}
+              onClick={() => requestGo(current - step)}
+          >
+            {readerUi.prev || "← Trang trước"}
+          </button>
+
+          <p>
+            Trang {current} / {LAST_PAGE}
+          </p>
+
+          <button
+              type="button"
+              disabled={!canNext}
+              onClick={() => requestGo(current + step)}
+          >
+            {readerUi.next || "Trang sau →"}
+          </button>
+        </nav>
+      </section>
   );
 }

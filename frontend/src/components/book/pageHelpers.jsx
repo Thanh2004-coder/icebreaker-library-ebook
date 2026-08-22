@@ -1,6 +1,6 @@
 import { getScreenshotByPage } from "../../data/catalog.js";
 
-export function pageClass(pageNumber) {
+export function pageClass() {
   return "book-page solo screenshot-page";
 }
 
