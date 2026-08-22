@@ -74,27 +74,14 @@ function matchesSearch(game, search) {
 
   const needle = unaccent(search);
 
-  const name = unaccent(game.name || "");
-
-  // Search chính xác theo tên game trước
-  if (name.includes(needle)) {
-    return true;
-  }
-
-  // Sau đó mới tìm trong các metadata
-  const haystack = [
-    game.description,
-    game.purpose,
-    game.context,
-    ...(game.purposes || []),
-    ...(game.tags || []),
-    ...(game.contexts || []),
-    ...(game.searchKeywords || []),
+  const fields = [
+    game.name,
+    ...(game.searchKeywords || [])
   ]
       .filter(Boolean)
-      .join(" ");
+      .map(unaccent);
 
-  return unaccent(haystack).includes(needle);
+  return fields.some((field) => field.includes(needle));
 }
 
 export function filterGames(games, { search, selected }) {
