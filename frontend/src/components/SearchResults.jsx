@@ -5,11 +5,9 @@ export default function SearchResults({ games, onClear }) {
   const navigate = useNavigate();
   const resultsUi = UI.searchResults || {};
 
-  const resultCount = games.length;
-
   const foundText = resolveCatalogText(
       resultsUi.found || "Tìm thấy {count} trò chơi"
-  ).replace("{count}", String(resultCount));
+  ).replace("{count}", String(games.length));
 
   return (
       <section className="search-results" aria-live="polite">
