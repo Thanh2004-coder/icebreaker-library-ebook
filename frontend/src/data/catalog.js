@@ -336,11 +336,20 @@ export function getHeroImage(game) {
     return FALLBACK_GAME_IMAGE;
   }
 
+  const gameIndex = gamesByPage().findIndex(
+      (item) => Number(item.id) === Number(game.id)
+  );
+
+  const gameScreenshot =
+      gameIndex >= 0
+          ? SCREENSHOTS[5 + gameIndex]
+          : null;
+
   return (
       game.heroImage ||
       game.coverImage ||
       game.image ||
-      getScreenshotByPage(game.page) ||
+      gameScreenshot ||
       FALLBACK_GAME_IMAGE
   );
 }
