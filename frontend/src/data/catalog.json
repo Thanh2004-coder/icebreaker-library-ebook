@@ -713,6 +713,100 @@
         "suy luận"
       ],
       "description": "Phần lớn người chơi nhận cùng một từ khóa, một người nhận từ khóa gần giống và phải tìm cách không bị phát hiện."
+    },
+    {
+      "id": 22,
+      "page": 26,
+      "name": "Nối từ",
+      "minPlayers": 3,
+      "maxPlayers": 10,
+      "players": "3–10 người",
+      "durationMin": 5,
+      "durationMax": 10,
+      "duration": "5–10 phút",
+      "time": "5–10 phút",
+      "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
+      "purposes": ["Giao tiếp", "Tăng tương tác", "Tạo tiếng cười"],
+      "tags": ["nối từ", "từ ngữ", "phản xạ", "trí nhớ"],
+      "searchKeywords": [
+        "nối từ",
+        "nối chữ",
+        "từ",
+        "phản xạ",
+        "trí nhớ"
+      ],
+      "description": "Người chơi lần lượt nói một từ bắt đầu bằng chữ hoặc âm cuối của từ trước đó. Ai không nghĩ ra từ phù hợp sẽ bị loại hoặc mất điểm."
+    },
+    {
+      "id": 23,
+      "page": 27,
+      "name": "Có gì thay đổi?",
+      "minPlayers": 4,
+      "maxPlayers": 10,
+      "players": "4–10 người",
+      "durationMin": 5,
+      "durationMax": 10,
+      "duration": "5–10 phút",
+      "time": "5–10 phút",
+      "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
+      "purposes": ["Tăng tương tác", "Ghi nhớ", "Tạo tiếng cười"],
+      "tags": ["thay đổi", "quan sát", "ghi nhớ", "phản xạ"],
+      "searchKeywords": [
+        "có gì thay đổi",
+        "thay đổi",
+        "quan sát",
+        "ghi nhớ",
+        "tìm điểm khác"
+      ],
+      "description": "Người chơi quan sát một nhóm người hoặc một khu vực, sau đó phát hiện những thay đổi nhỏ xảy ra sau khi quay lại."
+    },
+    {
+      "id": 24,
+      "page": 28,
+      "name": "Cân não Logic",
+      "minPlayers": 2,
+      "maxPlayers": 8,
+      "players": "2–8 người",
+      "durationMin": 5,
+      "durationMax": 10,
+      "duration": "5–10 phút",
+      "time": "5–10 phút",
+      "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
+      "purposes": ["Tư duy", "Tăng tương tác", "Giao tiếp"],
+      "tags": ["logic", "cân não", "suy luận", "đố vui"],
+      "searchKeywords": [
+        "cân não logic",
+        "logic",
+        "cân não",
+        "suy luận",
+        "đố logic",
+        "câu đố"
+      ],
+      "description": "Người chơi cùng giải những câu đố logic ngắn và đưa ra đáp án dựa trên khả năng suy luận thay vì đoán mò."
+    },
+    {
+      "id": 25,
+      "page": 29,
+      "name": "Giải mật thư",
+      "minPlayers": 4,
+      "maxPlayers": 15,
+      "players": "4–15 người",
+      "durationMin": 10,
+      "durationMax": 15,
+      "duration": "10–15 phút",
+      "time": "10–15 phút",
+      "contexts": ["Trong lớp học", "Trong phòng", "Campus"],
+      "purposes": ["Tăng tương tác", "Giao tiếp", "Tư duy", "Khởi động trước khi họp nhóm"],
+      "tags": ["mật thư", "giải mã", "logic", "đội nhóm"],
+      "searchKeywords": [
+        "giải mật thư",
+        "mật thư",
+        "giải mã",
+        "mã hóa",
+        "logic",
+        "giải câu đố"
+      ],
+      "description": "Các đội phối hợp giải mã những manh mối và ký hiệu để tìm ra thông điệp bí mật trong thời gian giới hạn."
     }
   ],
   "webs": []
