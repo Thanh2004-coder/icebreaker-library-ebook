@@ -18,7 +18,8 @@ export const SITE = catalog.site || {};
  * ...
  * Page 33 -> Screenshot 2026-08-22 212247.png
  *
- * Thứ tự được giữ nguyên theo danh sách screenshot trong workspace.
+ * Game pages start at page 6:
+ * Page 6 -> Screenshot 2026-08-22 211822.png
  */
 export const SCREENSHOTS = [
   "/images/Screenshot 2026-08-22 211740.png",
@@ -26,6 +27,8 @@ export const SCREENSHOTS = [
   "/images/Screenshot 2026-08-22 211754.png",
   "/images/Screenshot 2026-08-22 211802.png",
   "/images/Screenshot 2026-08-22 211812.png",
+
+  // GAME 01 -> GAME 25
   "/images/Screenshot 2026-08-22 211822.png",
   "/images/Screenshot 2026-08-22 211828.png",
   "/images/Screenshot 2026-08-22 211838.png",
@@ -57,12 +60,52 @@ export const SCREENSHOTS = [
 ];
 
 /**
- * Get screenshot mapped to ebook page.
+ * Official game names read from the 25 game screenshots.
  *
- * page 1 -> SCREENSHOTS[0]
- * page 2 -> SCREENSHOTS[1]
+ * ID 1  -> Page 6
+ * ID 25 -> Page 30
+ */
+export const GAME_NAMES = {
+  1: "5 Giây",
+  2: "This or That",
+  3: "Tìm Điểm Chung Nhanh",
+  4: "Bingo Làm Quen",
+  5: "Câu Chuyện 3 Chương",
+  6: "Đứng Lên Ngồi Xuống",
+  7: "Đi Tìm Báu Vật",
+  8: "Nối Vòng Tay Lớn",
+  9: "Đoán Loại Rau",
+  10: "Lá Bàn",
+  11: "Đổi Chỗ Thần Tốc",
+  12: "Đoán Địa Danh Việt Nam",
+  13: "Săn Số 1–100",
+  14: "Đoán Hành Động",
+  15: "Tôi Là Ai?",
+  16: "Đáp Án Bí Mật",
+  17: "5 Second Rule",
+  18: "Đếm Số Thay Thế",
+  19: "Chữ Đầu Chữ Cuối",
+  20: "Đoán Từ Theo Gợi Ý",
+  21: "Ai Là Gián Điệp?",
+  22: "Nối Từ",
+  23: "Có Gì Thay Đổi?",
+  24: "Cân Não Logic",
+  25: "Giải Mật Thư",
+};
+
+/**
+ * Game pages are fixed by the screenshot layout.
+ *
+ * Page 6  -> Game 1
+ * Page 7  -> Game 2
  * ...
- * page 33 -> SCREENSHOTS[32]
+ * Page 30 -> Game 25
+ */
+export const GAME_START_PAGE = 6;
+export const GAME_END_PAGE = GAME_START_PAGE + 25 - 1;
+
+/**
+ * Get screenshot mapped to ebook page.
  */
 export function getScreenshotByPage(page) {
   const n = Number(page);
@@ -77,13 +120,16 @@ export function getScreenshotByPage(page) {
  * Raw catalog assets.
  */
 export const EBOOK_BACKGROUND =
-    catalog.assets?.ebookBackground || "/images/purple-background.png";
+    catalog.assets?.ebookBackground ||
+    "/images/purple-background.png";
 
 export const GAME_PAGE_BACKGROUND =
-    catalog.assets?.gamePageBackground || EBOOK_BACKGROUND;
+    catalog.assets?.gamePageBackground ||
+    EBOOK_BACKGROUND;
 
 export const FALLBACK_GAME_IMAGE =
-    catalog.assets?.fallbackHeroImage || "/images/games/fallback.svg";
+    catalog.assets?.fallbackHeroImage ||
+    "/images/games/fallback.svg";
 
 export const FALLBACK_INSTRUCTION_IMAGE =
     catalog.assets?.fallbackInstructionImage ||
@@ -112,24 +158,17 @@ export function lastPage() {
     ...numberedPages(WEBS),
   ];
 
-  /*
-   * Screenshot mapping has 33 pages.
-   * Catalog pages are still respected if they contain more pages.
-   */
-  const catalogLastPage = pages.length ? Math.max(...pages) : 1;
+  const catalogLastPage =
+      pages.length ? Math.max(...pages) : 1;
 
-  return Math.max(catalogLastPage, SCREENSHOTS.length);
-}
-
-export function gameStartPage() {
-  const pages = numberedPages(GAMES);
-
-  return pages.length ? Math.min(...pages) : lastPage();
+  return Math.max(
+      catalogLastPage,
+      SCREENSHOTS.length
+  );
 }
 
 export const FIRST_PAGE = firstPage();
 export const LAST_PAGE = lastPage();
-export const GAME_START_PAGE = gameStartPage();
 
 export const EBOOK = {
   ...catalog.ebook,
@@ -137,6 +176,26 @@ export const EBOOK = {
   lastPage: LAST_PAGE,
   gameStartPage: GAME_START_PAGE,
 };
+
+/**
+ * Return the official game name.
+ *
+ * Priority:
+ * 1. catalog.json name
+ * 2. OCR-derived GAME_NAMES
+ * 3. empty string
+ */
+export function getGameName(game) {
+  if (!game) return "";
+
+  const id = Number(game.id);
+
+  return (
+      game.name ||
+      GAME_NAMES[id] ||
+      ""
+  );
+}
 
 /**
  * Replace:
@@ -159,7 +218,7 @@ export function resolveCatalogText(text) {
       )
       .replace(
           /\{gameCount\}/g,
-          String(GAMES.length)
+          String(GAMES.length || 25)
       )
       .replace(
           /\{title\}/g,
@@ -170,7 +229,9 @@ export function resolveCatalogText(text) {
 export function resolveCatalogLines(value) {
   const lines = asLines(value);
 
-  return lines.map((line) => resolveCatalogText(line));
+  return lines.map((line) =>
+      resolveCatalogText(line)
+  );
 }
 
 export function formatPlayers(min, max) {
@@ -213,7 +274,13 @@ export function getGameByPage(page) {
   return (
       GAMES.find(
           (game) => Number(game.page) === key
-      ) || null
+      ) ||
+      GAMES.find(
+          (game) =>
+              Number(game.id) ===
+              key - GAME_START_PAGE + 1
+      ) ||
+      null
   );
 }
 
@@ -239,7 +306,8 @@ export function getDesignSheet(page) {
 
 export function gamesByPage() {
   return [...GAMES].sort(
-      (a, b) => Number(a.page) - Number(b.page)
+      (a, b) =>
+          Number(a.page) - Number(b.page)
   );
 }
 
@@ -383,7 +451,6 @@ export function howToPlaySteps(game) {
 
 /**
  * Normalized view-model for rendering a game sheet.
- * Components read this instead of raw catalog quirks.
  */
 export function getGameDisplay(game) {
   if (!game) return null;
@@ -393,15 +460,18 @@ export function getGameDisplay(game) {
           ? game.purposes
           : game.tags || [];
 
-  const modes = playerModeSections(game);
+  const modes =
+      playerModeSections(game);
 
   return {
     id: game.id,
 
     page: game.page,
 
-    name:
-        game.name || "",
+    /**
+     * Official name from the 25-game OCR list.
+     */
+    name: getGameName(game),
 
     description:
         game.description || "",
@@ -429,11 +499,6 @@ export function getGameDisplay(game) {
 
     tags: purposes,
 
-    /**
-     * Screenshot mapped strictly by page
-     * is used automatically when game
-     * doesn't have its own image.
-     */
     heroImage:
         getHeroImage(game),
 
@@ -445,8 +510,7 @@ export function getGameDisplay(game) {
     showInstructionImage:
         hasInstructionImage(game),
 
-    playerModes:
-    modes,
+    playerModes: modes,
 
     howToPlay:
         modes.length
@@ -469,8 +533,6 @@ export function getGameDisplay(game) {
  * 2. game
  * 3. web
  * 4. empty
- *
- * Every page also receives its mapped screenshot.
  */
 export function getSheet(page) {
   const n = Number(page);
@@ -494,16 +556,16 @@ export function getSheet(page) {
       getGameByPage(n);
 
   if (game) {
+    const gameIndex =
+        Number(game.id) ||
+        n - GAME_START_PAGE + 1;
+
     return {
       type: "game",
       page: n,
       game,
 
-      gameIndex:
-          gamesByPage().findIndex(
-              (item) =>
-                  item.id === game.id
-          ) + 1,
+      gameIndex,
 
       screenshot,
     };
