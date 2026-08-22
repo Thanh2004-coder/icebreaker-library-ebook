@@ -11,8 +11,6 @@
     },
     "filters": {
       "legendPlayers": "Số người",
-      "legendContext": "Bối cảnh",
-      "legendPurpose": "Mục đích",
       "legendDuration": "Thời gian",
       "all": "Tất cả"
     },
