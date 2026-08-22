@@ -716,7 +716,7 @@
     },
     {
       "id": 22,
-      "page": 26,
+      "page": 27,
       "name": "Nối từ",
       "minPlayers": 3,
       "maxPlayers": 10,
@@ -739,7 +739,7 @@
     },
     {
       "id": 23,
-      "page": 27,
+      "page": 28,
       "name": "Có gì thay đổi?",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -762,7 +762,7 @@
     },
     {
       "id": 24,
-      "page": 28,
+      "page": 29,
       "name": "Cân não Logic",
       "minPlayers": 2,
       "maxPlayers": 8,
@@ -786,7 +786,7 @@
     },
     {
       "id": 25,
-      "page": 29,
+      "page": 30,
       "name": "Giải mật thư",
       "minPlayers": 4,
       "maxPlayers": 15,
