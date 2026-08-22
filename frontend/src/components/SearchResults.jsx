@@ -29,33 +29,35 @@ export default function SearchResults({ games, onClear }) {
             </p>
         ) : (
             <ul className="result-list">
-              {games.map((game) => (
-                  <li key={game.id} className="result-card">
-                    <div>
-                      <h2>{game.name}</h2>
+              {games.map((game) => {
+                // Game 1 bắt đầu ở trang 6
+                // Game 4 (Bingo Làm Quen) = trang 9
+                const gamePage = Number(game.id) + 5;
 
-                      <p className="result-page">
-                        {resolveCatalogText(
-                            resultsUi.pageLabel || "Trang {page}"
-                        ).replace("{page}", String(game.page))}
-                      </p>
+                return (
+                    <li key={game.id} className="result-card">
+                      <div>
+                        <h2>{game.name}</h2>
 
-                      <p className="card-desc">
-                        {game.description || ""}
-                      </p>
-                    </div>
+                        <p className="result-page">
+                          Trang {gamePage}
+                        </p>
 
-                    <button
-                        type="button"
-                        className="open-page-btn"
-                        onClick={() => navigate(`/page/${game.page}`)}
-                    >
-                      {resolveCatalogText(
-                          resultsUi.openPage || "Xem trang {page}"
-                      ).replace("{page}", String(game.page))}
-                    </button>
-                  </li>
-              ))}
+                        <p className="card-desc">
+                          {game.description || ""}
+                        </p>
+                      </div>
+
+                      <button
+                          type="button"
+                          className="open-page-btn"
+                          onClick={() => navigate(`/page/${gamePage}`)}
+                      >
+                        Xem trang {gamePage}
+                      </button>
+                    </li>
+                );
+              })}
             </ul>
         )}
       </section>
