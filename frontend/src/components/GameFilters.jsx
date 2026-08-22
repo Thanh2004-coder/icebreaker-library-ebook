@@ -36,43 +36,6 @@ export default function GameFilters({ filters, selected, onChange }) {
       </fieldset>
 
       <fieldset>
-        <legend>{filterUi.legendContext || "Bối cảnh"}</legend>
-        <div className="chips">
-          {filters.contexts.map((item) => (
-            <label key={item.value} className={selected.context === item.value ? "chip on" : "chip"}>
-              <input
-                type="radio"
-                name="context"
-                value={item.value}
-                checked={selected.context === item.value}
-                onChange={() => onChange({ ...selected, context: item.value })}
-              />
-              {item.label}
-            </label>
-          ))}
-          <button type="button" className="chip ghost" onClick={() => onChange({ ...selected, context: "" })}>
-            {allLabel}
-          </button>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>{filterUi.legendPurpose || "Mục đích"}</legend>
-        <div className="chips">
-          {filters.purposes.map((item) => (
-            <label key={item.value} className={selected.purposes.includes(item.value) ? "chip on" : "chip"}>
-              <input
-                type="checkbox"
-                checked={selected.purposes.includes(item.value)}
-                onChange={() => toggleMulti("purposes", item.value)}
-              />
-              {item.label}
-            </label>
-          ))}
-        </div>
-      </fieldset>
-
-      <fieldset>
         <legend>{filterUi.legendDuration || "Thời gian"}</legend>
         <div className="chips">
           {filters.durations.map((item) => (
