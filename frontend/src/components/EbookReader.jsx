@@ -1,167 +1,269 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FitPageStage from "./book/FitPageStage.jsx";
-import GamePageStage from "./book/GamePageStage.jsx";
-import { SheetBody, pageClass, pageStyle } from "./book/pageHelpers.jsx";
-import { FIRST_PAGE, LAST_PAGE, UI, clampPage, resolveCatalogText } from "../data/catalog.js";
+import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
+import {
+    FIRST_PAGE,
+    LAST_PAGE,
+    UI,
+    clampPage,
+    resolveCatalogText,
+} from "../data/catalog.js";
 
-/** Design sheets use the original FitPageStage UI; game/web pages use the large viewer. */
-const DESIGN_PAGE_LAST = 4;
+/**
+ * EbookReader
+ *
+ * Every ebook page is rendered as a screenshot only.
+ *
+ * Page mapping:
+ * 1  -> screenshot 1
+ * 2  -> screenshot 2
+ * ...
+ * 33 -> screenshot 33
+ */
 
 function isInteractive(target) {
-  return Boolean(target.closest("a, button, input, textarea, select, label"));
+    return Boolean(
+        target.closest(
+            "a, button, input, textarea, select, label"
+        )
+    );
 }
 
 export default function EbookReader({ page }) {
-  const navigate = useNavigate();
-  const current = clampPage(page);
-  const [focused, setFocused] = useState(false);
-  const readerUi = UI.reader || {};
-  const useDesignLayout = current <= DESIGN_PAGE_LAST;
+    const navigate = useNavigate();
 
-  const step = 1;
-  const canPrev = current > FIRST_PAGE;
-  const canNext = current < LAST_PAGE;
+    const current = clampPage(page);
 
-  const requestGo = useCallback(
-    (target) => {
-      const next = clampPage(target);
-      if (next === current) return;
-      navigate(`/page/${next}`);
-    },
-    [current, navigate]
-  );
+    const [focused, setFocused] = useState(false);
 
-  useEffect(() => {
-    const onKey = (event) => {
-      if (event.key === "Escape" && focused) {
-        setFocused(false);
-        return;
-      }
-      if (event.key === "ArrowLeft" && current > FIRST_PAGE) requestGo(current - step);
-      if (event.key === "ArrowRight" && current < LAST_PAGE) requestGo(current + step);
+    const readerUi = UI.reader || {};
+
+    const step = 1;
+
+    const canPrev =
+        current > FIRST_PAGE;
+
+    const canNext =
+        current < LAST_PAGE;
+
+    const requestGo = useCallback(
+        (target) => {
+            const next = clampPage(target);
+
+            if (next === current) return;
+
+            navigate(`/page/${next}`);
+        },
+        [current, navigate]
+    );
+
+    /**
+     * Keyboard navigation.
+     */
+    useEffect(() => {
+        const onKey = (event) => {
+            if (
+                event.key === "Escape" &&
+                focused
+            ) {
+                setFocused(false);
+                return;
+            }
+
+            if (
+                event.key === "ArrowLeft" &&
+                current > FIRST_PAGE
+            ) {
+                requestGo(current - step);
+            }
+
+            if (
+                event.key === "ArrowRight" &&
+                current < LAST_PAGE
+            ) {
+                requestGo(current + step);
+            }
+        };
+
+        window.addEventListener(
+            "keydown",
+            onKey
+        );
+
+        return () => {
+            window.removeEventListener(
+                "keydown",
+                onKey
+            );
+        };
+    }, [
+        current,
+        focused,
+        requestGo,
+    ]);
+
+    /**
+     * Prevent background scrolling
+     * while focus mode is open.
+     */
+    useEffect(() => {
+        if (!focused) {
+            return undefined;
+        }
+
+        const previous =
+            document.body.style.overflow;
+
+        document.body.style.overflow =
+            "hidden";
+
+        return () => {
+            document.body.style.overflow =
+                previous;
+        };
+    }, [focused]);
+
+    /**
+     * Open focus mode by clicking the page.
+     */
+    const openFocus = (event) => {
+        if (focused) return;
+
+        if (isInteractive(event.target)) {
+            return;
+        }
+
+        setFocused(true);
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [current, focused, requestGo, step]);
 
-  useEffect(() => {
-    if (!focused) return undefined;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, [focused]);
-
-  const openFocus = (event) => {
-    if (focused) return;
-    if (isInteractive(event.target)) return;
-    setFocused(true);
-  };
-
-  const pageLeaf = (
-    <div className="book-spread single" onClick={(event) => event.stopPropagation()}>
-      <div className={pageClass(current)} style={pageStyle(current)} onClick={openFocus}>
-        <SheetBody page={current} />
-        <span className="page-folio folio-right">{current}</span>
-      </div>
-    </div>
-  );
-
-  const ariaLabel = resolveCatalogText(readerUi.ariaLabel || "Ebook {title}");
-
-  const stage = useDesignLayout ? (
-    focused ? (
-      <div className="ebook-focus" onClick={() => setFocused(false)}>
-        <button
-          type="button"
-          className="focus-arrow left"
-          disabled={!canPrev}
-          aria-label="Trang trước"
-          onClick={(event) => {
-            event.stopPropagation();
-            requestGo(current - step);
-          }}
+    /**
+     * One page.
+     *
+     * SheetBody now returns ONLY the mapped
+     * screenshot, so there is no GameDetail,
+     * DesignSheet or WebSheet rendering.
+     */
+    const pageLeaf = (
+        <div
+            className="book-spread single"
+            onClick={(event) =>
+                event.stopPropagation()
+            }
         >
-          {readerUi.prevShort || "←"}
-        </button>
-        <div className="ebook-focus-book">
-          <FitPageStage pageKey={`focus-${current}`} key={`focus-${current}`} className="ebook-stage-focus">
-            {pageLeaf}
-          </FitPageStage>
+            <div
+                className={`${pageClass(
+                    current
+                )} screenshot-only-page`}
+                onClick={openFocus}
+            >
+                <SheetBody page={current} />
+
+                <span className="page-folio folio-right">
+          {current}
+        </span>
+            </div>
         </div>
-        <button
-          type="button"
-          className="focus-arrow right"
-          disabled={!canNext}
-          aria-label="Trang sau"
-          onClick={(event) => {
-            event.stopPropagation();
-            requestGo(current + step);
-          }}
+    );
+
+    const ariaLabel =
+        resolveCatalogText(
+            readerUi.ariaLabel ||
+            "Ebook {title}"
+        );
+
+    return (
+        <section
+            className="ebook-reader ebook-reader--screenshots"
+            aria-label={ariaLabel}
         >
-          {readerUi.nextShort || "→"}
-        </button>
-      </div>
-    ) : (
-      <FitPageStage pageKey={current} key={`page-${current}`}>
-        {pageLeaf}
-      </FitPageStage>
-    )
-  ) : focused ? (
-    <div className="ebook-focus ebook-focus--game" onClick={() => setFocused(false)}>
-      <button
-        type="button"
-        className="focus-arrow left"
-        disabled={!canPrev}
-        aria-label="Trang trước"
-        onClick={(event) => {
-          event.stopPropagation();
-          requestGo(current - step);
-        }}
-      >
-        {readerUi.prevShort || "←"}
-      </button>
-      <div className="ebook-focus-book">
-        <GamePageStage pageKey={`focus-${current}`} key={`focus-game-${current}`} className="ebook-game-viewer--focus">
-          {pageLeaf}
-        </GamePageStage>
-      </div>
-      <button
-        type="button"
-        className="focus-arrow right"
-        disabled={!canNext}
-        aria-label="Trang sau"
-        onClick={(event) => {
-          event.stopPropagation();
-          requestGo(current + step);
-        }}
-      >
-        {readerUi.nextShort || "→"}
-      </button>
-    </div>
-  ) : (
-    <GamePageStage pageKey={current} key={`game-page-${current}`}>
-      {pageLeaf}
-    </GamePageStage>
-  );
+            {focused ? (
+                <div
+                    className="ebook-focus ebook-focus--screenshots"
+                    onClick={() =>
+                        setFocused(false)
+                    }
+                >
+                    <button
+                        type="button"
+                        className="focus-arrow left"
+                        disabled={!canPrev}
+                        aria-label="Trang trước"
+                        onClick={(event) => {
+                            event.stopPropagation();
 
-  return (
-    <section className={`ebook-reader${useDesignLayout ? "" : " ebook-reader--game"}`} aria-label={ariaLabel}>
-      {stage}
+                            requestGo(
+                                current - step
+                            );
+                        }}
+                    >
+                        {readerUi.prevShort ||
+                            "←"}
+                    </button>
 
-      <nav className="reader-nav" aria-label={readerUi.navAriaLabel || "Lật trang"}>
-        <button type="button" disabled={!canPrev} onClick={() => requestGo(current - step)}>
-          {readerUi.prev || "← Trang trước"}
-        </button>
-        <p>
-          Trang {current} / {LAST_PAGE}
-        </p>
-        <button type="button" disabled={!canNext} onClick={() => requestGo(current + step)}>
-          {readerUi.next || "Trang sau →"}
-        </button>
-      </nav>
-    </section>
-  );
+                    <div className="ebook-focus-book screenshot-focus-book">
+                        {pageLeaf}
+                    </div>
+
+                    <button
+                        type="button"
+                        className="focus-arrow right"
+                        disabled={!canNext}
+                        aria-label="Trang sau"
+                        onClick={(event) => {
+                            event.stopPropagation();
+
+                            requestGo(
+                                current + step
+                            );
+                        }}
+                    >
+                        {readerUi.nextShort ||
+                            "→"}
+                    </button>
+                </div>
+            ) : (
+                <div className="ebook-screenshot-stage">
+                    {pageLeaf}
+                </div>
+            )}
+
+            <nav
+                className="reader-nav"
+                aria-label={
+                    readerUi.navAriaLabel ||
+                    "Lật trang"
+                }
+            >
+                <button
+                    type="button"
+                    disabled={!canPrev}
+                    onClick={() =>
+                        requestGo(
+                            current - step
+                        )
+                    }
+                >
+                    {readerUi.prev ||
+                        "← Trang trước"}
+                </button>
+
+                <p>
+                    Trang {current} / {LAST_PAGE}
+                </p>
+
+                <button
+                    type="button"
+                    disabled={!canNext}
+                    onClick={() =>
+                        requestGo(
+                            current + step
+                        )
+                    }
+                >
+                    {readerUi.next ||
+                        "Trang sau →"}
+                </button>
+            </nav>
+        </section>
+    );
 }
