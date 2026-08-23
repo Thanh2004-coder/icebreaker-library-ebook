@@ -242,49 +242,46 @@ export default function HomePage() {
               onChange={setSelected}
           />
 
-          {querying ? (
+          {querying && (
               <SearchResults
                   games={filtered}
                   total={filtered.length}
                   onClear={clearSearch}
               />
-          ) : (
-              <>
-                <div className="result-bar">
-                  <p>{summaryText}</p>
-                </div>
-
-                <section className="static-game-list">
-                  <div className="static-game-list__header">
-                    <h2>25 TRÒ CHƠI</h2>
-
-                    <p>
-                      Xem tên trò chơi và trang tương ứng, sau đó tìm tên trò chơi
-                      bằng thanh Search.
-                    </p>
-                  </div>
-
-                  <div className="static-game-list__items">
-                    {STATIC_GAME_LIST.map((game) => (
-                        <article
-                            className="static-game-card"
-                            key={game.page}
-                        >
-                          <div className="static-game-card__content">
-                            <h3>{game.name}</h3>
-
-                            <p>{game.howToPlay}</p>
-                          </div>
-
-                          <div className="static-game-card__page">
-                            Trang {game.page}
-                          </div>
-                        </article>
-                    ))}
-                  </div>
-                </section>
-              </>
           )}
+
+          <div className="result-bar">
+            <p>{summaryText}</p>
+          </div>
+
+          <section className="static-game-list">
+            <div className="static-game-list__header">
+              <h2>25 TRÒ CHƠI</h2>
+
+              <p>
+                Xem tên trò chơi và trang tương ứng, sau đó tìm tên trò chơi
+                bằng thanh Search.
+              </p>
+            </div>
+
+            <div className="static-game-list__items">
+              {STATIC_GAME_LIST.map((game) => (
+                  <article
+                      className="static-game-card"
+                      key={game.page}
+                  >
+                    <div className="static-game-card__content">
+                      <h3>{game.name}</h3>
+                      <p>{game.howToPlay}</p>
+                    </div>
+
+                    <div className="static-game-card__page">
+                      Trang {game.page}
+                    </div>
+                  </article>
+              ))}
+            </div>
+          </section>
 
           <EbookReader page={currentPage} />
         </main>
