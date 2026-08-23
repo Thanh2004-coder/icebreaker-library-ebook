@@ -8,31 +8,23 @@ import {
     UI,
     clampPage,
     resolveCatalogText,
-    getScreenshotByPage,
 } from "../data/catalog.js";
 
 /**
  * EbookReader
  *
- * Normal:
- *   FitPageStage -> book-spread -> book-page -> screenshot
+ * Every ebook page is rendered as a screenshot only.
  *
- * Focus:
- *   ebook-focus -> img trực tiếp
- *
- * Focus KHÔNG dùng:
- *   FitPageStage
- *   ebook-stage
- *   ebook-fit-frame
- *   ebook-fit-clip
- *   ebook-fit-scale
- *   book-spread
- *   book-page
+ * Page mapping:
+ * 1  -> screenshot 1
+ * 2  -> screenshot 2
+ * ...
+ * 33 -> screenshot 33
  */
 
 function isInteractive(target) {
     return Boolean(
-        target?.closest(
+        target?.closest?.(
             "a, button, input, textarea, select, label"
         )
     );
@@ -52,40 +44,59 @@ export default function EbookReader({ page }) {
     const canPrev = current > FIRST_PAGE;
     const canNext = current < LAST_PAGE;
 
-    const screenshot = getScreenshotByPage(current);
-
+    /**
+     * Navigate to another page.
+     */
     const requestGo = useCallback(
         (target) => {
             const next = clampPage(target);
 
-            if (next === current) return;
+            if (next === current) {
+                return;
+            }
 
             navigate(`/page/${next}`);
         },
         [current, navigate]
     );
 
-    /*
-     * Keyboard navigation
+    /**
+     * Keyboard navigation.
      */
     useEffect(() => {
         const onKey = (event) => {
+            /**
+             * ESC:
+             * close focus mode.
+             */
             if (event.key === "Escape" && focused) {
+                event.preventDefault();
                 setFocused(false);
                 return;
             }
 
+            /**
+             * Left arrow:
+             * previous page.
+             */
             if (
                 event.key === "ArrowLeft" &&
                 current > FIRST_PAGE
             ) {
+                event.preventDefault();
                 requestGo(current - step);
+                return;
             }
 
+            /**
+             * Right arrow:
+             * next page.
+             */
             if (
                 event.key === "ArrowRight" &&
                 current < LAST_PAGE
             ) {
+                event.preventDefault();
                 requestGo(current + step);
             }
         };
@@ -95,10 +106,15 @@ export default function EbookReader({ page }) {
         return () => {
             window.removeEventListener("keydown", onKey);
         };
-    }, [current, focused, requestGo]);
+    }, [
+        current,
+        focused,
+        requestGo,
+    ]);
 
-    /*
-     * Khóa scroll nền khi fullscreen
+    /**
+     * Prevent background scrolling
+     * while focus mode is open.
      */
     useEffect(() => {
         if (!focused) {
@@ -123,11 +139,15 @@ export default function EbookReader({ page }) {
         };
     }, [focused]);
 
-    /*
-     * Mở fullscreen
+    /**
+     * Open focus mode.
+     *
+     * This is used only by the normal page.
      */
     const openFocus = (event) => {
-        if (focused) return;
+        if (focused) {
+            return;
+        }
 
         if (isInteractive(event.target)) {
             return;
@@ -136,20 +156,25 @@ export default function EbookReader({ page }) {
         setFocused(true);
     };
 
-    /*
-     * ================================
-     * NORMAL PAGE
-     * ================================
-     *
-     * Phần này giữ nguyên hệ thống FitPageStage.
+    /**
+     * Close focus mode.
      */
-    const normalPage = (
-        <div
-            className="book-spread single"
-            onClick={(event) =>
-                event.stopPropagation()
-            }
-        >
+    const closeFocus = () => {
+        setFocused(false);
+    };
+
+    /**
+     * One screenshot page.
+     *
+     * IMPORTANT:
+     * Do NOT stopPropagation here.
+     *
+     * When focus mode is open, clicking the screenshot
+     * must be able to reach the .ebook-focus container
+     * so it can close the overlay.
+     */
+    const pageLeaf = (
+        <div className="book-spread single">
             <div
                 className={`${pageClass(
                     current
@@ -165,42 +190,19 @@ export default function EbookReader({ page }) {
         </div>
     );
 
-    /*
-     * ================================
-     * FULLSCREEN PAGE
-     * ================================
-     *
-     * QUAN TRỌNG:
-     *
-     * Không dùng pageLeaf.
-     * Không dùng book-page.
-     * Không dùng FitPageStage.
-     *
-     * Chỉ render IMG trực tiếp.
-     */
-    const fullscreenPage = (
-        <img
-            className="fullscreen-screenshot"
-            src={screenshot}
-            alt={`Trang ${current}`}
-            draggable={false}
-        />
-    );
-
     const ariaLabel = resolveCatalogText(
         readerUi.ariaLabel || "Ebook {title}"
     );
 
-    /*
-     * ================================
-     * STAGE
-     * ================================
+    /**
+     * FOCUS / FULLSCREEN VIEW
      */
     const stage = focused ? (
         <div
             className="ebook-focus ebook-focus--screenshots"
-            onClick={() => setFocused(false)}
+            onClick={closeFocus}
         >
+            {/* PREVIOUS */}
             <button
                 type="button"
                 className="focus-arrow left"
@@ -215,20 +217,12 @@ export default function EbookReader({ page }) {
                 {readerUi.prevShort || "←"}
             </button>
 
-            {/*
-             * FULLSCREEN CONTAINER
-             *
-             * Không có FitPageStage ở đây.
-             */}
-            <div
-                className="fullscreen-screenshot-container"
-                onClick={(event) =>
-                    event.stopPropagation()
-                }
-            >
-                {fullscreenPage}
+            {/* IMAGE */}
+            <div className="ebook-focus-book screenshot-focus-book">
+                {pageLeaf}
             </div>
 
+            {/* NEXT */}
             <button
                 type="button"
                 className="focus-arrow right"
@@ -244,14 +238,14 @@ export default function EbookReader({ page }) {
             </button>
         </div>
     ) : (
-        /*
-         * NORMAL MODE
+        /**
+         * NORMAL PAGE VIEW
          */
         <FitPageStage
             pageKey={current}
             key={`page-${current}`}
         >
-            {normalPage}
+            {pageLeaf}
         </FitPageStage>
     );
 
@@ -262,6 +256,7 @@ export default function EbookReader({ page }) {
         >
             {stage}
 
+            {/* PAGE NAVIGATION */}
             <nav
                 className="reader-nav"
                 aria-label={
@@ -273,9 +268,7 @@ export default function EbookReader({ page }) {
                     type="button"
                     disabled={!canPrev}
                     onClick={() =>
-                        requestGo(
-                            current - step
-                        )
+                        requestGo(current - step)
                     }
                 >
                     {readerUi.prev ||
@@ -290,9 +283,7 @@ export default function EbookReader({ page }) {
                     type="button"
                     disabled={!canNext}
                     onClick={() =>
-                        requestGo(
-                            current + step
-                        )
+                        requestGo(current + step)
                     }
                 >
                     {readerUi.next ||
