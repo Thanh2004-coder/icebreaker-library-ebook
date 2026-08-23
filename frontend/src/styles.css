@@ -1814,6 +1814,14 @@ legend {
 .layout-ebook .ebook-reader {
   flex: 0 0 auto;
 }
+.static-game-card {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+}
 @media (max-width: 899px) {
   .ebook-game-viewer {
     min-height: max(360px, calc(100dvh - 280px));

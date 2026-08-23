@@ -266,9 +266,11 @@ export default function HomePage() {
 
             <div className="static-game-list__items">
               {STATIC_GAME_LIST.map((game) => (
-                  <article
+                  <button
+                      type="button"
                       className="static-game-card"
                       key={game.page}
+                      onClick={() => navigate(`/page/${game.page}`)}
                   >
                     <div className="static-game-card__content">
                       <h3>{game.name}</h3>
@@ -278,7 +280,7 @@ export default function HomePage() {
                     <div className="static-game-card__page">
                       Trang {game.page}
                     </div>
-                  </article>
+                  </button>
               ))}
             </div>
           </section>
