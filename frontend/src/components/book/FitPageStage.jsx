@@ -1,34 +1,112 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 
-/** Matches design-page artwork (~627x1002). width / height */
+/** Tỷ lệ trang */
 export const PAGE_ASPECT = 5 / 8;
-/** Comfortable layout width - content is measured here, then the whole page scales. */
+
+/**
+ * Kích thước layout gốc.
+ * Nội dung vẫn được layout ở kích thước này,
+ * sau đó scale lên theo stage.
+ */
 const BASE_WIDTH = 469;
 const BASE_HEIGHT = Math.round(BASE_WIDTH / PAGE_ASPECT);
+
 const MIN_STAGE = 160;
 
+/**
+ * focus:
+ *   false = chế độ bình thường
+ *   true  = chế độ phóng to
+ *
+ * zoom:
+ *   1    = vừa màn hình
+ *   1.25 = lớn hơn 25%
+ *   1.5  = lớn hơn 50%
+ */
 function readStageSize(stage) {
   const rect = stage.getBoundingClientRect();
-  let availW = Math.max(stage.clientWidth || 0, rect.width || 0);
-  let availH = Math.max(stage.clientHeight || 0, rect.height || 0);
+
+  let availW = Math.max(
+      stage.clientWidth || 0,
+      rect.width || 0
+  );
+
+  let availH = Math.max(
+      stage.clientHeight || 0,
+      rect.height || 0
+  );
 
   if (availW < MIN_STAGE) {
     availW = Math.max(window.innerWidth - 64, 280);
   }
+
   if (availH < MIN_STAGE) {
-    availH = Math.max(Math.floor(window.innerHeight * 0.55), 320);
+    availH = Math.max(
+        Math.floor(window.innerHeight * 0.55),
+        320
+    );
   }
 
   return { availW, availH };
 }
 
 /**
- * Fit a fixed-aspect base page into the stage.
- * Content never changes the aspect - only uniform scale does.
+ * Tính kích thước page.
+ *
+ * Chế độ thường:
+ *   - fit vào màn hình/stage
+ *
+ * Chế độ focus:
+ *   - cho phép page lớn hơn
+ *   - không còn bị giới hạn bởi BASE_WIDTH = 469
  */
-export function fitPageBox(availW, availH) {
-  const maxW = Math.min(availW, BASE_WIDTH, window.innerWidth);
-  const maxH = Math.min(availH, window.innerHeight);
+export function fitPageBox(
+    availW,
+    availH,
+    focus = false,
+    zoom = 1
+) {
+  if (focus) {
+    /*
+     * Focus lấy phần lớn chiều rộng màn hình.
+     *
+     * Không dùng BASE_WIDTH ở đây.
+     */
+    const focusMaxW =
+        Math.max(window.innerWidth - 140, 320);
+
+    let width = Math.min(
+        availW,
+        focusMaxW
+    );
+
+    /*
+     * Cho zoom vượt kích thước vừa màn hình.
+     */
+    width *= zoom;
+
+    let height = width / PAGE_ASPECT;
+
+    return {
+      width: Math.max(1, Math.floor(width)),
+      height: Math.max(1, Math.floor(height)),
+    };
+  }
+
+  /*
+   * Chế độ bình thường:
+   * vẫn giữ behavior cũ.
+   */
+  const maxW = Math.min(
+      availW,
+      BASE_WIDTH,
+      window.innerWidth
+  );
+
+  const maxH = Math.min(
+      availH,
+      window.innerHeight
+  );
 
   let width = maxW;
   let height = width / PAGE_ASPECT;
@@ -44,20 +122,48 @@ export function fitPageBox(availW, availH) {
   };
 }
 
-/**
- * Stable ebook page stage:
- * 1) Layout at fixed BASE_WIDTH x BASE_HEIGHT (ebook aspect)
- * 2) Uniformly scale that box into the available stage (outerScale only)
- */
-export default function FitPageStage({ children, pageKey, className = "" }) {
+export default function FitPageStage({
+                                       children,
+                                       pageKey,
+                                       className = "",
+
+                                       /**
+                                        * Bật khi component nằm trong modal phóng to.
+                                        */
+                                       focus = false,
+
+                                       /**
+                                        * Mức zoom khi focus.
+                                        *
+                                        * 1.0  = lớn vừa màn hình
+                                        * 1.25 = lớn hơn
+                                        * 1.5  = lớn hơn nữa
+                                        */
+                                       zoom = 1.25,
+                                     }) {
   const stageRef = useRef(null);
   const scaleRef = useRef(null);
   const rafRef = useRef(0);
+
   const [box, setBox] = useState(() => {
     if (typeof window === "undefined") {
-      return { width: 0, height: 0, scale: 1 };
+      return {
+        width: 0,
+        height: 0,
+        scale: 1,
+      };
     }
-    const seed = fitPageBox(Math.max(window.innerWidth - 64, 280), Math.max(window.innerHeight * 0.55, 320));
+
+    const seed = fitPageBox(
+        Math.max(window.innerWidth - 64, 280),
+        Math.max(
+            window.innerHeight * 0.55,
+            320
+        ),
+        focus,
+        zoom
+    );
+
     return {
       width: seed.width,
       height: seed.height,
@@ -68,111 +174,231 @@ export default function FitPageStage({ children, pageKey, className = "" }) {
   const recalculate = useCallback(() => {
     const stage = stageRef.current;
     const scaleEl = scaleRef.current;
+
     if (!stage || !scaleEl) return;
 
-    const { availW, availH } = readStageSize(stage);
-    const fitted = fitPageBox(availW, availH);
-    const scale = fitted.width / BASE_WIDTH;
+    const { availW, availH } =
+        readStageSize(stage);
 
-    scaleEl.style.width = `${BASE_WIDTH}px`;
-    scaleEl.style.height = `${BASE_HEIGHT}px`;
-    scaleEl.style.minHeight = `${BASE_HEIGHT}px`;
+    const fitted = fitPageBox(
+        availW,
+        availH,
+        focus,
+        zoom
+    );
+
+    const scale =
+        fitted.width / BASE_WIDTH;
+
+    /*
+     * Nội dung luôn layout ở kích thước BASE.
+     */
+    scaleEl.style.width =
+        `${BASE_WIDTH}px`;
+
+    scaleEl.style.height =
+        `${BASE_HEIGHT}px`;
+
+    scaleEl.style.minHeight =
+        `${BASE_HEIGHT}px`;
 
     setBox((prev) => {
       if (
-        prev.width === fitted.width &&
-        prev.height === fitted.height &&
-        Math.abs(prev.scale - scale) < 0.001
+          prev.width === fitted.width &&
+          prev.height === fitted.height &&
+          Math.abs(
+              prev.scale - scale
+          ) < 0.001
       ) {
         return prev;
       }
+
       return {
         width: fitted.width,
         height: fitted.height,
         scale,
       };
     });
-  }, []);
+  }, [focus, zoom]);
 
-  const scheduleRecalculate = useCallback(() => {
-    window.cancelAnimationFrame(rafRef.current);
-    rafRef.current = window.requestAnimationFrame(() => {
-      recalculate();
-    });
-  }, [recalculate]);
+  const scheduleRecalculate =
+      useCallback(() => {
+        window.cancelAnimationFrame(
+            rafRef.current
+        );
+
+        rafRef.current =
+            window.requestAnimationFrame(() => {
+              recalculate();
+            });
+      }, [recalculate]);
 
   useLayoutEffect(() => {
     scheduleRecalculate();
 
-    const stage = stageRef.current;
-    if (!stage) return undefined;
+    const stage =
+        stageRef.current;
 
-    const ro = new ResizeObserver(scheduleRecalculate);
+    if (!stage) {
+      return undefined;
+    }
+
+    const ro =
+        new ResizeObserver(
+            scheduleRecalculate
+        );
+
     ro.observe(stage);
 
-    const onViewport = () => scheduleRecalculate();
-    window.addEventListener("resize", onViewport);
-    window.addEventListener("orientationchange", onViewport);
-    window.visualViewport?.addEventListener("resize", onViewport);
+    const onViewport =
+        () => scheduleRecalculate();
 
-    const images = stage.querySelectorAll("img");
+    window.addEventListener(
+        "resize",
+        onViewport
+    );
+
+    window.addEventListener(
+        "orientationchange",
+        onViewport
+    );
+
+    window.visualViewport?.addEventListener(
+        "resize",
+        onViewport
+    );
+
+    const images =
+        stage.querySelectorAll("img");
+
     images.forEach((img) => {
-      img.addEventListener("load", scheduleRecalculate);
-      if (img.complete) scheduleRecalculate();
+      img.addEventListener(
+          "load",
+          scheduleRecalculate
+      );
+
+      if (img.complete) {
+        scheduleRecalculate();
+      }
     });
 
-    document.fonts?.ready?.then(scheduleRecalculate).catch(() => {});
+    document.fonts?.ready
+        ?.then(scheduleRecalculate)
+        .catch(() => {});
 
-    const t1 = window.setTimeout(scheduleRecalculate, 32);
-    const t2 = window.setTimeout(scheduleRecalculate, 180);
+    const t1 =
+        window.setTimeout(
+            scheduleRecalculate,
+            32
+        );
+
+    const t2 =
+        window.setTimeout(
+            scheduleRecalculate,
+            180
+        );
 
     return () => {
-      window.cancelAnimationFrame(rafRef.current);
+      window.cancelAnimationFrame(
+          rafRef.current
+      );
+
       window.clearTimeout(t1);
       window.clearTimeout(t2);
-      ro.disconnect();
-      window.removeEventListener("resize", onViewport);
-      window.removeEventListener("orientationchange", onViewport);
-      window.visualViewport?.removeEventListener("resize", onViewport);
-      images.forEach((img) => img.removeEventListener("load", scheduleRecalculate));
-    };
-  }, [scheduleRecalculate, pageKey]);
 
-  const ready = box.width > 0 && box.height > 0;
+      ro.disconnect();
+
+      window.removeEventListener(
+          "resize",
+          onViewport
+      );
+
+      window.removeEventListener(
+          "orientationchange",
+          onViewport
+      );
+
+      window.visualViewport?.removeEventListener(
+          "resize",
+          onViewport
+      );
+
+      images.forEach((img) => {
+        img.removeEventListener(
+            "load",
+            scheduleRecalculate
+        );
+      });
+    };
+  }, [
+    scheduleRecalculate,
+    pageKey,
+    focus,
+    zoom,
+  ]);
+
+  const ready =
+      box.width > 0 &&
+      box.height > 0;
 
   return (
-    <div ref={stageRef} className={`ebook-stage ${className}`.trim()}>
       <div
-        className="ebook-fit-frame"
-        style={
-          ready
-            ? {
-                width: box.width,
-                height: box.height,
-              }
-            : undefined
-        }
+          ref={stageRef}
+          className={[
+            "ebook-stage",
+            focus
+                ? "ebook-stage-focus"
+                : "",
+            className,
+          ]
+              .filter(Boolean)
+              .join(" ")}
       >
-        <div className="ebook-fit-clip">
-          <div
-            ref={scaleRef}
-            className="ebook-fit-scale"
+        <div
+            className="ebook-fit-frame"
             style={
               ready
-                ? {
-                    width: BASE_WIDTH,
-                    height: BASE_HEIGHT,
-                    minHeight: BASE_HEIGHT,
-                    transform: `scale(${box.scale})`,
-                    transformOrigin: "top left",
+                  ? {
+                    width: box.width,
+                    height: box.height,
                   }
-                : undefined
+                  : undefined
             }
+        >
+          <div
+              className="ebook-fit-clip"
+              style={
+                focus
+                    ? {
+                      overflow: "visible",
+                    }
+                    : undefined
+              }
           >
-            {children}
+            <div
+                ref={scaleRef}
+                className="ebook-fit-scale"
+                style={
+                  ready
+                      ? {
+                        width: BASE_WIDTH,
+                        height: BASE_HEIGHT,
+                        minHeight:
+                        BASE_HEIGHT,
+
+                        transform:
+                            `scale(${box.scale})`,
+
+                        transformOrigin:
+                            "top left",
+                      }
+                      : undefined
+                }
+            >
+              {children}
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
