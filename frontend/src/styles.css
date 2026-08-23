@@ -242,9 +242,9 @@ legend {
     background: transparent;
 }
 
-    /* =========================================================
-       RESULT BAR / SEARCH RESULTS
-       ========================================================= */
+/* =========================================================
+RESULT BAR / SEARCH RESULTS
+========================================================= */
 
 .result-bar {
     display: flex;
@@ -266,21 +266,26 @@ legend {
     cursor: pointer;
 }
 
+/* Khung kết quả tìm kiếm */
 .search-results {
     width: 100%;
     margin: 8px 0 12px;
     padding: 10px 12px;
+
     border: 1px solid rgba(125, 75, 255, 0.55);
     border-radius: 14px;
     background: rgba(18, 10, 45, 0.94);
+
     min-height: 0;
 }
 
+/* Header "Tìm thấy ... / Xóa bộ lọc" */
 .search-results__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+
     margin-bottom: 7px;
 }
 
@@ -291,13 +296,61 @@ legend {
     color: #fff;
 }
 
+/* =========================================================
+   CHỈ DANH SÁCH KẾT QUẢ ĐƯỢC SCROLL
+   ========================================================= */
+
 .search-results .result-list {
     list-style: none;
     margin: 0;
     padding: 0;
+
     display: grid;
     gap: 6px;
+
+    /* Chiều cao tối đa của vùng danh sách */
+    max-height: 310px;
+
+    /* Chỉ vùng này có thanh kéo */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Không làm layout bên ngoài thay đổi */
+    overscroll-behavior: contain;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #8f6bff rgba(10, 6, 32, 0.45);
 }
+
+/* Chrome / Edge / Safari */
+.search-results .result-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-results .result-list::-webkit-scrollbar-track {
+    background: rgba(10, 6, 32, 0.55);
+    border-radius: 999px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+            #ff7cc8,
+            #8f6bff
+    );
+    border-radius: 999px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+            #ff91d2,
+            #a080ff
+    );
+}
+
+/* =========================================================
+   RESULT CARD
+   ========================================================= */
 
 .result-list {
     list-style: none;
@@ -312,10 +365,12 @@ legend {
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
+
     background: rgba(16, 10, 42, 0.9);
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 10px 12px;
+
     box-shadow: var(--shadow);
 }
 
@@ -324,8 +379,10 @@ legend {
     padding: 8px 10px;
     border-radius: 9px;
     gap: 10px;
+
     background: rgba(255, 255, 255, 0.025);
     border-color: rgba(132, 84, 255, 0.2);
+
     box-shadow: none;
 }
 
@@ -360,19 +417,28 @@ legend {
     margin: 0;
     font-size: 8.5px;
     line-height: 1.25;
+
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+
     overflow: hidden;
 }
 
 .open-page-btn {
     flex: none;
     border: 0;
-    background: linear-gradient(90deg, #ff7cc8, #8f6bff);
+
+    background: linear-gradient(
+            90deg,
+            #ff7cc8,
+            #8f6bff
+    );
+
     color: #1a0f38;
     border-radius: 9px;
     padding: 7px 10px;
+
     cursor: pointer;
     font-weight: 700;
 }
@@ -381,6 +447,35 @@ legend {
     padding: 5px 8px;
     border-radius: 7px;
     font-size: 8px;
+}
+/* =========================================================
+   SEARCH RESULTS - CHỈ HIỆN 5 TRÒ, MUỐN XEM THÊM THÌ KÉO
+   ========================================================= */
+
+.search-results .result-list {
+    max-height: 265px;       /* khoảng 5 trò */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+}
+
+/* Thanh kéo */
+.search-results .result-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results .result-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb {
+    background: rgba(143, 107, 255, 0.75);
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 124, 200, 0.9);
 }
 
 .muted {
