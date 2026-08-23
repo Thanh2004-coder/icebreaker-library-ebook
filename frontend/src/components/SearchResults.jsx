@@ -49,7 +49,9 @@ export default function SearchResults({ games, onClear }) {
                                 <button
                                     type="button"
                                     className="open-page-btn"
-                                    onClick={() => navigate(`/page/${gamePage}`)}
+                                    onClick={() =>
+                                        navigate(`/page/${gamePage}`)
+                                    }
                                 >
                                     Xem trang {gamePage}
                                 </button>
