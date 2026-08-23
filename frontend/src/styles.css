@@ -1021,65 +1021,144 @@ RESULT BAR / SEARCH RESULTS
 }
 
 /* =========================================================
-   FOCUS VIEW
+   FOCUS / PHÓNG TO ẢNH - ẢNH TO HƠN
    ========================================================= */
 
 .ebook-focus {
     position: fixed;
     inset: 0;
     z-index: 80;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 72px;
-    background: rgba(8, 3, 26, 0.82);
+
+    /* giảm khoảng trống hai bên */
+    padding: 16px 40px;
+
+    background: rgba(8, 3, 26, 0.88);
+
     overflow: hidden;
 }
 
 .ebook-focus-book {
-    width: min(1180px, 100%);
-    height: calc(100dvh - 48px);
-    max-height: calc(100dvh - 48px);
+    width: auto;
+    max-width: 92vw;
+
+    height: calc(100dvh - 32px);
+    max-height: calc(100dvh - 32px);
+
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     min-height: 0;
 }
 
+/* Quan trọng: cho spread lấy chiều cao tối đa */
 .ebook-focus .book-spread {
+    width: auto;
+    height: 100%;
     max-width: none;
-    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
 }
 
+/* Trang đơn */
+.ebook-focus .book-spread.single,
+.ebook-focus .book-spread.cover-only {
+    width: auto;
+    height: 100%;
+}
+
+/* Trang trong chế độ phóng to */
 .ebook-focus .book-page {
+    width: auto;
+    height: 100%;
+
     min-height: 0;
     max-height: none;
+
+    padding: 0;
+
     cursor: default;
     overflow: hidden;
+
+    border-radius: 18px;
 }
 
-.ebook-focus .book-page.design-page {
-    overflow: hidden;
+/* ẢNH PHÓNG TO */
+.ebook-focus .book-page-image {
+    display: block;
+
+    height: 100%;
+    width: auto;
+
+    max-width: 92vw;
+    max-height: calc(100dvh - 32px);
+
+    object-fit: contain;
+    object-position: center;
 }
 
-.ebook-focus .book-spread.single .book-page,
-.ebook-focus .book-spread.cover-only .book-page {
-    min-height: 0;
+/* Nếu là trang design */
+.ebook-focus .design-sheet,
+.ebook-focus .design-sheet-page {
+    width: auto;
+    height: 100%;
 }
+
+.ebook-focus .design-sheet-image {
+    display: block;
+
+    width: auto;
+    height: 100%;
+
+    max-width: 92vw;
+    max-height: calc(100dvh - 32px);
+
+    object-fit: contain;
+}
+
+/* Không cho các khung trung gian bóp nhỏ ảnh */
+.ebook-focus .ebook-fit-frame,
+.ebook-focus .ebook-fit-clip,
+.ebook-focus .ebook-fit-scale {
+    width: auto;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+}
+
+/* =========================================================
+   MŨI TÊN
+   ========================================================= */
 
 .focus-arrow {
     position: fixed;
     top: 50%;
     z-index: 81;
+
     transform: translateY(-50%);
+
     width: 48px;
     height: 48px;
+
     border: 0;
     border-radius: 999px;
+
     background: #1f124f;
     color: #ffd76b;
+
     box-shadow: var(--shadow);
+
     font-size: 1.35rem;
     font-weight: 700;
+
     cursor: pointer;
 }
 
