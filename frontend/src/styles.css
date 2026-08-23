@@ -2092,3 +2092,177 @@ RESULT BAR / SEARCH RESULTS
         transform: scale(1.25) !important;
     }
 }
+/* =========================================================
+   FULLSCREEN SCREENSHOT - KHÔNG DÙNG FitPageStage
+   ========================================================= */
+
+.ebook-focus--screenshots {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    width: 100vw;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 70px;
+
+    background: rgba(5, 2, 18, 0.94);
+
+    overflow: hidden;
+}
+
+/* Khung ảnh fullscreen */
+.ebook-focus--screenshots .screenshot-focus-book {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+/* book-spread không còn bị giới hạn 469px */
+.ebook-focus--screenshots .book-spread.single {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    max-width: none;
+    max-height: none;
+
+    overflow: hidden;
+}
+
+/* Trang */
+.ebook-focus--screenshots .screenshot-only-page {
+    width: auto;
+    height: 100%;
+
+    max-width: calc(100vw - 140px);
+    max-height: calc(100dvh - 24px);
+
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+/* Ảnh thật */
+.ebook-focus--screenshots .screenshot-only-page .book-page-image {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: calc(100vw - 140px);
+    max-height: calc(100dvh - 24px);
+
+    object-fit: contain;
+
+    margin: 0;
+}
+
+/* Không để folio làm ảnh bị ảnh hưởng */
+.ebook-focus--screenshots .page-folio {
+    display: none;
+}
+
+/* Mũi tên */
+.ebook-focus--screenshots .focus-arrow {
+    position: fixed;
+    top: 50%;
+    z-index: 10001;
+
+    transform: translateY(-50%);
+
+    width: 52px;
+    height: 52px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: rgba(31, 18, 79, 0.95);
+    color: #ffd76b;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.ebook-focus--screenshots .focus-arrow.left {
+    left: 14px;
+}
+
+.ebook-focus--screenshots .focus-arrow.right {
+    right: 14px;
+}
+
+.ebook-focus--screenshots .focus-arrow:hover:not(:disabled) {
+    background: #6b49ff;
+    color: #fff6cf;
+}
+
+.ebook-focus--screenshots .focus-arrow:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .ebook-focus--screenshots {
+        padding: 8px 48px;
+    }
+
+    .ebook-focus--screenshots .screenshot-only-page {
+        max-width: calc(100vw - 96px);
+        max-height: calc(100dvh - 16px);
+    }
+
+    .ebook-focus--screenshots .screenshot-only-page .book-page-image {
+        max-width: calc(100vw - 96px);
+        max-height: calc(100dvh - 16px);
+    }
+
+    .ebook-focus--screenshots .focus-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .ebook-focus--screenshots .focus-arrow.left {
+        left: 6px;
+    }
+
+    .ebook-focus--screenshots .focus-arrow.right {
+        right: 6px;
+    }
+}

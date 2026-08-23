@@ -196,14 +196,11 @@ export default function EbookReader({ page }) {
                     "←"}
             </button>
 
-            <div className="ebook-focus-book screenshot-focus-book">
-                <FitPageStage
-                    pageKey={`focus-${current}`}
-                    key={`focus-${current}`}
-                    className="ebook-stage-focus"
-                >
-                    {pageLeaf}
-                </FitPageStage>
+            <div
+                className="ebook-focus-book screenshot-focus-book"
+                onClick={(event) => event.stopPropagation()}
+            >
+                {pageLeaf}
             </div>
 
             <button
