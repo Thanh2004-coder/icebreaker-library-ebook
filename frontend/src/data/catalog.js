@@ -13,13 +13,19 @@ export const SITE = catalog.site || {};
 /**
  * Screenshot mapping.
  *
- * Page 1  -> Screenshot 2026-08-22 211740.png
- * Page 2  -> Screenshot 2026-08-22 211748.png
+ * Page 1  -> Screenshot 01.png
+ * Page 2  -> Screenshot 02.png
+ * Page 3  -> Screenshot 03.png
+ * Page 4  -> Screenshot 04.png
+ * Page 5  -> Screenshot 05.png
  * ...
- * Page 33 -> Screenshot 2026-08-22 212247.png
+ * Page 32 -> Screenshot 32.png
  *
- * Game pages start at page 6:
- * Page 6 -> Screenshot 2026-08-22 211822.png
+ * Game pages start at page 5:
+ * Page 5 -> Game 1
+ * Page 6 -> Game 2
+ * ...
+ * Page 29 -> Game 25
  */
 export const SCREENSHOTS = [
   "/images/01.png",
@@ -59,8 +65,8 @@ export const SCREENSHOTS = [
 /**
  * Official game names read from the 25 game screenshots.
  *
- * ID 1  -> Page 6
- * ID 25 -> Page 30
+ * ID 1  -> Page 5
+ * ID 25 -> Page 29
  */
 export const GAME_NAMES = {
   1: "5 Giây",
@@ -93,13 +99,14 @@ export const GAME_NAMES = {
 /**
  * Game pages are fixed by the screenshot layout.
  *
- * Page 6  -> Game 1
- * Page 7  -> Game 2
+ * Page 5  -> Game 1
+ * Page 6  -> Game 2
  * ...
- * Page 30 -> Game 25
+ * Page 29 -> Game 25
  */
-export const GAME_START_PAGE = 6;
-export const GAME_END_PAGE = GAME_START_PAGE + 25 - 1;
+export const GAME_START_PAGE = 5;
+export const GAME_END_PAGE =
+    GAME_START_PAGE + 25 - 1;
 
 /**
  * Get screenshot mapped to ebook page.
@@ -107,8 +114,13 @@ export const GAME_END_PAGE = GAME_START_PAGE + 25 - 1;
 export function getScreenshotByPage(page) {
   const n = Number(page);
 
-  if (!Number.isInteger(n)) return null;
-  if (n < 1 || n > SCREENSHOTS.length) return null;
+  if (!Number.isInteger(n)) {
+    return null;
+  }
+
+  if (n < 1 || n > SCREENSHOTS.length) {
+    return null;
+  }
 
   return SCREENSHOTS[n - 1];
 }
@@ -145,7 +157,9 @@ export function firstPage() {
     ...numberedPages(WEBS),
   ];
 
-  return pages.length ? Math.min(...pages) : 1;
+  return pages.length
+      ? Math.min(...pages)
+      : 1;
 }
 
 export function lastPage() {
@@ -156,7 +170,9 @@ export function lastPage() {
   ];
 
   const catalogLastPage =
-      pages.length ? Math.max(...pages) : 1;
+      pages.length
+          ? Math.max(...pages)
+          : 1;
 
   return Math.max(
       catalogLastPage,
@@ -166,6 +182,7 @@ export function lastPage() {
 
 export const FIRST_PAGE = firstPage();
 export const LAST_PAGE = lastPage();
+
 export function clampPage(page) {
   const n = Number(page);
 
@@ -174,7 +191,10 @@ export function clampPage(page) {
   }
 
   return Math.min(
-      Math.max(Math.floor(n), FIRST_PAGE),
+      Math.max(
+          Math.floor(n),
+          FIRST_PAGE
+      ),
       LAST_PAGE
   );
 }
@@ -195,7 +215,9 @@ export const EBOOK = {
  * 3. empty string
  */
 export function getGameName(game) {
-  if (!game) return "";
+  if (!game) {
+    return "";
+  }
 
   const id = Number(game.id);
 
@@ -214,7 +236,9 @@ export function getGameName(game) {
  * {title}
  */
 export function resolveCatalogText(text) {
-  if (text == null) return "";
+  if (text == null) {
+    return "";
+  }
 
   return String(text)
       .replace(
@@ -244,7 +268,9 @@ export function resolveCatalogLines(value) {
 }
 
 export function formatPlayers(min, max) {
-  if (min == null) return "";
+  if (min == null) {
+    return "";
+  }
 
   if (max == null) {
     return `${min}+ người`;
@@ -258,7 +284,9 @@ export function formatPlayers(min, max) {
 }
 
 export function formatDuration(min, max) {
-  if (min == null) return "";
+  if (min == null) {
+    return "";
+  }
 
   if (min === max) {
     return `${min} phút`;
@@ -272,7 +300,8 @@ export function getGameById(id) {
 
   return (
       GAMES.find(
-          (game) => Number(game.id) === key
+          (game) =>
+              Number(game.id) === key
       ) || null
   );
 }
@@ -282,7 +311,8 @@ export function getGameByPage(page) {
 
   return (
       GAMES.find(
-          (game) => Number(game.page) === key
+          (game) =>
+              Number(game.page) === key
       ) ||
       GAMES.find(
           (game) =>
@@ -298,7 +328,8 @@ export function getWebByPage(page) {
 
   return (
       WEBS.find(
-          (web) => Number(web.page) === key
+          (web) =>
+              Number(web.page) === key
       ) || null
   );
 }
@@ -308,7 +339,8 @@ export function getDesignSheet(page) {
 
   return (
       SHEETS.find(
-          (sheet) => Number(sheet.page) === key
+          (sheet) =>
+              Number(sheet.page) === key
       ) || null
   );
 }
@@ -316,7 +348,8 @@ export function getDesignSheet(page) {
 export function gamesByPage() {
   return [...GAMES].sort(
       (a, b) =>
-          Number(a.page) - Number(b.page)
+          Number(a.page) -
+          Number(b.page)
   );
 }
 
@@ -337,7 +370,7 @@ export function getGamePageBackground(game) {
  * 1. heroImage
  * 2. coverImage
  * 3. image
- * 4. mapped screenshot by page
+ * 4. mapped screenshot by game position
  * 5. fallback image
  */
 export function getHeroImage(game) {
@@ -346,12 +379,17 @@ export function getHeroImage(game) {
   }
 
   const gameIndex = gamesByPage().findIndex(
-      (item) => Number(item.id) === Number(game.id)
+      (item) =>
+          Number(item.id) ===
+          Number(game.id)
   );
 
   const gameScreenshot =
       gameIndex >= 0
-          ? SCREENSHOTS[5 + gameIndex]
+          ? SCREENSHOTS[
+          GAME_START_PAGE - 1 +
+          gameIndex
+              ]
           : null;
 
   return (
@@ -378,9 +416,12 @@ export function hasInstructionImage(game) {
 
 export function onImageError(fallbackSrc) {
   return (event) => {
-    const img = event.currentTarget;
+    const img =
+        event.currentTarget;
 
-    if (img.dataset.fallback === "1") {
+    if (
+        img.dataset.fallback === "1"
+    ) {
       return;
     }
 
@@ -392,24 +433,35 @@ export function onImageError(fallbackSrc) {
 export function asLines(value) {
   if (Array.isArray(value)) {
     return value
-        .map((item) => String(item).trim())
+        .map((item) =>
+            String(item).trim()
+        )
         .filter(Boolean);
   }
 
-  if (value == null || value === "") {
+  if (
+      value == null ||
+      value === ""
+  ) {
     return [];
   }
 
   return String(value)
       .split(/\n/)
-      .map((line) => line.trim())
+      .map((line) =>
+          line.trim()
+      )
       .filter(Boolean);
 }
 
 export function playerModeSections(game) {
-  const modes = game?.playerModes;
+  const modes =
+      game?.playerModes;
 
-  if (!Array.isArray(modes) || !modes.length) {
+  if (
+      !Array.isArray(modes) ||
+      !modes.length
+  ) {
     return [];
   }
 
@@ -445,15 +497,21 @@ export function playerModeSections(game) {
 }
 
 export function howToPlaySteps(game) {
-  const raw = game?.howToPlay;
+  const raw =
+      game?.howToPlay;
 
   if (Array.isArray(raw)) {
     return raw
-        .map((item) => String(item).trim())
+        .map((item) =>
+            String(item).trim()
+        )
         .filter(Boolean);
   }
 
-  if (raw == null || raw === "") {
+  if (
+      raw == null ||
+      raw === ""
+  ) {
     return [];
   }
 
@@ -461,7 +519,10 @@ export function howToPlaySteps(game) {
       .split(/\n/)
       .map((line) =>
           line
-              .replace(/^\d+\.\s*/, "")
+              .replace(
+                  /^\d+\.\s*/,
+                  ""
+              )
               .trim()
       )
       .filter(Boolean);
@@ -471,7 +532,9 @@ export function howToPlaySteps(game) {
  * Normalized view-model for rendering a game sheet.
  */
 export function getGameDisplay(game) {
-  if (!game) return null;
+  if (!game) {
+    return null;
+  }
 
   const purposes =
       game.purposes?.length
@@ -511,7 +574,8 @@ export function getGameDisplay(game) {
 
     context:
         game.context ||
-        (game.contexts || []).join(", "),
+        (game.contexts || [])
+            .join(", "),
 
     purposes,
 
@@ -536,7 +600,9 @@ export function getGameDisplay(game) {
             : howToPlaySteps(game),
 
     preparation:
-        asLines(game.preparation),
+        asLines(
+            game.preparation
+        ),
 
     rules:
         asLines(game.rules),
