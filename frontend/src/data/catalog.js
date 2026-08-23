@@ -169,6 +169,18 @@ export function lastPage() {
 
 export const FIRST_PAGE = firstPage();
 export const LAST_PAGE = lastPage();
+export function clampPage(page) {
+  const n = Number(page);
+
+  if (!Number.isFinite(n)) {
+    return FIRST_PAGE;
+  }
+
+  return Math.min(
+      Math.max(Math.floor(n), FIRST_PAGE),
+      LAST_PAGE
+  );
+}
 
 export const EBOOK = {
   ...catalog.ebook,
