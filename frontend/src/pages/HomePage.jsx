@@ -25,151 +25,151 @@ import {
 const STATIC_GAME_LIST = [
   {
     name: "Trò chơi 5 giây",
-    page: 6,
+    page: 5,
     howToPlay:
         "Người chơi có 5 giây để trả lời một câu hỏi trước khi chuyển lượt.",
   },
   {
     name: "This or That",
-    page: 7,
+    page: 6,
     howToPlay:
         "Leader đưa ra hai lựa chọn. Người chơi chọn một trong hai trong vòng 3–5 giây.",
   },
   {
     name: "Tìm điểm chung nhanh",
-    page: 8,
+    page: 7,
     howToPlay:
         "Các nhóm nhỏ tìm những sở thích, thói quen hoặc trải nghiệm giống nhau trong thời gian giới hạn.",
   },
   {
     name: "Bingo làm quen",
-    page: 9,
+    page: 8,
     howToPlay:
         "Người chơi đi xung quanh bắt chuyện và tìm người phù hợp với các ô trên bảng Bingo.",
   },
   {
     name: "Câu chuyện 3 chương",
-    page: 10,
+    page: 9,
     howToPlay:
         "Mỗi người kể một câu chuyện về bản thân theo ba phần: bắt đầu, bất ngờ và kết thúc.",
   },
   {
     name: "Đứng lên ngồi xuống",
-    page: 11,
+    page: 10,
     howToPlay:
         "Người chơi làm theo lệnh Đứng hoặc Ngồi của Leader, càng về sau tốc độ càng nhanh.",
   },
   {
     name: "Đi tìm báu vật",
-    page: 12,
+    page: 11,
     howToPlay:
         "Các đội nhanh chóng tìm đúng vật được Leader yêu cầu và mang về điểm tập kết.",
   },
   {
     name: "Nối vòng tay lớn",
-    page: 13,
+    page: 12,
     howToPlay:
         "Người chơi nắm tay tạo thành mạng lưới rồi cùng nhau gỡ thành một vòng tròn mà không buông tay.",
   },
   {
     name: "Đoán loại rau",
-    page: 14,
+    page: 13,
     howToPlay:
         "Các đội quan sát hình ảnh rau củ và nhanh chóng đưa ra đáp án để ghi điểm.",
   },
   {
     name: "La bàn",
-    page: 15,
+    page: 14,
     howToPlay:
         "Người chơi phản ứng nhanh khi được gọi tên và phối hợp với hai người bên cạnh theo luật.",
   },
   {
     name: "Đổi chỗ thần tốc",
-    page: 16,
+    page: 15,
     howToPlay:
         "Những người có đặc điểm được Leader gọi phải nhanh chóng đổi chỗ cho nhau.",
   },
   {
     name: "Đoán địa danh Việt Nam",
-    page: 17,
+    page: 16,
     howToPlay:
         "Các đội quan sát hình ảnh địa danh Việt Nam và nhanh chóng đoán tên địa điểm.",
   },
   {
     name: "Săn số 1–100",
-    page: 18,
+    page: 17,
     howToPlay:
         "Người chơi tìm số được Leader gọi trên bảng 1–100 và khoanh lại để giành quyền tiếp tục.",
   },
   {
     name: "Đoán hành động",
-    page: 19,
+    page: 18,
     howToPlay:
         "Một người diễn tả hành động bí mật không được nói, đồng đội phải đoán trong thời gian giới hạn.",
   },
   {
     name: "Tôi là ai?",
-    page: 20,
+    page: 19,
     howToPlay:
         "Người chơi dựa vào từng gợi ý để xác định ai phù hợp nhất với từ khóa.",
   },
   {
     name: "Đáp án bí mật",
-    page: 21,
+    page: 20,
     howToPlay:
         "Người chơi đưa ra đáp án theo một chủ đề và cố gắng đoán xem người khác có chọn giống mình hay không.",
   },
   {
     name: "5 Second Rule",
-    page: 22,
+    page: 21,
     howToPlay:
         "Người chơi phải đưa ra đủ ba đáp án đúng theo chủ đề trong vòng 5 giây.",
   },
   {
     name: "Đếm số thay thế",
-    page: 23,
+    page: 22,
     howToPlay:
         "Người chơi lần lượt đếm số, sau đó thay một số bằng từ hoặc hành động mới theo luật.",
   },
   {
     name: "Chữ đầu chữ cuối",
-    page: 24,
+    page: 23,
     howToPlay:
         "Hai người đưa ra chữ đầu và chữ cuối rồi nhanh chóng tìm một từ phù hợp.",
   },
   {
     name: "Đoán từ theo gợi ý",
-    page: 25,
+    page: 24,
     howToPlay:
         "Leader đưa ra từng gợi ý để người chơi suy luận và đoán từ khóa.",
   },
   {
     name: "Ai là gián điệp?",
-    page: 26,
+    page: 25,
     howToPlay:
         "Phần lớn nhận cùng một từ khóa, một người nhận từ gần giống và cả nhóm phải tìm ra gián điệp.",
   },
   {
     name: "Nối từ",
-    page: 27,
+    page: 26,
     howToPlay:
         "Người chơi lần lượt nói từ theo luật nối từ. Ai không nghĩ ra hoặc quá thời gian sẽ mất lượt.",
   },
   {
     name: "Có gì thay đổi?",
-    page: 28,
+    page: 27,
     howToPlay:
         "Người chơi quan sát, sau đó tìm những chi tiết đã bị Leader thay đổi.",
   },
   {
     name: "Cân não Logic",
-    page: 29,
+    page: 28,
     howToPlay:
         "Các đội cùng giải những câu đố logic trong thời gian giới hạn.",
   },
   {
     name: "Giải mật thư",
-    page: 30,
+    page: 29,
     howToPlay:
         "Các đội tìm quy luật và giải mã những manh mối để tìm ra thông điệp bí mật.",
   },
