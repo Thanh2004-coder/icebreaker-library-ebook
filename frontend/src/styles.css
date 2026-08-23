@@ -10,6 +10,7 @@
   --coral-dark: #ffdb66;
   --sage: #a98dff;
   --shadow: 0 20px 48px rgba(6, 2, 20, 0.55);
+
   font-family: "Chakra Petch", "Be Vietnam Pro", system-ui, sans-serif;
 }
 
@@ -28,9 +29,21 @@ body,
 
 body {
   background:
-          radial-gradient(circle at 20% 10%, rgba(255, 120, 210, 0.2), transparent 35%),
-          radial-gradient(circle at 80% 30%, rgba(97, 120, 255, 0.25), transparent 36%),
-          radial-gradient(circle at 50% 90%, rgba(116, 80, 255, 0.2), transparent 32%),
+          radial-gradient(
+                  circle at 20% 10%,
+                  rgba(255, 120, 210, 0.2),
+                  transparent 35%
+          ),
+          radial-gradient(
+                  circle at 80% 30%,
+                  rgba(97, 120, 255, 0.25),
+                  transparent 36%
+          ),
+          radial-gradient(
+                  circle at 50% 90%,
+                  rgba(116, 80, 255, 0.2),
+                  transparent 32%
+          ),
           #09041a;
 }
 
@@ -44,6 +57,10 @@ input,
 textarea {
   font: inherit;
 }
+
+/* =========================================================
+   APP / PAGE
+   ========================================================= */
 
 .page {
   flex: 1;
@@ -62,12 +79,27 @@ textarea {
   flex-direction: column;
 }
 
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .hero {
-  background: linear-gradient(140deg, #140a3f 0%, #240f5e 52%, #2e1a75 100%);
+  background:
+          linear-gradient(
+                  140deg,
+                  #140a3f 0%,
+                  #240f5e 52%,
+                  #2e1a75 100%
+          );
+
   color: #f6f1ff;
+
   padding: 48px 20px 40px;
+
   border-bottom: 2px solid #6a46ff;
-  box-shadow: inset 0 -1px 0 rgba(255, 218, 111, 0.45);
+
+  box-shadow:
+          inset 0 -1px 0 rgba(255, 218, 111, 0.45);
 }
 
 .hero-inner {
@@ -77,100 +109,169 @@ textarea {
 
 .eyebrow-light {
   margin: 0 0 10px;
+
   letter-spacing: 0.16em;
   text-transform: uppercase;
+
   font-size: 0.75rem;
+
   color: rgba(247, 233, 255, 0.78);
 }
 
 .brand-title {
   display: block;
+
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 800;
+
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  text-shadow: 0 0 12px rgba(255, 221, 99, 0.5);
+
+  text-shadow:
+          0 0 12px rgba(255, 221, 99, 0.5);
 }
 
 .tagline {
   margin: 10px 0 0;
+
   max-width: 640px;
+
   font-size: 1.05rem;
   line-height: 1.6;
+
   color: rgba(235, 228, 255, 0.92);
 }
 
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+/*
+   QUAN TRỌNG:
+   Toàn bộ Search → Filter → Results → 25 game → Ebook
+   nằm trong cùng một flow dọc.
+*/
+
 .layout {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 28px 20px 48px;
   width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 28px 20px 48px;
 }
 
 .layout-ebook {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  max-width: min(1100px, 100%);
-  padding-bottom: 16px;
-  overflow-x: hidden;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 28px 20px 16px;
+
+  display: block;
+
+  height: auto;
+  min-height: 0;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-wrap {
+  width: 100%;
 }
 
 .search-wrap label {
   display: block;
+
+  margin-bottom: 8px;
+
   font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
 .search-wrap input {
   width: 100%;
+
   border: 1px solid var(--line);
+
   background: rgba(14, 8, 39, 0.96);
+
   color: var(--ink);
+
   border-radius: 16px;
+
   padding: 16px 18px;
+
   box-shadow: var(--shadow);
 }
 
+/* =========================================================
+   FILTER
+   ========================================================= */
+
 .filters {
+  width: 100%;
+
   display: grid;
+
   gap: 16px;
-  margin-top: 22px;
+
+  margin-top: 16px;
 }
 
 fieldset {
   border: 1px solid var(--line);
+
   background: rgba(17, 10, 45, 0.85);
+
   border-radius: 16px;
+
   margin: 0;
+
   padding: 12px 14px 14px;
 }
 
 legend {
   font-size: 0.78rem;
   font-weight: 700;
+
   padding: 0 6px;
+
   color: var(--teal);
 }
 
 .chips {
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 8px;
 }
 
 .chip {
   display: inline-flex;
+
   align-items: center;
+
   gap: 6px;
+
   border: 1px solid var(--line);
+
   background: rgba(27, 16, 66, 0.85);
+
   color: var(--ink);
+
   border-radius: 999px;
+
   padding: 7px 12px;
+
   cursor: pointer;
+
   font-size: 0.86rem;
 }
 
@@ -180,8 +281,11 @@ legend {
 
 .chip.on {
   border-color: #ffd76b;
+
   background: rgba(255, 215, 107, 0.2);
+
   color: #ffe8a1;
+
   font-weight: 600;
 }
 
@@ -189,1580 +293,89 @@ legend {
   background: transparent;
 }
 
+/* =========================================================
+   RESULT BAR
+   ========================================================= */
+
 .result-bar {
+  width: 100%;
+
   display: flex;
+
   justify-content: space-between;
   align-items: center;
+
   gap: 12px;
-  margin: 22px 0 14px;
+
+  margin: 14px 0 8px;
 }
 
 .result-bar p {
   margin: 0;
+
   font-weight: 700;
 }
 
 .text-btn {
   border: 0;
+
   background: none;
+
   color: var(--coral-dark);
+
   cursor: pointer;
 }
 
-.result-list {
-  list-style: none;
-  margin: 0 0 28px;
-  padding: 0;
-  display: grid;
-  gap: 12px;
-}
-
-.result-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  background: rgba(16, 10, 42, 0.9);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 16px 20px;
-  box-shadow: var(--shadow);
-}
-
-.result-card h2 {
-  margin: 0 0 4px;
-  font-size: 1.15rem;
-}
-
-.result-page {
-  margin: 0 0 8px;
-  font-weight: 700;
-  color: #ffd76b;
-}
-
-.open-page-btn {
-  flex: none;
-  border: 0;
-  background: linear-gradient(90deg, #ff7cc8, #8f6bff);
-  color: #1a0f38;
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.card-desc {
-  color: #d8d0ff;
-  line-height: 1.55;
-  margin: 0 0 14px;
-}
-
-.muted {
-  color: var(--muted);
-}
-
-.ebook-reader {
-  margin-top: 8px;
-  padding: 12px 12px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(109, 70, 255, 0.45);
-  background: rgba(9, 4, 26, 0.36);
-  box-shadow: var(--shadow);
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  min-height: max(440px, calc(100dvh - 300px));
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.ebook-reader-standalone {
-  max-width: none;
-  margin: 0 auto;
-}
-
-.ebook-stage {
-  flex: 1 1 auto;
-  width: 100%;
-  max-width: 100%;
-  min-height: max(380px, calc(100dvh - 360px));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  overflow-x: hidden;
-  position: relative;
-}
-
-.ebook-stage-focus {
-  width: 100%;
-  height: 100%;
-  min-height: min(70dvh, 720px);
-}
-
-.ebook-fit-frame {
-  position: relative;
-  flex-shrink: 0;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
-  border-radius: 18px;
-}
-
-.ebook-fit-clip {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.ebook-fit-scale {
-  will-change: transform;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.ebook-fit-scale .book-spread {
-  width: 100%;
-  height: 100%;
-}
-
-.ebook-fit-scale .book-page {
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 100%;
-}
-
-/* Game pages fill the fixed ebook frame; tall content scrolls inside */
-.ebook-fit-scale .book-page.game-page {
-  height: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-}
-
-.ebook-fit-scale .book-page.design-page,
-.ebook-fit-scale .book-page.web-page {
-  height: 100%;
-  overflow: hidden;
-}
-
-.ebook-fit-scale .design-sheet,
-.ebook-fit-scale .design-sheet-page {
-  width: 100%;
-  line-height: 0;
-}
-
-.ebook-fit-scale .design-sheet-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center top;
-}
-
-.ebook-fit-scale .game-sheet {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.book-spread {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
-}
-
-.book-page {
-  position: relative;
-  background: rgba(14, 8, 39, 0.72);
-  border: 1px solid var(--line);
-  width: 100%;
-  max-width: 100%;
-  min-height: 0;
-  max-height: none;
-  overflow: hidden;
-  padding: 20px 20px 36px;
-  cursor: zoom-in;
-  box-sizing: border-box;
-}
-
-.book-page.design-page {
-  padding: 0;
-  overflow: hidden;
-  min-height: 0;
-  background: transparent;
-  cursor: zoom-in;
-  border: 0;
-}
-
-.book-page.web-page {
-  padding: 0;
-  overflow: hidden;
-  min-height: 0;
-  background: transparent;
-}
-
-.web-sheet,
-.web-sheet-empty {
-  display: block;
-  width: 100%;
-  min-height: 0;
-}
-
-.web-sheet-title {
-  margin: 0;
-  padding: 16px 20px 0;
-  font-size: 1.2rem;
-}
-
-.web-sheet-frame {
-  display: block;
-  width: 100%;
-  min-height: min(50vh, 420px);
-  border: 0;
-  background: transparent;
-}
-
-.book-page.game-page {
-  background-image: var(--game-page-background);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.design-sheet {
-  display: block;
-  width: 100%;
-  line-height: 0;
-}
-
-.design-sheet-page {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-}
-
-.design-sheet-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.game-sheet {
-  background: transparent;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.book-page.left {
-  border-radius: 18px 0 0 18px;
-  border-right: 0;
-  box-shadow: inset -18px 0 28px rgba(6, 2, 24, 0.45);
-}
-
-.book-page.right {
-  border-radius: 0 18px 18px 0;
-  box-shadow: inset 18px 0 28px rgba(6, 2, 24, 0.45);
-}
-
-.book-page.solo {
-  border-radius: 18px;
-}
-
-.screenshot-only-page {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  overflow: hidden;
-}
-
-.book-page-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.page-folio {
-  position: absolute;
-  bottom: 14px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.folio-left {
-  left: 22px;
-}
-
-.folio-right {
-  right: 22px;
-}
-
-.ebook-cover {
-  min-height: 520px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px 8px;
-  background: linear-gradient(160deg, #163e3c 0%, #1b4d4a 55%, #2f6f6a 100%);
-  color: #f8f3ea;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.ebook-cover h1 {
-  margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  letter-spacing: -0.03em;
-}
-
-.cover-subtitle {
-  margin: 14px auto 0;
-  max-width: 360px;
-  line-height: 1.6;
-  color: rgba(248, 243, 234, 0.86);
-}
-
-.cover-meta {
-  margin: 28px 0 0;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  color: #e07a5f;
-  font-weight: 700;
-}
-
-.toc-page h1,
-.front-matter h1,
-.game-sheet h1 {
-  margin: 0 0 16px;
-  font-size: 1.45rem;
-  letter-spacing: -0.02em;
-}
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.72rem;
-  color: #ffd76b;
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-
-.toc-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 4px;
-}
-
-.toc-row {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: baseline;
-  gap: 8px;
-  border: 0;
-  background: none;
-  padding: 8px 0;
-  cursor: pointer;
-  text-align: left;
-  color: inherit;
-}
-
-.toc-row:hover .toc-name {
-  color: var(--teal);
-}
-
-.toc-name {
-  font-weight: 600;
-}
-
-.toc-dots {
-  border-bottom: 1px dotted var(--line);
-  min-width: 16px;
-}
-
-.toc-page {
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  color: var(--teal);
-}
-
-.front-matter p {
-  line-height: 1.65;
-  color: var(--muted);
-}
-
-.reader-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-  flex-shrink: 0;
-}
-
-.reader-nav p {
-  margin: 0;
-  font-weight: 700;
-}
-
-.reader-nav button {
-  border: 1px solid var(--line);
-  background: rgba(16, 10, 42, 0.92);
-  color: var(--ink);
-  border-radius: 10px;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-.reader-nav button:hover:not(:disabled) {
-  background: #6c46ff;
-  color: #fff7d2;
-  border-color: #8d69ff;
-}
-
-.reader-nav button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.ebook-focus {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  padding: 24px 72px;
-  background: rgba(8, 3, 26, 0.82);
-  overflow: hidden;
-}
-
-.ebook-focus-book {
-  width: min(1180px, 100%);
-  height: calc(100dvh - 48px);
-  max-height: calc(100dvh - 48px);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.ebook-focus .book-spread {
-  max-width: none;
-  width: 100%;
-}
-
-.ebook-focus .book-page {
-  min-height: 0;
-  max-height: none;
-  cursor: default;
-  overflow: hidden;
-}
-
-.ebook-focus .book-page.design-page {
-  overflow: hidden;
-}
-
-.ebook-focus .book-spread.single .book-page,
-.ebook-focus .book-spread.cover-only .book-page {
-  min-height: 0;
-}
-
-.focus-arrow {
-  position: fixed;
-  top: 50%;
-  z-index: 81;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border: 0;
-  border-radius: 999px;
-  background: #1f124f;
-  color: #ffd76b;
-  box-shadow: var(--shadow);
-  font-size: 1.35rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.focus-arrow.left {
-  left: 16px;
-}
-
-.focus-arrow.right {
-  right: 16px;
-}
-
-.focus-arrow:hover:not(:disabled) {
-  background: #6b49ff;
-  color: #fff6cf;
-}
-
-.focus-arrow:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.sheet-hero,
-.sheet-instruction {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  object-fit: cover;
-  object-position: center;
-  background: #1b114a;
-}
-
-.sheet-hero {
-  height: 180px;
-  border-radius: 16px;
-  margin: 0 0 14px;
-}
-
-.sheet-instruction {
-  height: 140px;
-  border-radius: 12px;
-  margin: 0 0 12px;
-  background: #20145a;
-}
-
-.meta {
-  display: grid;
-  gap: 8px;
-  padding: 0;
-  margin: 0 0 14px;
-  list-style: none;
-  font-size: 0.92rem;
-}
-
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.tag {
-  background: rgba(109, 180, 255, 0.2);
-  color: #aed5ff;
-  border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.tag.purpose {
-  background: rgba(255, 141, 210, 0.22);
-  color: #ffd3f1;
-}
-
-.game-sheet section h2 {
-  font-size: 1.05rem;
-  margin: 16px 0 8px;
-}
-
-.how-to-steps {
-  margin: 0;
-  padding-left: 1.25em;
-  line-height: 1.7;
-}
-
-.how-to-steps li {
-  margin: 0 0 8px;
-}
-
-.player-mode-list {
-  display: grid;
-  gap: 16px;
-}
-
-.player-mode-block h3 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-  color: #ffd76b;
-}
-
-.player-mode-rules {
-  margin: 8px 0 0;
-  padding-left: 1.25em;
-  line-height: 1.7;
-}
-
-.prose {
-  white-space: pre-wrap;
-  line-height: 1.7;
-}
-
-.back {
-  display: inline-block;
-  margin-bottom: 16px;
-  font-weight: 600;
-  color: var(--teal);
-}
-
-.error,
-.empty {
-  background: rgba(44, 24, 88, 0.82);
-  border: 1px solid #7349e6;
-  border-radius: 12px;
-  padding: 12px 14px;
-}
-
-.site-footer {
-  margin-top: auto;
-  flex-shrink: 0;
-  background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
-  color: #f8f3ea;
-  padding: 16px 20px 14px;
-}
-
-.footer-inner {
-  max-width: 1080px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.4fr 0.8fr;
-  gap: 16px;
-  align-items: start;
-}
-
-.footer-kicker {
-  margin: 0 0 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #ffd76b;
-}
-
-.footer-contact ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 10px;
-}
-
-.footer-contact li {
-  display: grid;
-  gap: 2px;
-}
-
-.footer-contact span {
-  font-size: 0.78rem;
-  color: rgba(248, 243, 234, 0.7);
-}
-
-.footer-contact strong,
-.footer-contact a {
-  font-size: 0.98rem;
-  font-weight: 700;
-}
-
-.footer-qr {
-  background: rgba(255, 253, 248, 0.05);
-  border: 1px solid rgba(255, 215, 107, 0.36);
-  border-radius: 14px;
-  padding: 10px 12px;
-}
-
-.footer-hint {
-  margin: 0 0 8px;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: rgba(248, 243, 234, 0.86);
-}
-
-.qr-frame {
-  display: inline-flex;
-  background: #f8f4ff;
-  border-radius: 10px;
-  padding: 4px;
-}
-
-.footer-form-link {
-  display: block;
-  margin: 10px 0 0;
-  font-weight: 700;
-  color: #f8f3ea;
-}
-
-.sheet-page-label {
-  margin: 0 0 8px;
-  color: #95b7ff;
-  font-weight: 700;
-}
-
-.game-title {
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-}
-
-.game-panel {
-  background: rgba(14, 8, 39, 0.85);
-  border: 1px solid #6846d5;
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-
-.game-panel h2 {
-  margin-top: 0;
-}
-
-.hint-panel {
-  border-color: #f08ad0;
-}
-
-/* Game pages (5+): flush to ebook frame edges — design pages 1–4 unchanged */
-.book-page.game-page {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.book-page.game-page .game-sheet {
-  width: 100%;
-  max-width: 100%;
-  min-height: 100%;
-  height: auto;
-  margin: 0;
-  padding: 10px 12px 26px;
-  box-sizing: border-box;
-}
-
-.ebook-fit-scale .book-page.game-page {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  min-height: 100%;
-}
-
-.ebook-fit-scale .book-page.game-page .game-sheet {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-}
-
-.book-page.game-page .sheet-page-label {
-  margin: 0 0 4px;
-  font-size: 0.88rem;
-}
-
-.book-page.game-page .game-title,
-.book-page.game-page .game-sheet h1 {
-  margin: 0 0 8px;
-  font-size: 1.12rem;
-  line-height: 1.25;
-}
-
-.book-page.game-page .card-desc {
-  margin: 0 0 8px;
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-
-.book-page.game-page .meta {
-  gap: 4px;
-  margin: 0 0 8px;
-  font-size: 0.84rem;
-}
-
-.book-page.game-page .tag-row {
-  gap: 6px;
-  margin-bottom: 10px;
-}
-
-.book-page.game-page .tag {
-  padding: 4px 8px;
-  font-size: 0.74rem;
-}
-
-.book-page.game-page .sheet-hero {
-  height: 100px;
-  border-radius: 12px;
-  margin: 0 0 8px;
-}
-
-.book-page.game-page .sheet-instruction {
-  height: 80px;
-  border-radius: 10px;
-  margin: 0 0 8px;
-}
-
-.book-page.game-page .game-grid {
-  gap: 8px;
-}
-
-.book-page.game-page .game-panel {
-  padding: 8px 10px;
-  border-radius: 12px;
-}
-
-.book-page.game-page .game-sheet section h2,
-.book-page.game-page .game-panel h2 {
-  font-size: 0.95rem;
-  margin: 8px 0 4px;
-}
-
-.book-page.game-page .how-to-steps {
-  line-height: 1.4;
-}
-
-.book-page.game-page .how-to-steps li {
-  margin: 0 0 4px;
-  font-size: 0.84rem;
-}
-
-.book-page.game-page .player-mode-list {
-  gap: 8px;
-}
-
-.book-page.game-page .player-mode-block h3 {
-  margin: 0 0 4px;
-  font-size: 0.88rem;
-}
-
-.book-page.game-page .player-mode-rules,
-.book-page.game-page .prose {
-  line-height: 1.4;
-  font-size: 0.84rem;
-}
-
-.layout-ebook .result-bar,
-.layout-ebook .search-wrap,
-.layout-ebook .filters {
-  flex-shrink: 0;
-}
-
-.layout-ebook .result-bar {
-  margin: 10px 0 8px;
-}
+/* =========================================================
+   SEARCH RESULTS
+   ========================================================= */
 
 .layout-ebook .search-results {
-  flex-shrink: 1;
-  min-height: 0;
-  max-height: 26vh;
-  overflow: auto;
-  margin-bottom: 8px;
-}
-
-.page-home .hero {
-  padding: 14px 16px 12px;
-  flex-shrink: 0;
-}
-
-.page-home .brand-title {
-  font-size: clamp(1.35rem, 3.2vw, 2.1rem);
-}
-
-.page-home .tagline {
-  margin: 4px 0 0;
-  font-size: 0.9rem;
-  line-height: 1.35;
-  max-width: 52rem;
-}
-
-.page-home .eyebrow-light {
-  margin: 0 0 4px;
-  font-size: 0.68rem;
-}
-
-.page-home .filters {
-  margin-top: 8px;
-  gap: 8px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.page-home fieldset {
-  padding: 6px 8px 8px;
-}
-
-.page-home .chips {
-  gap: 6px;
-}
-
-.page-home .chip {
-  padding: 5px 9px;
-  font-size: 0.8rem;
-}
-
-@media (max-width: 899px) {
-  .page-home {
-    height: auto;
-  }
-
-  .page-home .tagline {
-    display: none;
-  }
-
-  .page-home .filters {
-    grid-template-columns: 1fr;
-  }
-
-  .layout-ebook {
-    padding: 12px 12px 10px;
-  }
-
-  .book-spread,
-  .book-spread.single,
-  .book-spread.cover-only {
-    display: block;
-    width: 100%;
-  }
-
-  .book-page,
-  .book-page.left,
-  .book-page.right,
-  .book-page.solo {
-    border-radius: 18px;
-    max-height: none;
-    min-height: 0;
-  }
-
-  .book-page.design-page,
-  .book-page.web-page {
-    max-height: none;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .ebook-reader {
-    background: rgba(9, 4, 26, 0.36);
-    padding: 8px 8px 6px;
-    min-height: min(62dvh, 640px);
-  }
-
-  .ebook-stage {
-    min-height: min(52dvh, 560px);
-  }
-
-  .ebook-focus .book-page,
-  .ebook-focus .book-page.left,
-  .ebook-focus .book-page.right,
-  .ebook-focus .book-page.solo {
-    max-height: none;
-    min-height: 0;
-  }
-
-  .ebook-focus .book-page.design-page {
-    min-height: 0;
-    height: auto;
-    max-height: none;
-  }
-
-  .result-card {
-    flex-direction: column;
-  }
-
-  .book-page.game-page .sheet-hero {
-    height: 88px;
-  }
-
-  .book-page.game-page .sheet-instruction {
-    height: 72px;
-  }
-}
-
-@media (max-width: 860px) {
-  .hero {
-    padding: 36px 16px 28px;
-  }
-
-  .footer-inner {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 560px) {
-  .result-bar,
-  .reader-nav {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .reader-nav {
-    text-align: center;
-  }
-
-  .ebook-focus {
-    padding: 16px 52px;
-  }
-
-  .ebook-focus-book {
-    height: calc(100dvh - 32px);
-    max-height: calc(100dvh - 32px);
-  }
-
-  .ebook-focus .book-page {
-    min-height: 0;
-  }
-
-  .ebook-focus .book-page.design-page {
-    min-height: 0;
-    height: auto;
-  }
-
-  .sheet-hero {
-    height: 160px;
-  }
-
-  .sheet-instruction {
-    height: 120px;
-  }
-}
-
-/* -------------------------------------------------------------------------- */
-/* Pages 5+ only: large centered game/web viewer (FitPageStage / pages 1–4    */
-/* are untouched — these selectors never apply outside .ebook-game-viewer).   */
-/* -------------------------------------------------------------------------- */
-
-.ebook-reader--game {
-  min-height: max(480px, calc(100dvh - 260px));
-}
-
-.ebook-game-viewer {
-  flex: 1 1 auto;
   width: 100%;
-  max-width: 100%;
-  min-height: max(420px, calc(100dvh - 300px));
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
 
-.ebook-game-viewer--focus {
-  width: 100%;
-  height: 100%;
-  min-height: min(78dvh, 860px);
-}
-
-.ebook-game-viewer__stage {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 0;
-  padding: 6px 10px;
-  box-sizing: border-box;
-}
-
-.ebook-game-viewer__frame {
-  width: min(960px, 94%);
-  height: min(84vh, calc(100dvh - 270px));
-  max-width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-.ebook-game-viewer__frame .book-spread {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
-}
-
-.ebook-game-viewer__frame .book-page {
-  flex: 1 1 auto;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  min-height: 0;
-  max-height: none;
-  margin: 0;
-  border-radius: 18px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  box-sizing: border-box;
-}
-
-.ebook-game-viewer__frame .book-page.game-page {
-  padding: 0;
-  width: 100%;
-}
-
-.ebook-game-viewer__frame .book-page.web-page {
-  padding: 0;
-  background: rgba(14, 8, 39, 0.72);
-}
-
-.ebook-game-viewer__frame .game-sheet {
-  width: 100%;
-  max-width: 100%;
-  min-height: 100%;
-  margin: 0;
-  padding: 18px 22px 36px;
-  box-sizing: border-box;
-}
-
-.ebook-game-viewer__frame .web-sheet,
-.ebook-game-viewer__frame .web-sheet-empty {
-  width: 100%;
-  min-height: 100%;
-}
-
-/* Readable desktop type inside the large viewer */
-.ebook-game-viewer__frame .book-page.game-page .sheet-page-label {
-  margin: 0 0 6px;
-  font-size: 0.95rem;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .game-title,
-.ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
-  margin: 0 0 10px;
-  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
-  line-height: 1.25;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .card-desc {
-  margin: 0 0 12px;
-  font-size: 1rem;
-  line-height: 1.55;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .meta {
-  gap: 6px;
-  margin: 0 0 12px;
-  font-size: 0.92rem;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .tag-row {
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .tag {
-  padding: 5px 10px;
-  font-size: 0.8rem;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .sheet-hero {
-  height: clamp(140px, 22vh, 220px);
-  border-radius: 14px;
-  margin: 0 0 12px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
-  height: clamp(110px, 16vh, 180px);
-  border-radius: 12px;
-  margin: 0 0 12px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .game-grid {
-  gap: 12px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .game-panel {
-  padding: 12px 14px;
-  border-radius: 14px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .game-sheet section h2,
-.ebook-game-viewer__frame .book-page.game-page .game-panel h2 {
-  font-size: 1.05rem;
-  margin: 10px 0 6px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .how-to-steps {
-  line-height: 1.55;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .how-to-steps li {
-  margin: 0 0 6px;
-  font-size: 0.95rem;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .player-mode-list {
-  gap: 10px;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .player-mode-block h3 {
-  margin: 0 0 6px;
-  font-size: 1rem;
-}
-
-.ebook-game-viewer__frame .book-page.game-page .player-mode-rules,
-.ebook-game-viewer__frame .book-page.game-page .prose {
-  line-height: 1.55;
-  font-size: 0.95rem;
-}
-
-.ebook-focus--game .ebook-focus-book {
-  width: min(980px, calc(100vw - 120px));
-}
-
-.ebook-focus--game .ebook-game-viewer__frame {
-  width: 100%;
-  height: calc(100dvh - 48px);
-  max-height: calc(100dvh - 48px);
-}
-
-     /* =========================================================
-        STATIC GAME LIST - COMPACT 1 SCREEN
-        ========================================================= */
-
-   .static-game-list {
-     margin: 8px 0 12px;
-     padding: 14px 16px;
-
-     border: 1px solid rgba(125, 75, 255, 0.58);
-     border-radius: 16px;
-
-     background:
-             linear-gradient(
-                     135deg,
-                     rgba(52, 20, 70, 0.88),
-                     rgba(18, 12, 42, 0.94)
-             );
-
-     box-shadow:
-             0 8px 24px rgba(0, 0, 0, 0.16),
-             inset 0 1px 0 rgba(255, 255, 255, 0.035);
-
-     flex: 0 0 auto;
-
-     max-height: min(62vh, 560px);
-     overflow-y: auto;
-   }
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.static-game-list__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.static-game-list__header h2 {
-  margin: 0;
-
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 800;
-
-  color: #ffffff;
-}
-
-.static-game-list__header p {
-  margin: 0;
-
-  max-width: 480px;
-
-  font-size: 11px;
-  line-height: 1.4;
-  text-align: right;
-
-  color: rgba(255, 255, 255, 0.58);
-}
-
-/* =========================================================
-   25 GAME
-   ========================================================= */
-
-.static-game-list__items {
-  display: grid;
-
-  /* Desktop: 5 cột x 5 hàng = 25 trò */
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-
-  gap: 7px 8px;
-}
-
-/* =========================================================
-   GAME CARD
-   ========================================================= */
-
-.static-game-card {
-  min-width: 0;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  padding: 8px 9px;
-
-  border: 1px solid rgba(132, 84, 255, 0.18);
-  border-radius: 9px;
-
-  background: rgba(255, 255, 255, 0.025);
-
-  cursor: pointer;
-
-  transition:
-          background 0.15s ease,
-          border-color 0.15s ease,
-          transform 0.15s ease;
-}
-
-.static-game-card:hover {
-  background: rgba(132, 84, 255, 0.08);
-  border-color: rgba(132, 84, 255, 0.42);
-  transform: translateY(-1px);
-}
-
-.static-game-card:active {
-  transform: translateY(0);
-}
-
-/* =========================================================
-   CONTENT
-   ========================================================= */
-
-.static-game-card__content {
-  min-width: 0;
-  flex: 1;
-}
-
-.static-game-card__content h3 {
-  margin: 0;
-
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 700;
-
-  color: #ffffff;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.static-game-card__content p {
-  margin: 3px 0 0;
-
-  font-size: 9px;
-  line-height: 1.3;
-
-  color: rgba(255, 255, 255, 0.48);
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* =========================================================
-   PAGE
-   ========================================================= */
-
-.static-game-card__page {
-  flex: 0 0 auto;
-
-  padding: 3px 7px;
-
-  border-radius: 999px;
-
-  border: 1px solid rgba(132, 84, 255, 0.28);
-
-  background: rgba(132, 84, 255, 0.08);
-
-  color: #d9c9ff;
-
-  font-size: 8.5px;
-  font-weight: 700;
-
-  white-space: nowrap;
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1050px) {
-  .static-game-list__items {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .static-game-list {
-    max-height: 64vh;
-  }
-}
-
-/* =========================================================
-   SMALL TABLET
-   ========================================================= */
-
-@media (max-width: 800px) {
-  .static-game-list__items {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .static-game-list__header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .static-game-list__header p {
-    max-width: none;
-    text-align: left;
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 560px) {
-  .static-game-list {
-    padding: 12px;
-  }
-
-  .static-game-list__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .static-game-list__header h2 {
-    font-size: 18px;
-  }
-
-  .static-game-card {
-    padding: 8px;
-  }
-
-  .static-game-card__content h3 {
-    font-size: 11px;
-  }
-
-  .static-game-card__content p {
-    font-size: 8.5px;
-  }
-}
-```
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 560px) {
-  .static-game-list {
-    padding: 10px;
-    max-height: none;
-  }
-
-  .static-game-list__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 5px;
-  }
-
-  .static-game-card {
-    padding: 6px;
-  }
-
-  .static-game-card__content h3 {
-    font-size: 10px;
-  }
-
-  .static-game-card__content p {
-    font-size: 8px;
-  }
-
-  .static-game-card__page {
-    font-size: 7px;
-    padding: 2px 5px;
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-  .static-game-list {
-    padding: 15px;
-  }
-
-  .static-game-list__items {
-    grid-template-columns: 1fr;
-  }
-
-  .static-game-card__content h3 {
-    font-size: 13px;
-  }
-
-  .static-game-card__content p {
-    font-size: 10.5px;
-  }
-}
-.search-results {
-  width: 100%;
-  margin: 8px 0;
+  margin: 8px 0 12px;
   padding: 10px 12px;
 
   border: 1px solid rgba(125, 75, 255, 0.55);
+
   border-radius: 14px;
 
   background: rgba(18, 10, 45, 0.94);
 
   min-height: 0;
-  max-height: 22vh;
-  overflow: hidden;
 
-  flex-shrink: 1;
+  /*
+     Chỉ giới hạn KHU VỰC KẾT QUẢ TÌM KIẾM.
+     Không giới hạn layout tổng.
+  */
+  max-height: 22vh;
+
+  overflow: hidden;
 }
 
 .search-results__header {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
   gap: 12px;
+
   margin-bottom: 7px;
 }
 
 .search-results__header p {
   margin: 0;
+
   font-size: 12px;
   font-weight: 700;
-  color: #ffffff;
+
+  color: #fff;
 }
 
 .search-results .result-list {
   max-height: calc(22vh - 48px);
+
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -1770,30 +383,38 @@ legend {
   padding: 0;
 
   display: grid;
+
   gap: 6px;
+
+  list-style: none;
 }
 
 .search-results .result-card {
   padding: 8px 10px;
+
   border-radius: 9px;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
   gap: 10px;
 
   background: rgba(255, 255, 255, 0.025);
+
   border: 1px solid rgba(132, 84, 255, 0.2);
 }
 
 .search-results .result-card h2 {
   margin: 0 0 2px;
+
   font-size: 11px;
 }
 
 .search-results .result-page {
   margin: 0 0 2px;
+
   font-size: 9px;
 }
 
@@ -1804,6 +425,7 @@ legend {
   line-height: 1.25;
 
   display: -webkit-box;
+
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 
@@ -1814,6 +436,7 @@ legend {
   flex: 0 0 auto;
 
   padding: 5px 8px;
+
   border-radius: 7px;
 
   font-size: 8px;
@@ -1821,92 +444,117 @@ legend {
 
 .search-results .empty {
   margin: 0;
+
   padding: 8px 10px;
+
   font-size: 10px;
 }
+
 /* =========================================================
-   GỘP THÀNH 1 UI DUY NHẤT
-   Search → Filter → 25 trò chơi → Ebook
+   RESULT CARD - GENERAL
    ========================================================= */
 
-/* =========================
-   LAYOUT CHÍNH
-   ========================= */
+.result-list {
+  list-style: none;
 
-.layout-ebook {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
+  margin: 0 0 28px;
 
-  display: block;
+  padding: 0;
 
-  height: auto;
-  min-height: 0;
+  display: grid;
 
-  padding: 28px 20px 16px;
-
-  overflow-x: visible;
-  overflow-y: visible;
+  gap: 12px;
 }
 
+.result-card {
+  display: flex;
 
-/* =========================
-   SEARCH + FILTER
-   ========================= */
+  justify-content: space-between;
+  align-items: flex-start;
 
-.layout-ebook .search-wrap,
-.layout-ebook .filters,
-.layout-ebook .result-bar {
-  width: 100%;
-  flex: none;
+  gap: 16px;
+
+  background: rgba(16, 10, 42, 0.9);
+
+  border: 1px solid var(--line);
+
+  border-radius: 20px;
+
+  padding: 16px 20px;
+
+  box-shadow: var(--shadow);
 }
 
-.layout-ebook .search-wrap {
-  margin: 0;
+.result-card h2 {
+  margin: 0 0 4px;
+
+  font-size: 1.15rem;
 }
 
-.layout-ebook .filters {
-  margin-top: 12px;
+.result-page {
+  margin: 0 0 8px;
+
+  font-weight: 700;
+
+  color: #ffd76b;
 }
 
-
-/* =========================
-   SEARCH RESULTS
-   Không giới hạn toàn bộ layout
-   ========================= */
-
-.layout-ebook .search-results {
-  width: 100%;
-  margin: 8px 0;
-
+.open-page-btn {
   flex: none;
 
-  min-height: 0;
-  max-height: 22vh;
+  border: 0;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+  background:
+          linear-gradient(
+                  90deg,
+                  #ff7cc8,
+                  #8f6bff
+          );
+
+  color: #1a0f38;
+
+  border-radius: 12px;
+
+  padding: 10px 14px;
+
+  cursor: pointer;
+
+  font-weight: 700;
 }
 
+.card-desc {
+  color: #d8d0ff;
 
-/* =========================
-   25 TRÒ CHƠI
-   ========================= */
+  line-height: 1.55;
+
+  margin: 0 0 14px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* =========================================================
+   25 GAME LIST
+   ========================================================= */
+
+/*
+   CHỈ CÓ MỘT BỘ CSS CHO STATIC GAME LIST.
+
+   Không max-height.
+   Không overflow:auto.
+   25 game sẽ hiện hết trong cùng flow.
+*/
 
 .layout-ebook .static-game-list {
   width: 100%;
 
   margin: 8px 0 12px;
+
   padding: 14px 16px;
 
   box-sizing: border-box;
 
-  flex: none;
-
-  /* QUAN TRỌNG:
-     Không giới hạn chiều cao.
-     Không cắt nội dung.
-  */
   height: auto;
   min-height: 0;
   max-height: none;
@@ -1914,6 +562,7 @@ legend {
   overflow: visible;
 
   border: 1px solid rgba(125, 75, 255, 0.58);
+
   border-radius: 16px;
 
   background:
@@ -1928,17 +577,18 @@ legend {
           inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
 
-
-/* =========================
-   HEADER MỤC LỤC
-   ========================= */
+/* =========================================================
+   STATIC GAME HEADER
+   ========================================================= */
 
 .static-game-list__header {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
   gap: 12px;
+
   margin-bottom: 10px;
 }
 
@@ -1947,6 +597,7 @@ legend {
 
   font-size: 20px;
   line-height: 1.1;
+
   font-weight: 800;
 
   color: #fff;
@@ -1959,36 +610,37 @@ legend {
 
   font-size: 10px;
   line-height: 1.3;
+
   text-align: right;
 
   color: rgba(255, 255, 255, 0.55);
 }
 
-
-/* =========================
-   GRID 25 TRÒ
-   ========================= */
+/* =========================================================
+   STATIC GAME GRID
+   ========================================================= */
 
 .static-game-list__items {
   display: grid;
 
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 100%;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
 
   gap: 7px 8px;
-
-  width: 100%;
 }
 
-
-/* =========================
-   GAME CARD
-   ========================= */
+/* =========================================================
+   STATIC GAME CARD
+   ========================================================= */
 
 .static-game-card {
   min-width: 0;
   min-height: 48px;
 
   display: flex;
+
   align-items: center;
 
   gap: 7px;
@@ -1996,6 +648,7 @@ legend {
   padding: 7px 8px;
 
   border: 1px solid rgba(132, 84, 255, 0.18);
+
   border-radius: 8px;
 
   background: rgba(255, 255, 255, 0.025);
@@ -2004,16 +657,25 @@ legend {
 
   transition:
           background 0.15s ease,
-          border-color 0.15s ease;
+          border-color 0.15s ease,
+          transform 0.15s ease;
 }
 
 .static-game-card:hover {
   background: rgba(132, 84, 255, 0.08);
+
   border-color: rgba(132, 84, 255, 0.42);
+
+  transform: translateY(-1px);
+}
+
+.static-game-card:active {
+  transform: translateY(0);
 }
 
 .static-game-card__content {
   min-width: 0;
+
   flex: 1 1 auto;
 }
 
@@ -2022,12 +684,15 @@ legend {
 
   font-size: 11px;
   line-height: 1.2;
+
   font-weight: 700;
 
   color: #fff;
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
 }
 
@@ -2040,7 +705,9 @@ legend {
   color: rgba(255, 255, 255, 0.45);
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
 }
 
@@ -2058,16 +725,20 @@ legend {
   color: #d9c9ff;
 
   font-size: 7.5px;
+
   font-weight: 700;
 
   white-space: nowrap;
 }
 
-
 /* =========================================================
-   EBOOK
-   LUÔN NẰM NGAY BÊN DƯỚI 25 TRÒ
+   EBOOK READER
    ========================================================= */
+
+/*
+   Ebook luôn nằm NGAY DƯỚI 25 game.
+   Không dùng flex để ép nó cạnh hoặc chia màn hình.
+*/
 
 .layout-ebook .ebook-reader {
   width: 100%;
@@ -2075,60 +746,949 @@ legend {
 
   margin: 12px 0 0;
 
-  /* Không để flex co ebook về 0 */
   flex: none;
 
   height: auto;
-  min-height: max(440px, calc(100dvh - 300px));
+
+  min-height:
+          max(
+                  440px,
+                  calc(100dvh - 300px)
+          );
 
   overflow-x: visible;
   overflow-y: visible;
-}
 
+  padding: 12px 12px 10px;
 
-/*
-   Stage vẫn giữ logic ebook hiện tại,
-   nhưng không bị layout cha ép co.
-*/
+  border-radius: 20px;
 
-.layout-ebook .ebook-stage {
-  width: 100%;
+  border: 1px solid rgba(109, 70, 255, 0.45);
 
-  flex: none;
+  background: rgba(9, 4, 26, 0.36);
 
-  min-height: max(380px, calc(100dvh - 360px));
-
-  overflow-x: hidden;
-  overflow-y: visible;
+  box-shadow: var(--shadow);
 
   display: flex;
-  align-items: center;
-  justify-content: center;
 
-  position: relative;
+  flex-direction: column;
 }
 
+.ebook-reader-standalone {
+  max-width: none;
 
-/* =========================
-   EBOOK GAME VIEWER
-   Giữ nguyên viewer hiện tại
-   ========================= */
+  margin: 0 auto;
+}
 
-.layout-ebook .ebook-game-viewer {
+/* =========================================================
+   EBOOK STAGE
+   ========================================================= */
+
+.layout-ebook .ebook-stage {
   width: 100%;
   max-width: 100%;
 
   flex: none;
 
-  min-height: max(420px, calc(100dvh - 300px));
+  min-height:
+          max(
+                  380px,
+                  calc(100dvh - 360px)
+          );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  position: relative;
+}
+
+.ebook-stage-focus {
+  width: 100%;
+  height: 100%;
+
+  min-height:
+          min(
+                  70dvh,
+                  720px
+          );
+}
+
+/* =========================================================
+   EBOOK FIT FRAME
+   ========================================================= */
+
+.ebook-fit-frame {
+  position: relative;
+
+  flex-shrink: 0;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+}
+
+.ebook-fit-clip {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+}
+
+.ebook-fit-scale {
+  will-change: transform;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+.ebook-fit-scale .book-spread {
+  width: 100%;
+  height: 100%;
+}
+
+.ebook-fit-scale .book-page {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  min-height: 100%;
+}
+
+/* Game page trong fit viewer */
+.ebook-fit-scale .book-page.game-page {
+  height: 100%;
+
+  min-height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+}
+
+.ebook-fit-scale .book-page.design-page,
+.ebook-fit-scale .book-page.web-page {
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.ebook-fit-scale .design-sheet,
+.ebook-fit-scale .design-sheet-page {
+  width: 100%;
+
+  line-height: 0;
+}
+
+.ebook-fit-scale .design-sheet-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+
+  object-fit: contain;
+
+  object-position: center top;
+}
+
+.ebook-fit-scale .game-sheet {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BOOK
+   ========================================================= */
+
+.book-spread {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  filter:
+          drop-shadow(
+                  0 18px 40px rgba(28, 43, 42, 0.12)
+          );
+}
+
+.book-page {
+  position: relative;
+
+  background: rgba(14, 8, 39, 0.72);
+
+  border: 1px solid var(--line);
+
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 0;
+  max-height: none;
+
+  overflow: hidden;
+
+  padding: 20px 20px 36px;
+
+  cursor: zoom-in;
+
+  box-sizing: border-box;
+}
+
+.book-page.design-page {
+  padding: 0;
+
+  overflow: hidden;
+
+  min-height: 0;
+
+  background: transparent;
+
+  cursor: zoom-in;
+
+  border: 0;
+}
+
+.book-page.web-page {
+  padding: 0;
+
+  overflow: hidden;
+
+  min-height: 0;
+
+  background: transparent;
+}
+
+/* =========================================================
+   BOOK GAME PAGE
+   ========================================================= */
+
+.book-page.game-page {
+  background-image: var(--game-page-background);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  padding: 0;
+
+  margin: 0;
+
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.book-page.game-page .game-sheet {
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 100%;
+
+  height: auto;
+
+  margin: 0;
+
+  padding: 10px 12px 26px;
+
+  box-sizing: border-box;
+}
+
+.ebook-fit-scale .book-page.game-page {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  height: 100%;
+
+  min-height: 100%;
+}
+
+.ebook-fit-scale .book-page.game-page .game-sheet {
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+}
+
+/* =========================================================
+   GAME PAGE TYPOGRAPHY
+   ========================================================= */
+
+.book-page.game-page .sheet-page-label {
+  margin: 0 0 4px;
+
+  font-size: 0.88rem;
+}
+
+.book-page.game-page .game-title,
+.book-page.game-page .game-sheet h1 {
+  margin: 0 0 8px;
+
+  font-size: 1.12rem;
+
+  line-height: 1.25;
+}
+
+.book-page.game-page .card-desc {
+  margin: 0 0 8px;
+
+  font-size: 0.9rem;
+
+  line-height: 1.4;
+}
+
+.book-page.game-page .meta {
+  gap: 4px;
+
+  margin: 0 0 8px;
+
+  font-size: 0.84rem;
+}
+
+.book-page.game-page .tag-row {
+  gap: 6px;
+
+  margin-bottom: 10px;
+}
+
+.book-page.game-page .tag {
+  padding: 4px 8px;
+
+  font-size: 0.74rem;
+}
+
+.book-page.game-page .sheet-hero {
+  height: 100px;
+
+  border-radius: 12px;
+
+  margin: 0 0 8px;
+}
+
+.book-page.game-page .sheet-instruction {
+  height: 80px;
+
+  border-radius: 10px;
+
+  margin: 0 0 8px;
+}
+
+.book-page.game-page .game-grid {
+  gap: 8px;
+}
+
+.book-page.game-page .game-panel {
+  padding: 8px 10px;
+
+  border-radius: 12px;
+}
+
+.book-page.game-page .game-sheet section h2,
+.book-page.game-page .game-panel h2 {
+  font-size: 0.95rem;
+
+  margin: 8px 0 4px;
+}
+
+.book-page.game-page .how-to-steps {
+  line-height: 1.4;
+}
+
+.book-page.game-page .how-to-steps li {
+  margin: 0 0 4px;
+
+  font-size: 0.84rem;
+}
+
+.book-page.game-page .player-mode-list {
+  gap: 8px;
+}
+
+.book-page.game-page .player-mode-block h3 {
+  margin: 0 0 4px;
+
+  font-size: 0.88rem;
+}
+
+.book-page.game-page .player-mode-rules,
+.book-page.game-page .prose {
+  line-height: 1.4;
+
+  font-size: 0.84rem;
+}
+
+/* =========================================================
+   OTHER BOOK CONTENT
+   ========================================================= */
+
+.design-sheet {
+  display: block;
+
+  width: 100%;
+
+  line-height: 0;
+}
+
+.design-sheet-page {
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+}
+
+.design-sheet-image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+
+  object-fit: contain;
+
+  object-position: center;
+}
+
+.game-sheet {
+  background: transparent;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+.web-sheet,
+.web-sheet-empty {
+  display: block;
+
+  width: 100%;
+
+  min-height: 0;
+}
+
+.web-sheet-title {
+  margin: 0;
+
+  padding: 16px 20px 0;
+
+  font-size: 1.2rem;
+}
+
+.web-sheet-frame {
+  display: block;
+
+  width: 100%;
+
+  min-height:
+          min(
+                  50vh,
+                  420px
+          );
+
+  border: 0;
+
+  background: transparent;
+}
+
+.book-page.left {
+  border-radius: 18px 0 0 18px;
+
+  border-right: 0;
+
+  box-shadow:
+          inset -18px 0 28px rgba(6, 2, 24, 0.45);
+}
+
+.book-page.right {
+  border-radius: 0 18px 18px 0;
+
+  box-shadow:
+          inset 18px 0 28px rgba(6, 2, 24, 0.45);
+}
+
+.book-page.solo {
+  border-radius: 18px;
+}
+
+.screenshot-only-page {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  overflow: hidden;
+}
+
+.book-page-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  object-position: center;
+}
+
+/* =========================================================
+   PAGE FOLIO
+   ========================================================= */
+
+.page-folio {
+  position: absolute;
+
+  bottom: 14px;
+
+  font-size: 0.78rem;
+
+  color: var(--muted);
+
+  font-weight: 600;
+}
+
+.folio-left {
+  left: 22px;
+}
+
+.folio-right {
+  right: 22px;
+}
+
+/* =========================================================
+   COVER / TOC / FRONT MATTER
+   ========================================================= */
+
+.ebook-cover {
+  min-height: 520px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 24px 8px;
+
+  background:
+          linear-gradient(
+                  160deg,
+                  #163e3c 0%,
+                  #1b4d4a 55%,
+                  #2f6f6a 100%
+          );
+
+  color: #f8f3ea;
+
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+.ebook-cover h1 {
+  margin: 0;
+
+  font-size:
+          clamp(
+                  2rem,
+                  5vw,
+                  3rem
+          );
+
+  letter-spacing: -0.03em;
+}
+
+.cover-subtitle {
+  margin: 14px auto 0;
+
+  max-width: 360px;
+
+  line-height: 1.6;
+
+  color: rgba(248, 243, 234, 0.86);
+}
+
+.cover-meta {
+  margin: 28px 0 0;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  font-size: 0.75rem;
+
+  color: #e07a5f;
+
+  font-weight: 700;
+}
+
+.toc-page h1,
+.front-matter h1,
+.game-sheet h1 {
+  margin: 0 0 16px;
+
+  font-size: 1.45rem;
+
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+
+  font-size: 0.72rem;
+
+  color: #ffd76b;
+
+  font-weight: 700;
+
+  margin: 0 0 8px;
+}
+
+.toc-list {
+  list-style: none;
+
+  margin: 0;
+
+  padding: 0;
+
+  display: grid;
+
+  gap: 4px;
+}
+
+.toc-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  align-items: baseline;
+
+  gap: 8px;
+
+  border: 0;
+
+  background: none;
+
+  padding: 8px 0;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  color: inherit;
+}
+
+.toc-row:hover .toc-name {
+  color: var(--teal);
+}
+
+.toc-name {
+  font-weight: 600;
+}
+
+.toc-dots {
+  border-bottom: 1px dotted var(--line);
+
+  min-width: 16px;
+}
+
+.toc-page {
+  font-variant-numeric: tabular-nums;
+
+  font-weight: 700;
+
+  color: var(--teal);
+}
+
+.front-matter p {
+  line-height: 1.65;
+
+  color: var(--muted);
+}
+
+/* =========================================================
+   READER NAV
+   ========================================================= */
+
+.reader-nav {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 10px;
+
+  flex-shrink: 0;
+}
+
+.reader-nav p {
+  margin: 0;
+
+  font-weight: 700;
+}
+
+.reader-nav button {
+  border: 1px solid var(--line);
+
+  background: rgba(16, 10, 42, 0.92);
+
+  color: var(--ink);
+
+  border-radius: 10px;
+
+  padding: 8px 12px;
+
+  cursor: pointer;
+}
+
+.reader-nav button:hover:not(:disabled) {
+  background: #6c46ff;
+
+  color: #fff7d2;
+
+  border-color: #8d69ff;
+}
+
+.reader-nav button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   GAME COMPONENTS
+   ========================================================= */
+
+.sheet-hero,
+.sheet-instruction {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  background: #1b114a;
+}
+
+.sheet-hero {
+  height: 180px;
+
+  border-radius: 16px;
+
+  margin: 0 0 14px;
+}
+
+.sheet-instruction {
+  height: 140px;
+
+  border-radius: 12px;
+
+  margin: 0 0 12px;
+
+  background: #20145a;
+}
+
+.meta {
+  display: grid;
+
+  gap: 8px;
+
+  padding: 0;
+
+  margin: 0 0 14px;
+
+  list-style: none;
+
+  font-size: 0.92rem;
+}
+
+.tag-row {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+}
+
+.tag {
+  background: rgba(109, 180, 255, 0.2);
+
+  color: #aed5ff;
+
+  border-radius: 999px;
+
+  padding: 6px 10px;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+}
+
+.tag.purpose {
+  background: rgba(255, 141, 210, 0.22);
+
+  color: #ffd3f1;
+}
+
+.game-sheet section h2 {
+  font-size: 1.05rem;
+
+  margin: 16px 0 8px;
+}
+
+.how-to-steps {
+  margin: 0;
+
+  padding-left: 1.25em;
+
+  line-height: 1.7;
+}
+
+.how-to-steps li {
+  margin: 0 0 8px;
+}
+
+.player-mode-list {
+  display: grid;
+
+  gap: 16px;
+}
+
+.player-mode-block h3 {
+  margin: 0 0 8px;
+
+  font-size: 1rem;
+
+  color: #ffd76b;
+}
+
+.player-mode-rules {
+  margin: 8px 0 0;
+
+  padding-left: 1.25em;
+
+  line-height: 1.7;
+}
+
+.prose {
+  white-space: pre-wrap;
+
+  line-height: 1.7;
+}
+
+.game-title {
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+.game-grid {
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 14px;
+}
+
+.game-panel {
+  background: rgba(14, 8, 39, 0.85);
+
+  border: 1px solid #6846d5;
+
+  border-radius: 14px;
+
+  padding: 12px 14px;
+}
+
+.game-panel h2 {
+  margin-top: 0;
+}
+
+.hint-panel {
+  border-color: #f08ad0;
+}
+
+/* =========================================================
+   LARGE GAME / WEB VIEWER
+   ========================================================= */
+
+.ebook-reader--game {
+  min-height:
+          max(
+                  480px,
+                  calc(100dvh - 260px)
+          );
+}
+
+.layout-ebook .ebook-game-viewer {
+  width: 100%;
+  max-width: 100%;
+
+  min-height:
+          max(
+                  420px,
+                  calc(100dvh - 300px)
+          );
+
+  flex: none;
+
+  display: flex;
+
+  align-items: stretch;
+
+  justify-content: center;
 
   overflow: visible;
 
   position: relative;
+}
 
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
+.ebook-game-viewer--focus {
+  width: 100%;
+  height: 100%;
+
+  min-height:
+          min(
+                  78dvh,
+                  860px
+          );
 }
 
 .layout-ebook .ebook-game-viewer__stage {
@@ -2139,16 +1699,27 @@ legend {
   min-height: 0;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   padding: 6px 10px;
+
   box-sizing: border-box;
 }
 
 .layout-ebook .ebook-game-viewer__frame {
-  width: min(960px, 94%);
-  height: min(84vh, calc(100dvh - 270px));
+  width:
+          min(
+                  960px,
+                  94%
+          );
+
+  height:
+          min(
+                  84vh,
+                  calc(100dvh - 270px)
+          );
 
   max-width: 100%;
 
@@ -2159,11 +1730,552 @@ legend {
   border-radius: 18px;
 
   display: flex;
+
   flex-direction: column;
 
   box-sizing: border-box;
 }
 
+.ebook-game-viewer__frame .book-spread {
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  margin: 0;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.ebook-game-viewer__frame .book-page {
+  flex: 1 1 auto;
+
+  width: 100%;
+  max-width: 100%;
+
+  height: 100%;
+
+  min-height: 0;
+
+  max-height: none;
+
+  margin: 0;
+
+  border-radius: 18px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame .book-page.game-page {
+  padding: 0;
+
+  width: 100%;
+}
+
+.ebook-game-viewer__frame .book-page.web-page {
+  padding: 0;
+
+  background: rgba(14, 8, 39, 0.72);
+}
+
+.ebook-game-viewer__frame .game-sheet {
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 100%;
+
+  margin: 0;
+
+  padding: 18px 22px 36px;
+
+  box-sizing: border-box;
+}
+
+.ebook-game-viewer__frame .web-sheet,
+.ebook-game-viewer__frame .web-sheet-empty {
+  width: 100%;
+
+  min-height: 100%;
+}
+
+/* =========================================================
+   LARGE VIEWER TYPOGRAPHY
+   ========================================================= */
+
+.ebook-game-viewer__frame .book-page.game-page .sheet-page-label {
+  margin: 0 0 6px;
+
+  font-size: 0.95rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-title,
+.ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+  margin: 0 0 10px;
+
+  font-size:
+          clamp(
+                  1.35rem,
+                  2.2vw,
+                  1.7rem
+          );
+
+  line-height: 1.25;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .card-desc {
+  margin: 0 0 12px;
+
+  font-size: 1rem;
+
+  line-height: 1.55;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .meta {
+  gap: 6px;
+
+  margin: 0 0 12px;
+
+  font-size: 0.92rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .tag-row {
+  gap: 8px;
+
+  margin-bottom: 14px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .tag {
+  padding: 5px 10px;
+
+  font-size: 0.8rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .sheet-hero {
+  height:
+          clamp(
+                  140px,
+                  22vh,
+                  220px
+          );
+
+  border-radius: 14px;
+
+  margin: 0 0 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
+  height:
+          clamp(
+                  110px,
+                  16vh,
+                  180px
+          );
+
+  border-radius: 12px;
+
+  margin: 0 0 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-grid {
+  gap: 12px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-panel {
+  padding: 12px 14px;
+
+  border-radius: 14px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .game-sheet section h2,
+.ebook-game-viewer__frame .book-page.game-page .game-panel h2 {
+  font-size: 1.05rem;
+
+  margin: 10px 0 6px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .how-to-steps {
+  line-height: 1.55;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .how-to-steps li {
+  margin: 0 0 6px;
+
+  font-size: 0.95rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-list {
+  gap: 10px;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-block h3 {
+  margin: 0 0 6px;
+
+  font-size: 1rem;
+}
+
+.ebook-game-viewer__frame .book-page.game-page .player-mode-rules,
+.ebook-game-viewer__frame .book-page.game-page .prose {
+  line-height: 1.55;
+
+  font-size: 0.95rem;
+}
+
+/* =========================================================
+   FULLSCREEN EBOOK
+   ========================================================= */
+
+.ebook-focus {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 80;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0;
+
+  padding: 24px 72px;
+
+  background: rgba(8, 3, 26, 0.82);
+
+  overflow: hidden;
+}
+
+.ebook-focus-book {
+  width:
+          min(
+                  1180px,
+                  100%
+          );
+
+  height:
+          calc(
+                  100dvh - 48px
+          );
+
+  max-height:
+          calc(
+                  100dvh - 48px
+          );
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 0;
+}
+
+.ebook-focus .book-spread {
+  max-width: none;
+
+  width: 100%;
+}
+
+.ebook-focus .book-page {
+  min-height: 0;
+
+  max-height: none;
+
+  cursor: default;
+
+  overflow: hidden;
+}
+
+.ebook-focus .book-page.design-page {
+  overflow: hidden;
+}
+
+.ebook-focus .book-spread.single .book-page,
+.ebook-focus .book-spread.cover-only .book-page {
+  min-height: 0;
+}
+
+.focus-arrow {
+  position: fixed;
+
+  top: 50%;
+
+  z-index: 81;
+
+  transform: translateY(-50%);
+
+  width: 48px;
+  height: 48px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #1f124f;
+
+  color: #ffd76b;
+
+  box-shadow: var(--shadow);
+
+  font-size: 1.35rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.focus-arrow.left {
+  left: 16px;
+}
+
+.focus-arrow.right {
+  right: 16px;
+}
+
+.focus-arrow:hover:not(:disabled) {
+  background: #6b49ff;
+
+  color: #fff6cf;
+}
+
+.focus-arrow:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+.ebook-focus--game .ebook-focus-book {
+  width:
+          min(
+                  980px,
+                  calc(100vw - 120px)
+          );
+}
+
+.ebook-focus--game .ebook-game-viewer__frame {
+  width: 100%;
+
+  height:
+          calc(
+                  100dvh - 48px
+          );
+
+  max-height:
+          calc(
+                  100dvh - 48px
+          );
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  margin-top: auto;
+
+  flex-shrink: 0;
+
+  background:
+          linear-gradient(
+                  135deg,
+                  #13093b 0%,
+                  #1f0f5a 55%,
+                  #2f1a76 100%
+          );
+
+  color: #f8f3ea;
+
+  padding: 16px 20px 14px;
+}
+
+.footer-inner {
+  max-width: 1080px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1.4fr 0.8fr;
+
+  gap: 16px;
+
+  align-items: start;
+}
+
+.footer-kicker {
+  margin: 0 0 10px;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+
+  color: #ffd76b;
+}
+
+.footer-contact ul {
+  list-style: none;
+
+  margin: 0;
+
+  padding: 0;
+
+  display: grid;
+
+  gap: 10px;
+}
+
+.footer-contact li {
+  display: grid;
+
+  gap: 2px;
+}
+
+.footer-contact span {
+  font-size: 0.78rem;
+
+  color: rgba(248, 243, 234, 0.7);
+}
+
+.footer-contact strong,
+.footer-contact a {
+  font-size: 0.98rem;
+
+  font-weight: 700;
+}
+
+.footer-qr {
+  background: rgba(255, 253, 248, 0.05);
+
+  border: 1px solid rgba(255, 215, 107, 0.36);
+
+  border-radius: 14px;
+
+  padding: 10px 12px;
+}
+
+.footer-hint {
+  margin: 0 0 8px;
+
+  font-size: 0.8rem;
+
+  line-height: 1.4;
+
+  color: rgba(248, 243, 234, 0.86);
+}
+
+.qr-frame {
+  display: inline-flex;
+
+  background: #f8f4ff;
+
+  border-radius: 10px;
+
+  padding: 4px;
+}
+
+.footer-form-link {
+  display: block;
+
+  margin: 10px 0 0;
+
+  font-weight: 700;
+
+  color: #f8f3ea;
+}
+
+/* =========================================================
+   ERROR / EMPTY / BACK
+   ========================================================= */
+
+.back {
+  display: inline-block;
+
+  margin-bottom: 16px;
+
+  font-weight: 600;
+
+  color: var(--teal);
+}
+
+.error,
+.empty {
+  background: rgba(44, 24, 88, 0.82);
+
+  border: 1px solid #7349e6;
+
+  border-radius: 12px;
+
+  padding: 12px 14px;
+}
+
+/* =========================================================
+   HOME COMPACT HEADER
+   ========================================================= */
+
+.page-home .hero {
+  padding: 14px 16px 12px;
+
+  flex-shrink: 0;
+}
+
+.page-home .brand-title {
+  font-size:
+          clamp(
+                  1.35rem,
+                  3.2vw,
+                  2.1rem
+          );
+}
+
+.page-home .tagline {
+  margin: 4px 0 0;
+
+  font-size: 0.9rem;
+
+  line-height: 1.35;
+
+  max-width: 52rem;
+}
+
+.page-home .eyebrow-light {
+  margin: 0 0 4px;
+
+  font-size: 0.68rem;
+}
+
+.page-home .filters {
+  margin-top: 8px;
+
+  gap: 8px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+}
+
+.page-home fieldset {
+  padding: 6px 8px 8px;
+}
+
+.page-home .chips {
+  gap: 6px;
+}
+
+.page-home .chip {
+  padding: 5px 9px;
+
+  font-size: 0.8rem;
+}
 
 /* =========================================================
    TABLET
@@ -2176,48 +2288,98 @@ legend {
   }
 
   .static-game-list__items {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
   }
-
 }
 
-
 /* =========================================================
-   TABLET NHỎ
+   TABLET / MOBILE
    ========================================================= */
 
 @media (max-width: 899px) {
 
+  .page-home {
+    height: auto;
+  }
+
+  .page-home .tagline {
+    display: none;
+  }
+
+  .page-home .filters {
+    grid-template-columns: 1fr;
+  }
+
   .layout-ebook {
     width: 100%;
 
-    height: auto;
-    min-height: 0;
-
     padding: 12px 12px 16px;
 
-    overflow-x: visible;
-    overflow-y: visible;
+    height: auto;
+
+    min-height: 0;
+
+    overflow: visible;
   }
+
+  /*
+     Vẫn giữ 1 flow dọc.
+  */
 
   .static-game-list {
     height: auto;
+
     max-height: none;
 
     overflow: visible;
   }
 
   .static-game-list__items {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .book-spread,
+  .book-spread.single,
+  .book-spread.cover-only {
+    display: block;
+
+    width: 100%;
+  }
+
+  .book-page,
+  .book-page.left,
+  .book-page.right,
+  .book-page.solo {
+    border-radius: 18px;
+
+    max-height: none;
+
+    min-height: 0;
+  }
+
+  .book-page.design-page,
+  .book-page.web-page {
+    max-height: none;
+
+    min-height: 0;
+
+    overflow: visible;
   }
 
   .layout-ebook .ebook-reader {
     flex: none;
 
     height: auto;
+
     min-height: 500px;
 
     overflow: visible;
+
+    background: rgba(9, 4, 26, 0.36);
+
+    padding: 8px 8px 6px;
   }
 
   .layout-ebook .ebook-stage {
@@ -2226,11 +2388,80 @@ legend {
     min-height: 420px;
 
     overflow-x: hidden;
+
     overflow-y: visible;
   }
 
+  .result-card {
+    flex-direction: column;
+  }
+
+  .ebook-focus .book-page,
+  .ebook-focus .book-page.left,
+  .ebook-focus .book-page.right,
+  .ebook-focus .book-page.solo {
+    max-height: none;
+
+    min-height: 0;
+  }
+
+  .ebook-focus .book-page.design-page {
+    min-height: 0;
+
+    height: auto;
+
+    max-height: none;
+  }
+
+  .book-page.game-page .sheet-hero {
+    height: 88px;
+  }
+
+  .book-page.game-page .sheet-instruction {
+    height: 72px;
+  }
 }
 
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .static-game-list__items {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .static-game-list__header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 4px;
+  }
+
+  .static-game-list__header p {
+    max-width: none;
+
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   TABLET HERO
+   ========================================================= */
+
+@media (max-width: 860px) {
+
+  .hero {
+    padding: 36px 16px 28px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* =========================================================
    MOBILE
@@ -2244,14 +2475,19 @@ legend {
 
   .static-game-list {
     margin: 6px 0 10px;
+
     padding: 10px;
+
+    max-height: none;
   }
 
   .static-game-list__header {
     align-items: flex-start;
+
     flex-direction: column;
 
     gap: 4px;
+
     margin-bottom: 8px;
   }
 
@@ -2263,17 +2499,20 @@ legend {
     max-width: none;
 
     font-size: 8px;
+
     text-align: left;
   }
 
   .static-game-list__items {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
     gap: 5px 6px;
   }
 
   .static-game-card {
     min-height: 45px;
+
     padding: 6px;
   }
 
@@ -2287,18 +2526,71 @@ legend {
 
   .static-game-card__page {
     font-size: 7px;
+
     padding: 2px 5px;
   }
 
   .layout-ebook .ebook-reader {
     min-height: 500px;
   }
-
 }
 
+/* =========================================================
+   MOBILE 560
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .result-bar,
+  .reader-nav {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .reader-nav {
+    text-align: center;
+  }
+
+  .ebook-focus {
+    padding: 16px 52px;
+  }
+
+  .ebook-focus-book {
+    height:
+            calc(
+                    100dvh - 32px
+            );
+
+    max-height:
+            calc(
+                    100dvh - 32px
+            );
+  }
+
+  .ebook-focus .book-page {
+    min-height: 0;
+  }
+
+  .ebook-focus .book-page.design-page {
+    min-height: 0;
+
+    height: auto;
+
+    max-height: none;
+  }
+
+  .sheet-hero {
+    height: 160px;
+  }
+
+  .sheet-instruction {
+    height: 120px;
+  }
+}
 
 /* =========================================================
-   MOBILE RẤT NHỎ
+   MOBILE VERY SMALL
    ========================================================= */
 
 @media (max-width: 400px) {
@@ -2310,5 +2602,4 @@ legend {
   .static-game-card {
     min-height: 43px;
   }
-
 }
