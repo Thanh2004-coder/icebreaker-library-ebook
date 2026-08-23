@@ -10,18 +10,6 @@ import {
     resolveCatalogText,
 } from "../data/catalog.js";
 
-/**
- * EbookReader
- *
- * Every ebook page is rendered as a screenshot only.
- *
- * Page mapping:
- * 1  -> screenshot 1
- * 2  -> screenshot 2
- * ...
- * 33 -> screenshot 33
- */
-
 function isInteractive(target) {
     return Boolean(
         target?.closest?.(
@@ -34,120 +22,109 @@ export default function EbookReader({ page }) {
     const navigate = useNavigate();
 
     const current = clampPage(page);
-
     const [focused, setFocused] = useState(false);
 
     const readerUi = UI.reader || {};
-
     const step = 1;
 
     const canPrev = current > FIRST_PAGE;
     const canNext = current < LAST_PAGE;
 
-    /**
-     * Navigate to another page.
-     */
     const requestGo = useCallback(
         (target) => {
             const next = clampPage(target);
 
-            if (next === current) {
-                return;
-            }
+            if (next === current) return;
 
+            setFocused(false);
             navigate(`/page/${next}`);
         },
         [current, navigate]
     );
 
-    /**
-     * Keyboard navigation.
-     */
+    /* =========================================================
+       KEYBOARD
+       ========================================================= */
+
     useEffect(() => {
-        const onKey = (event) => {
-            /**
-             * ESC:
-             * close focus mode.
-             */
-            if (event.key === "Escape" && focused) {
-                event.preventDefault();
-                setFocused(false);
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") {
+                if (focused) {
+                    event.preventDefault();
+                    setFocused(false);
+                }
                 return;
             }
 
-            /**
-             * Left arrow:
-             * previous page.
-             */
+            if (!focused) return;
+
             if (
                 event.key === "ArrowLeft" &&
-                current > FIRST_PAGE
+                canPrev
             ) {
                 event.preventDefault();
                 requestGo(current - step);
-                return;
             }
 
-            /**
-             * Right arrow:
-             * next page.
-             */
             if (
                 event.key === "ArrowRight" &&
-                current < LAST_PAGE
+                canNext
             ) {
                 event.preventDefault();
                 requestGo(current + step);
             }
         };
 
-        window.addEventListener("keydown", onKey);
+        window.addEventListener(
+            "keydown",
+            onKeyDown
+        );
 
         return () => {
-            window.removeEventListener("keydown", onKey);
+            window.removeEventListener(
+                "keydown",
+                onKeyDown
+            );
         };
     }, [
-        current,
         focused,
+        current,
+        canPrev,
+        canNext,
         requestGo,
     ]);
 
-    /**
-     * Prevent background scrolling
-     * while focus mode is open.
-     */
-    useEffect(() => {
-        if (!focused) {
-            return undefined;
-        }
+    /* =========================================================
+       KHÓA SCROLL KHI FULLSCREEN
+       ========================================================= */
 
-        const previousBodyOverflow =
+    useEffect(() => {
+        if (!focused) return undefined;
+
+        const previousOverflow =
             document.body.style.overflow;
 
-        const previousHtmlOverflow =
-            document.documentElement.style.overflow;
+        const previousTouchAction =
+            document.body.style.touchAction;
 
         document.body.style.overflow = "hidden";
-        document.documentElement.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
 
         return () => {
             document.body.style.overflow =
-                previousBodyOverflow;
+                previousOverflow;
 
-            document.documentElement.style.overflow =
-                previousHtmlOverflow;
+            document.body.style.touchAction =
+                previousTouchAction;
         };
     }, [focused]);
 
-    /**
-     * Open focus mode.
-     *
-     * This is used only by the normal page.
-     */
+    /* =========================================================
+       MỞ FULLSCREEN
+       ========================================================= */
+
     const openFocus = (event) => {
-        if (focused) {
-            return;
-        }
+        if (focused) return;
 
         if (isInteractive(event.target)) {
             return;
@@ -156,29 +133,19 @@ export default function EbookReader({ page }) {
         setFocused(true);
     };
 
-    /**
-     * Close focus mode.
-     */
-    const closeFocus = () => {
-        setFocused(false);
-    };
+    /* =========================================================
+       PAGE CONTENT
+       ========================================================= */
 
-    /**
-     * One screenshot page.
-     *
-     * IMPORTANT:
-     * Do NOT stopPropagation here.
-     *
-     * When focus mode is open, clicking the screenshot
-     * must be able to reach the .ebook-focus container
-     * so it can close the overlay.
-     */
     const pageLeaf = (
-        <div className="book-spread single">
+        <div
+            className="book-spread single"
+            onClick={(event) => {
+                event.stopPropagation();
+            }}
+        >
             <div
-                className={`${pageClass(
-                    current
-                )} screenshot-only-page`}
+                className={`${pageClass(current)} screenshot-only-page`}
                 onClick={openFocus}
             >
                 <SheetBody page={current} />
@@ -194,15 +161,33 @@ export default function EbookReader({ page }) {
         readerUi.ariaLabel || "Ebook {title}"
     );
 
-    /**
-     * FOCUS / FULLSCREEN VIEW
-     */
-    const stage = focused ? (
+    /* =========================================================
+       FULLSCREEN
+       KHÔNG DÙNG FitPageStage Ở ĐÂY
+       ========================================================= */
+
+    const focusStage = focused ? (
         <div
             className="ebook-focus ebook-focus--screenshots"
-            onClick={closeFocus}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Xem trang ${current}`}
+            onClick={() => setFocused(false)}
         >
-            {/* PREVIOUS */}
+            {/* NÚT ĐÓNG */}
+            <button
+                type="button"
+                className="focus-close"
+                aria-label="Đóng chế độ phóng to"
+                onClick={(event) => {
+                    event.stopPropagation();
+                    setFocused(false);
+                }}
+            >
+                ×
+            </button>
+
+            {/* TRANG TRƯỚC */}
             <button
                 type="button"
                 className="focus-arrow left"
@@ -211,18 +196,33 @@ export default function EbookReader({ page }) {
                 onClick={(event) => {
                     event.stopPropagation();
 
-                    requestGo(current - step);
+                    if (canPrev) {
+                        requestGo(
+                            current - step
+                        );
+                    }
                 }}
             >
                 {readerUi.prevShort || "←"}
             </button>
 
-            {/* IMAGE */}
-            <div className="ebook-focus-book screenshot-focus-book">
-                {pageLeaf}
+            {/* ẢNH */}
+            <div
+                className="screenshot-focus-book"
+                onClick={(event) => {
+                    event.stopPropagation();
+                }}
+            >
+                <div className="screenshot-focus-page">
+                    <SheetBody page={current} />
+
+                    <span className="focus-page-number">
+                        {current} / {LAST_PAGE}
+                    </span>
+                </div>
             </div>
 
-            {/* NEXT */}
+            {/* TRANG SAU */}
             <button
                 type="button"
                 className="focus-arrow right"
@@ -231,32 +231,38 @@ export default function EbookReader({ page }) {
                 onClick={(event) => {
                     event.stopPropagation();
 
-                    requestGo(current + step);
+                    if (canNext) {
+                        requestGo(
+                            current + step
+                        );
+                    }
                 }}
             >
                 {readerUi.nextShort || "→"}
             </button>
         </div>
-    ) : (
-        /**
-         * NORMAL PAGE VIEW
-         */
-        <FitPageStage
-            pageKey={current}
-            key={`page-${current}`}
-        >
-            {pageLeaf}
-        </FitPageStage>
-    );
+    ) : null;
+
+    /* =========================================================
+       NORMAL VIEW
+       ========================================================= */
 
     return (
         <section
             className="ebook-reader ebook-reader--screenshots"
             aria-label={ariaLabel}
         >
-            {stage}
+            {!focused && (
+                <FitPageStage
+                    pageKey={current}
+                    key={`page-${current}`}
+                >
+                    {pageLeaf}
+                </FitPageStage>
+            )}
 
-            {/* PAGE NAVIGATION */}
+            {focusStage}
+
             <nav
                 className="reader-nav"
                 aria-label={
@@ -268,7 +274,9 @@ export default function EbookReader({ page }) {
                     type="button"
                     disabled={!canPrev}
                     onClick={() =>
-                        requestGo(current - step)
+                        requestGo(
+                            current - step
+                        )
                     }
                 >
                     {readerUi.prev ||
@@ -283,7 +291,9 @@ export default function EbookReader({ page }) {
                     type="button"
                     disabled={!canNext}
                     onClick={() =>
-                        requestGo(current + step)
+                        requestGo(
+                            current + step
+                        )
                     }
                 >
                     {readerUi.next ||
