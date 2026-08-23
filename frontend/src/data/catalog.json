@@ -160,7 +160,7 @@
   "games": [
     {
       "id": 1,
-      "page": 6,
+      "page": 5,
       "name": "Trò chơi 5 giây",
       "minPlayers": 3,
       "maxPlayers": 20,
@@ -172,19 +172,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Làm quen", "Phá băng", "Giao tiếp", "Tăng tương tác"],
       "tags": ["5 giây", "trả lời nhanh", "làm quen", "phá băng"],
-      "searchKeywords": [
-        "trò chơi 5 giây",
-        "5 giây",
-        "5 second",
-        "câu hỏi",
-        "trả lời nhanh",
-        "làm quen"
-      ],
+      "searchKeywords": ["trò chơi 5 giây", "5 giây", "5 second", "câu hỏi", "trả lời nhanh", "làm quen"],
       "description": "Người chơi có 5 giây để trả lời một câu hỏi trước khi chuyển lượt cho người tiếp theo."
     },
     {
       "id": 2,
-      "page": 7,
+      "page": 6,
       "name": "This or That",
       "minPlayers": 3,
       "maxPlayers": 20,
@@ -196,21 +189,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Làm quen", "Phá băng", "Tìm điểm chung", "Tăng tương tác"],
       "tags": ["This or That", "lựa chọn", "làm quen", "điểm chung"],
-      "searchKeywords": [
-        "this or that",
-        "this",
-        "that",
-        "lựa chọn",
-        "cà phê",
-        "trà sữa",
-        "biển",
-        "núi"
-      ],
+      "searchKeywords": ["this or that", "this", "that", "lựa chọn", "cà phê", "trà sữa", "biển", "núi"],
       "description": "Người chơi nhanh chóng chọn một trong hai lựa chọn để tìm ra điểm chung và sự khác biệt."
     },
     {
       "id": 3,
-      "page": 8,
+      "page": 7,
       "name": "Tìm điểm chung nhanh",
       "minPlayers": 4,
       "maxPlayers": 15,
@@ -222,18 +206,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Làm quen", "Tìm điểm chung", "Giao tiếp", "Tăng tương tác"],
       "tags": ["tìm điểm chung", "điểm chung", "sở thích", "làm quen"],
-      "searchKeywords": [
-        "tìm điểm chung nhanh",
-        "tìm điểm chung",
-        "điểm chung",
-        "sở thích",
-        "thói quen"
-      ],
+      "searchKeywords": ["tìm điểm chung nhanh", "tìm điểm chung", "điểm chung", "sở thích", "thói quen"],
       "description": "Các nhóm nhỏ tìm ra những sở thích, thói quen hoặc trải nghiệm giống nhau trong thời gian giới hạn."
     },
     {
       "id": 4,
-      "page": 9,
+      "page": 8,
       "name": "Bingo làm quen",
       "minPlayers": 6,
       "maxPlayers": 20,
@@ -245,18 +223,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Campus"],
       "purposes": ["Làm quen", "Phá băng", "Giao tiếp", "Tăng tương tác"],
       "tags": ["Bingo", "làm quen", "bắt chuyện", "giao tiếp"],
-      "searchKeywords": [
-        "bingo làm quen",
-        "bingo",
-        "làm quen",
-        "bắt chuyện",
-        "biết nhau"
-      ],
+      "searchKeywords": ["bingo làm quen", "bingo", "làm quen", "bắt chuyện", "biết nhau"],
       "description": "Người chơi đi xung quanh bắt chuyện và tìm những người phù hợp với các ô trên bảng Bingo."
     },
     {
       "id": 5,
-      "page": 10,
+      "page": 9,
       "name": "Câu chuyện 3 chương",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -268,18 +240,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Làm quen", "Giao tiếp", "Tạo sự thoải mái", "Tăng tương tác"],
       "tags": ["câu chuyện", "3 chương", "chia sẻ", "làm quen"],
-      "searchKeywords": [
-        "câu chuyện 3 chương",
-        "3 chương",
-        "câu chuyện",
-        "chia sẻ",
-        "story"
-      ],
+      "searchKeywords": ["câu chuyện 3 chương", "3 chương", "câu chuyện", "chia sẻ", "story"],
       "description": "Mỗi người kể một câu chuyện về bản thân theo ba chương: bắt đầu, bất ngờ và kết."
     },
     {
       "id": 6,
-      "page": 11,
+      "page": 10,
       "name": "Đứng lên ngồi xuống",
       "minPlayers": 6,
       "maxPlayers": 15,
@@ -291,18 +257,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Khởi động trước khi họp nhóm"],
       "tags": ["đứng lên", "ngồi xuống", "phản xạ", "năng lượng"],
-      "searchKeywords": [
-        "đứng lên ngồi xuống",
-        "đứng",
-        "ngồi",
-        "phản xạ",
-        "đứng sai"
-      ],
+      "searchKeywords": ["đứng lên ngồi xuống", "đứng", "ngồi", "phản xạ", "đứng sai"],
       "description": "Người chơi làm theo lệnh đứng hoặc ngồi của Leader, càng về sau tốc độ càng nhanh để đánh lừa người chơi."
     },
     {
       "id": 7,
-      "page": 12,
+      "page": 11,
       "name": "Đi tìm báu vật",
       "minPlayers": 5,
       "maxPlayers": 15,
@@ -314,18 +274,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Campus", "Ngoài trời"],
       "purposes": ["Tăng tương tác", "Tạo tiếng cười", "Khởi động trước khi họp nhóm"],
       "tags": ["báu vật", "tìm đồ", "đội", "phản xạ"],
-      "searchKeywords": [
-        "đi tìm báu vật",
-        "báu vật",
-        "tìm đồ",
-        "treasure hunt",
-        "tìm kiếm"
-      ],
+      "searchKeywords": ["đi tìm báu vật", "báu vật", "tìm đồ", "treasure hunt", "tìm kiếm"],
       "description": "Các đội nhanh chóng tìm và mang đúng những vật được Leader yêu cầu về điểm tập kết."
     },
     {
       "id": 8,
-      "page": 13,
+      "page": 12,
       "name": "Nối vòng tay lớn",
       "minPlayers": 8,
       "maxPlayers": 30,
@@ -337,18 +291,12 @@
       "contexts": ["Trong phòng", "Ngoài trời", "Campus"],
       "purposes": ["Tăng tương tác", "Giao tiếp", "Tạo sự thoải mái"],
       "tags": ["nối vòng", "vòng tay", "kết nối", "teamwork"],
-      "searchKeywords": [
-        "nối vòng tay lớn",
-        "nối vòng",
-        "vòng tay",
-        "human knot",
-        "kết nối"
-      ],
+      "searchKeywords": ["nối vòng tay lớn", "nối vòng", "vòng tay", "human knot", "kết nối"],
       "description": "Người chơi nắm tay tạo thành một mạng lưới liên kết rồi cùng nhau gỡ thành một vòng tròn."
     },
     {
       "id": 9,
-      "page": 14,
+      "page": 13,
       "name": "Đoán loại rau",
       "minPlayers": 6,
       "maxPlayers": 20,
@@ -360,18 +308,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Khởi động trước khi họp nhóm"],
       "tags": ["đoán rau", "rau củ", "quan sát", "phản xạ"],
-      "searchKeywords": [
-        "đoán loại rau",
-        "đoán rau",
-        "rau củ",
-        "rau",
-        "quan sát"
-      ],
+      "searchKeywords": ["đoán loại rau", "đoán rau", "rau củ", "rau", "quan sát"],
       "description": "Các đội quan sát hình ảnh rau củ và nhanh chóng đưa ra đáp án để ghi điểm."
     },
     {
       "id": 10,
-      "page": 15,
+      "page": 14,
       "name": "La bàn",
       "minPlayers": 8,
       "maxPlayers": 20,
@@ -383,18 +325,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Khởi động trước khi họp nhóm"],
       "tags": ["la bàn", "gối", "phản xạ", "tập trung"],
-      "searchKeywords": [
-        "la bàn",
-        "la ban",
-        "gối",
-        "phản xạ",
-        "tập trung"
-      ],
+      "searchKeywords": ["la bàn", "la ban", "gối", "phản xạ", "tập trung"],
       "description": "Người chơi phản ứng nhanh khi được gọi tên, kết hợp với người bên cạnh theo luật của trò chơi."
     },
     {
       "id": 11,
-      "page": 16,
+      "page": 15,
       "name": "Đổi chỗ thần tốc",
       "minPlayers": 8,
       "maxPlayers": 15,
@@ -406,18 +342,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Phá băng"],
       "tags": ["đổi chỗ", "thần tốc", "phản xạ", "đổi chỗ nhanh"],
-      "searchKeywords": [
-        "đổi chỗ thần tốc",
-        "đổi chỗ",
-        "thần tốc",
-        "white shoes",
-        "swap"
-      ],
+      "searchKeywords": ["đổi chỗ thần tốc", "đổi chỗ", "thần tốc", "white shoes", "swap"],
       "description": "Leader đưa ra một đặc điểm, những người có đặc điểm đó phải nhanh chóng đổi chỗ cho nhau."
     },
     {
       "id": 12,
-      "page": 17,
+      "page": 16,
       "name": "Đoán địa danh Việt Nam",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -429,19 +359,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Ghi nhớ"],
       "tags": ["địa danh", "Việt Nam", "đoán địa danh", "địa lý"],
-      "searchKeywords": [
-        "đoán địa danh Việt Nam",
-        "đoán địa danh",
-        "địa danh",
-        "Việt Nam",
-        "địa lý",
-        "Vịnh Hạ Long"
-      ],
+      "searchKeywords": ["đoán địa danh Việt Nam", "đoán địa danh", "địa danh", "Việt Nam", "địa lý", "Vịnh Hạ Long"],
       "description": "Các đội quan sát hình ảnh địa danh Việt Nam và nhanh chóng đoán tên địa điểm."
     },
     {
       "id": 13,
-      "page": 18,
+      "page": 17,
       "name": "Săn số 1–100",
       "minPlayers": 2,
       "maxPlayers": 6,
@@ -453,18 +376,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Tăng tương tác", "Khởi động trước khi họp nhóm"],
       "tags": ["săn số", "1-100", "số", "phản xạ"],
-      "searchKeywords": [
-        "săn số 1-100",
-        "săn số",
-        "1-100",
-        "tìm số",
-        "khoanh số"
-      ],
+      "searchKeywords": ["săn số 1-100", "săn số", "1-100", "tìm số", "khoanh số"],
       "description": "Người chơi nhanh chóng tìm số được Leader gọi và khoanh vào bảng để giành quyền tiếp tục."
     },
     {
       "id": 14,
-      "page": 19,
+      "page": 18,
       "name": "Đoán hành động",
       "minPlayers": 6,
       "maxPlayers": 10,
@@ -476,18 +393,12 @@
       "contexts": ["Trong lớp học", "Trong phòng"],
       "purposes": ["Tạo tiếng cười", "Phá băng", "Tăng tương tác"],
       "tags": ["đoán hành động", "diễn", "đoán", "đội"],
-      "searchKeywords": [
-        "đoán hành động",
-        "hành động",
-        "diễn tả",
-        "charades",
-        "đoán"
-      ],
+      "searchKeywords": ["đoán hành động", "hành động", "diễn tả", "charades", "đoán"],
       "description": "Một người diễn tả hành động bí mật mà không được nói, đồng đội có thời gian giới hạn để đoán."
     },
     {
       "id": 15,
-      "page": 20,
+      "page": 19,
       "name": "Tôi là ai?",
       "minPlayers": 4,
       "maxPlayers": 6,
@@ -499,18 +410,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tạo tiếng cười", "Giao tiếp", "Tăng tương tác", "Ghi nhớ"],
       "tags": ["tôi là ai", "từ khóa", "gợi ý", "đoán"],
-      "searchKeywords": [
-        "tôi là ai",
-        "tôi là ai?",
-        "who am i",
-        "từ khóa",
-        "gợi ý"
-      ],
+      "searchKeywords": ["tôi là ai", "tôi là ai?", "who am i", "từ khóa", "gợi ý"],
       "description": "Người chơi lần lượt bước lên dựa trên các gợi ý để cả nhóm đoán xem ai phù hợp nhất với từ khóa."
     },
     {
       "id": 16,
-      "page": 21,
+      "page": 20,
       "name": "Đáp án bí mật",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -522,18 +427,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tăng tương tác", "Ghi nhớ", "Tạo tiếng cười"],
       "tags": ["đáp án bí mật", "trùng đáp án", "đoán", "phán đoán"],
-      "searchKeywords": [
-        "đáp án bí mật",
-        "đáp án",
-        "bí mật",
-        "trùng đáp án",
-        "phán đoán"
-      ],
+      "searchKeywords": ["đáp án bí mật", "đáp án", "bí mật", "trùng đáp án", "phán đoán"],
       "description": "Người chơi đưa ra đáp án theo một chủ đề và cố gắng đoán xem người khác có chọn giống mình hay không."
     },
     {
       "id": 17,
-      "page": 22,
+      "page": 21,
       "name": "5 Second Rule",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -545,18 +444,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tạo tiếng cười", "Phản xạ", "Tăng tương tác"],
       "tags": ["5 second rule", "5 giây", "trả lời nhanh", "phản xạ"],
-      "searchKeywords": [
-        "5 second rule",
-        "5 seconds",
-        "5 giây",
-        "kể 3",
-        "trả lời nhanh"
-      ],
+      "searchKeywords": ["5 second rule", "5 seconds", "5 giây", "kể 3", "trả lời nhanh"],
       "description": "Người chơi phải nhanh chóng đưa ra ba đáp án đúng theo chủ đề trong vòng 5 giây."
     },
     {
       "id": 18,
-      "page": 23,
+      "page": 22,
       "name": "Đếm số thay thế",
       "minPlayers": 3,
       "maxPlayers": 8,
@@ -568,18 +461,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Ghi nhớ", "Tăng tương tác", "Khởi động trước khi họp nhóm"],
       "tags": ["đếm số", "thay thế", "trí nhớ", "phản xạ"],
-      "searchKeywords": [
-        "đếm số thay thế",
-        "đếm số",
-        "1-10",
-        "thay số",
-        "trí nhớ"
-      ],
+      "searchKeywords": ["đếm số thay thế", "đếm số", "1-10", "thay số", "trí nhớ"],
       "description": "Người chơi lần lượt đếm từ 1 đến 10, sau đó thay một số bằng từ hoặc hành động mới theo luật."
     },
     {
       "id": 19,
-      "page": 24,
+      "page": 23,
       "name": "Chữ đầu chữ cuối",
       "minPlayers": 2,
       "maxPlayers": 2,
@@ -591,18 +478,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Giao tiếp", "Phản xạ", "Tăng tương tác"],
       "tags": ["chữ đầu", "chữ cuối", "từ", "phản xạ"],
-      "searchKeywords": [
-        "chữ đầu chữ cuối",
-        "chữ đầu",
-        "chữ cuối",
-        "M-T",
-        "từ"
-      ],
+      "searchKeywords": ["chữ đầu chữ cuối", "chữ đầu", "chữ cuối", "M-T", "từ"],
       "description": "Hai người đưa ra hai chữ cái làm chữ đầu và chữ cuối, sau đó nhanh chóng tìm một từ phù hợp."
     },
     {
       "id": 20,
-      "page": 25,
+      "page": 24,
       "name": "Đoán từ theo gợi ý",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -614,19 +495,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tư duy", "Tăng tương tác", "Phá băng"],
       "tags": ["đoán từ", "gợi ý", "suy luận", "liên tưởng"],
-      "searchKeywords": [
-        "đoán từ theo gợi ý",
-        "đoán từ",
-        "gợi ý",
-        "suy luận",
-        "liên tưởng",
-        "pizza"
-      ],
+      "searchKeywords": ["đoán từ theo gợi ý", "đoán từ", "gợi ý", "suy luận", "liên tưởng", "pizza"],
       "description": "Leader đưa ra từng gợi ý để người chơi suy luận và đoán từ khóa, gợi ý càng sớm thì điểm càng cao."
     },
     {
       "id": 21,
-      "page": 26,
+      "page": 25,
       "name": "Ai là gián điệp?",
       "minPlayers": 6,
       "maxPlayers": 15,
@@ -638,19 +512,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Giao tiếp", "Tăng tương tác", "Phán đoán", "Tạo tiếng cười"],
       "tags": ["gián điệp", "spy", "từ khóa", "suy luận", "bỏ phiếu"],
-      "searchKeywords": [
-        "ai là gián điệp",
-        "gián điệp",
-        "spy",
-        "spyfall",
-        "từ khóa",
-        "suy luận"
-      ],
+      "searchKeywords": ["ai là gián điệp", "gián điệp", "spy", "spyfall", "từ khóa", "suy luận"],
       "description": "Phần lớn người chơi nhận cùng một từ khóa, một người nhận từ khóa gần giống và phải tìm cách không bị phát hiện."
     },
     {
       "id": 22,
-      "page": 27,
+      "page": 26,
       "name": "Nối từ",
       "minPlayers": 3,
       "maxPlayers": 10,
@@ -662,18 +529,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Giao tiếp", "Tăng tương tác", "Tạo tiếng cười"],
       "tags": ["nối từ", "từ ngữ", "phản xạ", "trí nhớ"],
-      "searchKeywords": [
-        "nối từ",
-        "nối chữ",
-        "từ",
-        "phản xạ",
-        "trí nhớ"
-      ],
+      "searchKeywords": ["nối từ", "nối chữ", "từ", "phản xạ", "trí nhớ"],
       "description": "Người chơi lần lượt nói một từ bắt đầu bằng chữ hoặc âm cuối của từ trước đó. Ai không nghĩ ra từ phù hợp sẽ bị loại hoặc mất điểm."
     },
     {
       "id": 23,
-      "page": 28,
+      "page": 27,
       "name": "Có gì thay đổi?",
       "minPlayers": 4,
       "maxPlayers": 10,
@@ -685,18 +546,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tăng tương tác", "Ghi nhớ", "Tạo tiếng cười"],
       "tags": ["thay đổi", "quan sát", "ghi nhớ", "phản xạ"],
-      "searchKeywords": [
-        "có gì thay đổi",
-        "thay đổi",
-        "quan sát",
-        "ghi nhớ",
-        "tìm điểm khác"
-      ],
+      "searchKeywords": ["có gì thay đổi", "thay đổi", "quan sát", "ghi nhớ", "tìm điểm khác"],
       "description": "Người chơi quan sát một nhóm người hoặc một khu vực, sau đó phát hiện những thay đổi nhỏ xảy ra sau khi quay lại."
     },
     {
       "id": 24,
-      "page": 29,
+      "page": 28,
       "name": "Cân não Logic",
       "minPlayers": 2,
       "maxPlayers": 8,
@@ -708,19 +563,12 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Nhóm nhỏ"],
       "purposes": ["Tư duy", "Tăng tương tác", "Giao tiếp"],
       "tags": ["logic", "cân não", "suy luận", "đố vui"],
-      "searchKeywords": [
-        "cân não logic",
-        "logic",
-        "cân não",
-        "suy luận",
-        "đố logic",
-        "câu đố"
-      ],
+      "searchKeywords": ["cân não logic", "logic", "cân não", "suy luận", "đố logic", "câu đố"],
       "description": "Người chơi cùng giải những câu đố logic ngắn và đưa ra đáp án dựa trên khả năng suy luận thay vì đoán mò."
     },
     {
       "id": 25,
-      "page": 30,
+      "page": 29,
       "name": "Giải mật thư",
       "minPlayers": 4,
       "maxPlayers": 15,
@@ -732,14 +580,7 @@
       "contexts": ["Trong lớp học", "Trong phòng", "Campus"],
       "purposes": ["Tăng tương tác", "Giao tiếp", "Tư duy", "Khởi động trước khi họp nhóm"],
       "tags": ["mật thư", "giải mã", "logic", "đội nhóm"],
-      "searchKeywords": [
-        "giải mật thư",
-        "mật thư",
-        "giải mã",
-        "mã hóa",
-        "logic",
-        "giải câu đố"
-      ],
+      "searchKeywords": ["giải mật thư", "mật thư", "giải mã", "mã hóa", "logic", "giải câu đố"],
       "description": "Các đội phối hợp giải mã những manh mối và ký hiệu để tìm ra thông điệp bí mật trong thời gian giới hạn."
     }
   ],
