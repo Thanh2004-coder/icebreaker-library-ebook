@@ -151,10 +151,7 @@ textarea {
 /* Never create a second scrollbar inside the main layout. */
 .layout-ebook .search-results,
 .layout-ebook .result-list,
-.layout-ebook .static-game-list {
-    overflow: visible;
-    max-height: none;
-}
+
 
 /* =========================================================
    SEARCH
