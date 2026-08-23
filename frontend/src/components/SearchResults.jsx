@@ -30,7 +30,7 @@ export default function SearchResults({ games, onClear }) {
             ) : (
                 <ul className="result-list">
                     {games.map((game) => {
-                        const gamePage = Number(game.id) + 5;
+                        const gamePage = Number(game.id) + 4;
 
                         return (
                             <li key={game.id} className="result-card">

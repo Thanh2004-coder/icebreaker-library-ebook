@@ -306,44 +306,7 @@ export function getGameById(id) {
   );
 }
 
-export function getGameByPage(page) {
-  const key = Number(page);
 
-  return (
-      GAMES.find(
-          (game) =>
-              Number(game.page) === key
-      ) ||
-      GAMES.find(
-          (game) =>
-              Number(game.id) ===
-              key - GAME_START_PAGE + 1
-      ) ||
-      null
-  );
-}
-
-export function getWebByPage(page) {
-  const key = Number(page);
-
-  return (
-      WEBS.find(
-          (web) =>
-              Number(web.page) === key
-      ) || null
-  );
-}
-
-export function getDesignSheet(page) {
-  const key = Number(page);
-
-  return (
-      SHEETS.find(
-          (sheet) =>
-              Number(sheet.page) === key
-      ) || null
-  );
-}
 
 export function gamesByPage() {
   return [...GAMES].sort(
