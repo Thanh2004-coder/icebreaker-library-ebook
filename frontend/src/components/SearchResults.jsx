@@ -30,10 +30,15 @@ export default function SearchResults({ games, onClear }) {
             ) : (
                 <ul className="result-list">
                     {games.map((game) => {
-                        const gamePage = Number(game.id) + 4;
+                        // Lấy trực tiếp page từ catalog.json.
+                        // Game 1 = 5, Game 2 = 6, ..., Game 25 = 29.
+                        const gamePage = Number(game.page);
 
                         return (
-                            <li key={game.id} className="result-card">
+                            <li
+                                key={game.id}
+                                className="result-card"
+                            >
                                 <div className="result-card__content">
                                     <h2>{game.name}</h2>
 
@@ -50,7 +55,9 @@ export default function SearchResults({ games, onClear }) {
                                     type="button"
                                     className="open-page-btn"
                                     onClick={() =>
-                                        navigate(`/page/${gamePage}`)
+                                        navigate(
+                                            `/page/${gamePage}`
+                                        )
                                     }
                                 >
                                     Xem trang {gamePage}
