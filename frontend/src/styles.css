@@ -1098,7 +1098,7 @@ RESULT BAR / SEARCH RESULTS
     height: 100%;
     width: auto;
 
-    max-width: 92vw;
+    max-width: 100vw;
     max-height: calc(100dvh - 32px);
 
     object-fit: contain;
