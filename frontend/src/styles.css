@@ -1901,3 +1901,216 @@ RESULT BAR / SEARCH RESULTS
         min-height: 43px;
     }
 }
+/* =========================================================
+   FORCE LARGE FOCUS VIEW
+   ========================================================= */
+
+.ebook-focus {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 10px 70px !important;
+
+    background: rgba(8, 3, 26, 0.92) !important;
+
+    overflow: hidden !important;
+}
+
+/* KHUNG NGOÀI */
+.ebook-focus-book {
+    width: 100% !important;
+    max-width: none !important;
+
+    height: calc(100dvh - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+}
+
+/* =========================================================
+   QUAN TRỌNG NHẤT:
+   GAME PAGE PHẢI CÓ WIDTH THỰC SỰ
+   ========================================================= */
+
+.ebook-focus .ebook-game-viewer {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.ebook-focus .ebook-game-viewer__stage {
+    width: 100% !important;
+    height: 100% !important;
+
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* KHUNG TRANG GAME */
+.ebook-focus .ebook-game-viewer__frame {
+    width: min(92vw, 1250px) !important;
+
+    height: calc(100dvh - 20px) !important;
+    max-height: calc(100dvh - 20px) !important;
+
+    min-height: 0 !important;
+
+    margin: 0 auto !important;
+
+    overflow: hidden !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* SPREAD */
+.ebook-focus .book-spread {
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+}
+
+/* =========================================================
+   GAME PAGE
+   ========================================================= */
+
+.ebook-focus .book-page.game-page {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    height: 100% !important;
+    min-height: 0 !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+
+    flex: 1 1 auto !important;
+}
+
+/* NỘI DUNG GAME */
+.ebook-focus .book-page.game-page .game-sheet {
+    width: 100% !important;
+    max-width: none !important;
+
+    min-height: 100% !important;
+    height: auto !important;
+
+    margin: 0 !important;
+
+    padding: 24px 30px 40px !important;
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+}
+
+/* =========================================================
+   TĂNG CỠ CHỮ TRONG GAME KHI PHÓNG TO
+   ========================================================= */
+
+.ebook-focus .game-sheet h1,
+.ebook-focus .game-sheet .game-title {
+    font-size: clamp(1.8rem, 3vw, 2.8rem) !important;
+}
+
+.ebook-focus .game-sheet .card-desc {
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+}
+
+.ebook-focus .game-sheet section h2,
+.ebook-focus .game-sheet .game-panel h2 {
+    font-size: 1.25rem !important;
+}
+
+.ebook-focus .game-sheet .how-to-steps,
+.ebook-focus .game-sheet .player-mode-rules,
+.ebook-focus .game-sheet .prose {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================================
+   NẾU LÀ ẢNH PDF / DESIGN
+   ========================================================= */
+
+.ebook-focus .book-page.design-page,
+.ebook-focus .book-page.screenshot-only-page {
+    width: auto !important;
+    height: 100% !important;
+    max-width: 92vw !important;
+}
+
+.ebook-focus .book-page-image,
+.ebook-focus .design-sheet-image {
+    display: block !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    max-width: 92vw !important;
+    max-height: calc(100dvh - 20px) !important;
+
+    object-fit: contain !important;
+}
+
+/* =========================================================
+   HỦY CÁC SCALE CŨ
+   ========================================================= */
+
+.ebook-focus .ebook-fit-frame,
+.ebook-focus .ebook-fit-clip,
+.ebook-focus .ebook-fit-scale {
+    transform: none !important;
+
+    width: 100% !important;
+    max-width: none !important;
+
+    height: 100% !important;
+    max-height: none !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .ebook-focus {
+        padding: 5px 45px !important;
+    }
+
+    .ebook-focus .ebook-game-viewer__frame {
+        width: 96vw !important;
+        height: calc(100dvh - 10px) !important;
+    }
+
+    .ebook-focus .ebook-focus-book {
+        width: 100% !important;
+        height: calc(100dvh - 10px) !important;
+    }
+}
