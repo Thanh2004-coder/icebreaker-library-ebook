@@ -1865,14 +1865,7 @@ legend {
   padding: 3px 6px;
 }
 
-/* QUYỂN SÁCH VẪN LÀ PHẦN TIẾP THEO
-   CỦA CHÍNH UI NÀY */
-.layout-ebook .ebook-reader {
-  width: 100%;
-  flex: 1 1 auto;
-  min-height: 0;
-  margin-top: 4px;
-}
+
 
 
 /* =========================================================
