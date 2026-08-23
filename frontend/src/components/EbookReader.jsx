@@ -8,23 +8,31 @@ import {
     UI,
     clampPage,
     resolveCatalogText,
+    getScreenshotByPage,
 } from "../data/catalog.js";
 
 /**
  * EbookReader
  *
- * Every ebook page is rendered as a screenshot only.
+ * Normal:
+ *   FitPageStage -> book-spread -> book-page -> screenshot
  *
- * Page mapping:
- * 1  -> screenshot 1
- * 2  -> screenshot 2
- * ...
- * 33 -> screenshot 33
+ * Focus:
+ *   ebook-focus -> img trực tiếp
+ *
+ * Focus KHÔNG dùng:
+ *   FitPageStage
+ *   ebook-stage
+ *   ebook-fit-frame
+ *   ebook-fit-clip
+ *   ebook-fit-scale
+ *   book-spread
+ *   book-page
  */
 
 function isInteractive(target) {
     return Boolean(
-        target.closest(
+        target?.closest(
             "a, button, input, textarea, select, label"
         )
     );
@@ -41,11 +49,10 @@ export default function EbookReader({ page }) {
 
     const step = 1;
 
-    const canPrev =
-        current > FIRST_PAGE;
+    const canPrev = current > FIRST_PAGE;
+    const canNext = current < LAST_PAGE;
 
-    const canNext =
-        current < LAST_PAGE;
+    const screenshot = getScreenshotByPage(current);
 
     const requestGo = useCallback(
         (target) => {
@@ -58,15 +65,12 @@ export default function EbookReader({ page }) {
         [current, navigate]
     );
 
-    /**
-     * Keyboard navigation.
+    /*
+     * Keyboard navigation
      */
     useEffect(() => {
         const onKey = (event) => {
-            if (
-                event.key === "Escape" &&
-                focused
-            ) {
+            if (event.key === "Escape" && focused) {
                 setFocused(false);
                 return;
             }
@@ -86,46 +90,41 @@ export default function EbookReader({ page }) {
             }
         };
 
-        window.addEventListener(
-            "keydown",
-            onKey
-        );
+        window.addEventListener("keydown", onKey);
 
         return () => {
-            window.removeEventListener(
-                "keydown",
-                onKey
-            );
+            window.removeEventListener("keydown", onKey);
         };
-    }, [
-        current,
-        focused,
-        requestGo,
-    ]);
+    }, [current, focused, requestGo]);
 
-    /**
-     * Prevent background scrolling
-     * while focus mode is open.
+    /*
+     * Khóa scroll nền khi fullscreen
      */
     useEffect(() => {
         if (!focused) {
             return undefined;
         }
 
-        const previous =
+        const previousBodyOverflow =
             document.body.style.overflow;
 
-        document.body.style.overflow =
-            "hidden";
+        const previousHtmlOverflow =
+            document.documentElement.style.overflow;
+
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
 
         return () => {
             document.body.style.overflow =
-                previous;
+                previousBodyOverflow;
+
+            document.documentElement.style.overflow =
+                previousHtmlOverflow;
         };
     }, [focused]);
 
-    /**
-     * Open focus mode by clicking the page.
+    /*
+     * Mở fullscreen
      */
     const openFocus = (event) => {
         if (focused) return;
@@ -137,14 +136,14 @@ export default function EbookReader({ page }) {
         setFocused(true);
     };
 
-    /**
-     * One page.
+    /*
+     * ================================
+     * NORMAL PAGE
+     * ================================
      *
-     * SheetBody now returns ONLY the mapped
-     * screenshot, so there is no GameDetail,
-     * DesignSheet or WebSheet rendering.
+     * Phần này giữ nguyên hệ thống FitPageStage.
      */
-    const pageLeaf = (
+    const normalPage = (
         <div
             className="book-spread single"
             onClick={(event) =>
@@ -160,24 +159,47 @@ export default function EbookReader({ page }) {
                 <SheetBody page={current} />
 
                 <span className="page-folio folio-right">
-          {current}
-        </span>
+                    {current}
+                </span>
             </div>
         </div>
     );
 
-    const ariaLabel =
-        resolveCatalogText(
-            readerUi.ariaLabel ||
-            "Ebook {title}"
-        );
+    /*
+     * ================================
+     * FULLSCREEN PAGE
+     * ================================
+     *
+     * QUAN TRỌNG:
+     *
+     * Không dùng pageLeaf.
+     * Không dùng book-page.
+     * Không dùng FitPageStage.
+     *
+     * Chỉ render IMG trực tiếp.
+     */
+    const fullscreenPage = (
+        <img
+            className="fullscreen-screenshot"
+            src={screenshot}
+            alt={`Trang ${current}`}
+            draggable={false}
+        />
+    );
 
+    const ariaLabel = resolveCatalogText(
+        readerUi.ariaLabel || "Ebook {title}"
+    );
+
+    /*
+     * ================================
+     * STAGE
+     * ================================
+     */
     const stage = focused ? (
         <div
             className="ebook-focus ebook-focus--screenshots"
-            onClick={() =>
-                setFocused(false)
-            }
+            onClick={() => setFocused(false)}
         >
             <button
                 type="button"
@@ -187,20 +209,24 @@ export default function EbookReader({ page }) {
                 onClick={(event) => {
                     event.stopPropagation();
 
-                    requestGo(
-                        current - step
-                    );
+                    requestGo(current - step);
                 }}
             >
-                {readerUi.prevShort ||
-                    "←"}
+                {readerUi.prevShort || "←"}
             </button>
 
+            {/*
+             * FULLSCREEN CONTAINER
+             *
+             * Không có FitPageStage ở đây.
+             */}
             <div
-                className="ebook-focus-book screenshot-focus-book"
-                onClick={(event) => event.stopPropagation()}
+                className="fullscreen-screenshot-container"
+                onClick={(event) =>
+                    event.stopPropagation()
+                }
             >
-                {pageLeaf}
+                {fullscreenPage}
             </div>
 
             <button
@@ -211,21 +237,21 @@ export default function EbookReader({ page }) {
                 onClick={(event) => {
                     event.stopPropagation();
 
-                    requestGo(
-                        current + step
-                    );
+                    requestGo(current + step);
                 }}
             >
-                {readerUi.nextShort ||
-                    "→"}
+                {readerUi.nextShort || "→"}
             </button>
         </div>
     ) : (
+        /*
+         * NORMAL MODE
+         */
         <FitPageStage
             pageKey={current}
             key={`page-${current}`}
         >
-            {pageLeaf}
+            {normalPage}
         </FitPageStage>
     );
 
