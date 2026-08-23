@@ -2390,3 +2390,255 @@ RESULT BAR / SEARCH RESULTS
         right: 6px !important;
     }
 }
+/* =========================================================
+   FOCUS / PHÓNG TO ẢNH
+   KÍCH THƯỚC VỪA MÀN HÌNH
+   ========================================================= */
+
+.ebook-focus {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 32px 80px;
+
+    background: rgba(8, 3, 26, 0.88);
+
+    overflow: hidden;
+}
+
+.ebook-focus-book {
+    width: auto;
+    height: auto;
+
+    max-width: calc(100vw - 180px);
+    max-height: calc(100dvh - 64px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+/* Khung chứa ảnh */
+.ebook-focus .book-spread {
+    width: auto;
+    height: auto;
+
+    max-width: calc(100vw - 180px);
+    max-height: calc(100dvh - 64px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+}
+
+/* Trang */
+.ebook-focus .book-page {
+    width: auto;
+    height: auto;
+
+    max-width: calc(100vw - 180px);
+    max-height: calc(100dvh - 64px);
+
+    min-width: 0;
+    min-height: 0;
+
+    padding: 0;
+
+    cursor: zoom-out;
+
+    border-radius: 18px;
+    overflow: hidden;
+
+    border: 1px solid rgba(109, 70, 255, 0.45);
+}
+
+/* ẢNH */
+.ebook-focus .book-page-image {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: calc(100vw - 180px);
+    max-height: calc(100dvh - 64px);
+
+    object-fit: contain;
+    object-position: center;
+
+    margin: 0 auto;
+}
+
+/* Không để FitPageStage bóp hoặc phóng ảnh */
+.ebook-focus .ebook-fit-frame,
+.ebook-focus .ebook-fit-clip,
+.ebook-focus .ebook-fit-scale {
+    width: auto;
+    height: auto;
+
+    max-width: none;
+    max-height: none;
+
+    transform: none !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .ebook-focus {
+        padding: 20px 52px;
+    }
+
+    .ebook-focus-book,
+    .ebook-focus .book-spread,
+    .ebook-focus .book-page,
+    .ebook-focus .book-page-image {
+        max-width: calc(100vw - 100px);
+        max-height: calc(100dvh - 40px);
+    }
+
+    .focus-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .focus-arrow.left {
+        left: 8px;
+    }
+
+    .focus-arrow.right {
+        right: 8px;
+    }
+}
+/* =========================================================
+   FOCUS IMAGE - KÍCH THƯỚC VỪA PHẢI
+   ========================================================= */
+
+.ebook-focus {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 100px;
+
+    background: rgba(8, 3, 26, 0.90);
+
+    overflow: hidden;
+}
+
+.ebook-focus-book {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-width: 75vw;
+    max-height: 78vh;
+
+    min-width: 0;
+    min-height: 0;
+}
+
+/* Spread */
+.ebook-focus .book-spread {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    height: auto;
+
+    max-width: 75vw;
+    max-height: 78vh;
+
+    margin: 0;
+}
+
+/* Page */
+.ebook-focus .book-page {
+    width: auto !important;
+    height: auto !important;
+
+    max-width: 75vw !important;
+    max-height: 78vh !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    padding: 0 !important;
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    cursor: zoom-out;
+}
+
+/* ẢNH */
+.ebook-focus .book-page-image {
+    display: block;
+
+    width: auto !important;
+    height: auto !important;
+
+    max-width: 75vw !important;
+    max-height: 78vh !important;
+
+    object-fit: contain;
+
+    margin: 0 auto;
+}
+
+/* FitPageStage không được can thiệp kích thước focus */
+.ebook-focus .ebook-fit-frame,
+.ebook-focus .ebook-fit-clip,
+.ebook-focus .ebook-fit-scale {
+    width: auto !important;
+    height: auto !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    transform: none !important;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+    .ebook-focus {
+        padding: 30px 55px;
+    }
+
+    .ebook-focus-book,
+    .ebook-focus .book-spread {
+        max-width: 80vw;
+        max-height: 75vh;
+    }
+
+    .ebook-focus .book-page,
+    .ebook-focus .book-page-image {
+        max-width: 80vw !important;
+        max-height: 75vh !important;
+    }
+}
