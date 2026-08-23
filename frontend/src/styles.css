@@ -1434,7 +1434,7 @@ legend {
   height: calc(100dvh - 48px);
   max-height: calc(100dvh - 48px);
 }
-```css
+
      /* =========================================================
         STATIC GAME LIST - COMPACT 1 SCREEN
         ========================================================= */
@@ -1825,73 +1825,490 @@ legend {
   font-size: 10px;
 }
 /* =========================================================
-   SEARCH + STATIC GAME LIST
-   Mục lục luôn tồn tại và luôn được hiển thị
+   GỘP THÀNH 1 UI DUY NHẤT
+   Search → Filter → 25 trò chơi → Ebook
    ========================================================= */
 
+/* =========================
+   LAYOUT CHÍNH
+   ========================= */
+
 .layout-ebook {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: block;
+
+  height: auto;
+  min-height: 0;
+
+  padding: 28px 20px 16px;
+
+  overflow-x: visible;
+  overflow-y: visible;
+}
+
+
+/* =========================
+   SEARCH + FILTER
+   ========================= */
+
+.layout-ebook .search-wrap,
+.layout-ebook .filters,
+.layout-ebook .result-bar {
+  width: 100%;
+  flex: none;
+}
+
+.layout-ebook .search-wrap {
+  margin: 0;
+}
+
+.layout-ebook .filters {
+  margin-top: 12px;
+}
+
+
+/* =========================
+   SEARCH RESULTS
+   Không giới hạn toàn bộ layout
+   ========================= */
+
+.layout-ebook .search-results {
+  width: 100%;
+  margin: 8px 0;
+
+  flex: none;
+
+  min-height: 0;
+  max-height: 22vh;
+
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
-.layout-ebook .search-results {
-  flex: 0 0 auto;
-  max-height: 26vh;
-  overflow: hidden;
-}
 
-.layout-ebook .result-bar {
-  flex: 0 0 auto;
-}
+/* =========================
+   25 TRÒ CHƠI
+   ========================= */
 
 .layout-ebook .static-game-list {
-  flex: 0 0 auto;
-  display: block;
-  visibility: visible;
-  opacity: 1;
-  max-height: min(62vh, 560px);
-  overflow: hidden;
+  width: 100%;
+
+  margin: 8px 0 12px;
+  padding: 14px 16px;
+
+  box-sizing: border-box;
+
+  flex: none;
+
+  /* QUAN TRỌNG:
+     Không giới hạn chiều cao.
+     Không cắt nội dung.
+  */
+  height: auto;
+  min-height: 0;
+  max-height: none;
+
+  overflow: visible;
+
+  border: 1px solid rgba(125, 75, 255, 0.58);
+  border-radius: 16px;
+
+  background:
+          linear-gradient(
+                  135deg,
+                  rgba(52, 20, 70, 0.88),
+                  rgba(18, 12, 42, 0.94)
+          );
+
+  box-shadow:
+          0 6px 18px rgba(0, 0, 0, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.035);
 }
+
+
+/* =========================
+   HEADER MỤC LỤC
+   ========================= */
+
+.static-game-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.static-game-list__header h2 {
+  margin: 0;
+
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 800;
+
+  color: #fff;
+}
+
+.static-game-list__header p {
+  margin: 0;
+
+  max-width: 460px;
+
+  font-size: 10px;
+  line-height: 1.3;
+  text-align: right;
+
+  color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================
+   GRID 25 TRÒ
+   ========================= */
+
+.static-game-list__items {
+  display: grid;
+
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  gap: 7px 8px;
+
+  width: 100%;
+}
+
+
+/* =========================
+   GAME CARD
+   ========================= */
+
+.static-game-card {
+  min-width: 0;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 7px 8px;
+
+  border: 1px solid rgba(132, 84, 255, 0.18);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  cursor: pointer;
+
+  transition:
+          background 0.15s ease,
+          border-color 0.15s ease;
+}
+
+.static-game-card:hover {
+  background: rgba(132, 84, 255, 0.08);
+  border-color: rgba(132, 84, 255, 0.42);
+}
+
+.static-game-card__content {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.static-game-card__content h3 {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  color: #fff;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.static-game-card__content p {
+  margin: 2px 0 0;
+
+  font-size: 7.5px;
+  line-height: 1.2;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.static-game-card__page {
+  flex: 0 0 auto;
+
+  padding: 3px 6px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(132, 84, 255, 0.28);
+
+  background: rgba(132, 84, 255, 0.08);
+
+  color: #d9c9ff;
+
+  font-size: 7.5px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   EBOOK
+   LUÔN NẰM NGAY BÊN DƯỚI 25 TRÒ
+   ========================================================= */
 
 .layout-ebook .ebook-reader {
-  flex: 0 0 auto;
-}
-.static-game-card {
   width: 100%;
-  font: inherit;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-  appearance: none;
+  max-width: 100%;
+
+  margin: 12px 0 0;
+
+  /* Không để flex co ebook về 0 */
+  flex: none;
+
+  height: auto;
+  min-height: max(440px, calc(100dvh - 300px));
+
+  overflow-x: visible;
+  overflow-y: visible;
 }
+
+
+/*
+   Stage vẫn giữ logic ebook hiện tại,
+   nhưng không bị layout cha ép co.
+*/
+
+.layout-ebook .ebook-stage {
+  width: 100%;
+
+  flex: none;
+
+  min-height: max(380px, calc(100dvh - 360px));
+
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+
+/* =========================
+   EBOOK GAME VIEWER
+   Giữ nguyên viewer hiện tại
+   ========================= */
+
+.layout-ebook .ebook-game-viewer {
+  width: 100%;
+  max-width: 100%;
+
+  flex: none;
+
+  min-height: max(420px, calc(100dvh - 300px));
+
+  overflow: visible;
+
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.layout-ebook .ebook-game-viewer__stage {
+  width: 100%;
+
+  flex: none;
+
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+
+.layout-ebook .ebook-game-viewer__frame {
+  width: min(960px, 94%);
+  height: min(84vh, calc(100dvh - 270px));
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .layout-ebook {
+    max-width: 100%;
+  }
+
+  .static-game-list__items {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   TABLET NHỎ
+   ========================================================= */
+
 @media (max-width: 899px) {
-  .ebook-game-viewer {
-    min-height: max(360px, calc(100dvh - 280px));
-  }
 
-  .ebook-game-viewer__stage {
-    padding: 4px 4px;
-  }
-
-  .ebook-game-viewer__frame {
+  .layout-ebook {
     width: 100%;
-    height: min(78vh, calc(100dvh - 240px));
-    border-radius: 16px;
+
+    height: auto;
+    min-height: 0;
+
+    padding: 12px 12px 16px;
+
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
-  .ebook-game-viewer__frame .game-sheet {
-    padding: 14px 14px 32px;
+  .static-game-list {
+    height: auto;
+    max-height: none;
+
+    overflow: visible;
   }
 
-  .ebook-game-viewer__frame .book-page.game-page .sheet-hero {
-    height: 120px;
+  .static-game-list__items {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
-    height: 96px;
+  .layout-ebook .ebook-reader {
+    flex: none;
+
+    height: auto;
+    min-height: 500px;
+
+    overflow: visible;
   }
 
-  .ebook-game-viewer__frame .book-page.game-page .game-title,
-  .ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
-    font-size: 1.25rem;
+  .layout-ebook .ebook-stage {
+    flex: none;
+
+    min-height: 420px;
+
+    overflow-x: hidden;
+    overflow-y: visible;
   }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .layout-ebook {
+    padding: 10px 10px 16px;
+  }
+
+  .static-game-list {
+    margin: 6px 0 10px;
+    padding: 10px;
+  }
+
+  .static-game-list__header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .static-game-list__header h2 {
+    font-size: 17px;
+  }
+
+  .static-game-list__header p {
+    max-width: none;
+
+    font-size: 8px;
+    text-align: left;
+  }
+
+  .static-game-list__items {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 5px 6px;
+  }
+
+  .static-game-card {
+    min-height: 45px;
+    padding: 6px;
+  }
+
+  .static-game-card__content h3 {
+    font-size: 10px;
+  }
+
+  .static-game-card__content p {
+    font-size: 7px;
+  }
+
+  .static-game-card__page {
+    font-size: 7px;
+    padding: 2px 5px;
+  }
+
+  .layout-ebook .ebook-reader {
+    min-height: 500px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE RẤT NHỎ
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .static-game-list__items {
+    grid-template-columns: 1fr;
+  }
+
+  .static-game-card {
+    min-height: 43px;
+  }
+
 }
