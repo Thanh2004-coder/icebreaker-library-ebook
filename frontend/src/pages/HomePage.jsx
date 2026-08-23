@@ -22,7 +22,6 @@ import {
   hasActiveQuery,
 } from "../data/filterGames.js";
 
-
 const STATIC_GAME_LIST = [
   {
     name: "Trò chơi 5 giây",
@@ -176,25 +175,24 @@ const STATIC_GAME_LIST = [
   },
 ];
 
-
 export default function HomePage() {
   const { page } = useParams();
   const navigate = useNavigate();
-
-  /*
-   * Page hiện tại chỉ dùng để xác định
-   * ebook đang hiển thị trang nào.
-   *
-   * KHÔNG dùng page để quyết định
-   * có render 25 game hay ebook.
-   */
-  const currentPage = clampPage(page || 1);
 
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(EMPTY_FILTERS);
 
   const homeUi = UI.home || {};
+
+  /*
+   * HOME LUÔN LÀ MỘT MÀN HÌNH.
+   *
+   * page chỉ dùng để xác định ebook đang đứng ở trang nào.
+   * Không còn isHome.
+   * Không còn màn hình riêng cho game.
+   */
+  const currentPage = clampPage(page || 1);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -204,12 +202,8 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, [searchInput]);
 
-
   /*
-   * Nếu chưa có page thì mặc định page 1.
-   *
-   * Route vẫn tồn tại để ebook biết trang nào đang mở,
-   * nhưng KHÔNG tạo màn hình mới.
+   * Không có page -> mặc định page 1.
    */
   useEffect(() => {
     if (!page) {
@@ -217,9 +211,8 @@ export default function HomePage() {
     }
   }, [page, navigate]);
 
-
   /*
-   * Chuẩn hóa page không hợp lệ.
+   * Page không hợp lệ -> đưa về page hợp lệ.
    */
   useEffect(() => {
     const raw = Number(page);
@@ -229,7 +222,6 @@ export default function HomePage() {
     }
   }, [page, currentPage, navigate]);
 
-
   const filtered = useMemo(() => {
     return filterGames(GAMES, {
       search,
@@ -237,9 +229,7 @@ export default function HomePage() {
     });
   }, [search, selected]);
 
-
   const querying = hasActiveQuery(search, selected);
-
 
   const summaryText = resolveCatalogText(
       homeUi.summary || "{title} · {count} trò chơi"
@@ -247,26 +237,21 @@ export default function HomePage() {
       .replace("{title}", EBOOK.title)
       .replace("{count}", String(STATIC_GAME_LIST.length));
 
-
   const clearSearch = () => {
     setSearchInput("");
     setSearch("");
     setSelected(EMPTY_FILTERS);
   };
 
-
   /*
-   * Bấm game:
+   * Bấm game -> chỉ đổi trang ebook.
    *
-   * KHÔNG mở GamePage.
-   * KHÔNG chuyển sang màn hình khác.
-   *
-   * Chỉ đổi trang ebook bên dưới.
+   * Không chuyển sang GamePage.
+   * Không tạo màn hình thứ hai.
    */
   const openGame = (gamePage) => {
     navigate(`/page/${gamePage}`);
   };
-
 
   return (
       <div className="page page-home">
@@ -283,7 +268,6 @@ export default function HomePage() {
               onChange={setSearchInput}
           />
 
-
           {/* =========================
             FILTER
            ========================= */}
@@ -294,9 +278,8 @@ export default function HomePage() {
               onChange={setSelected}
           />
 
-
           {/* =========================
-            SEARCH RESULTS
+            SEARCH RESULT
            ========================= */}
 
           {querying && (
@@ -307,7 +290,6 @@ export default function HomePage() {
               />
           )}
 
-
           {/* =========================
             SUMMARY
            ========================= */}
@@ -316,7 +298,6 @@ export default function HomePage() {
             <p>{summaryText}</p>
           </div>
 
-
           {/* =========================
             25 TRÒ CHƠI
            ========================= */}
@@ -324,55 +305,41 @@ export default function HomePage() {
           <section className="static-game-list">
 
             <div className="static-game-list__header">
-
               <h2>25 TRÒ CHƠI</h2>
 
               <p>
-                Bấm vào một trò chơi để xem nội dung trong ebook bên dưới.
+                Chọn trò chơi để mở đúng trang trong ebook.
               </p>
-
             </div>
 
-
             <div className="static-game-list__items">
-
               {STATIC_GAME_LIST.map((game) => (
-
                   <button
                       type="button"
                       className="static-game-card"
                       key={game.page}
                       onClick={() => openGame(game.page)}
                   >
-
                     <div className="static-game-card__content">
-
                       <h3>{game.name}</h3>
 
                       <p>{game.howToPlay}</p>
-
                     </div>
-
 
                     <div className="static-game-card__page">
                       Trang {game.page}
                     </div>
-
                   </button>
-
               ))}
-
             </div>
-
           </section>
-
 
           {/* =========================
             EBOOK
-            LUÔN NẰM BÊN DƯỚI 25 GAME
+            LUÔN HIỂN THỊ
            ========================= */}
 
-          <section className="ebook-section">
+          <section className="ebook-reader ebook-reader-standalone">
 
             <EbookReader page={currentPage} />
 
