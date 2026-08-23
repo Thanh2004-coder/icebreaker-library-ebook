@@ -1456,10 +1456,10 @@ legend {
           0 8px 24px rgba(0, 0, 0, 0.16),
           inset 0 1px 0 rgba(255, 255, 255, 0.035);
 
-  /* Không để danh sách tự phình quá cao */
-  max-height: min(62vh, 560px);
+  flex: 0 0 auto;
 
-  overflow: hidden;
+  max-height: min(62vh, 560px);
+  overflow-y: auto;
 }
 
 /* =========================================================
@@ -1782,6 +1782,37 @@ legend {
   margin: 0;
   padding: 8px 10px;
   font-size: 10px;
+}
+/* =========================================================
+   SEARCH + STATIC GAME LIST
+   Mục lục luôn tồn tại và luôn được hiển thị
+   ========================================================= */
+
+.layout-ebook {
+  overflow-y: auto;
+}
+
+.layout-ebook .search-results {
+  flex: 0 0 auto;
+  max-height: 26vh;
+  overflow: hidden;
+}
+
+.layout-ebook .result-bar {
+  flex: 0 0 auto;
+}
+
+.layout-ebook .static-game-list {
+  flex: 0 0 auto;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  max-height: min(62vh, 560px);
+  overflow: hidden;
+}
+
+.layout-ebook .ebook-reader {
+  flex: 0 0 auto;
 }
 @media (max-width: 899px) {
   .ebook-game-viewer {
