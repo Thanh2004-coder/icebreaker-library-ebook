@@ -120,113 +120,47 @@ function detectFocusMode(stage) {
  *   - giữ nguyên aspect ratio
  *   - nếu quá cao thì giảm cả width + height
  */
-function fitNormalPage(
-  availW,
-  availH
-) {
-  const viewportW =
-    window.innerWidth;
+function fitNormalPage(availW, availH) {
+  const viewportW = window.innerWidth;
+  const viewportH = window.innerHeight;
 
-  const viewportH =
-    window.innerHeight;
+  const isMobile = viewportW < 900;
 
-  const isMobile =
-    viewportW < DESKTOP_BREAKPOINT;
+  let maxW;
 
-  /**
-   * MOBILE
-   *
-   * Dùng gần hết chiều rộng màn hình,
-   * nhưng vẫn chừa khoảng hai bên.
-   */
   if (isMobile) {
-    const mobileSideGap =
-      viewportW <= 480
-        ? 16
-        : 24;
-
-    const maxW = Math.min(
-      availW,
-      viewportW -
-        mobileSideGap * 2
+    // Mobile: giữ gần nguyên responsive hiện tại
+    maxW = Math.min(
+        availW,
+        viewportW - 32
     );
-
-    const maxH = Math.max(
-      viewportH - 120,
-      320
+  } else {
+    // Desktop: chỉ cho ebook chiếm khoảng 50% viewport
+    maxW = Math.min(
+        availW,
+        Math.floor(viewportW * 0.5),
+        520
     );
-
-    let width = maxW;
-    let height =
-      width / PAGE_ASPECT;
-
-    if (height > maxH) {
-      height = maxH;
-      width =
-        height * PAGE_ASPECT;
-    }
-
-    return {
-      width: Math.max(
-        1,
-        Math.floor(width)
-      ),
-      height: Math.max(
-        1,
-        Math.floor(height)
-      ),
-    };
   }
 
-  /**
-   * DESKTOP
-   *
-   * Chủ động giới hạn width.
-   *
-   * Không lấy toàn bộ stage width nữa.
-   */
-  const desktopMaxWidth =
-    viewportW >=
-    LARGE_DESKTOP_BREAKPOINT
-      ? NORMAL_DESKTOP_WIDTH_LARGE
-      : NORMAL_DESKTOP_WIDTH_SMALL;
-
-  const maxW = Math.min(
-    availW,
-    desktopMaxWidth
-  );
-
-  /**
-   * Chừa khu vực cho navigation phía dưới.
-   */
+  // Chừa chỗ cho navigation bên dưới
   const maxH = Math.max(
-    viewportH - 110,
-    400
+      viewportH - 120,
+      320
   );
 
   let width = maxW;
-  let height =
-    width / PAGE_ASPECT;
+  let height = width / PAGE_ASPECT;
 
-  /**
-   * Nếu page cao quá màn hình,
-   * giảm toàn bộ page theo tỷ lệ.
-   */
+  // Nếu cao quá viewport thì thu nhỏ cả page
   if (height > maxH) {
     height = maxH;
-    width =
-      height * PAGE_ASPECT;
+    width = height * PAGE_ASPECT;
   }
 
   return {
-    width: Math.max(
-      1,
-      Math.floor(width)
-    ),
-    height: Math.max(
-      1,
-      Math.floor(height)
-    ),
+    width: Math.max(1, Math.floor(width)),
+    height: Math.max(1, Math.floor(height)),
   };
 }
 
