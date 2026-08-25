@@ -120,6 +120,29 @@ export default function EbookReader({ page }) {
     }, [focused]);
 
     /* =========================================================
+       TỰ ĐỘNG SCROLL ĐẾN PAGE MỚI
+       ========================================================= */
+
+    useEffect(() => {
+        if (focused) return;
+
+        const timer = requestAnimationFrame(() => {
+            const pageElement = document.querySelector(
+                ".ebook-reader--screenshots .screenshot-only-page"
+            );
+
+            if (!pageElement) return;
+
+            pageElement.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        });
+
+        return () => cancelAnimationFrame(timer);
+    }, [current, focused]);
+
+    /* =========================================================
        MỞ FULLSCREEN
        ========================================================= */
 
