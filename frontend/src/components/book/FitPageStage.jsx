@@ -13,9 +13,6 @@ export const PAGE_ASPECT = 5 / 8;
 
 /**
  * Kích thước layout gốc.
- *
- * Nội dung bên trong luôn render ở kích thước này,
- * sau đó dùng transform scale để fit vào màn hình.
  */
 const BASE_WIDTH = 469;
 const BASE_HEIGHT = Math.round(
@@ -25,33 +22,16 @@ const BASE_HEIGHT = Math.round(
 const MIN_STAGE = 160;
 
 /**
- * =========================================================
  * NORMAL VIEW
- * =========================================================
  */
 const DESKTOP_BREAKPOINT = 900;
-
-/**
- * Desktop không cho ebook quá rộng.
- */
 const NORMAL_MAX_WIDTH = 520;
 
 /**
- * =========================================================
- * FOCUS VIEW
- * =========================================================
+ * FOCUS / ZOOM VIEW
  *
- * Focus không chiếm toàn bộ màn hình.
- *
- * Giới hạn:
- *   - khoảng 78% chiều rộng viewport
- *   - khoảng 82% chiều cao viewport
- *
- * Như vậy khi phóng to:
- *   - page vẫn lớn hơn normal
- *   - vẫn nhìn thấy khoảng trống xung quanh
- *   - không bị quá khổ
- *   - không tạo cảm giác "full screen page"
+ * Trang sẽ lớn hơn bình thường nhưng
+ * không chiếm toàn bộ viewport.
  */
 const FOCUS_WIDTH_RATIO = 0.78;
 const FOCUS_HEIGHT_RATIO = 0.82;
@@ -60,8 +40,7 @@ const FOCUS_HEIGHT_RATIO = 0.82;
  * Đọc kích thước stage.
  */
 function readStageSize(stage) {
-  const rect =
-      stage.getBoundingClientRect();
+  const rect = stage.getBoundingClientRect();
 
   let availW = Math.max(
       stage.clientWidth || 0,
@@ -82,9 +61,7 @@ function readStageSize(stage) {
 
   if (availH < MIN_STAGE) {
     availH = Math.max(
-        Math.floor(
-            window.innerHeight * 0.75
-        ),
+        Math.floor(window.innerHeight * 0.75),
         320
     );
   }
@@ -96,15 +73,20 @@ function readStageSize(stage) {
 }
 
 /**
- * Kiểm tra stage có nằm trong .ebook-focus hay không.
+ * Kiểm tra Focus mode.
+ *
+ * Hỗ trợ cả trường hợp:
+ * .ebook-focus
+ * là parent hoặc chính stage.
  */
 function detectFocusMode(stage) {
   if (!stage) {
     return false;
   }
 
-  return Boolean(
-      stage.closest(".ebook-focus")
+  return (
+      stage.classList.contains("ebook-focus") ||
+      Boolean(stage.closest(".ebook-focus"))
   );
 }
 
@@ -117,11 +99,8 @@ function fitNormalPage(
     availW,
     availH
 ) {
-  const viewportW =
-      window.innerWidth;
-
-  const viewportH =
-      window.innerHeight;
+  const viewportW = window.innerWidth;
+  const viewportH = window.innerHeight;
 
   const isMobile =
       viewportW < DESKTOP_BREAKPOINT;
@@ -129,49 +108,29 @@ function fitNormalPage(
   let maxW;
 
   if (isMobile) {
-    /**
-     * Mobile:
-     * page fit theo chiều rộng màn hình,
-     * chừa khoảng 16px mỗi bên.
-     */
     maxW = Math.min(
         availW,
         viewportW - 32
     );
   } else {
-    /**
-     * Desktop:
-     * page không được quá rộng.
-     */
     maxW = Math.min(
         availW,
-        Math.floor(
-            viewportW * 0.5
-        ),
+        Math.floor(viewportW * 0.5),
         NORMAL_MAX_WIDTH
     );
   }
 
-  /**
-   * Chừa chỗ cho navigation.
-   */
   const maxH = Math.max(
       viewportH - 120,
       320
   );
 
   let width = maxW;
-
   let height =
       width / PAGE_ASPECT;
 
-  /**
-   * Nếu page quá cao thì giảm
-   * cả width và height.
-   */
   if (height > maxH) {
     height = maxH;
-
     width =
         height * PAGE_ASPECT;
   }
@@ -191,19 +150,16 @@ function fitNormalPage(
 
 /**
  * =========================================================
- * FOCUS PAGE
+ * FOCUS / ZOOM PAGE
  * =========================================================
  *
- * KHÔNG cho page chiếm toàn viewport.
+ * QUAN TRỌNG:
  *
- * Đây là phần quan trọng để sửa lỗi:
+ * Không lấy availW / availH làm giới hạn chính.
  *
- * "Bấm phóng to -> page quá to".
+ * Focus phải có khả năng lớn hơn stage bình thường.
  */
-function fitFocusPage(
-    availW,
-    availH
-) {
+function fitFocusPage() {
   const viewportW =
       window.innerWidth;
 
@@ -211,46 +167,27 @@ function fitFocusPage(
       window.innerHeight;
 
   /**
-   * Giới hạn chiều rộng focus.
-   *
-   * Ví dụ:
-   * viewport 1920px
-   * -> page tối đa khoảng 1497px
-   *
-   * viewport 1366px
-   * -> page tối đa khoảng 1065px
+   * Giới hạn theo viewport.
    */
   const maxWidth =
       viewportW *
       FOCUS_WIDTH_RATIO;
 
-  /**
-   * Giới hạn chiều cao focus.
-   *
-   * Ví dụ:
-   * viewport 900px
-   * -> page tối đa khoảng 738px
-   */
   const maxHeight =
       viewportH *
       FOCUS_HEIGHT_RATIO;
 
   /**
-   * Stage thực tế không được vượt
-   * giới hạn viewport.
+   * Bắt đầu bằng kích thước tối đa
+   * mà viewport cho phép.
    */
-  let width = Math.min(
-      availW,
-      maxWidth
-  );
+  let width = maxWidth;
 
   let height =
       width / PAGE_ASPECT;
 
   /**
-   * Nếu page quá cao:
-   * giảm height -> giảm width
-   * theo đúng aspect ratio.
+   * Nếu quá cao thì giảm lại.
    */
   if (height > maxHeight) {
     height = maxHeight;
@@ -258,17 +195,6 @@ function fitFocusPage(
     width =
         height * PAGE_ASPECT;
   }
-
-  /**
-   * Safety limit.
-   */
-  width = Math.min(
-      width,
-      maxWidth
-  );
-
-  height =
-      width / PAGE_ASPECT;
 
   return {
     width: Math.max(
@@ -287,8 +213,6 @@ function fitFocusPage(
  * =========================================================
  * PUBLIC API
  * =========================================================
- *
- * API cũ vẫn giữ nguyên.
  */
 export function fitPageBox(
     availW,
@@ -296,10 +220,7 @@ export function fitPageBox(
     focus = false
 ) {
   if (focus) {
-    return fitFocusPage(
-        availW,
-        availH
-    );
+    return fitFocusPage();
   }
 
   return fitNormalPage(
@@ -392,13 +313,16 @@ export default function FitPageStage({
         } = readStageSize(stage);
 
         /**
-         * Tự phát hiện focus.
+         * Xác định Focus.
          */
         const isFocus =
             detectFocusMode(stage);
 
         /**
-         * Tính kích thước page.
+         * Tính kích thước.
+         *
+         * Focus KHÔNG còn bị giới hạn
+         * bởi kích thước stage bình thường.
          */
         const fitted =
             fitPageBox(
@@ -407,16 +331,13 @@ export default function FitPageStage({
                 isFocus
             );
 
-        /**
-         * Scale từ BASE_WIDTH.
-         */
         const scale =
             fitted.width /
             BASE_WIDTH;
 
         /**
-         * Nội dung bên trong luôn layout
-         * ở kích thước cố định.
+         * Nội dung luôn layout
+         * ở BASE_WIDTH / BASE_HEIGHT.
          */
         scaleEl.style.width =
             `${BASE_WIDTH}px`;
@@ -427,10 +348,6 @@ export default function FitPageStage({
         scaleEl.style.minHeight =
             `${BASE_HEIGHT}px`;
 
-        /**
-         * Focus:
-         * cho phép nội dung không bị clip.
-         */
         scaleEl.style.overflow =
             isFocus
                 ? "visible"
@@ -651,9 +568,6 @@ export default function FitPageStage({
       box.width > 0 &&
       box.height > 0;
 
-  /**
-   * Class cho stage.
-   */
   const stageClassName = [
     "ebook-stage",
 
@@ -687,11 +601,6 @@ export default function FitPageStage({
                     height:
                     box.height,
 
-                    /**
-                     * Không cho CSS bên ngoài
-                     * ép page lớn hơn kích thước
-                     * đã tính.
-                     */
                     maxWidth:
                     box.width,
 
@@ -702,23 +611,23 @@ export default function FitPageStage({
                         box.focus
                             ? "visible"
                             : "hidden",
+
+                    position:
+                        "relative",
                   }
                   : undefined
             }
         >
           <div
               className="ebook-fit-clip"
-              style={
-                box.focus
-                    ? {
-                      overflow:
-                          "visible",
-                    }
-                    : {
-                      overflow:
-                          "hidden",
-                    }
-              }
+              style={{
+                width: "100%",
+                height: "100%",
+                overflow:
+                    box.focus
+                        ? "visible"
+                        : "hidden",
+              }}
           >
             <div
                 ref={scaleRef}
@@ -735,15 +644,14 @@ export default function FitPageStage({
                         minHeight:
                         BASE_HEIGHT,
 
-                        /**
-                         * Scale duy nhất
-                         * quyết định kích thước page.
-                         */
                         transform:
                             `scale(${box.scale})`,
 
+                        /**
+                         * Phóng to từ giữa.
+                         */
                         transformOrigin:
-                            "top left",
+                            "top center",
 
                         overflow:
                             box.focus
@@ -752,6 +660,19 @@ export default function FitPageStage({
 
                         boxSizing:
                             "border-box",
+
+                        position:
+                            "relative",
+
+                        left:
+                            box.focus
+                                ? "50%"
+                                : "0",
+
+                        marginLeft:
+                            box.focus
+                                ? `${-BASE_WIDTH / 2}px`
+                                : "0",
                       }
                       : undefined
                 }
@@ -763,4 +684,3 @@ export default function FitPageStage({
       </div>
   );
 }
-
