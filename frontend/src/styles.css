@@ -2672,3 +2672,771 @@ code {
     white-space: pre-wrap;
     overflow-wrap: break-word;
 }
+/* =========================================================
+   EXTRA RESPONSIVE - SMALL SCREENS
+   FIX MOBILE EBOOK / HORIZONTAL OVERFLOW
+   ========================================================= */
+
+/* =========================================================
+   TABLET / iPAD
+   ========================================================= */
+
+@media (max-width: 899px) {
+
+    html,
+    body,
+    #root {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .app-shell,
+    .page,
+    .page-home {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .layout,
+    .layout-ebook {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
+        overflow-x: hidden;
+    }
+
+    /* SEARCH RESULTS */
+
+    .search-results {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .search-results .result-list {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .search-results .result-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* GAME LIST */
+
+    .static-game-list {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .static-game-list__items {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* EBOOK */
+
+    .ebook-reader {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+        padding: 8px;
+    }
+
+    .ebook-stage {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__stage {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 4px;
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame .book-spread {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .ebook-game-viewer__frame .book-page {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .ebook-game-viewer__frame .game-sheet {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .ebook-fit-frame {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .ebook-fit-clip {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .ebook-fit-scale {
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .book-spread,
+    .book-page,
+    .game-page,
+    .game-sheet {
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* ẢNH TRONG EBOOK */
+
+    .book-page-image,
+    .design-sheet-image,
+    .sheet-hero,
+    .sheet-instruction {
+        max-width: 100%;
+    }
+
+    /* GAME CONTENT */
+
+    .game-grid {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .game-panel {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+
+    .game-sheet h1,
+    .game-sheet h2,
+    .game-sheet h3,
+    .game-sheet p,
+    .game-sheet li {
+        max-width: 100%;
+        overflow-wrap: break-word;
+    }
+}
+
+
+/* =========================================================
+   IPHONE / MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    html {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    #root {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .app-shell {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    .page {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /* =====================================================
+       LAYOUT
+       ===================================================== */
+
+    .layout,
+    .layout-ebook {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 10px 8px 20px;
+        overflow-x: hidden;
+    }
+
+    /* =====================================================
+       SEARCH
+       ===================================================== */
+
+    .search-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .search-wrap input {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        font-size: 16px;
+    }
+
+    .filters {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    fieldset {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* =====================================================
+       SEARCH RESULTS
+       ===================================================== */
+
+    .result-bar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .search-results {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 8px 0 10px;
+        padding: 8px;
+        overflow: hidden;
+    }
+
+    .search-results__header {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .search-results .result-list {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .search-results .result-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .search-results .result-card > div {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .search-results .result-card h2 {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .search-results .card-desc {
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .search-results .open-page-btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+
+    /* =====================================================
+       STATIC GAME LIST
+       ===================================================== */
+
+    .static-game-list {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .static-game-list__items {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .static-game-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .static-game-card__content {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+
+    /* =====================================================
+       EBOOK CONTAINER
+       ===================================================== */
+
+    .ebook-reader {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        margin: 8px 0 0;
+        padding: 5px;
+
+        border-radius: 14px;
+
+        overflow: hidden;
+    }
+
+    .ebook-stage {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       EBOOK VIEWER
+       ===================================================== */
+
+    .ebook-game-viewer {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__stage {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        margin: 0;
+
+        border-radius: 14px;
+
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame .book-spread {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        display: block;
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame .book-page {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        border-radius: 14px;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       FIX SCALE FRAME
+       ===================================================== */
+
+    .ebook-fit-frame {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        margin: 0 auto;
+
+        overflow: hidden;
+    }
+
+    .ebook-fit-clip {
+        width: 100%;
+        max-width: 100%;
+
+        inset: 0;
+
+        overflow: hidden;
+    }
+
+    .ebook-fit-scale {
+        max-width: 100%;
+        min-width: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       GAME PAGE
+       ===================================================== */
+
+    .ebook-game-viewer__frame .book-page.game-page {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 0;
+
+        overflow: hidden;
+    }
+
+    .ebook-game-viewer__frame .game-sheet {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 12px 10px 20px;
+
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+
+    /* =====================================================
+       GAME IMAGES
+       ===================================================== */
+
+    .ebook-game-viewer__frame .sheet-hero {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 100px;
+        max-height: 180px;
+
+        object-fit: cover;
+    }
+
+    .ebook-game-viewer__frame .sheet-instruction {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 80px;
+        max-height: 140px;
+
+        object-fit: cover;
+    }
+
+    .book-page-image,
+    .design-sheet-image {
+        display: block;
+
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+
+        object-fit: contain;
+    }
+
+
+    /* =====================================================
+       GAME TEXT
+       ===================================================== */
+
+    .ebook-game-viewer__frame .game-title,
+    .ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+        font-size: 1.2rem;
+        line-height: 1.25;
+
+        max-width: 100%;
+
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .card-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+
+        max-width: 100%;
+
+        overflow-wrap: break-word;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .meta {
+        font-size: 0.82rem;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .tag-row {
+        gap: 5px;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .tag {
+        font-size: 0.72rem;
+        padding: 4px 8px;
+    }
+
+    .game-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 10px;
+
+        overflow: hidden;
+    }
+
+    .game-panel h2 {
+        font-size: 0.95rem;
+    }
+
+    .how-to-steps,
+    .player-mode-rules,
+    .prose {
+        max-width: 100%;
+
+        font-size: 0.88rem;
+        line-height: 1.5;
+
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
+
+    .reader-nav {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        gap: 8px;
+    }
+
+    .reader-nav button {
+        width: 100%;
+        max-width: 100%;
+
+        min-height: 48px;
+
+        font-size: 0.95rem;
+    }
+
+    .reader-nav p {
+        font-size: 1.05rem;
+    }
+}
+
+
+/* =========================================================
+   SMALL IPHONE
+   390px / 375px / 360px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .hero {
+        padding: 12px 10px;
+    }
+
+    .layout,
+    .layout-ebook {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .ebook-reader {
+        padding: 3px;
+        border-radius: 12px;
+    }
+
+    .ebook-game-viewer__frame {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .ebook-game-viewer__frame .book-page {
+        border-radius: 12px;
+    }
+
+    .ebook-game-viewer__frame .game-sheet {
+        padding: 10px 8px 18px;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .game-title,
+    .ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+        font-size: 1.05rem;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .card-desc {
+        font-size: 0.82rem;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .sheet-hero {
+        min-height: 80px;
+        max-height: 140px;
+        margin-bottom: 8px;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
+        min-height: 70px;
+        max-height: 110px;
+    }
+
+    .game-panel {
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .game-panel h2 {
+        font-size: 0.9rem;
+    }
+
+    .how-to-steps,
+    .player-mode-rules,
+    .prose {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .reader-nav button {
+        min-height: 46px;
+        padding: 10px;
+    }
+
+    .reader-nav p {
+        font-size: 0.95rem;
+    }
+
+    .static-game-list__items {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL IPHONE
+   360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .layout,
+    .layout-ebook {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .ebook-reader {
+        padding: 2px;
+    }
+
+    .ebook-game-viewer__frame .game-sheet {
+        padding: 8px 7px 16px;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .game-title,
+    .ebook-game-viewer__frame .book-page.game-page .game-sheet h1 {
+        font-size: 1rem;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .card-desc {
+        font-size: 0.78rem;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .sheet-hero {
+        min-height: 70px;
+        max-height: 120px;
+    }
+
+    .ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
+        min-height: 60px;
+        max-height: 95px;
+    }
+
+    .game-panel {
+        padding: 7px;
+    }
+
+    .how-to-steps,
+    .player-mode-rules,
+    .prose {
+        font-size: 0.78rem;
+    }
+
+    .reader-nav button {
+        min-height: 44px;
+        font-size: 0.85rem;
+    }
+}
