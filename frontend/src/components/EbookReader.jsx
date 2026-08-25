@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FitPageStage from "./book/FitPageStage.jsx";
 import { SheetBody, pageClass } from "./book/pageHelpers.jsx";
@@ -14,15 +14,12 @@ export default function EbookReader({ page }) {
     const navigate = useNavigate();
 
     const current = clampPage(page);
-
     const readerUi = UI.reader || {};
+
     const step = 1;
 
-    const canPrev =
-        current > FIRST_PAGE;
-
-    const canNext =
-        current < LAST_PAGE;
+    const canPrev = current > FIRST_PAGE;
+    const canNext = current < LAST_PAGE;
 
     const requestGo = useCallback(
         (target) => {
@@ -38,63 +35,48 @@ export default function EbookReader({ page }) {
     );
 
     /**
-     * =========================================================
-     * KEYBOARD
-     * =========================================================
-     *
-     * Chỉ dùng ← / → để chuyển trang.
+     * Keyboard navigation.
      * Không còn Escape / Focus / Zoom.
      */
-    useEffect(() => {
-        const onKeyDown = (event) => {
+    useLayoutEffect(() => {
+        const onKey = (event) => {
             if (
                 event.key === "ArrowLeft" &&
-                canPrev
+                current > FIRST_PAGE
             ) {
-                event.preventDefault();
-
-                requestGo(
-                    current - step
-                );
+                requestGo(current - step);
             }
 
             if (
                 event.key === "ArrowRight" &&
-                canNext
+                current < LAST_PAGE
             ) {
-                event.preventDefault();
-
-                requestGo(
-                    current + step
-                );
+                requestGo(current + step);
             }
         };
 
         window.addEventListener(
             "keydown",
-            onKeyDown
+            onKey
         );
 
         return () => {
             window.removeEventListener(
                 "keydown",
-                onKeyDown
+                onKey
             );
         };
     }, [
         current,
-        canPrev,
-        canNext,
         requestGo,
     ]);
 
     /**
-     * =========================================================
-     * PAGE CONTENT
-     * =========================================================
+     * Một trang ebook.
      *
-     * Không có onClick mở fullscreen.
-     * Người dùng chạm/click vào sách -> không có hành động gì.
+     * QUAN TRỌNG:
+     * Không có onClick mở focus.
+     * Chạm/click vào ảnh chỉ là chạm/click ảnh.
      */
     const pageLeaf = (
         <div className="book-spread single">
@@ -106,8 +88,8 @@ export default function EbookReader({ page }) {
                 <SheetBody page={current} />
 
                 <span className="page-folio folio-right">
-                    {current}
-                </span>
+          {current}
+        </span>
             </div>
         </div>
     );
@@ -118,11 +100,6 @@ export default function EbookReader({ page }) {
             "Ebook {title}"
         );
 
-    /**
-     * =========================================================
-     * RENDER
-     * =========================================================
-     */
     return (
         <section
             className="ebook-reader ebook-reader--screenshots"
@@ -130,7 +107,6 @@ export default function EbookReader({ page }) {
         >
             <FitPageStage
                 pageKey={current}
-                key={`page-${current}`}
             >
                 {pageLeaf}
             </FitPageStage>
@@ -156,8 +132,7 @@ export default function EbookReader({ page }) {
                 </button>
 
                 <p>
-                    Trang {current} /{" "}
-                    {LAST_PAGE}
+                    Trang {current} / {LAST_PAGE}
                 </p>
 
                 <button
