@@ -108,7 +108,6 @@ textarea {
 
 /* =========================================================
    MAIN LAYOUT
-   IMPORTANT: THIS IS THE ONLY MAIN VERTICAL SCROLLBAR
    ========================================================= */
 
 .layout {
@@ -121,41 +120,12 @@ textarea {
 .layout-ebook {
     width: 100%;
     max-width: 1100px;
-    height: calc(100dvh - 108px);
+    height: auto;
     min-height: 0;
     margin: 0 auto;
     padding: 16px 20px 28px;
-
     display: block;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-
-    scrollbar-width: thin;
-    scrollbar-color: rgba(140, 199, 255, 0.65) rgba(10, 6, 32, 0.45);
-}
-
-.layout-ebook::-webkit-scrollbar {
-    width: 10px;
-}
-
-.layout-ebook::-webkit-scrollbar-track {
-    background: rgba(10, 6, 32, 0.45);
-    border-radius: 999px;
-}
-
-.layout-ebook::-webkit-scrollbar-thumb {
-    background: linear-gradient(#8cc7ff, #8f6bff);
-    border-radius: 999px;
-    border: 2px solid rgba(10, 6, 32, 0.45);
-}
-
-/* Never create a second scrollbar inside the main layout. */
-.layout-ebook .search-results,
-.layout-ebook .result-list,
-.layout-ebook .static-game-list {
     overflow: visible;
-    max-height: none;
 }
 
 /* =========================================================
@@ -200,6 +170,8 @@ textarea {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 10px;
+    width: 100%;
+    overflow: visible;
 }
 
 fieldset {
@@ -208,6 +180,8 @@ fieldset {
     border-radius: 14px;
     margin: 0;
     padding: 8px 10px 10px;
+    min-width: 0;
+    overflow: visible;
 }
 
 legend {
@@ -221,6 +195,8 @@ legend {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    width: 100%;
+    overflow: visible;
 }
 
 .chip {
@@ -234,6 +210,7 @@ legend {
     padding: 5px 9px;
     cursor: pointer;
     font-size: 0.78rem;
+    overflow: visible;
 }
 
 .chip input {
@@ -300,13 +277,50 @@ legend {
     color: #fff;
 }
 
+/* =========================================================
+   SEARCH RESULT LIST
+   ========================================================= */
+
 .search-results .result-list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 6px 0 0;
+
     display: grid;
     gap: 6px;
+
+    max-height: 265px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+    scrollbar-color: #8f6bff rgba(10, 6, 32, 0.45);
 }
+
+.search-results .result-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results .result-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb {
+    background: rgba(143, 107, 255, 0.75);
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 124, 200, 0.9);
+}
+
+/* =========================================================
+   RESULT CARD
+   ========================================================= */
 
 .result-list {
     list-style: none;
@@ -321,10 +335,12 @@ legend {
     justify-content: space-between;
     align-items: flex-start;
     gap: 12px;
+
     background: rgba(16, 10, 42, 0.9);
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 10px 12px;
+
     box-shadow: var(--shadow);
 }
 
@@ -333,8 +349,10 @@ legend {
     padding: 8px 10px;
     border-radius: 9px;
     gap: 10px;
+
     background: rgba(255, 255, 255, 0.025);
     border-color: rgba(132, 84, 255, 0.2);
+
     box-shadow: none;
 }
 
@@ -369,19 +387,28 @@ legend {
     margin: 0;
     font-size: 8.5px;
     line-height: 1.25;
+
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+
     overflow: hidden;
 }
 
 .open-page-btn {
     flex: none;
     border: 0;
-    background: linear-gradient(90deg, #ff7cc8, #8f6bff);
+
+    background: linear-gradient(
+            90deg,
+            #ff7cc8,
+            #8f6bff
+    );
+
     color: #1a0f38;
     border-radius: 9px;
     padding: 7px 10px;
+
     cursor: pointer;
     font-weight: 700;
 }
@@ -412,14 +439,17 @@ legend {
     width: 100%;
     margin: 10px 0 14px;
     padding: 14px 16px;
+
     border: 1px solid rgba(125, 75, 255, 0.58);
     border-radius: 16px;
+
     background:
             linear-gradient(
                     135deg,
                     rgba(52, 20, 70, 0.88),
                     rgba(18, 12, 42, 0.94)
             );
+
     box-shadow:
             0 8px 24px rgba(0, 0, 0, 0.16),
             inset 0 1px 0 rgba(255, 255, 255, 0.035);
@@ -460,14 +490,20 @@ legend {
 .static-game-card {
     min-width: 0;
     min-height: 48px;
+
     display: flex;
     align-items: center;
     gap: 7px;
+
     padding: 7px 8px;
+
     border: 1px solid rgba(132, 84, 255, 0.18);
     border-radius: 8px;
+
     background: rgba(255, 255, 255, 0.025);
+
     cursor: pointer;
+
     transition:
             background 0.15s ease,
             border-color 0.15s ease,
@@ -495,6 +531,7 @@ legend {
     line-height: 1.2;
     font-weight: 700;
     color: #fff;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -505,6 +542,7 @@ legend {
     font-size: 7.5px;
     line-height: 1.2;
     color: rgba(255, 255, 255, 0.45);
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -512,13 +550,19 @@ legend {
 
 .static-game-card__page {
     flex: 0 0 auto;
+
     padding: 3px 6px;
+
     border-radius: 999px;
     border: 1px solid rgba(132, 84, 255, 0.28);
+
     background: rgba(132, 84, 255, 0.08);
+
     color: #d9c9ff;
+
     font-size: 7.5px;
     font-weight: 700;
+
     white-space: nowrap;
 }
 
@@ -531,12 +575,15 @@ legend {
     max-width: 100%;
     margin: 12px 0 0;
     padding: 12px;
+
     border-radius: 20px;
     border: 1px solid rgba(109, 70, 255, 0.45);
+
     background: rgba(9, 4, 26, 0.36);
+
     box-shadow: var(--shadow);
 
-    min-height: 620px;
+    min-height: 0;
 
     display: flex;
     flex-direction: column;
@@ -551,22 +598,31 @@ legend {
 
 .ebook-stage {
     width: 100%;
-    min-height: 560px;
+    min-height: 0;
 
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 
     position: relative;
+
     overflow: visible;
 }
 
+.ebook-stage-focus {
+    width: 100%;
+    height: 100%;
+    min-height: min(70dvh, 720px);
+}
 
 .ebook-fit-frame {
     position: relative;
     flex-shrink: 0;
+
+    width: 100%;
     max-width: 100%;
-    max-height: 100%;
+    max-height: none;
+
     overflow: hidden;
     border-radius: 18px;
 }
@@ -595,15 +651,17 @@ legend {
 }
 
 .ebook-fit-scale .book-page.game-page {
-    height: 100%;
-    min-height: 100%;
+    height: auto;
+    min-height: 0;
+
     overflow: hidden;
-    overscroll-behavior: auto;
+    overscroll-behavior: none;
 }
 
 .ebook-fit-scale .book-page.design-page,
 .ebook-fit-scale .book-page.web-page {
-    height: 100%;
+    height: auto;
+    min-height: 0;
     overflow: hidden;
 }
 
@@ -634,33 +692,50 @@ legend {
     width: 100%;
     max-width: 100%;
     margin: 0;
+
     filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
+
+    overflow: visible;
 }
 
 .book-page {
     position: relative;
+
     background: rgba(14, 8, 39, 0.72);
     border: 1px solid var(--line);
+
     width: 100%;
     max-width: 100%;
+
     min-height: 0;
+    height: auto;
+
     padding: 20px 20px 36px;
+
+    cursor: zoom-in;
     box-sizing: border-box;
+
+    overflow: visible;
 }
 
 .book-page.design-page {
     padding: 0;
-    overflow: hidden;
     min-height: 0;
+
     background: transparent;
+    cursor: zoom-in;
     border: 0;
+
+    overflow: hidden;
 }
 
 .book-page.web-page {
     padding: 0;
-    overflow: hidden;
     min-height: 0;
+
     background: transparent;
+
+    overflow: hidden;
 }
 
 .web-sheet,
@@ -689,21 +764,29 @@ legend {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
     padding: 0;
     margin: 0;
+
     width: 100%;
     max-width: 100%;
+
     overflow: hidden;
 }
 
 .book-page.game-page .game-sheet {
     width: 100%;
     max-width: 100%;
-    min-height: 100%;
+
+    min-height: 0;
     height: auto;
+
     margin: 0;
     padding: 18px 22px 30px;
+
     box-sizing: border-box;
+
+    overflow: visible;
 }
 
 .book-page.left {
@@ -731,7 +814,7 @@ legend {
 .book-page-image {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: contain;
     object-position: center;
 }
@@ -758,11 +841,20 @@ legend {
 
 .ebook-cover {
     min-height: 520px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     padding: 24px 8px;
-    background: linear-gradient(160deg, #163e3c 0%, #1b4d4a 55%, #2f6f6a 100%);
+
+    background: linear-gradient(
+            160deg,
+            #163e3c 0%,
+            #1b4d4a 55%,
+            #2f6f6a 100%
+    );
+
     color: #f8f3ea;
     border-radius: 12px;
     text-align: center;
@@ -817,13 +909,17 @@ legend {
 
 .toc-row {
     width: 100%;
+
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: baseline;
     gap: 8px;
+
     border: 0;
     background: none;
+
     padding: 8px 0;
+
     cursor: pointer;
     text-align: left;
     color: inherit;
@@ -858,6 +954,7 @@ legend {
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+
     margin-top: 10px;
     flex-shrink: 0;
 }
@@ -871,8 +968,10 @@ legend {
     border: 1px solid var(--line);
     background: rgba(16, 10, 42, 0.92);
     color: var(--ink);
+
     border-radius: 10px;
     padding: 8px 12px;
+
     cursor: pointer;
 }
 
@@ -917,9 +1016,12 @@ legend {
 .meta {
     display: grid;
     gap: 8px;
+
     padding: 0;
     margin: 0 0 14px;
+
     list-style: none;
+
     font-size: 0.92rem;
 }
 
@@ -933,8 +1035,11 @@ legend {
 .tag {
     background: rgba(109, 180, 255, 0.2);
     color: #aed5ff;
+
     border-radius: 999px;
+
     padding: 6px 10px;
+
     font-size: 0.82rem;
     font-weight: 600;
 }
@@ -1031,22 +1136,33 @@ legend {
 .ebook-game-viewer {
     width: 100%;
     min-height: 560px;
+
     display: flex;
     align-items: stretch;
     justify-content: center;
+
     overflow: visible;
     position: relative;
 }
 
+.ebook-game-viewer--focus {
+    width: 100%;
+    height: 100%;
+    min-height: min(78dvh, 860px);
+}
 
 .ebook-game-viewer__stage {
     flex: 1 1 auto;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 100%;
     min-height: 0;
+
     padding: 6px 10px;
+
     box-sizing: border-box;
 }
 
@@ -1054,12 +1170,18 @@ legend {
     width: min(960px, 94%);
     min-height: 560px;
     height: min(84vh, calc(100dvh - 270px));
+
     max-width: 100%;
+
     margin: 0 auto;
+
     overflow: hidden;
+
     border-radius: 18px;
+
     display: flex;
     flex-direction: column;
+
     box-sizing: border-box;
 }
 
@@ -1067,21 +1189,27 @@ legend {
     width: 100%;
     height: 100%;
     max-width: none;
+
     margin: 0;
+
     display: flex;
     flex-direction: column;
 }
 
 .ebook-game-viewer__frame .book-page {
     flex: 1 1 auto;
+
     width: 100%;
     max-width: 100%;
+
     height: 100%;
     min-height: 0;
     max-height: none;
+
     margin: 0;
+
     border-radius: 18px;
-    overflow: hidden;
+
     box-sizing: border-box;
 }
 
@@ -1098,9 +1226,12 @@ legend {
 .ebook-game-viewer__frame .game-sheet {
     width: 100%;
     max-width: 100%;
+
     min-height: 100%;
+
     margin: 0;
     padding: 18px 22px 36px;
+
     box-sizing: border-box;
 }
 
@@ -1195,7 +1326,6 @@ legend {
     font-size: 0.95rem;
 }
 
-
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -1203,26 +1333,39 @@ legend {
 .site-footer {
     margin-top: auto;
     flex-shrink: 0;
-    background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
+
+    background: linear-gradient(
+            135deg,
+            #13093b 0%,
+            #1f0f5a 55%,
+            #2f1a76 100%
+    );
+
     color: #f8f3ea;
+
     padding: 16px 20px 14px;
 }
 
 .footer-inner {
     max-width: 1080px;
     margin: 0 auto;
+
     display: grid;
     grid-template-columns: 1.4fr 0.8fr;
+
     gap: 16px;
     align-items: start;
 }
 
 .footer-kicker {
     margin: 0 0 10px;
+
     letter-spacing: 0.14em;
     text-transform: uppercase;
+
     font-size: 0.72rem;
     font-weight: 700;
+
     color: #ffd76b;
 }
 
@@ -1230,6 +1373,7 @@ legend {
     list-style: none;
     margin: 0;
     padding: 0;
+
     display: grid;
     gap: 10px;
 }
@@ -1253,27 +1397,36 @@ legend {
 .footer-qr {
     background: rgba(255, 253, 248, 0.05);
     border: 1px solid rgba(255, 215, 107, 0.36);
+
     border-radius: 14px;
+
     padding: 10px 12px;
 }
 
 .footer-hint {
     margin: 0 0 8px;
+
     font-size: 0.8rem;
     line-height: 1.4;
+
     color: rgba(248, 243, 234, 0.86);
 }
 
 .qr-frame {
     display: inline-flex;
+
     background: #f8f4ff;
+
     border-radius: 10px;
+
     padding: 4px;
 }
 
 .footer-form-link {
     display: block;
+
     margin: 10px 0 0;
+
     font-weight: 700;
     color: #f8f3ea;
 }
@@ -1298,7 +1451,8 @@ legend {
     }
 
     .layout-ebook {
-        height: calc(100dvh - 92px);
+        height: auto;
+        min-height: 0;
         padding: 12px 12px 24px;
     }
 
@@ -1353,7 +1507,8 @@ legend {
 
 @media (max-width: 650px) {
     .layout-ebook {
-        height: calc(100dvh - 78px);
+        height: auto;
+        min-height: 0;
         padding: 10px 10px 20px;
     }
 
@@ -1459,7 +1614,6 @@ legend {
     .reader-nav {
         text-align: center;
     }
-
 
     .sheet-hero {
         height: 160px;
