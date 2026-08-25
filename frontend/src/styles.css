@@ -1,3 +1,7 @@
+/* =========================================================
+   ROOT / GLOBAL
+   ========================================================= */
+
 :root {
     --bg: #0a0620;
     --ink: #efeaff;
@@ -10,6 +14,7 @@
     --coral-dark: #ffdb66;
     --sage: #a98dff;
     --shadow: 0 20px 48px rgba(6, 2, 20, 0.55);
+
     font-family: "Chakra Petch", "Be Vietnam Pro", system-ui, sans-serif;
 }
 
@@ -34,7 +39,6 @@ html {
 
 body {
     overflow-x: hidden;
-    overflow-y: auto;
 
     background:
             radial-gradient(circle at 20% 10%, rgba(255, 120, 210, 0.2), transparent 35%),
@@ -43,8 +47,13 @@ body {
             #09041a;
 }
 
+
+/* =========================================================
+   APP / PAGE
+   ========================================================= */
+
 .app-shell {
-    min-height: 100dvh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     overflow: visible;
@@ -62,11 +71,6 @@ body {
     min-height: auto;
 }
 
-.app-shell {
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-}
 
 /* =========================================================
    HERO
@@ -74,7 +78,12 @@ body {
 
 .hero {
     flex-shrink: 0;
-    background: linear-gradient(140deg, #140a3f 0%, #240f5e 52%, #2e1a75 100%);
+    background: linear-gradient(
+            140deg,
+            #140a3f 0%,
+            #240f5e 52%,
+            #2e1a75 100%
+    );
     color: #f6f1ff;
     padding: 20px 20px 18px;
     border-bottom: 2px solid #6a46ff;
@@ -111,15 +120,10 @@ body {
     color: rgba(235, 228, 255, 0.92);
 }
 
-/* =========================================================
-   MAIN LAYOUT
-   IMPORTANT: THIS IS THE ONLY MAIN VERTICAL SCROLLBAR
-   ========================================================= */
 
 /* =========================================================
    MAIN LAYOUT
-   Header + body + ebook + footer = 1 trang duy nhất
-   Chỉ scrollbar ngoài cùng của browser hoạt động
+   ONE DOCUMENT FLOW
    ========================================================= */
 
 .layout {
@@ -133,7 +137,7 @@ body {
     width: 100%;
     max-width: 1100px;
 
-    /* Không khóa theo viewport */
+    /* NEVER lock ebook to viewport */
     height: auto;
     min-height: 0;
 
@@ -142,26 +146,20 @@ body {
 
     display: block;
 
-    /* Không tạo scrollbar riêng */
+    /* NEVER create a nested scrollbar */
     overflow: visible;
-
-    /* Ẩn scrollbar riêng nếu trình duyệt vẫn tạo */
-    scrollbar-width: none;
 }
 
-.layout-ebook::-webkit-scrollbar {
-    display: none;
-}
-
-/* Không vùng con nào tự scroll */
 .layout-ebook .search-results,
 .layout-ebook .result-list,
 .layout-ebook .static-game-list,
 .layout-ebook .ebook-reader,
 .layout-ebook .ebook-stage {
     max-height: none;
+    height: auto;
     overflow: visible;
 }
+
 
 /* =========================================================
    SEARCH
@@ -195,6 +193,7 @@ body {
             0 0 0 2px rgba(140, 199, 255, 0.14),
             var(--shadow);
 }
+
 
 /* =========================================================
    FILTERS
@@ -256,6 +255,7 @@ legend {
     background: transparent;
 }
 
+
 /* =========================================================
    RESULT BAR / SEARCH RESULTS
    ========================================================= */
@@ -288,6 +288,8 @@ legend {
     border-radius: 14px;
     background: rgba(18, 10, 45, 0.94);
     min-height: 0;
+    max-height: none;
+    overflow: visible;
 }
 
 .search-results__header {
@@ -305,20 +307,20 @@ legend {
     color: #fff;
 }
 
-.search-results .result-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 6px;
-}
-
+.search-results .result-list,
 .result-list {
     list-style: none;
     margin: 0 0 20px;
     padding: 0;
     display: grid;
     gap: 10px;
+    max-height: none;
+    overflow: visible;
+}
+
+.search-results .result-list {
+    gap: 6px;
+    margin-bottom: 0;
 }
 
 .result-card {
@@ -409,6 +411,7 @@ legend {
     padding: 10px 12px;
 }
 
+
 /* =========================================================
    25 GAME LIST
    ========================================================= */
@@ -428,6 +431,10 @@ legend {
     box-shadow:
             0 8px 24px rgba(0, 0, 0, 0.16),
             inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    height: auto;
+    max-height: none;
+    overflow: visible;
 }
 
 .static-game-list__header {
@@ -527,8 +534,10 @@ legend {
     white-space: nowrap;
 }
 
+
 /* =========================================================
-   EBOOK READER
+   EBOOK
+   NORMAL DOCUMENT FLOW
    ========================================================= */
 
 .ebook-reader {
@@ -541,7 +550,9 @@ legend {
     background: rgba(9, 4, 26, 0.36);
     box-shadow: var(--shadow);
 
-    min-height: 620px;
+    min-height: 0;
+    height: auto;
+    max-height: none;
 
     display: flex;
     flex-direction: column;
@@ -556,7 +567,9 @@ legend {
 
 .ebook-stage {
     width: 100%;
-    min-height: 560px;
+    min-height: 0;
+    height: auto;
+    max-height: none;
 
     display: flex;
     align-items: center;
@@ -566,12 +579,11 @@ legend {
     overflow: visible;
 }
 
-
 .ebook-fit-frame {
     position: relative;
     flex-shrink: 0;
     max-width: 100%;
-    max-height: 100%;
+    max-height: none;
     overflow: hidden;
     border-radius: 18px;
 }
@@ -649,6 +661,7 @@ legend {
     width: 100%;
     max-width: 100%;
     min-height: 0;
+    height: auto;
     padding: 20px 20px 36px;
     box-sizing: border-box;
 }
@@ -736,7 +749,8 @@ legend {
 .book-page-image {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-width: 100%;
     object-fit: contain;
     object-position: center;
 }
@@ -757,6 +771,7 @@ legend {
     right: 22px;
 }
 
+
 /* =========================================================
    COVER / CONTENT
    ========================================================= */
@@ -767,7 +782,12 @@ legend {
     flex-direction: column;
     justify-content: center;
     padding: 24px 8px;
-    background: linear-gradient(160deg, #163e3c 0%, #1b4d4a 55%, #2f6f6a 100%);
+    background: linear-gradient(
+            160deg,
+            #163e3c 0%,
+            #1b4d4a 55%,
+            #2f6f6a 100%
+    );
     color: #f8f3ea;
     border-radius: 12px;
     text-align: center;
@@ -891,6 +911,7 @@ legend {
     opacity: 0.4;
     cursor: not-allowed;
 }
+
 
 /* =========================================================
    GAME CONTENT
@@ -1025,24 +1046,26 @@ legend {
     border-color: #f08ad0;
 }
 
+
 /* =========================================================
-   LARGE GAME / WEB VIEWER
+   GAME / WEB VIEWER
+   NO VIEWPORT LOCK
    ========================================================= */
 
 .ebook-reader--game {
-    min-height: 620px;
+    min-height: 0;
 }
 
 .ebook-game-viewer {
     width: 100%;
-    min-height: 560px;
+    min-height: 0;
+    height: auto;
     display: flex;
     align-items: stretch;
     justify-content: center;
     overflow: visible;
     position: relative;
 }
-
 
 .ebook-game-viewer__stage {
     flex: 1 1 auto;
@@ -1051,17 +1074,18 @@ legend {
     justify-content: center;
     width: 100%;
     min-height: 0;
+    height: auto;
     padding: 6px 10px;
     box-sizing: border-box;
 }
 
 .ebook-game-viewer__frame {
     width: min(960px, 94%);
-    min-height: 560px;
-    height: min(84vh, calc(100dvh - 270px));
+    min-height: 0;
+    height: auto;
     max-width: 100%;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 18px;
     display: flex;
     flex-direction: column;
@@ -1070,7 +1094,7 @@ legend {
 
 .ebook-game-viewer__frame .book-spread {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: none;
     margin: 0;
     display: flex;
@@ -1078,15 +1102,15 @@ legend {
 }
 
 .ebook-game-viewer__frame .book-page {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     width: 100%;
     max-width: 100%;
-    height: 100%;
+    height: auto;
     min-height: 0;
     max-height: none;
     margin: 0;
     border-radius: 18px;
-    overflow: hidden;
+    overflow: visible;
     box-sizing: border-box;
 }
 
@@ -1103,7 +1127,7 @@ legend {
 .ebook-game-viewer__frame .game-sheet {
     width: 100%;
     max-width: 100%;
-    min-height: 100%;
+    min-height: 0;
     margin: 0;
     padding: 18px 22px 36px;
     box-sizing: border-box;
@@ -1112,7 +1136,7 @@ legend {
 .ebook-game-viewer__frame .web-sheet,
 .ebook-game-viewer__frame .web-sheet-empty {
     width: 100%;
-    min-height: 100%;
+    min-height: 0;
 }
 
 .ebook-game-viewer__frame .book-page.game-page .sheet-page-label {
@@ -1150,13 +1174,13 @@ legend {
 }
 
 .ebook-game-viewer__frame .book-page.game-page .sheet-hero {
-    height: clamp(140px, 22vh, 220px);
+    height: clamp(140px, 22vw, 220px);
     border-radius: 14px;
     margin: 0 0 12px;
 }
 
 .ebook-game-viewer__frame .book-page.game-page .sheet-instruction {
-    height: clamp(110px, 16vh, 180px);
+    height: clamp(110px, 16vw, 180px);
     border-radius: 12px;
     margin: 0 0 12px;
 }
@@ -1202,40 +1226,37 @@ legend {
 
 
 /* =========================================================
-   NO ZOOM / NO FOCUS OVERLAY
+   NO FOCUS / NO ZOOM CSS
    ========================================================= */
-.ebook-focus,
-.ebook-focus[aria-hidden="false"],
-.ebook-focus.is-open,
-.ebook-focus.open,
-.ebook-focus.active {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-}
 
-.focus-arrow,
-.ebook-focus + .focus-arrow,
-.ebook-focus ~ .focus-arrow {
-    display: none !important;
-}
+/*
+   Intentionally no .ebook-focus rules.
+   Intentionally no focus overlay.
+   Intentionally no zoom overlay.
+   Intentionally no click-to-enlarge CSS.
+*/
 
-/* Game pages stay in the normal reader; never turn them into fullscreen focus mode. */
 .ebook-game-viewer--focus {
     width: 100%;
     height: auto;
     min-height: 0;
+    overflow: visible;
 }
+
 
 /* =========================================================
    FOOTER
    ========================================================= */
 
 .site-footer {
-    margin-top: auto;
     flex-shrink: 0;
-    background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
+    margin-top: 0;
+    background: linear-gradient(
+            135deg,
+            #13093b 0%,
+            #1f0f5a 55%,
+            #2f1a76 100%
+    );
     color: #f8f3ea;
     padding: 16px 20px 14px;
 }
@@ -1310,10 +1331,12 @@ legend {
     color: #f8f3ea;
 }
 
+
 /* =========================================================
    RESPONSIVE
    ========================================================= */
 
+/* Desktop / large laptop: 5 columns */
 @media (max-width: 1050px) {
     .layout-ebook {
         max-width: 100%;
@@ -1324,14 +1347,17 @@ legend {
     }
 }
 
+/* Laptop / tablet: 3 columns */
 @media (max-width: 899px) {
     .hero {
         padding: 16px 16px 14px;
     }
 
     .layout-ebook {
-        height: calc(100dvh - 92px);
         padding: 12px 12px 24px;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
     }
 
     .tagline {
@@ -1346,21 +1372,13 @@ legend {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .ebook-reader {
-        min-height: 540px;
-    }
-
-    .ebook-stage {
-        min-height: 480px;
-    }
-
-    .ebook-game-viewer {
-        min-height: 480px;
-    }
-
+    .ebook-reader,
+    .ebook-stage,
+    .ebook-game-viewer,
+    .ebook-game-viewer__stage,
     .ebook-game-viewer__frame {
-        width: min(960px, 98%);
-        min-height: 480px;
+        min-height: 0;
+        height: auto;
     }
 
     .book-page,
@@ -1383,10 +1401,13 @@ legend {
     }
 }
 
+/* iPhone / mobile: 2 columns */
 @media (max-width: 650px) {
     .layout-ebook {
-        height: calc(100dvh - 78px);
         padding: 10px 10px 20px;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
     }
 
     .hero {
@@ -1456,16 +1477,15 @@ legend {
     }
 
     .ebook-reader {
-        min-height: 500px;
         padding: 8px;
     }
 
-    .ebook-stage {
-        min-height: 430px;
-    }
-
-    .ebook-game-viewer {
-        min-height: 430px;
+    .ebook-stage,
+    .ebook-game-viewer,
+    .ebook-game-viewer__stage,
+    .ebook-game-viewer__frame {
+        min-height: 0;
+        height: auto;
     }
 
     .ebook-game-viewer__stage {
@@ -1474,8 +1494,7 @@ legend {
 
     .ebook-game-viewer__frame {
         width: 100%;
-        min-height: 430px;
-        height: auto;
+        min-height: 0;
     }
 
     .ebook-game-viewer__frame .game-sheet {
@@ -1501,6 +1520,7 @@ legend {
     }
 }
 
+/* Very small screens: 1 column */
 @media (max-width: 400px) {
     .static-game-list__items {
         grid-template-columns: 1fr;
