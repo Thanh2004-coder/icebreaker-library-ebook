@@ -757,7 +757,6 @@ legend {
 
 .ebook-fit-frame {
     position: relative;
-
     flex-shrink: 0;
 
     max-width: 100%;
@@ -770,13 +769,13 @@ legend {
 .ebook-fit-clip {
     position: absolute;
     inset: 0;
+
     overflow: hidden;
 }
 
 .ebook-fit-scale {
-    will-change: transform;
-    overflow: hidden;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .ebook-fit-scale .book-spread {
@@ -3531,45 +3530,6 @@ body,
     overflow-x: hidden !important;
 }
 
-
-/* =========================================================
-   QUAN TRỌNG NHẤT
-   FIX KHUNG EBOOK BỊ RỘNG HƠN IPHONE
-   ========================================================= */
-
-.ebook-fit-frame {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    height: auto !important;
-    max-height: none !important;
-
-    margin-left: auto !important;
-    margin-right: auto !important;
-
-    overflow: hidden !important;
-}
-
-
-/* Scale container */
-
-.ebook-fit-clip {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    left: 0 !important;
-    right: 0 !important;
-
-    overflow: hidden !important;
-}
-
-.ebook-fit-scale {
-    max-width: 100% !important;
-    min-width: 0 !important;
-
-    overflow: hidden !important;
-}
 
 
 /* =========================================================
