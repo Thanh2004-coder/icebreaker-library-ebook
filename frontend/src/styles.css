@@ -22,11 +22,20 @@ body,
 #root {
     margin: 0;
     min-height: 100%;
+    width: 100%;
     background: transparent;
     color: var(--ink);
 }
 
+html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 body {
+    overflow-x: hidden;
+    overflow-y: auto;
+
     background:
             radial-gradient(circle at 20% 10%, rgba(255, 120, 210, 0.2), transparent 35%),
             radial-gradient(circle at 80% 30%, rgba(97, 120, 255, 0.25), transparent 36%),
@@ -34,19 +43,15 @@ body {
             #09041a;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-textarea {
-    font: inherit;
+.app-shell {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
 }
 
 .page {
-    flex: 1;
+    flex: 0 0 auto;
     min-height: 0;
 }
 
@@ -54,7 +59,7 @@ textarea {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100dvh;
+    min-height: auto;
 }
 
 .app-shell {
@@ -111,6 +116,12 @@ textarea {
    IMPORTANT: THIS IS THE ONLY MAIN VERTICAL SCROLLBAR
    ========================================================= */
 
+/* =========================================================
+   MAIN LAYOUT
+   Header + body + ebook + footer = 1 trang duy nhất
+   Chỉ scrollbar ngoài cùng của browser hoạt động
+   ========================================================= */
+
 .layout {
     max-width: 1100px;
     margin: 0 auto;
@@ -121,18 +132,20 @@ textarea {
 .layout-ebook {
     width: 100%;
     max-width: 1100px;
-    height: calc(100dvh - 108px);
+
+    /* Không khóa theo viewport */
+    height: auto;
     min-height: 0;
+
     margin: 0 auto;
     padding: 16px 20px 28px;
 
     display: block;
 
-    overflow-x: hidden;
-    overflow-y: auto;
+    /* Không tạo scrollbar riêng */
+    overflow: visible;
 
-    scrollbar-width: thin;
-    scrollbar-color: rgba(140, 199, 255, 0.65) rgba(10, 6, 32, 0.45);
+    /* Ẩn scrollbar riêng nếu trình duyệt vẫn tạo */
     scrollbar-width: none;
 }
 
@@ -140,12 +153,14 @@ textarea {
     display: none;
 }
 
-/* Never create a second scrollbar inside the main layout. */
+/* Không vùng con nào tự scroll */
 .layout-ebook .search-results,
 .layout-ebook .result-list,
-.layout-ebook .static-game-list {
-    overflow: visible;
+.layout-ebook .static-game-list,
+.layout-ebook .ebook-reader,
+.layout-ebook .ebook-stage {
     max-height: none;
+    overflow: visible;
 }
 
 /* =========================================================
