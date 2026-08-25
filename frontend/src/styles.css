@@ -108,7 +108,6 @@ textarea {
 
 /* =========================================================
    MAIN LAYOUT
-   IMPORTANT: THIS IS THE ONLY MAIN VERTICAL SCROLLBAR
    ========================================================= */
 
 .layout {
@@ -121,22 +120,13 @@ textarea {
 .layout-ebook {
     width: 100%;
     max-width: 1100px;
-
-    /* KHÔNG khóa chiều cao theo viewport */
     height: auto;
     min-height: 0;
-
     margin: 0 auto;
     padding: 16px 20px 28px;
-
     display: block;
     overflow: visible;
 }
-
-/* Never create a second scrollbar inside the main layout. */
-.layout-ebook .search-results,
-.layout-ebook .result-list,
-
 
 /* =========================================================
    SEARCH
@@ -180,7 +170,6 @@ textarea {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 10px;
-
     width: 100%;
     overflow: visible;
 }
@@ -191,7 +180,6 @@ fieldset {
     border-radius: 14px;
     margin: 0;
     padding: 8px 10px 10px;
-
     min-width: 0;
     overflow: visible;
 }
@@ -207,7 +195,6 @@ legend {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-
     width: 100%;
     overflow: visible;
 }
@@ -223,7 +210,6 @@ legend {
     padding: 5px 9px;
     cursor: pointer;
     font-size: 0.78rem;
-
     overflow: visible;
 }
 
@@ -243,8 +229,8 @@ legend {
 }
 
 /* =========================================================
-RESULT BAR / SEARCH RESULTS
-========================================================= */
+   RESULT BAR / SEARCH RESULTS
+   ========================================================= */
 
 .result-bar {
     display: flex;
@@ -266,26 +252,21 @@ RESULT BAR / SEARCH RESULTS
     cursor: pointer;
 }
 
-/* Khung kết quả tìm kiếm */
 .search-results {
     width: 100%;
     margin: 8px 0 12px;
     padding: 10px 12px;
-
     border: 1px solid rgba(125, 75, 255, 0.55);
     border-radius: 14px;
     background: rgba(18, 10, 45, 0.94);
-
     min-height: 0;
 }
 
-/* Header "Tìm thấy ... / Xóa bộ lọc" */
 .search-results__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-
     margin-bottom: 7px;
 }
 
@@ -297,55 +278,44 @@ RESULT BAR / SEARCH RESULTS
 }
 
 /* =========================================================
-   CHỈ DANH SÁCH KẾT QUẢ ĐƯỢC SCROLL
+   SEARCH RESULT LIST
    ========================================================= */
 
 .search-results .result-list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 6px 0 0;
 
     display: grid;
     gap: 6px;
 
-    /* Chiều cao tối đa của vùng danh sách */
-    max-height: 310px;
+    max-height: 265px;
 
-    /* Chỉ vùng này có thanh kéo */
     overflow-y: auto;
     overflow-x: hidden;
 
-    /* Không làm layout bên ngoài thay đổi */
     overscroll-behavior: contain;
 
-    /* Firefox */
     scrollbar-width: thin;
     scrollbar-color: #8f6bff rgba(10, 6, 32, 0.45);
 }
 
-/* Chrome / Edge / Safari */
 .search-results .result-list::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .search-results .result-list::-webkit-scrollbar-track {
-    background: rgba(10, 6, 32, 0.55);
-    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
 }
 
 .search-results .result-list::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-            #ff7cc8,
-            #8f6bff
-    );
-    border-radius: 999px;
+    background: rgba(143, 107, 255, 0.75);
+    border-radius: 10px;
 }
 
 .search-results .result-list::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(
-            #ff91d2,
-            #a080ff
-    );
+    background: rgba(255, 124, 200, 0.9);
 }
 
 /* =========================================================
@@ -448,35 +418,6 @@ RESULT BAR / SEARCH RESULTS
     border-radius: 7px;
     font-size: 8px;
 }
-/* =========================================================
-   SEARCH RESULTS - CHỈ HIỆN 5 TRÒ, MUỐN XEM THÊM THÌ KÉO
-   ========================================================= */
-
-.search-results .result-list {
-    max-height: 265px;       /* khoảng 5 trò */
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 6px;
-}
-
-/* Thanh kéo */
-.search-results .result-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.search-results .result-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 10px;
-}
-
-.search-results .result-list::-webkit-scrollbar-thumb {
-    background: rgba(143, 107, 255, 0.75);
-    border-radius: 10px;
-}
-
-.search-results .result-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 124, 200, 0.9);
-}
 
 .muted {
     color: var(--muted);
@@ -498,14 +439,17 @@ RESULT BAR / SEARCH RESULTS
     width: 100%;
     margin: 10px 0 14px;
     padding: 14px 16px;
+
     border: 1px solid rgba(125, 75, 255, 0.58);
     border-radius: 16px;
+
     background:
             linear-gradient(
                     135deg,
                     rgba(52, 20, 70, 0.88),
                     rgba(18, 12, 42, 0.94)
             );
+
     box-shadow:
             0 8px 24px rgba(0, 0, 0, 0.16),
             inset 0 1px 0 rgba(255, 255, 255, 0.035);
@@ -546,14 +490,20 @@ RESULT BAR / SEARCH RESULTS
 .static-game-card {
     min-width: 0;
     min-height: 48px;
+
     display: flex;
     align-items: center;
     gap: 7px;
+
     padding: 7px 8px;
+
     border: 1px solid rgba(132, 84, 255, 0.18);
     border-radius: 8px;
+
     background: rgba(255, 255, 255, 0.025);
+
     cursor: pointer;
+
     transition:
             background 0.15s ease,
             border-color 0.15s ease,
@@ -581,6 +531,7 @@ RESULT BAR / SEARCH RESULTS
     line-height: 1.2;
     font-weight: 700;
     color: #fff;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -591,6 +542,7 @@ RESULT BAR / SEARCH RESULTS
     font-size: 7.5px;
     line-height: 1.2;
     color: rgba(255, 255, 255, 0.45);
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -598,19 +550,21 @@ RESULT BAR / SEARCH RESULTS
 
 .static-game-card__page {
     flex: 0 0 auto;
+
     padding: 3px 6px;
+
     border-radius: 999px;
     border: 1px solid rgba(132, 84, 255, 0.28);
+
     background: rgba(132, 84, 255, 0.08);
+
     color: #d9c9ff;
+
     font-size: 7.5px;
     font-weight: 700;
+
     white-space: nowrap;
 }
-
-/* =========================================================
-   EBOOK READER
-   ========================================================= */
 
 /* =========================================================
    EBOOK READER
@@ -621,9 +575,12 @@ RESULT BAR / SEARCH RESULTS
     max-width: 100%;
     margin: 12px 0 0;
     padding: 12px;
+
     border-radius: 20px;
     border: 1px solid rgba(109, 70, 255, 0.45);
+
     background: rgba(9, 4, 26, 0.36);
+
     box-shadow: var(--shadow);
 
     min-height: 0;
@@ -631,7 +588,6 @@ RESULT BAR / SEARCH RESULTS
     display: flex;
     flex-direction: column;
 
-    /* KHÔNG SCROLL */
     overflow: visible;
 }
 
@@ -650,7 +606,6 @@ RESULT BAR / SEARCH RESULTS
 
     position: relative;
 
-    /* KHÔNG SCROLL */
     overflow: visible;
 }
 
@@ -663,11 +618,11 @@ RESULT BAR / SEARCH RESULTS
 .ebook-fit-frame {
     position: relative;
     flex-shrink: 0;
+
     width: 100%;
     max-width: 100%;
     max-height: none;
 
-    /* Không tạo scrollbar */
     overflow: hidden;
     border-radius: 18px;
 }
@@ -675,8 +630,6 @@ RESULT BAR / SEARCH RESULTS
 .ebook-fit-clip {
     position: absolute;
     inset: 0;
-
-    /* Chỉ clip, không scroll */
     overflow: hidden;
 }
 
@@ -701,7 +654,6 @@ RESULT BAR / SEARCH RESULTS
     height: auto;
     min-height: 0;
 
-    /* Không scroll */
     overflow: hidden;
     overscroll-behavior: none;
 }
@@ -743,12 +695,12 @@ RESULT BAR / SEARCH RESULTS
 
     filter: drop-shadow(0 18px 40px rgba(28, 43, 42, 0.12));
 
-    /* Không scroll */
     overflow: visible;
 }
 
 .book-page {
     position: relative;
+
     background: rgba(14, 8, 39, 0.72);
     border: 1px solid var(--line);
 
@@ -763,7 +715,6 @@ RESULT BAR / SEARCH RESULTS
     cursor: zoom-in;
     box-sizing: border-box;
 
-    /* Không scroll */
     overflow: visible;
 }
 
@@ -820,7 +771,6 @@ RESULT BAR / SEARCH RESULTS
     width: 100%;
     max-width: 100%;
 
-    /* Không scroll */
     overflow: hidden;
 }
 
@@ -891,11 +841,20 @@ RESULT BAR / SEARCH RESULTS
 
 .ebook-cover {
     min-height: 520px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     padding: 24px 8px;
-    background: linear-gradient(160deg, #163e3c 0%, #1b4d4a 55%, #2f6f6a 100%);
+
+    background: linear-gradient(
+            160deg,
+            #163e3c 0%,
+            #1b4d4a 55%,
+            #2f6f6a 100%
+    );
+
     color: #f8f3ea;
     border-radius: 12px;
     text-align: center;
@@ -950,13 +909,17 @@ RESULT BAR / SEARCH RESULTS
 
 .toc-row {
     width: 100%;
+
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: baseline;
     gap: 8px;
+
     border: 0;
     background: none;
+
     padding: 8px 0;
+
     cursor: pointer;
     text-align: left;
     color: inherit;
@@ -991,6 +954,7 @@ RESULT BAR / SEARCH RESULTS
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+
     margin-top: 10px;
     flex-shrink: 0;
 }
@@ -1004,8 +968,10 @@ RESULT BAR / SEARCH RESULTS
     border: 1px solid var(--line);
     background: rgba(16, 10, 42, 0.92);
     color: var(--ink);
+
     border-radius: 10px;
     padding: 8px 12px;
+
     cursor: pointer;
 }
 
@@ -1017,259 +983,6 @@ RESULT BAR / SEARCH RESULTS
 
 .reader-nav button:disabled {
     opacity: 0.4;
-    cursor: not-allowed;
-}
-
-/* =========================================================
-   FOCUS / PHÓNG TO ẢNH - ẢNH TO HƠN
-   ========================================================= */
-
-.ebook-focus {
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    /* giảm khoảng trống hai bên */
-    padding: 16px 40px;
-
-    background: rgba(8, 3, 26, 0.88);
-
-    overflow: hidden;
-}
-.ebook-focus {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    align-items: flex-start !important;
-}
-
-.ebook-focus-book {
-    width: auto;
-    max-width: 100vw;
-
-    height: calc(100dvh - 32px);
-    max-height: calc(100dvh - 32px);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    min-height: 0;
-}
-
-/* Quan trọng: cho spread lấy chiều cao tối đa */
-.ebook-focus .book-spread {
-    width: auto;
-    height: 100%;
-    max-width: none;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0;
-}
-
-/* Trang đơn */
-.ebook-focus .book-spread.single,
-.ebook-focus .book-spread.cover-only {
-    width: auto;
-    height: 100%;
-}
-
-/* Trang trong chế độ phóng to */
-.ebook-focus .book-page {
-    width: auto;
-    height: 100%;
-
-    min-height: 0;
-    max-height: none;
-
-    padding: 0;
-
-    cursor: default;
-    overflow: hidden;
-
-    border-radius: 18px;
-}
-
-/* ẢNH PHÓNG TO */
-.ebook-focus .book-page-image {
-    width: min(90vw, 1200px) !important;
-    height: auto !important;
-
-    max-width: min(90vw, 1200px) !important;
-    max-height: none !important;
-
-    object-fit: contain;
-}
-
-/* Nếu là trang design */
-.ebook-focus .design-sheet,
-.ebook-focus .design-sheet-page {
-    width: auto;
-    height: 100%;
-}
-
-.ebook-focus .design-sheet-image {
-    display: block;
-
-    width: auto;
-    height: 100%;
-
-    max-width: 100vw;
-    max-height: calc(100dvh - 32px);
-
-    object-fit: contain;
-}
-
-/* Không cho các khung trung gian bóp nhỏ ảnh */
-.ebook-focus .ebook-fit-frame,
-.ebook-focus .ebook-fit-clip,
-.ebook-focus .ebook-fit-scale {
-    width: auto;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-}
-/* =========================================================
-   FIX: ẢNH TRONG CHẾ ĐỘ PHÓNG TO PHẢI LỚN
-   ========================================================= */
-
-.ebook-focus {
-    padding: 12px 70px !important;
-    overflow: hidden !important;
-}
-
-/* Cho khung focus rộng gần hết màn hình */
-.ebook-focus-book {
-    width: calc(100vw - 140px) !important;
-    max-width: 1400px !important;
-    height: calc(100dvh - 24px) !important;
-    max-height: calc(100dvh - 24px) !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-/* Quan trọng: bỏ giới hạn width cũ */
-.ebook-focus .ebook-fit-frame {
-    width: 100% !important;
-    max-width: none !important;
-    height: 100% !important;
-    max-height: none !important;
-}
-
-/* Bỏ các scale được tính ở chế độ bình thường */
-.ebook-focus .ebook-fit-scale {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-
-    transform: none !important;
-}
-
-/* Khung trang */
-.ebook-focus .book-spread {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-/* Trang */
-.ebook-focus .book-page {
-    width: auto !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-
-    padding: 0 !important;
-}
-
-/* ẢNH */
-.ebook-focus .book-page-image,
-.ebook-focus .design-sheet-image {
-    display: block !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    max-width: calc(100vw - 140px) !important;
-    max-height: calc(100dvh - 24px) !important;
-
-    object-fit: contain !important;
-}
-
-/* GAME */
-.ebook-focus--game .ebook-focus-book {
-    width: calc(100vw - 100px) !important;
-    max-width: 1500px !important;
-}
-
-.ebook-focus--game .ebook-game-viewer {
-    width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-}
-
-.ebook-focus--game .ebook-game-viewer__frame {
-    width: 100% !important;
-    height: calc(100dvh - 24px) !important;
-    max-height: calc(100dvh - 24px) !important;
-    min-height: 0 !important;
-}
-/* =========================================================
-   MŨI TÊN
-   ========================================================= */
-
-.focus-arrow {
-    position: fixed;
-    top: 50%;
-    z-index: 81;
-
-    transform: translateY(-50%);
-
-    width: 48px;
-    height: 48px;
-
-    border: 0;
-    border-radius: 999px;
-
-    background: #1f124f;
-    color: #ffd76b;
-
-    box-shadow: var(--shadow);
-
-    font-size: 1.35rem;
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-.focus-arrow.left {
-    left: 16px;
-}
-
-.focus-arrow.right {
-    right: 16px;
-}
-
-.focus-arrow:hover:not(:disabled) {
-    background: #6b49ff;
-    color: #fff6cf;
-}
-
-.focus-arrow:disabled {
-    opacity: 0.35;
     cursor: not-allowed;
 }
 
@@ -1303,9 +1016,12 @@ RESULT BAR / SEARCH RESULTS
 .meta {
     display: grid;
     gap: 8px;
+
     padding: 0;
     margin: 0 0 14px;
+
     list-style: none;
+
     font-size: 0.92rem;
 }
 
@@ -1319,8 +1035,11 @@ RESULT BAR / SEARCH RESULTS
 .tag {
     background: rgba(109, 180, 255, 0.2);
     color: #aed5ff;
+
     border-radius: 999px;
+
     padding: 6px 10px;
+
     font-size: 0.82rem;
     font-weight: 600;
 }
@@ -1417,9 +1136,11 @@ RESULT BAR / SEARCH RESULTS
 .ebook-game-viewer {
     width: 100%;
     min-height: 560px;
+
     display: flex;
     align-items: stretch;
     justify-content: center;
+
     overflow: visible;
     position: relative;
 }
@@ -1432,12 +1153,16 @@ RESULT BAR / SEARCH RESULTS
 
 .ebook-game-viewer__stage {
     flex: 1 1 auto;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 100%;
     min-height: 0;
+
     padding: 6px 10px;
+
     box-sizing: border-box;
 }
 
@@ -1445,12 +1170,18 @@ RESULT BAR / SEARCH RESULTS
     width: min(960px, 94%);
     min-height: 560px;
     height: min(84vh, calc(100dvh - 270px));
+
     max-width: 100%;
+
     margin: 0 auto;
+
     overflow: hidden;
+
     border-radius: 18px;
+
     display: flex;
     flex-direction: column;
+
     box-sizing: border-box;
 }
 
@@ -1458,20 +1189,27 @@ RESULT BAR / SEARCH RESULTS
     width: 100%;
     height: 100%;
     max-width: none;
+
     margin: 0;
+
     display: flex;
     flex-direction: column;
 }
 
 .ebook-game-viewer__frame .book-page {
     flex: 1 1 auto;
+
     width: 100%;
     max-width: 100%;
+
     height: 100%;
     min-height: 0;
     max-height: none;
+
     margin: 0;
+
     border-radius: 18px;
+
     box-sizing: border-box;
 }
 
@@ -1488,9 +1226,12 @@ RESULT BAR / SEARCH RESULTS
 .ebook-game-viewer__frame .game-sheet {
     width: 100%;
     max-width: 100%;
+
     min-height: 100%;
+
     margin: 0;
     padding: 18px 22px 36px;
+
     box-sizing: border-box;
 }
 
@@ -1585,16 +1326,6 @@ RESULT BAR / SEARCH RESULTS
     font-size: 0.95rem;
 }
 
-.ebook-focus--game .ebook-focus-book {
-    width: min(980px, calc(100vw - 120px));
-}
-
-.ebook-focus--game .ebook-game-viewer__frame {
-    width: 100%;
-    height: calc(100dvh - 48px);
-    max-height: calc(100dvh - 48px);
-}
-
 /* =========================================================
    FOOTER
    ========================================================= */
@@ -1602,26 +1333,39 @@ RESULT BAR / SEARCH RESULTS
 .site-footer {
     margin-top: auto;
     flex-shrink: 0;
-    background: linear-gradient(135deg, #13093b 0%, #1f0f5a 55%, #2f1a76 100%);
+
+    background: linear-gradient(
+            135deg,
+            #13093b 0%,
+            #1f0f5a 55%,
+            #2f1a76 100%
+    );
+
     color: #f8f3ea;
+
     padding: 16px 20px 14px;
 }
 
 .footer-inner {
     max-width: 1080px;
     margin: 0 auto;
+
     display: grid;
     grid-template-columns: 1.4fr 0.8fr;
+
     gap: 16px;
     align-items: start;
 }
 
 .footer-kicker {
     margin: 0 0 10px;
+
     letter-spacing: 0.14em;
     text-transform: uppercase;
+
     font-size: 0.72rem;
     font-weight: 700;
+
     color: #ffd76b;
 }
 
@@ -1629,6 +1373,7 @@ RESULT BAR / SEARCH RESULTS
     list-style: none;
     margin: 0;
     padding: 0;
+
     display: grid;
     gap: 10px;
 }
@@ -1652,27 +1397,36 @@ RESULT BAR / SEARCH RESULTS
 .footer-qr {
     background: rgba(255, 253, 248, 0.05);
     border: 1px solid rgba(255, 215, 107, 0.36);
+
     border-radius: 14px;
+
     padding: 10px 12px;
 }
 
 .footer-hint {
     margin: 0 0 8px;
+
     font-size: 0.8rem;
     line-height: 1.4;
+
     color: rgba(248, 243, 234, 0.86);
 }
 
 .qr-frame {
     display: inline-flex;
+
     background: #f8f4ff;
+
     border-radius: 10px;
+
     padding: 4px;
 }
 
 .footer-form-link {
     display: block;
+
     margin: 10px 0 0;
+
     font-weight: 700;
     color: #f8f3ea;
 }
@@ -1861,28 +1615,6 @@ RESULT BAR / SEARCH RESULTS
         text-align: center;
     }
 
-    .ebook-focus {
-        padding: 16px 52px;
-    }
-
-    .ebook-focus-book {
-        height: calc(100dvh - 32px);
-        max-height: calc(100dvh - 32px);
-    }
-
-    .focus-arrow {
-        width: 40px;
-        height: 40px;
-    }
-
-    .focus-arrow.left {
-        left: 8px;
-    }
-
-    .focus-arrow.right {
-        right: 8px;
-    }
-
     .sheet-hero {
         height: 160px;
     }
@@ -1900,478 +1632,4 @@ RESULT BAR / SEARCH RESULTS
     .static-game-card {
         min-height: 43px;
     }
-}
-/* =========================================================
-   FORCE ZOOM - PHÓNG ẢNH LỚN THỰC SỰ
-   ========================================================= */
-
-.ebook-focus {
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: 99999 !important;
-
-    display: block !important;
-
-    padding: 0 !important;
-
-    background: rgba(8, 3, 26, 0.92) !important;
-
-    /* QUAN TRỌNG: cho ảnh vượt màn hình */
-    overflow: auto !important;
-
-    text-align: center !important;
-}
-
-/* Khung chứa */
-.ebook-focus-book {
-    position: relative !important;
-
-    width: max-content !important;
-    height: max-content !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    margin: 20px auto !important;
-
-    display: block !important;
-}
-
-/* =========================================================
-   BỎ TOÀN BỘ GIỚI HẠN KÍCH THƯỚC CŨ
-   ========================================================= */
-
-.ebook-focus .ebook-fit-frame,
-.ebook-focus .ebook-fit-clip,
-.ebook-focus .ebook-fit-scale {
-    position: relative !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    overflow: visible !important;
-
-    transform: none !important;
-}
-
-/* =========================================================
-   SPREAD
-   ========================================================= */
-
-.ebook-focus .book-spread {
-    width: auto !important;
-    height: auto !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    display: block !important;
-
-    overflow: visible !important;
-}
-
-/* =========================================================
-   TRANG
-   ========================================================= */
-
-.ebook-focus .book-page {
-    width: auto !important;
-    height: auto !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    padding: 0 !important;
-
-    border: 0 !important;
-
-    overflow: visible !important;
-}
-
-/* =========================================================
-   ẢNH - ĐÂY MỚI LÀ PHẦN QUAN TRỌNG
-   ========================================================= */
-
-.ebook-focus .book-page-image,
-.ebook-focus .design-sheet-image {
-
-    display: block !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    object-fit: contain !important;
-
-    /* =====================================================
-       TĂNG CON SỐ NÀY = ẢNH TO HƠN
-       1.0 = kích thước hiện tại
-       1.3 = to 30%
-       1.5 = to 50%
-       2.0 = TO GẤP ĐÔI
-       ===================================================== */
-
-    transform: scale(1.5) !important;
-
-    transform-origin: center center !important;
-}
-
-/* =========================================================
-   GAME PAGE
-   ========================================================= */
-
-.ebook-focus .book-page.game-page {
-    width: auto !important;
-    height: auto !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    overflow: visible !important;
-
-    padding: 0 !important;
-}
-
-/* Nếu game là nội dung HTML */
-.ebook-focus .book-page.game-page .game-sheet {
-    width: 100% !important;
-    max-width: none !important;
-
-    min-height: 0 !important;
-
-    overflow: visible !important;
-}
-
-/* =========================================================
-   KHÔNG ĐỂ GAME VIEWER ÉP NHỎ
-   ========================================================= */
-
-.ebook-focus .ebook-game-viewer,
-.ebook-focus .ebook-game-viewer__stage,
-.ebook-focus .ebook-game-viewer__frame {
-
-    width: auto !important;
-    height: auto !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    max-width: none !important;
-    max-height: none !important;
-
-    overflow: visible !important;
-}
-
-/* =========================================================
-   MŨI TÊN LUÔN NẰM TRÊN MÀN HÌNH
-   ========================================================= */
-
-.ebook-focus .focus-arrow,
-.focus-arrow {
-    position: fixed !important;
-
-    z-index: 100000 !important;
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    .ebook-focus .book-page-image,
-    .ebook-focus .design-sheet-image {
-        transform: scale(1.25) !important;
-    }
-}
-/* =========================================================
-   FULLSCREEN SCREENSHOT - KHÔNG DÙNG FitPageStage
-   ========================================================= */
-
-.ebook-focus--screenshots {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-
-    width: 100vw;
-    height: 100dvh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 12px 70px;
-
-    background: rgba(5, 2, 18, 0.94);
-
-    overflow: hidden;
-}
-
-/* Khung ảnh fullscreen */
-.ebook-focus--screenshots .screenshot-focus-book {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 0;
-    min-height: 0;
-
-    overflow: hidden;
-}
-
-/* book-spread không còn bị giới hạn 469px */
-.ebook-focus--screenshots .book-spread.single {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin: 0;
-    max-width: none;
-    max-height: none;
-
-    overflow: hidden;
-}
-
-/* Trang */
-.ebook-focus--screenshots .screenshot-only-page {
-    width: auto;
-    height: 100%;
-
-    max-width: calc(100vw - 140px);
-    max-height: calc(100dvh - 24px);
-
-    padding: 0;
-    margin: 0;
-
-    border: 0;
-    border-radius: 12px;
-
-    background: transparent;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-/* Ảnh thật */
-.ebook-focus--screenshots .screenshot-only-page .book-page-image {
-    display: block;
-
-    width: auto;
-    height: auto;
-
-    max-width: calc(100vw - 140px);
-    max-height: calc(100dvh - 24px);
-
-    object-fit: contain;
-
-    margin: 0;
-}
-
-/* Không để folio làm ảnh bị ảnh hưởng */
-.ebook-focus--screenshots .page-folio {
-    display: none;
-}
-
-/* Mũi tên */
-.ebook-focus--screenshots .focus-arrow {
-    position: fixed;
-    top: 50%;
-    z-index: 10001;
-
-    transform: translateY(-50%);
-
-    width: 52px;
-    height: 52px;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: rgba(31, 18, 79, 0.95);
-    color: #ffd76b;
-
-    font-size: 26px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-}
-
-.ebook-focus--screenshots .focus-arrow.left {
-    left: 14px;
-}
-
-.ebook-focus--screenshots .focus-arrow.right {
-    right: 14px;
-}
-
-.ebook-focus--screenshots .focus-arrow:hover:not(:disabled) {
-    background: #6b49ff;
-    color: #fff6cf;
-}
-
-.ebook-focus--screenshots .focus-arrow:disabled {
-    opacity: 0.25;
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 650px) {
-    .ebook-focus--screenshots {
-        padding: 8px 48px;
-    }
-
-    .ebook-focus--screenshots .screenshot-only-page {
-        max-width: calc(100vw - 96px);
-        max-height: calc(100dvh - 16px);
-    }
-
-    .ebook-focus--screenshots .screenshot-only-page .book-page-image {
-        max-width: calc(100vw - 96px);
-        max-height: calc(100dvh - 16px);
-    }
-
-    .ebook-focus--screenshots .focus-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-    }
-
-    .ebook-focus--screenshots .focus-arrow.left {
-        left: 6px;
-    }
-
-    .ebook-focus--screenshots .focus-arrow.right {
-        right: 6px;
-    }
-}
-/* =========================================================
-   SCREENSHOT FULLSCREEN - DIRECT IMAGE
-   ========================================================= */
-
-.ebook-focus--screenshots {
-    position: fixed !important;
-    inset: 0 !important;
-
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    background: rgba(0, 0, 0, 0.96) !important;
-
-    overflow: hidden !important;
-
-    z-index: 999999 !important;
-}
-
-.fullscreen-screenshot-container {
-    position: relative !important;
-
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-
-    flex: 1 1 auto !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    overflow: hidden !important;
-}
-
-.fullscreen-screenshot {
-    display: block !important;
-
-    width: auto !important;
-    height: auto !important;
-
-    /*
-     * Chừa chỗ cho 2 nút mũi tên.
-     */
-    max-width: calc(100vw - 120px) !important;
-    max-height: calc(100dvh - 20px) !important;
-
-    min-width: 0 !important;
-    min-height: 0 !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    border: 0 !important;
-
-    object-fit: contain !important;
-    object-position: center !important;
-
-    transform: none !important;
-
-    box-sizing: border-box !important;
-}
-
-@media (min-width: 900px) {
-    .ebook-reader--screenshots .ebook-stage {
-        width: 50vw !important;
-        max-width: 520px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    .ebook-reader--screenshots .ebook-fit-frame {
-        max-width: 100% !important;
-    }
-}
-.ebook-focus {
-    position: fixed;
-    inset: 0;
-}
-
-.ebook-focus-backdrop {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-.ebook-focus-book {
-    position: relative;
-    z-index: 2;
-}
-
-.focus-arrow,
-.focus-close {
-    position: relative;
-    z-index: 3;
 }
