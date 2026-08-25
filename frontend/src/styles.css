@@ -136,6 +136,7 @@ body {
     width: 100%;
     max-width: 1100px;
 
+    /* NEVER lock ebook to viewport */
     height: auto;
     min-height: 0;
 
@@ -144,9 +145,16 @@ body {
 
     display: block;
 
+    /* NEVER create a nested scrollbar */
     overflow: visible;
 }
 
+
+/*
+   IMPORTANT:
+   .result-list is intentionally NOT included here.
+   It needs its own scroll area.
+*/
 .layout-ebook .search-results,
 .layout-ebook .static-game-list,
 .layout-ebook .ebook-reader,
@@ -278,9 +286,7 @@ legend {
 
 
 /* =========================================================
-   SEARCH RESULTS
-   CHỈ HIỂN THỊ 3 GAME
-   GAME 4, 5, 6... NẰM TRONG VÙNG SCROLL
+   SEARCH RESULTS CONTAINER
    ========================================================= */
 
 .search-results {
@@ -290,14 +296,9 @@ legend {
     border: 1px solid rgba(125, 75, 255, 0.55);
     border-radius: 14px;
     background: rgba(18, 10, 45, 0.94);
-
     min-height: 0;
 
-    /*
-       Quan trọng:
-       Không đặt max-height ở đây.
-       Scroll phải nằm ở .result-list.
-    */
+    /* Container itself does NOT scroll */
     max-height: none;
     overflow: visible;
 }
@@ -318,72 +319,81 @@ legend {
 }
 
 
-/*
-   VÙNG DANH SÁCH KẾT QUẢ
+/* =========================================================
+   SEARCH RESULT LIST
+   ONLY THIS AREA SCROLLS
+   ========================================================= */
 
-   3 game sẽ luôn được nhìn thấy.
-   Game thứ 4 trở đi nằm bên dưới và có thể scroll.
-*/
-.search-results .result-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    display: grid;
-    gap: 6px;
-
-    /*
-       Chiều cao cho đúng khoảng 3 result-card.
-       Nếu card cao hơn một chút vẫn có thể scroll.
-    */
-    height: 180px;
-    max-height: 180px;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    /*
-       Không cho scrollbar chiếm quá nhiều không gian.
-    */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(132, 84, 255, 0.65) rgba(255, 255, 255, 0.04);
-}
-
-
-/*
-   Scrollbar Chrome / Edge
-*/
-.search-results .result-list::-webkit-scrollbar {
-    width: 6px;
-}
-
-.search-results .result-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.035);
-    border-radius: 999px;
-}
-
-.search-results .result-list::-webkit-scrollbar-thumb {
-    background: rgba(132, 84, 255, 0.65);
-    border-radius: 999px;
-}
-
-.search-results .result-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(150, 105, 255, 0.9);
-}
-
-
-/*
-   Rule chung cho các result-list khác
-   KHÔNG ảnh hưởng search-results.
-*/
+.search-results .result-list,
 .result-list {
     list-style: none;
     margin: 0 0 20px;
     padding: 0;
     display: grid;
     gap: 10px;
-    max-height: none;
-    overflow: visible;
+
+    /*
+       CHỈ HIỆN 3 GAME.
+       Khi có game thứ 4 trở đi thì xuất hiện scrollbar.
+    */
+    max-height: 275px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #8f6bff rgba(255, 255, 255, 0.08);
+}
+
+
+/*
+   Search results specific sizing
+*/
+.search-results .result-list {
+    gap: 6px;
+    margin-bottom: 0;
+
+    /* 3 cards visible */
+    max-height: 275px;
+
+    /* Enable vertical scrolling */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #8f6bff rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   CUSTOM SCROLLBAR
+   ========================================================= */
+
+.search-results .result-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-results .result-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+            180deg,
+            #ff7cc8,
+            #8f6bff
+    );
+    border-radius: 10px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+            180deg,
+            #ff91d2,
+            #a184ff
+    );
 }
 
 
@@ -408,16 +418,9 @@ legend {
     padding: 8px 10px;
     border-radius: 9px;
     gap: 10px;
-
     background: rgba(255, 255, 255, 0.025);
     border-color: rgba(132, 84, 255, 0.2);
     box-shadow: none;
-
-    /*
-       Không cho card bị co lại theo chiều dọc.
-       Mỗi game giữ nguyên một hàng.
-    */
-    flex-shrink: 0;
 }
 
 .result-card h2 {
@@ -451,7 +454,6 @@ legend {
     margin: 0;
     font-size: 8.5px;
     line-height: 1.25;
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -1305,6 +1307,13 @@ legend {
    NO FOCUS / NO ZOOM CSS
    ========================================================= */
 
+/*
+   Intentionally no .ebook-focus rules.
+   Intentionally no focus overlay.
+   Intentionally no zoom overlay.
+   Intentionally no click-to-enlarge CSS.
+*/
+
 .ebook-game-viewer--focus {
     width: 100%;
     height: auto;
@@ -1466,16 +1475,17 @@ legend {
         flex-direction: row;
     }
 
-    .footer-inner {
-        grid-template-columns: 1fr;
-    }
-
     /*
-       Search result vẫn chỉ 3 game trên tablet.
+       Giữ scrollbar của search results trên tablet.
     */
     .search-results .result-list {
-        height: 180px;
-        max-height: 180px;
+        max-height: 275px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1509,32 +1519,6 @@ legend {
         padding: 4px 8px;
         font-size: 0.74rem;
     }
-
-
-    /* =========================================
-       SEARCH RESULTS MOBILE
-       VẪN 3 GAME + SCROLL
-       ========================================= */
-
-    .search-results {
-        padding: 8px 10px;
-    }
-
-    .search-results .result-list {
-        height: 174px;
-        max-height: 174px;
-        gap: 5px;
-    }
-
-    .search-results .result-card {
-        padding: 7px 8px;
-        gap: 8px;
-    }
-
-
-    /* =========================================
-       STATIC GAME LIST
-       ========================================= */
 
     .static-game-list {
         margin: 8px 0 10px;
@@ -1581,10 +1565,14 @@ legend {
         padding: 2px 5px;
     }
 
-
-    /* =========================================
-       EBOOK
-       ========================================= */
+    /*
+       Search result vẫn chỉ hiện 3 game trên mobile.
+    */
+    .search-results .result-list {
+        max-height: 275px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 
     .ebook-reader {
         padding: 8px;
@@ -1642,11 +1630,11 @@ legend {
     }
 
     /*
-       Search result vẫn giữ 3 item hiển thị,
-       không chuyển thành 1 game duy nhất.
+       Vẫn giữ vùng search chỉ cao khoảng 3 card.
     */
     .search-results .result-list {
-        height: 174px;
-        max-height: 174px;
+        max-height: 275px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }
