@@ -136,7 +136,6 @@ body {
     width: 100%;
     max-width: 1100px;
 
-    /* NEVER lock ebook to viewport */
     height: auto;
     min-height: 0;
 
@@ -145,12 +144,10 @@ body {
 
     display: block;
 
-    /* NEVER create a nested scrollbar */
     overflow: visible;
 }
 
 .layout-ebook .search-results,
-.layout-ebook .result-list,
 .layout-ebook .static-game-list,
 .layout-ebook .ebook-reader,
 .layout-ebook .ebook-stage {
@@ -279,6 +276,13 @@ legend {
     cursor: pointer;
 }
 
+
+/* =========================================================
+   SEARCH RESULTS
+   CHỈ HIỂN THỊ 3 GAME
+   GAME 4, 5, 6... NẰM TRONG VÙNG SCROLL
+   ========================================================= */
+
 .search-results {
     width: 100%;
     margin: 8px 0 12px;
@@ -286,7 +290,14 @@ legend {
     border: 1px solid rgba(125, 75, 255, 0.55);
     border-radius: 14px;
     background: rgba(18, 10, 45, 0.94);
+
     min-height: 0;
+
+    /*
+       Quan trọng:
+       Không đặt max-height ở đây.
+       Scroll phải nằm ở .result-list.
+    */
     max-height: none;
     overflow: visible;
 }
@@ -306,7 +317,65 @@ legend {
     color: #fff;
 }
 
-.search-results .result-list,
+
+/*
+   VÙNG DANH SÁCH KẾT QUẢ
+
+   3 game sẽ luôn được nhìn thấy.
+   Game thứ 4 trở đi nằm bên dưới và có thể scroll.
+*/
+.search-results .result-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 6px;
+
+    /*
+       Chiều cao cho đúng khoảng 3 result-card.
+       Nếu card cao hơn một chút vẫn có thể scroll.
+    */
+    height: 180px;
+    max-height: 180px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /*
+       Không cho scrollbar chiếm quá nhiều không gian.
+    */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(132, 84, 255, 0.65) rgba(255, 255, 255, 0.04);
+}
+
+
+/*
+   Scrollbar Chrome / Edge
+*/
+.search-results .result-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-results .result-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.035);
+    border-radius: 999px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb {
+    background: rgba(132, 84, 255, 0.65);
+    border-radius: 999px;
+}
+
+.search-results .result-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(150, 105, 255, 0.9);
+}
+
+
+/*
+   Rule chung cho các result-list khác
+   KHÔNG ảnh hưởng search-results.
+*/
 .result-list {
     list-style: none;
     margin: 0 0 20px;
@@ -317,10 +386,10 @@ legend {
     overflow: visible;
 }
 
-.search-results .result-list {
-    gap: 6px;
-    margin-bottom: 0;
-}
+
+/* =========================================================
+   RESULT CARD
+   ========================================================= */
 
 .result-card {
     display: flex;
@@ -339,9 +408,16 @@ legend {
     padding: 8px 10px;
     border-radius: 9px;
     gap: 10px;
+
     background: rgba(255, 255, 255, 0.025);
     border-color: rgba(132, 84, 255, 0.2);
     box-shadow: none;
+
+    /*
+       Không cho card bị co lại theo chiều dọc.
+       Mỗi game giữ nguyên một hàng.
+    */
+    flex-shrink: 0;
 }
 
 .result-card h2 {
@@ -375,6 +451,7 @@ legend {
     margin: 0;
     font-size: 8.5px;
     line-height: 1.25;
+
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
@@ -1228,13 +1305,6 @@ legend {
    NO FOCUS / NO ZOOM CSS
    ========================================================= */
 
-/*
-   Intentionally no .ebook-focus rules.
-   Intentionally no focus overlay.
-   Intentionally no zoom overlay.
-   Intentionally no click-to-enlarge CSS.
-*/
-
 .ebook-game-viewer--focus {
     width: 100%;
     height: auto;
@@ -1346,6 +1416,7 @@ legend {
     }
 }
 
+
 /* Laptop / tablet: 3 columns */
 @media (max-width: 899px) {
     .hero {
@@ -1398,7 +1469,16 @@ legend {
     .footer-inner {
         grid-template-columns: 1fr;
     }
+
+    /*
+       Search result vẫn chỉ 3 game trên tablet.
+    */
+    .search-results .result-list {
+        height: 180px;
+        max-height: 180px;
+    }
 }
+
 
 /* iPhone / mobile: 2 columns */
 @media (max-width: 650px) {
@@ -1429,6 +1509,32 @@ legend {
         padding: 4px 8px;
         font-size: 0.74rem;
     }
+
+
+    /* =========================================
+       SEARCH RESULTS MOBILE
+       VẪN 3 GAME + SCROLL
+       ========================================= */
+
+    .search-results {
+        padding: 8px 10px;
+    }
+
+    .search-results .result-list {
+        height: 174px;
+        max-height: 174px;
+        gap: 5px;
+    }
+
+    .search-results .result-card {
+        padding: 7px 8px;
+        gap: 8px;
+    }
+
+
+    /* =========================================
+       STATIC GAME LIST
+       ========================================= */
 
     .static-game-list {
         margin: 8px 0 10px;
@@ -1475,6 +1581,11 @@ legend {
         padding: 2px 5px;
     }
 
+
+    /* =========================================
+       EBOOK
+       ========================================= */
+
     .ebook-reader {
         padding: 8px;
     }
@@ -1519,6 +1630,7 @@ legend {
     }
 }
 
+
 /* Very small screens: 1 column */
 @media (max-width: 400px) {
     .static-game-list__items {
@@ -1528,8 +1640,13 @@ legend {
     .static-game-card {
         min-height: 43px;
     }
-}
-/* Search Results: chỉ hiển thị tối đa 3 game */
-.search-results .result-list > :nth-child(n + 4) {
-    display: none;
+
+    /*
+       Search result vẫn giữ 3 item hiển thị,
+       không chuyển thành 1 game duy nhất.
+    */
+    .search-results .result-list {
+        height: 174px;
+        max-height: 174px;
+    }
 }
