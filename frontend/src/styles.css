@@ -34,7 +34,6 @@ body,
 
 html {
     overflow-x: hidden;
-    overflow-y: auto;
 }
 
 body {
@@ -1529,4 +1528,8 @@ legend {
     .static-game-card {
         min-height: 43px;
     }
+}
+/* Search Results: chỉ hiển thị tối đa 3 game */
+.search-results .result-list > :nth-child(n + 4) {
+    display: none;
 }
