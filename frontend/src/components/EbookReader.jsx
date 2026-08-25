@@ -186,7 +186,7 @@ export default function EbookReader({ page }) {
 
     /* =========================================================
        FULLSCREEN
-       KHÔNG DÙNG FitPageStage Ở ĐÂY
+       BẤM BACKDROP / KHOẢNG TRỐNG ĐỂ ĐÓNG
        ========================================================= */
 
     const focusStage = focused ? (
@@ -195,7 +195,19 @@ export default function EbookReader({ page }) {
             role="dialog"
             aria-modal="true"
             aria-label={`Xem trang ${current}`}
-            onClick={() => setFocused(false)}
+            onClick={(event) => {
+                /*
+                 * Chỉ đóng khi click trực tiếp vào backdrop.
+                 * Click vào page hoặc các phần tử bên trong
+                 * sẽ không làm đóng fullscreen.
+                 */
+                if (
+                    event.target ===
+                    event.currentTarget
+                ) {
+                    setFocused(false);
+                }
+            }}
         >
             {/* NÚT ĐÓNG */}
             <button
@@ -229,10 +241,14 @@ export default function EbookReader({ page }) {
                 {readerUi.prevShort || "←"}
             </button>
 
-            {/* ẢNH */}
+            {/* TRANG */}
             <div
                 className="screenshot-focus-book"
                 onClick={(event) => {
+                    /*
+                     * Không cho click trong khu vực page
+                     * truyền lên backdrop.
+                     */
                     event.stopPropagation();
                 }}
             >
@@ -326,3 +342,4 @@ export default function EbookReader({ page }) {
         </section>
     );
 }
+
