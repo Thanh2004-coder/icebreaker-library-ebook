@@ -1,4 +1,3 @@
-
 import {
   useCallback,
   useLayoutEffect,
@@ -20,69 +19,73 @@ export const PAGE_ASPECT = 5 / 8;
  */
 const BASE_WIDTH = 469;
 const BASE_HEIGHT = Math.round(
-  BASE_WIDTH / PAGE_ASPECT
+    BASE_WIDTH / PAGE_ASPECT
 );
 
 const MIN_STAGE = 160;
 
 /**
  * =========================================================
- * NORMAL VIEW SIZE
+ * NORMAL VIEW
  * =========================================================
- *
- * Desktop không cho ebook chiếm quá nhiều chiều ngang.
- *
- * 900 - 1199px  -> tối đa 360px
- * >= 1200px      -> tối đa 400px
- *
- * Mobile không dùng các giới hạn này,
- * mà fit trực tiếp theo viewport.
  */
-const NORMAL_DESKTOP_WIDTH_SMALL = 360;
-const NORMAL_DESKTOP_WIDTH_LARGE = 400;
-
 const DESKTOP_BREAKPOINT = 900;
-const LARGE_DESKTOP_BREAKPOINT = 1200;
+
+/**
+ * Desktop không cho ebook quá rộng.
+ */
+const NORMAL_MAX_WIDTH = 520;
 
 /**
  * =========================================================
  * FOCUS VIEW
  * =========================================================
+ *
+ * Focus không chiếm toàn bộ màn hình.
+ *
+ * Giới hạn:
+ *   - khoảng 78% chiều rộng viewport
+ *   - khoảng 82% chiều cao viewport
+ *
+ * Như vậy khi phóng to:
+ *   - page vẫn lớn hơn normal
+ *   - vẫn nhìn thấy khoảng trống xung quanh
+ *   - không bị quá khổ
+ *   - không tạo cảm giác "full screen page"
  */
-const FOCUS_SIDE_GAP = 56;
-const FOCUS_TOP_GAP = 24;
-const FOCUS_BOTTOM_GAP = 24;
+const FOCUS_WIDTH_RATIO = 0.78;
+const FOCUS_HEIGHT_RATIO = 0.82;
 
 /**
  * Đọc kích thước stage.
  */
 function readStageSize(stage) {
   const rect =
-    stage.getBoundingClientRect();
+      stage.getBoundingClientRect();
 
   let availW = Math.max(
-    stage.clientWidth || 0,
-    rect.width || 0
+      stage.clientWidth || 0,
+      rect.width || 0
   );
 
   let availH = Math.max(
-    stage.clientHeight || 0,
-    rect.height || 0
+      stage.clientHeight || 0,
+      rect.height || 0
   );
 
   if (availW < MIN_STAGE) {
     availW = Math.max(
-      window.innerWidth - 32,
-      280
+        window.innerWidth - 32,
+        280
     );
   }
 
   if (availH < MIN_STAGE) {
     availH = Math.max(
-      Math.floor(
-        window.innerHeight * 0.75
-      ),
-      320
+        Math.floor(
+            window.innerHeight * 0.75
+        ),
+        320
     );
   }
 
@@ -101,7 +104,7 @@ function detectFocusMode(stage) {
   }
 
   return Boolean(
-    stage.closest(".ebook-focus")
+      stage.closest(".ebook-focus")
   );
 }
 
@@ -109,58 +112,80 @@ function detectFocusMode(stage) {
  * =========================================================
  * NORMAL PAGE
  * =========================================================
- *
- * Desktop:
- *   Không cho page quá rộng.
- *
- * Mobile:
- *   Page fit theo chiều rộng màn hình.
- *
- * Trong cả hai trường hợp:
- *   - giữ nguyên aspect ratio
- *   - nếu quá cao thì giảm cả width + height
  */
-function fitNormalPage(availW, availH) {
-  const viewportW = window.innerWidth;
-  const viewportH = window.innerHeight;
+function fitNormalPage(
+    availW,
+    availH
+) {
+  const viewportW =
+      window.innerWidth;
 
-  const isMobile = viewportW < 900;
+  const viewportH =
+      window.innerHeight;
+
+  const isMobile =
+      viewportW < DESKTOP_BREAKPOINT;
 
   let maxW;
 
   if (isMobile) {
-    // Mobile: giữ gần nguyên responsive hiện tại
+    /**
+     * Mobile:
+     * page fit theo chiều rộng màn hình,
+     * chừa khoảng 16px mỗi bên.
+     */
     maxW = Math.min(
         availW,
         viewportW - 32
     );
   } else {
-    // Desktop: chỉ cho ebook chiếm khoảng 50% viewport
+    /**
+     * Desktop:
+     * page không được quá rộng.
+     */
     maxW = Math.min(
         availW,
-        Math.floor(viewportW * 0.5),
-        520
+        Math.floor(
+            viewportW * 0.5
+        ),
+        NORMAL_MAX_WIDTH
     );
   }
 
-  // Chừa chỗ cho navigation bên dưới
+  /**
+   * Chừa chỗ cho navigation.
+   */
   const maxH = Math.max(
       viewportH - 120,
       320
   );
 
   let width = maxW;
-  let height = width / PAGE_ASPECT;
 
-  // Nếu cao quá viewport thì thu nhỏ cả page
+  let height =
+      width / PAGE_ASPECT;
+
+  /**
+   * Nếu page quá cao thì giảm
+   * cả width và height.
+   */
   if (height > maxH) {
     height = maxH;
-    width = height * PAGE_ASPECT;
+
+    width =
+        height * PAGE_ASPECT;
   }
 
   return {
-    width: Math.max(1, Math.floor(width)),
-    height: Math.max(1, Math.floor(height)),
+    width: Math.max(
+        1,
+        Math.floor(width)
+    ),
+
+    height: Math.max(
+        1,
+        Math.floor(height)
+    ),
   };
 }
 
@@ -169,101 +194,117 @@ function fitNormalPage(availW, availH) {
  * FOCUS PAGE
  * =========================================================
  *
- * Focus vẫn được phép lớn.
+ * KHÔNG cho page chiếm toàn viewport.
+ *
+ * Đây là phần quan trọng để sửa lỗi:
+ *
+ * "Bấm phóng to -> page quá to".
  */
 function fitFocusPage(
-  availW,
-  availH
+    availW,
+    availH
 ) {
   const viewportW =
-    window.innerWidth;
+      window.innerWidth;
 
   const viewportH =
-    window.innerHeight;
+      window.innerHeight;
 
+  /**
+   * Giới hạn chiều rộng focus.
+   *
+   * Ví dụ:
+   * viewport 1920px
+   * -> page tối đa khoảng 1497px
+   *
+   * viewport 1366px
+   * -> page tối đa khoảng 1065px
+   */
   const maxWidth =
-    Math.max(
-      viewportW -
-        FOCUS_SIDE_GAP * 2,
-      280
-    );
+      viewportW *
+      FOCUS_WIDTH_RATIO;
 
+  /**
+   * Giới hạn chiều cao focus.
+   *
+   * Ví dụ:
+   * viewport 900px
+   * -> page tối đa khoảng 738px
+   */
   const maxHeight =
-    Math.max(
-      viewportH -
-        FOCUS_TOP_GAP -
-        FOCUS_BOTTOM_GAP,
-      320
-    );
+      viewportH *
+      FOCUS_HEIGHT_RATIO;
 
+  /**
+   * Stage thực tế không được vượt
+   * giới hạn viewport.
+   */
   let width = Math.min(
-    availW,
-    maxWidth
+      availW,
+      maxWidth
   );
 
   let height =
-    width / PAGE_ASPECT;
+      width / PAGE_ASPECT;
 
+  /**
+   * Nếu page quá cao:
+   * giảm height -> giảm width
+   * theo đúng aspect ratio.
+   */
   if (height > maxHeight) {
     height = maxHeight;
+
     width =
-      height * PAGE_ASPECT;
+        height * PAGE_ASPECT;
   }
 
+  /**
+   * Safety limit.
+   */
   width = Math.min(
-    width,
-    maxWidth
+      width,
+      maxWidth
   );
 
   height =
-    width / PAGE_ASPECT;
+      width / PAGE_ASPECT;
 
   return {
     width: Math.max(
-      1,
-      Math.floor(width)
+        1,
+        Math.floor(width)
     ),
+
     height: Math.max(
-      1,
-      Math.floor(height)
+        1,
+        Math.floor(height)
     ),
   };
 }
 
 /**
- * API cũ.
+ * =========================================================
+ * PUBLIC API
+ * =========================================================
  *
- * fitPageBox(
- *   width,
- *   height,
- *   false
- * )
- *
- * -> normal
- *
- * fitPageBox(
- *   width,
- *   height,
- *   true
- * )
- *
- * -> focus
+ * API cũ vẫn giữ nguyên.
  */
 export function fitPageBox(
-  availW,
-  availH,
-  focus = false
+    availW,
+    availH,
+    focus = false
 ) {
   if (focus) {
     return fitFocusPage(
-      availW,
-      availH
+        availW,
+        availH
     );
   }
 
   return fitNormalPage(
-    availW,
-    availH
+      availW,
+      availH
   );
 }
 
@@ -273,250 +314,280 @@ export function fitPageBox(
  * =========================================================
  */
 export default function FitPageStage({
-  children,
-  pageKey,
-  className = "",
-}) {
+                                       children,
+                                       pageKey,
+                                       className = "",
+                                     }) {
   const stageRef =
-    useRef(null);
+      useRef(null);
 
   const scaleRef =
-    useRef(null);
+      useRef(null);
 
   const rafRef =
-    useRef(0);
+      useRef(0);
 
   const [box, setBox] =
-    useState(() => {
-      if (
-        typeof window ===
-        "undefined"
-      ) {
-        return {
-          width: 0,
-          height: 0,
-          scale: 1,
-          focus: false,
-        };
-      }
-
-      const seed =
-        fitNormalPage(
-          Math.max(
-            window.innerWidth - 32,
-            280
-          ),
-          Math.max(
-            window.innerHeight * 0.75,
-            320
-          )
-        );
-
-      return {
-        width: seed.width,
-        height: seed.height,
-        scale:
-          seed.width /
-          BASE_WIDTH,
-        focus: false,
-      };
-    });
-
-  /**
-   * Tính lại kích thước page.
-   */
-  const recalculate =
-    useCallback(() => {
-      const stage =
-        stageRef.current;
-
-      const scaleEl =
-        scaleRef.current;
-
-      if (
-        !stage ||
-        !scaleEl
-      ) {
-        return;
-      }
-
-      const {
-        availW,
-        availH,
-      } = readStageSize(stage);
-
-      const isFocus =
-        detectFocusMode(stage);
-
-      const fitted =
-        fitPageBox(
-          availW,
-          availH,
-          isFocus
-        );
-
-      const scale =
-        fitted.width /
-        BASE_WIDTH;
-
-      /**
-       * Nội dung luôn layout
-       * ở kích thước BASE.
-       */
-      scaleEl.style.width =
-        `${BASE_WIDTH}px`;
-
-      scaleEl.style.height =
-        `${BASE_HEIGHT}px`;
-
-      scaleEl.style.minHeight =
-        `${BASE_HEIGHT}px`;
-
-      scaleEl.style.overflow =
-        isFocus
-          ? "visible"
-          : "hidden";
-
-      setBox((prev) => {
+      useState(() => {
         if (
-          prev.width ===
-            fitted.width &&
-          prev.height ===
-            fitted.height &&
-          Math.abs(
-            prev.scale -
-              scale
-          ) < 0.001 &&
-          prev.focus ===
-            isFocus
+            typeof window ===
+            "undefined"
         ) {
-          return prev;
+          return {
+            width: 0,
+            height: 0,
+            scale: 1,
+            focus: false,
+          };
         }
 
+        const seed =
+            fitNormalPage(
+                Math.max(
+                    window.innerWidth - 32,
+                    280
+                ),
+                Math.max(
+                    window.innerHeight * 0.75,
+                    320
+                )
+            );
+
         return {
-          width:
-            fitted.width,
-          height:
-            fitted.height,
-          scale,
-          focus:
-            isFocus,
+          width: seed.width,
+
+          height: seed.height,
+
+          scale:
+              seed.width /
+              BASE_WIDTH,
+
+          focus: false,
         };
       });
-    }, []);
 
   /**
-   * Gom resize vào animation frame.
+   * =======================================================
+   * RECALCULATE
+   * =======================================================
+   */
+  const recalculate =
+      useCallback(() => {
+        const stage =
+            stageRef.current;
+
+        const scaleEl =
+            scaleRef.current;
+
+        if (
+            !stage ||
+            !scaleEl
+        ) {
+          return;
+        }
+
+        const {
+          availW,
+          availH,
+        } = readStageSize(stage);
+
+        /**
+         * Tự phát hiện focus.
+         */
+        const isFocus =
+            detectFocusMode(stage);
+
+        /**
+         * Tính kích thước page.
+         */
+        const fitted =
+            fitPageBox(
+                availW,
+                availH,
+                isFocus
+            );
+
+        /**
+         * Scale từ BASE_WIDTH.
+         */
+        const scale =
+            fitted.width /
+            BASE_WIDTH;
+
+        /**
+         * Nội dung bên trong luôn layout
+         * ở kích thước cố định.
+         */
+        scaleEl.style.width =
+            `${BASE_WIDTH}px`;
+
+        scaleEl.style.height =
+            `${BASE_HEIGHT}px`;
+
+        scaleEl.style.minHeight =
+            `${BASE_HEIGHT}px`;
+
+        /**
+         * Focus:
+         * cho phép nội dung không bị clip.
+         */
+        scaleEl.style.overflow =
+            isFocus
+                ? "visible"
+                : "hidden";
+
+        setBox((prev) => {
+          if (
+              prev.width ===
+              fitted.width &&
+              prev.height ===
+              fitted.height &&
+              Math.abs(
+                  prev.scale -
+                  scale
+              ) < 0.001 &&
+              prev.focus ===
+              isFocus
+          ) {
+            return prev;
+          }
+
+          return {
+            width:
+            fitted.width,
+
+            height:
+            fitted.height,
+
+            scale,
+
+            focus:
+            isFocus,
+          };
+        });
+      }, []);
+
+  /**
+   * =======================================================
+   * SCHEDULE RECALCULATE
+   * =======================================================
    */
   const scheduleRecalculate =
-    useCallback(() => {
-      window.cancelAnimationFrame(
-        rafRef.current
-      );
-
-      rafRef.current =
-        window.requestAnimationFrame(
-          () => {
-            recalculate();
-          }
+      useCallback(() => {
+        window.cancelAnimationFrame(
+            rafRef.current
         );
-    }, [recalculate]);
+
+        rafRef.current =
+            window.requestAnimationFrame(
+                () => {
+                  recalculate();
+                }
+            );
+      }, [recalculate]);
 
   /**
-   * Theo dõi kích thước.
+   * =======================================================
+   * RESIZE / VIEWPORT / IMAGE
+   * =======================================================
    */
   useLayoutEffect(() => {
     scheduleRecalculate();
 
     const stage =
-      stageRef.current;
+        stageRef.current;
 
     if (!stage) {
       return undefined;
     }
 
+    /**
+     * Theo dõi kích thước stage.
+     */
     const ro =
-      new ResizeObserver(
-        scheduleRecalculate
-      );
+        new ResizeObserver(
+            scheduleRecalculate
+        );
 
     ro.observe(stage);
 
+    /**
+     * Theo dõi viewport.
+     */
     const onViewport =
-      () => {
-        scheduleRecalculate();
-      };
+        () => {
+          scheduleRecalculate();
+        };
 
     window.addEventListener(
-      "resize",
-      onViewport
+        "resize",
+        onViewport
     );
 
     window.addEventListener(
-      "orientationchange",
-      onViewport
+        "orientationchange",
+        onViewport
     );
 
     window.visualViewport?.addEventListener(
-      "resize",
-      onViewport
+        "resize",
+        onViewport
     );
 
     /**
      * Theo dõi ảnh.
      */
     const images =
-      stage.querySelectorAll(
-        "img"
-      );
-
-    images.forEach(
-      (img) => {
-        img.addEventListener(
-          "load",
-          scheduleRecalculate
+        stage.querySelectorAll(
+            "img"
         );
 
-        if (img.complete) {
-          scheduleRecalculate();
+    images.forEach(
+        (img) => {
+          img.addEventListener(
+              "load",
+              scheduleRecalculate
+          );
+
+          if (img.complete) {
+            scheduleRecalculate();
+          }
         }
-      }
     );
 
     /**
-     * Font.
+     * Theo dõi font.
      */
     document.fonts?.ready
-      ?.then(
-        scheduleRecalculate
-      )
-      .catch(() => {});
+        ?.then(
+            scheduleRecalculate
+        )
+        .catch(() => {});
 
     /**
-     * Recalculate bổ sung
-     * sau khi DOM ổn định.
+     * Recalculate bổ sung.
      */
     const t1 =
-      window.setTimeout(
-        scheduleRecalculate,
-        32
-      );
+        window.setTimeout(
+            scheduleRecalculate,
+            32
+        );
 
     const t2 =
-      window.setTimeout(
-        scheduleRecalculate,
-        120
-      );
+        window.setTimeout(
+            scheduleRecalculate,
+            120
+        );
 
     const t3 =
-      window.setTimeout(
-        scheduleRecalculate,
-        300
-      );
+        window.setTimeout(
+            scheduleRecalculate,
+            300
+        );
 
     return () => {
       window.cancelAnimationFrame(
-        rafRef.current
+          rafRef.current
       );
 
       window.clearTimeout(t1);
@@ -526,27 +597,27 @@ export default function FitPageStage({
       ro.disconnect();
 
       window.removeEventListener(
-        "resize",
-        onViewport
+          "resize",
+          onViewport
       );
 
       window.removeEventListener(
-        "orientationchange",
-        onViewport
+          "orientationchange",
+          onViewport
       );
 
       window.visualViewport?.removeEventListener(
-        "resize",
-        onViewport
+          "resize",
+          onViewport
       );
 
       images.forEach(
-        (img) => {
-          img.removeEventListener(
-            "load",
-            scheduleRecalculate
-          );
-        }
+          (img) => {
+            img.removeEventListener(
+                "load",
+                scheduleRecalculate
+            );
+          }
       );
     };
   }, [
@@ -555,16 +626,18 @@ export default function FitPageStage({
   ]);
 
   /**
-   * Recalculate khi đổi page.
+   * =======================================================
+   * PAGE CHANGE
+   * =======================================================
    */
   useLayoutEffect(() => {
     scheduleRecalculate();
 
     const t =
-      window.setTimeout(
-        scheduleRecalculate,
-        50
-      );
+        window.setTimeout(
+            scheduleRecalculate,
+            50
+        );
 
     return () => {
       window.clearTimeout(t);
@@ -575,102 +648,119 @@ export default function FitPageStage({
   ]);
 
   const ready =
-    box.width > 0 &&
-    box.height > 0;
+      box.width > 0 &&
+      box.height > 0;
 
+  /**
+   * Class cho stage.
+   */
   const stageClassName = [
     "ebook-stage",
+
     box.focus
-      ? "ebook-stage-focus"
-      : "",
+        ? "ebook-stage-focus"
+        : "",
+
     className,
   ]
-    .filter(Boolean)
-    .join(" ");
+      .filter(Boolean)
+      .join(" ");
 
+  /**
+   * =======================================================
+   * RENDER
+   * =======================================================
+   */
   return (
-    <div
-      ref={stageRef}
-      className={stageClassName}
-    >
       <div
-        className="ebook-fit-frame"
-        style={
-          ready
-            ? {
-                width:
-                  box.width,
-                height:
-                  box.height,
-
-                maxWidth:
-                  box.focus
-                    ? "none"
-                    : `${box.width}px`,
-
-                maxHeight:
-                  box.focus
-                    ? "none"
-                    : `${box.height}px`,
-
-                overflow:
-                  box.focus
-                    ? "visible"
-                    : "hidden",
-              }
-            : undefined
-        }
+          ref={stageRef}
+          className={stageClassName}
       >
         <div
-          className="ebook-fit-clip"
-          style={
-            box.focus
-              ? {
-                  overflow:
-                    "visible",
-                }
-              : {
-                  overflow:
-                    "hidden",
-                }
-          }
-        >
-          <div
-            ref={scaleRef}
-            className="ebook-fit-scale"
+            className="ebook-fit-frame"
             style={
               ready
-                ? {
+                  ? {
                     width:
-                      BASE_WIDTH,
+                    box.width,
 
                     height:
-                      BASE_HEIGHT,
+                    box.height,
 
-                    minHeight:
-                      BASE_HEIGHT,
+                    /**
+                     * Không cho CSS bên ngoài
+                     * ép page lớn hơn kích thước
+                     * đã tính.
+                     */
+                    maxWidth:
+                    box.width,
 
-                    transform:
-                      `scale(${box.scale})`,
-
-                    transformOrigin:
-                      "top left",
+                    maxHeight:
+                    box.height,
 
                     overflow:
-                      box.focus
-                        ? "visible"
-                        : "hidden",
-
-                    boxSizing:
-                      "border-box",
+                        box.focus
+                            ? "visible"
+                            : "hidden",
                   }
-                : undefined
+                  : undefined
             }
+        >
+          <div
+              className="ebook-fit-clip"
+              style={
+                box.focus
+                    ? {
+                      overflow:
+                          "visible",
+                    }
+                    : {
+                      overflow:
+                          "hidden",
+                    }
+              }
           >
-            {children}
+            <div
+                ref={scaleRef}
+                className="ebook-fit-scale"
+                style={
+                  ready
+                      ? {
+                        width:
+                        BASE_WIDTH,
+
+                        height:
+                        BASE_HEIGHT,
+
+                        minHeight:
+                        BASE_HEIGHT,
+
+                        /**
+                         * Scale duy nhất
+                         * quyết định kích thước page.
+                         */
+                        transform:
+                            `scale(${box.scale})`,
+
+                        transformOrigin:
+                            "top left",
+
+                        overflow:
+                            box.focus
+                                ? "visible"
+                                : "hidden",
+
+                        boxSizing:
+                            "border-box",
+                      }
+                      : undefined
+                }
+            >
+              {children}
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
+
