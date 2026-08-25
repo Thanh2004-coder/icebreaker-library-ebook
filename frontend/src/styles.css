@@ -2354,3 +2354,24 @@ RESULT BAR / SEARCH RESULTS
         max-width: 100% !important;
     }
 }
+.ebook-focus {
+    position: fixed;
+    inset: 0;
+}
+
+.ebook-focus-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.ebook-focus-book {
+    position: relative;
+    z-index: 2;
+}
+
+.focus-arrow,
+.focus-close {
+    position: relative;
+    z-index: 3;
+}

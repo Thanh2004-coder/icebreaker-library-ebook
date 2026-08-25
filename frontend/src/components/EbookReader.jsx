@@ -127,9 +127,10 @@ export default function EbookReader({ page }) {
         if (focused) return;
 
         const timer = requestAnimationFrame(() => {
-            const pageElement = document.querySelector(
-                ".ebook-reader--screenshots .screenshot-only-page"
-            );
+            const pageElement =
+                document.querySelector(
+                    ".ebook-reader--screenshots .screenshot-only-page"
+                );
 
             if (!pageElement) return;
 
@@ -139,7 +140,8 @@ export default function EbookReader({ page }) {
             });
         });
 
-        return () => cancelAnimationFrame(timer);
+        return () =>
+            cancelAnimationFrame(timer);
     }, [current, focused]);
 
     /* =========================================================
@@ -168,7 +170,9 @@ export default function EbookReader({ page }) {
             }}
         >
             <div
-                className={`${pageClass(current)} screenshot-only-page`}
+                className={`${pageClass(
+    current
+)} screenshot-only-page`}
                 onClick={openFocus}
             >
                 <SheetBody page={current} />
@@ -180,13 +184,14 @@ export default function EbookReader({ page }) {
         </div>
     );
 
-    const ariaLabel = resolveCatalogText(
-        readerUi.ariaLabel || "Ebook {title}"
-    );
+    const ariaLabel =
+        resolveCatalogText(
+            readerUi.ariaLabel ||
+                "Ebook {title}"
+        );
 
     /* =========================================================
        FULLSCREEN
-       BẤM BACKDROP / KHOẢNG TRỐNG ĐỂ ĐÓNG
        ========================================================= */
 
     const focusStage = focused ? (
@@ -195,26 +200,37 @@ export default function EbookReader({ page }) {
             role="dialog"
             aria-modal="true"
             aria-label={`Xem trang ${current}`}
-            onClick={(event) => {
-                /*
-                 * Chỉ đóng khi click trực tiếp vào backdrop.
-                 * Click vào page hoặc các phần tử bên trong
-                 * sẽ không làm đóng fullscreen.
-                 */
-                if (
-                    event.target ===
-                    event.currentTarget
-                ) {
-                    setFocused(false);
-                }
-            }}
         >
-            {/* NÚT ĐÓNG */}
+            {/* =================================================
+               BACKDROP
+
+               Layer này phủ toàn bộ popup.
+
+               Click vào bất kỳ vùng trống nào
+               -> đóng fullscreen.
+
+               Vì page nằm ở layer phía trên nên
+               click vào page không đi vào đây.
+               ================================================= */}
+
+            <div
+                className="ebook-focus-backdrop"
+                aria-hidden="true"
+                onClick={() => {
+                    setFocused(false);
+                }}
+            />
+
+            {/* =================================================
+               NÚT ĐÓNG
+               ================================================= */}
+
             <button
                 type="button"
                 className="focus-close"
                 aria-label="Đóng chế độ phóng to"
                 onClick={(event) => {
+                    event.preventDefault();
                     event.stopPropagation();
                     setFocused(false);
                 }}
@@ -222,13 +238,17 @@ export default function EbookReader({ page }) {
                 ×
             </button>
 
-            {/* TRANG TRƯỚC */}
+            {/* =================================================
+               TRANG TRƯỚC
+               ================================================= */}
+
             <button
                 type="button"
                 className="focus-arrow left"
                 disabled={!canPrev}
                 aria-label="Trang trước"
                 onClick={(event) => {
+                    event.preventDefault();
                     event.stopPropagation();
 
                     if (canPrev) {
@@ -241,18 +261,24 @@ export default function EbookReader({ page }) {
                 {readerUi.prevShort || "←"}
             </button>
 
-            {/* TRANG */}
+            {/* =================================================
+               TRANG
+               ================================================= */}
+
             <div
                 className="screenshot-focus-book"
                 onClick={(event) => {
-                    /*
-                     * Không cho click trong khu vực page
-                     * truyền lên backdrop.
-                     */
+                    event.preventDefault();
                     event.stopPropagation();
                 }}
             >
-                <div className="screenshot-focus-page">
+                <div
+                    className="screenshot-focus-page"
+                    onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }}
+                >
                     <SheetBody page={current} />
 
                     <span className="focus-page-number">
@@ -261,13 +287,17 @@ export default function EbookReader({ page }) {
                 </div>
             </div>
 
-            {/* TRANG SAU */}
+            {/* =================================================
+               TRANG SAU
+               ================================================= */}
+
             <button
                 type="button"
                 className="focus-arrow right"
                 disabled={!canNext}
                 aria-label="Trang sau"
                 onClick={(event) => {
+                    event.preventDefault();
                     event.stopPropagation();
 
                     if (canNext) {
@@ -323,7 +353,8 @@ export default function EbookReader({ page }) {
                 </button>
 
                 <p>
-                    Trang {current} / {LAST_PAGE}
+                    Trang {current} /{" "}
+                    {LAST_PAGE}
                 </p>
 
                 <button
@@ -342,4 +373,3 @@ export default function EbookReader({ page }) {
         </section>
     );
 }
-
