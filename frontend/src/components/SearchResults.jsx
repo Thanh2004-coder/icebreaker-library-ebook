@@ -9,8 +9,29 @@ export default function SearchResults({ games, onClear }) {
         resultsUi.found || "Tìm thấy {count} trò chơi"
     ).replace("{count}", String(games.length));
 
+    const openGamePage = (gamePage) => {
+        navigate(`/page/${gamePage}`);
+
+        setTimeout(() => {
+            const ebook =
+                document.querySelector(".ebook-reader");
+
+            if (!ebook) {
+                return;
+            }
+
+            ebook.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }, 150);
+    };
+
     return (
-        <section className="search-results" aria-live="polite">
+        <section
+            className="search-results"
+            aria-live="polite"
+        >
             <div className="search-results__header">
                 <p>{foundText}</p>
 
@@ -25,14 +46,16 @@ export default function SearchResults({ games, onClear }) {
 
             {games.length === 0 ? (
                 <p className="empty">
-                    {resultsUi.empty || "Không có trò chơi khớp."}
+                    {resultsUi.empty ||
+                        "Không có trò chơi khớp."}
                 </p>
             ) : (
                 <ul className="result-list">
                     {games.map((game) => {
                         // Lấy trực tiếp page từ catalog.json.
                         // Game 1 = 5, Game 2 = 6, ..., Game 25 = 29.
-                        const gamePage = Number(game.page);
+                        const gamePage =
+                            Number(game.page);
 
                         return (
                             <li
@@ -40,14 +63,17 @@ export default function SearchResults({ games, onClear }) {
                                 className="result-card"
                             >
                                 <div className="result-card__content">
-                                    <h2>{game.name}</h2>
+                                    <h2>
+                                        {game.name}
+                                    </h2>
 
                                     <p className="result-page">
                                         Trang {gamePage}
                                     </p>
 
                                     <p className="card-desc">
-                                        {game.description || ""}
+                                        {game.description ||
+                                            ""}
                                     </p>
                                 </div>
 
@@ -55,12 +81,13 @@ export default function SearchResults({ games, onClear }) {
                                     type="button"
                                     className="open-page-btn"
                                     onClick={() =>
-                                        navigate(
-                                            `/page/${gamePage}`
+                                        openGamePage(
+                                            gamePage
                                         )
                                     }
                                 >
-                                    Xem trang {gamePage}
+                                    Xem trang{" "}
+                                    {gamePage}
                                 </button>
                             </li>
                         );

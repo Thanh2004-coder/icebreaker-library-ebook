@@ -251,6 +251,15 @@ export default function HomePage() {
    */
   const openGame = (gamePage) => {
     navigate(`/page/${gamePage}`);
+
+    setTimeout(() => {
+      document
+          .querySelector(".ebook-reader")
+          ?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+    }, 150);
   };
 
   return (
