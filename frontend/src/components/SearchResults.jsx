@@ -7,24 +7,17 @@ export default function SearchResults({ games, onClear }) {
 
     const foundText = resolveCatalogText(
         resultsUi.found || "Tìm thấy {count} trò chơi"
-    ).replace("{count}", String(games.length));
+    ).replace(
+        "{count}",
+        String(games.length)
+    );
 
     const openGamePage = (gamePage) => {
-        navigate(`/page/${gamePage}`);
-
-        setTimeout(() => {
-            const ebook =
-                document.querySelector(".ebook-reader");
-
-            if (!ebook) {
-                return;
-            }
-
-            ebook.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        }, 150);
+        navigate(`/page/${gamePage}`, {
+            state: {
+                scrollToEbook: true,
+            },
+        });
     };
 
     return (
@@ -52,8 +45,6 @@ export default function SearchResults({ games, onClear }) {
             ) : (
                 <ul className="result-list">
                     {games.map((game) => {
-                        // Lấy trực tiếp page từ catalog.json.
-                        // Game 1 = 5, Game 2 = 6, ..., Game 25 = 29.
                         const gamePage =
                             Number(game.page);
 

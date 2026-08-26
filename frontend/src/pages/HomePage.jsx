@@ -1,5 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
 import Header from "../components/Header.jsx";
 import SearchBar from "../components/SearchBar.jsx";
@@ -177,89 +186,262 @@ const STATIC_GAME_LIST = [
 
 export default function HomePage() {
   const { page } = useParams();
+
   const navigate = useNavigate();
 
-  const [searchInput, setSearchInput] = useState("");
-  const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(EMPTY_FILTERS);
+  const location = useLocation();
 
-  const homeUi = UI.home || {};
+  const [searchInput, setSearchInput] =
+      useState("");
+
+  const [search, setSearch] =
+      useState("");
+
+  const [selected, setSelected] =
+      useState(EMPTY_FILTERS);
+
+  const homeUi =
+      UI.home || {};
 
   /*
    * HOME LUÔN LÀ MỘT MÀN HÌNH.
    *
-   * page chỉ dùng để xác định ebook đang đứng ở trang nào.
-   * Không còn isHome.
-   * Không còn màn hình riêng cho game.
+   * page chỉ dùng để xác định
+   * ebook đang đứng ở trang nào.
    */
-  const currentPage = clampPage(page || 1);
+  const currentPage =
+      clampPage(page || 1);
+
+  /* =========================================================
+     SEARCH
+     ========================================================= */
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setSearch(searchInput.trim());
-    }, 250);
+    const timer =
+        setTimeout(() => {
+          setSearch(
+              searchInput.trim()
+          );
+        }, 250);
 
-    return () => clearTimeout(timer);
+    return () =>
+        clearTimeout(timer);
   }, [searchInput]);
 
-  /*
-   * Không có page -> mặc định page 1.
-   */
+  /* =========================================================
+     DEFAULT PAGE
+     ========================================================= */
+
   useEffect(() => {
     if (!page) {
-      navigate("/page/1", { replace: true });
+      navigate(
+          "/page/1",
+          {
+            replace: true,
+          }
+      );
     }
-  }, [page, navigate]);
+  }, [
+    page,
+    navigate,
+  ]);
 
-  /*
-   * Page không hợp lệ -> đưa về page hợp lệ.
-   */
+  /* =========================================================
+     INVALID PAGE
+     ========================================================= */
+
   useEffect(() => {
-    const raw = Number(page);
+    const raw =
+        Number(page);
 
-    if (!Number.isFinite(raw) || raw !== currentPage) {
-      navigate(`/page/${currentPage}`, { replace: true });
+    if (
+        !Number.isFinite(raw) ||
+        raw !== currentPage
+    ) {
+      navigate(
+          `/page/${currentPage}`,
+          {
+            replace: true,
+          }
+      );
     }
-  }, [page, currentPage, navigate]);
+  }, [
+    page,
+    currentPage,
+    navigate,
+  ]);
 
-  const filtered = useMemo(() => {
-    return filterGames(GAMES, {
-      search,
-      selected,
-    });
-  }, [search, selected]);
+  /* =========================================================
+     SCROLL TO EBOOK
+     =========================================================
 
-  const querying = hasActiveQuery(search, selected);
+     Chờ route + EbookReader render xong
+     rồi mới scroll.
 
-  const summaryText = resolveCatalogText(
-      homeUi.summary || "{title} · {count} trò chơi"
-  )
-      .replace("{title}", EBOOK.title)
-      .replace("{count}", String(STATIC_GAME_LIST.length));
+     Dùng 2 requestAnimationFrame để tránh
+     scroll quá sớm khi DOM ebook chưa cập nhật.
+     ========================================================= */
+
+  useEffect(() => {
+    if (
+        !location.state?.scrollToEbook
+    ) {
+      return;
+    }
+
+    let frame1 = 0;
+    let frame2 = 0;
+    let timer = 0;
+
+    const scrollToEbook = () => {
+      const ebook =
+          document.querySelector(
+              ".ebook-reader"
+          );
+
+      if (!ebook) {
+        return false;
+      }
+
+      ebook.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      return true;
+    };
+
+    frame1 =
+        window.requestAnimationFrame(
+            () => {
+              frame2 =
+                  window.requestAnimationFrame(
+                      () => {
+                        const found =
+                            scrollToEbook();
+
+                        /*
+                         * Nếu ebook chưa render kịp,
+                         * thử thêm một lần sau 100ms.
+                         */
+                        if (!found) {
+                          timer =
+                              window.setTimeout(
+                                  scrollToEbook,
+                                  100
+                              );
+                        }
+
+                        /*
+                         * Xóa state để refresh/re-render
+                         * không tự scroll lại.
+                         */
+                        navigate(
+                            location.pathname,
+                            {
+                              replace: true,
+                              state: {},
+                            }
+                        );
+                      }
+                  );
+            }
+        );
+
+    return () => {
+      window.cancelAnimationFrame(
+          frame1
+      );
+
+      window.cancelAnimationFrame(
+          frame2
+      );
+
+      window.clearTimeout(
+          timer
+      );
+    };
+  }, [
+    currentPage,
+    location.pathname,
+    location.state,
+    navigate,
+  ]);
+
+  /* =========================================================
+     FILTER
+     ========================================================= */
+
+  const filtered =
+      useMemo(() => {
+        return filterGames(
+            GAMES,
+            {
+              search,
+              selected,
+            }
+        );
+      }, [
+        search,
+        selected,
+      ]);
+
+  const querying =
+      hasActiveQuery(
+          search,
+          selected
+      );
+
+  /* =========================================================
+     SUMMARY
+     ========================================================= */
+
+  const summaryText =
+      resolveCatalogText(
+          homeUi.summary ||
+          "{title} · {count} trò chơi"
+      )
+          .replace(
+              "{title}",
+              EBOOK.title
+          )
+          .replace(
+              "{count}",
+              String(
+                  STATIC_GAME_LIST.length
+              )
+          );
+
+  /* =========================================================
+     CLEAR SEARCH
+     ========================================================= */
 
   const clearSearch = () => {
     setSearchInput("");
+
     setSearch("");
-    setSelected(EMPTY_FILTERS);
+
+    setSelected(
+        EMPTY_FILTERS
+    );
   };
 
-  /*
-   * Bấm game -> chỉ đổi trang ebook.
-   *
-   * Không chuyển sang GamePage.
-   * Không tạo màn hình thứ hai.
-   */
-  const openGame = (gamePage) => {
-    navigate(`/page/${gamePage}`);
+  /* =========================================================
+     OPEN GAME FROM STATIC LIST
+     ========================================================= */
 
-    setTimeout(() => {
-      document
-          .querySelector(".ebook-reader")
-          ?.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-    }, 150);
+  const openGame = (
+      gamePage
+  ) => {
+    navigate(
+        `/page/${gamePage}`,
+        {
+          state: {
+            scrollToEbook:
+                true,
+          },
+        }
+    );
   };
 
   return (
@@ -269,89 +451,123 @@ export default function HomePage() {
         <main className="layout layout-ebook">
 
           {/* =========================
-            SEARCH
-           ========================= */}
+                    SEARCH
+                   ========================= */}
 
           <SearchBar
               value={searchInput}
-              onChange={setSearchInput}
+              onChange={
+                setSearchInput
+              }
           />
 
           {/* =========================
-            FILTER
-           ========================= */}
+                    FILTER
+                   ========================= */}
 
           <GameFilters
               filters={FILTERS}
               selected={selected}
-              onChange={setSelected}
+              onChange={
+                setSelected
+              }
           />
 
           {/* =========================
-            SEARCH RESULT
-           ========================= */}
+                    SEARCH RESULT
+                   ========================= */}
 
           {querying && (
               <SearchResults
                   games={filtered}
-                  total={filtered.length}
-                  onClear={clearSearch}
+                  total={
+                    filtered.length
+                  }
+                  onClear={
+                    clearSearch
+                  }
               />
           )}
 
           {/* =========================
-            SUMMARY
-           ========================= */}
+                    SUMMARY
+                   ========================= */}
 
           <div className="result-bar">
-            <p>{summaryText}</p>
+            <p>
+              {summaryText}
+            </p>
           </div>
 
           {/* =========================
-            25 TRÒ CHƠI
-           ========================= */}
+                    25 TRÒ CHƠI
+                   ========================= */}
 
           <section className="static-game-list">
 
             <div className="static-game-list__header">
-              <h2>25 TRÒ CHƠI</h2>
+              <h2>
+                25 TRÒ CHƠI
+              </h2>
 
               <p>
-                Chọn trò chơi để mở đúng trang trong ebook.
+                Chọn trò chơi để mở đúng
+                trang trong ebook.
               </p>
             </div>
 
             <div className="static-game-list__items">
-              {STATIC_GAME_LIST.map((game) => (
-                  <button
-                      type="button"
-                      className="static-game-card"
-                      key={game.page}
-                      onClick={() => openGame(game.page)}
-                  >
-                    <div className="static-game-card__content">
-                      <h3>{game.name}</h3>
+              {STATIC_GAME_LIST.map(
+                  (game) => (
+                      <button
+                          type="button"
+                          className="static-game-card"
+                          key={
+                            game.page
+                          }
+                          onClick={() =>
+                              openGame(
+                                  game.page
+                              )
+                          }
+                      >
+                        <div className="static-game-card__content">
+                          <h3>
+                            {
+                              game.name
+                            }
+                          </h3>
 
-                      <p>{game.howToPlay}</p>
-                    </div>
+                          <p>
+                            {
+                              game.howToPlay
+                            }
+                          </p>
+                        </div>
 
-                    <div className="static-game-card__page">
-                      Trang {game.page}
-                    </div>
-                  </button>
-              ))}
+                        <div className="static-game-card__page">
+                          Trang{" "}
+                          {
+                            game.page
+                          }
+                        </div>
+                      </button>
+                  )
+              )}
             </div>
           </section>
 
           {/* =========================
-            EBOOK
-            LUÔN HIỂN THỊ
-           ========================= */}
+                    EBOOK
+                    LUÔN HIỂN THỊ
+                   ========================= */}
 
           <section className="ebook-reader ebook-reader-standalone">
-
-            <EbookReader page={currentPage} />
-
+            <EbookReader
+                page={
+                  currentPage
+                }
+            />
           </section>
 
         </main>
